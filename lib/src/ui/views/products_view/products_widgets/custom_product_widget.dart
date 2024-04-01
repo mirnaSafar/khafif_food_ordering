@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
+import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
+import 'package:khafif_food_ordering_application/src/data/models/apis/product_template_model.dart';
+import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_contaitner.dart';
+import 'package:khafif_food_ordering_application/src/ui/views/product_details_view/product_details_view.dart';
+import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_widgets/custom_favorite.dart';
+import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_widgets/custom_name_calories.dart';
+import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_widgets/custom_price_currency.dart';
+import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_widgets/custom_product_image.dart';
+
+class CustomProductWidget extends StatelessWidget {
+  const CustomProductWidget({super.key, required this.product});
+  final ProductTemplateModel product;
+  @override
+  Widget build(BuildContext context) {
+    return CustomContainer(
+      blurRadius: 4,
+      shadowColor: AppColors.shadowColor,
+      offset: const Offset(0, 4),
+      containerStyle: ContainerStyle.BIGSQUARE,
+      padding: EdgeInsets.symmetric(
+          horizontal: screenWidth(50), vertical: screenWidth(90)),
+      width: screenWidth(2.3),
+      child: Stack(
+        alignment: AlignmentDirectional.topEnd,
+        children: [
+          InkWell(
+            onTap: () {
+              Get.to(
+                ProductDetailsView(
+                  product: product,
+                ),
+                duration: const Duration(seconds: 0),
+                transition: Transition.noTransition,
+              );
+            },
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: CustomNetworkImage(
+                      imageUrl: product.image ?? '',
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomNameCalories(
+                          productname: product.name ?? '',
+                          calory: product.calories.toString()),
+                      CustomPriceCurrency(price: product.price.toString()),
+                    ],
+                  )
+                ]),
+          ),
+          CustomFavorite(
+            product: product,
+          ),
+        ],
+      ),
+    );
+  }
+}
