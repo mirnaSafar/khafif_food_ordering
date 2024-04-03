@@ -80,6 +80,8 @@ void checkConnection(Function function) {
 
 void homeRefreshingMethod() {
   checkConnection(() {});
+  storage.isLoggedIn ? favoriteService.getFavorites() : null;
+
   productsVieewController.categoryIndex.value == -1
       ? productsVieewController.getAllProducts()
       : productsVieewController.getProductsByCategory(

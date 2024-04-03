@@ -148,7 +148,7 @@ class MapController extends GetxController {
                 textStyle: const TextStyle(
                     fontWeight: FontWeight.bold,
                     // height: screenWidth(100),
-                    fontSize: 60),
+                    fontSize: 50),
                 backgroundColor: AppColors.canceledRedColor,
               ))
                 .then(

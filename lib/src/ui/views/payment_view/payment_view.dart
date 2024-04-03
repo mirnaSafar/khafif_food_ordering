@@ -58,10 +58,11 @@ class _PaymentViewState extends State<PaymentView> {
                     controller.isPaymentsLoading.value
                         ? paymentMethodsShimmer()
                         : CustomListView(
-                            itemCount: controller.paymentMethods.length,
+                            itemCount:
+                                controller.filteredPaymentModelList.length,
                             separatorPadding: screenWidth(30).ph,
                             vertical: true,
-                            listViewHeight: screenHeight(2.3),
+                            listViewHeight: screenHeight(2.7),
                             // backgroundColor: Colors.white,
                             itemBuilder: (context, index) =>
                                 CustomPaymentMethod(
@@ -73,14 +74,15 @@ class _PaymentViewState extends State<PaymentView> {
                                             value; // Update the selected item
                                       });
                                     },
-                                    text:
-                                        controller.paymentMethods[index].name ??
-                                            '',
+                                    text: controller
+                                            .filteredPaymentModelList[index]
+                                            .name ??
+                                        '',
                                     image: CustomNetworkImage(
                                         imageUrl: controller
                                                 .paymentMethods[index].image ??
                                             ''))),
-                    screenWidth(20).ph,
+                    // screenWidth(40).ph,
                     CustomText(
                         text: tr('subtotal_lb'),
                         textType: TextStyleType.SUBTITLE,
@@ -122,7 +124,7 @@ class _PaymentViewState extends State<PaymentView> {
                           '${cartController.customerCart!.value.amountTotal}',
                       titletextcolor: AppColors.mainBlackColor,
                     ),
-                    screenWidth(14).ph,
+                    screenWidth(5).ph,
                     CustomButton(
                         onPressed: () {
                           controller.checkout();
@@ -138,7 +140,7 @@ class _PaymentViewState extends State<PaymentView> {
 
   CustomListView paymentMethodsShimmer() {
     return CustomListView(
-        itemCount: 4,
+        itemCount: 3,
         separatorPadding: screenWidth(30).ph,
         vertical: true,
         listViewHeight: screenHeight(2.3),

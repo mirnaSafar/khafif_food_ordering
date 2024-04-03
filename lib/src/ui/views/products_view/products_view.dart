@@ -125,10 +125,18 @@ class _ProductsViewState extends State<ProductsView> {
                                 onTap: () => Get.to(const ConfirmOrderView()),
                                 child: Stack(
                                   children: [
+                                    Image.asset(
+                                      'assets/images/shopping-cart.png',
+                                      color:
+                                          Get.theme.textTheme.bodyLarge!.color,
+                                      width: screenWidth(18),
+                                      height: screenWidth(18),
+                                    ),
                                     redCircleItemsContainChecker(
                                         visible:
-                                            cartService.cartList.isNotEmpty),
-                                    const Icon(Icons.card_travel)
+                                            (cartService.cart.value != null &&
+                                                cartService.cart.value!.line!
+                                                    .isNotEmpty)),
                                   ],
                                 ),
                               ),

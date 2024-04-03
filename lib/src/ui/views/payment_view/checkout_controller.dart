@@ -38,15 +38,32 @@ class CheckOutController extends BaseController {
   RxBool get isPaymentsLoading =>
       operationType.contains(OperationType.CART).obs;
   RxInt selectedItem = 0.obs;
+
+  List<List<String>> PaymentMethodsInfo = [
+    ['mada', "8ac7a4c98e42878a018e4c6151bb05a6"],
+    ['visa', "8ac7a4ca72029fc0017202eed3c600dc"],
+  ];
+
   void checkout() {
-    // PaymentService().checkoutPage(
-    //   type: [paymentMethods[selectedItem.value].name ?? ''],
-    //   entityID: 'entityID',
-    //   paymentMethod: int.parse(paymentMethods[selectedItem.value].mobileCode!),
-    // );
+    filteredPaymentModelList[selectedItem.value].mobileCode == '3'
+        ? confirmOrder()
+        : PaymentService().checkoutPage(
+            type: [
+              PaymentMethodsInfo[
+                  int.parse(paymentMethods[selectedItem.value].mobileCode!)][0]
+            ],
+            entityID: PaymentMethodsInfo[
+                int.parse(paymentMethods[selectedItem.value].mobileCode!)][1],
+            paymentMethod:
+                int.parse(paymentMethods[selectedItem.value].mobileCode!),
+          );
+  }
+
+  void confirmOrder({String? transactionId}) {
     runFullLoadingFutuerFunction(
         function: OrdersRepository()
             .closeOrder(
+                transactionId: transactionId,
                 paymentMethod:
                     int.parse(paymentMethods[selectedItem.value].mobileCode!),
                 shippingMethod:
@@ -65,6 +82,7 @@ class CheckOutController extends BaseController {
                   storage.setCart(emptyCart);
                   // cartController.cart.value = emptyCart;
                   cartService.clearCart();
+                  cartService.cartList.value = [];
                   cartService.calcCartCount(cart: r);
                   cartController.setOderCount =
                       cartService.cartCustomerCount.value;
@@ -81,6 +99,8 @@ class CheckOutController extends BaseController {
                 })));
   }
 
+  RxList<PaymentModel> filteredPaymentModelList = <PaymentModel>[].obs;
+  String excludedId = '2';
   void getPaymentMethods() {
     runLoadingFutuerFunction(
         type: OperationType.CART,
@@ -91,6 +111,14 @@ class CheckOutController extends BaseController {
               paymentMethods.addAll(r);
               paymentMethods.sort((a, b) =>
                   int.parse(a.mobileCode!).compareTo(int.parse(b.mobileCode!)));
+              // paymentMethods.value = paymentMethods
+              //     .skipWhile((element) => element.mobileCode == '2')
+              //     .toList();
+              for (PaymentModel paymentModel in paymentMethods) {
+                if (paymentModel.mobileCode != excludedId) {
+                  filteredPaymentModelList.add(paymentModel);
+                }
+              }
             })));
   }
 }

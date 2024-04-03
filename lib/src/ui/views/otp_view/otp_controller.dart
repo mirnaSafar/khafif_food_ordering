@@ -109,7 +109,7 @@ class OtpController extends GetxController {
                   messageType: MessageType.REJECTED);
             }, (r) {
               storage.setUserInfo(r);
-              storage.setOtpVerified(true);
+              // storage.setOtpVerified(true);
 
               CustomToast.showMessage(
                   message: 'done', messageType: MessageType.SUCCESS);

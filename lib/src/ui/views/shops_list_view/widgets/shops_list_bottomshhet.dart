@@ -33,6 +33,9 @@ class ShopsListBottomSheet extends StatelessWidget {
         children: [
           // screenWidth(20).ph,
           InkWell(
+            onTap: () => controller.panelController.isPanelClosed
+                ? controller.panelController.open()
+                : controller.panelController.close(),
             child: Container(
               width: screenWidth(10),
               height: screenWidth(100),

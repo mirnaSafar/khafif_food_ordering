@@ -49,14 +49,17 @@ class CartService {
       cartCustomerCount.value += line.productUomQty!.toInt();
     }
   }
-  // void removeFromCartList(CartModel model) {
-  //   cartList.remove(model);
-  //   cartCount.value -= model.count!;
 
-  //   storage.setCartList(cartList);
+  void removeFromCartList(CartModel model) {
+    cartList.removeWhere(
+      (element) => element.product!.id == model.product!.id,
+    );
+    cartCount.value -= model.count!;
 
-  //   calcCartTotal();
-  // }
+    storage.setCartList(cartList);
+
+    calcCartTotal();
+  }
 
   void changeCount(
       {required bool incress,

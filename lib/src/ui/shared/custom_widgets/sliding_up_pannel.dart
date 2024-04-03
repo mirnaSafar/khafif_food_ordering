@@ -9,12 +9,13 @@ class CustomSlidingUpPannel extends StatefulWidget {
       required this.panel,
       this.openPanelHeight,
       this.closePanelHeight,
-      this.panelBuilder});
+      this.panelBuilder,
+      this.panelController});
   final Widget backgroundBody;
   final Widget? panel;
   final double? openPanelHeight, closePanelHeight;
   final Widget Function(ScrollController)? panelBuilder;
-  // final SlidingUpPanelContaroller panelController;
+  final PanelController? panelController;
   @override
   State<CustomSlidingUpPannel> createState() => _CustomSlidingUpPannelState();
 }
@@ -23,6 +24,7 @@ class _CustomSlidingUpPannelState extends State<CustomSlidingUpPannel> {
   @override
   Widget build(BuildContext context) {
     return SlidingUpPanel(
+      controller: PanelController(),
       borderRadius: BorderRadius.circular(20),
       panelBuilder: widget.panelBuilder,
       maxHeight: widget.openPanelHeight ?? screenHeight(3),

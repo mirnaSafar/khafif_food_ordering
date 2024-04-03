@@ -13,6 +13,7 @@ import 'package:khafif_food_ordering_application/src/ui/views/map_view/map_contr
 import 'package:khafif_food_ordering_application/src/ui/views/map_view/map_view.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_view.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/shops_list_view/widgets/shops_list_bottomshhet.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class ShopsController extends BaseController {
   @override
@@ -28,6 +29,7 @@ class ShopsController extends BaseController {
   Rx<BranchModel> currentShop = BranchModel().obs;
   Rx<CustomerCartModel> currentCart =
       (storage.getCart() ?? CustomerCartModel()).obs;
+  PanelController panelController = PanelController();
 
   Future getAll() {
     if (isOnline) {
@@ -71,12 +73,15 @@ class ShopsController extends BaseController {
           shop.name!, LatLng(shop.latitude!, shop.longitude!),
           locationDesc: shop.name);
     }
+
     Get.to(MapPage(
+      panelController: panelController,
       sourceLocation: LatLng(
         shopsList[0].latitude!,
         shopsList[0].longitude!,
       ),
       openPanelHeight: screenHeight(2),
+      closePanelHeight: screenHeight(3),
       bottomsheet:
           // shopsList[current],
           ShopsListBottomSheet(shopsList),

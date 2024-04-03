@@ -85,10 +85,10 @@ class FavoriteService extends BaseController {
                   message: l,
                 );
               }, (r) {
-                CustomToast.showMessage(
-                  messageType: MessageType.SUCCESS,
-                  message: 'get Successfully',
-                );
+                // CustomToast.showMessage(
+                //   messageType: MessageType.SUCCESS,
+                //   message: 'get Successfully',
+                // );
                 favoritesList.value = r;
               });
             })));

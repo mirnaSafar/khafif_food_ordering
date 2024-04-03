@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/enums.dart';
 import 'package:khafif_food_ordering_application/src/core/services/language_service.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
+import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_view_controller.dart';
 
 import '../../core/network/network_utils.dart';
 import '../models/apis/user_model.dart';
@@ -152,7 +153,7 @@ class UserRepository {
 
   void clearData() {
     storage.setTokenIno('');
-    storage.setOtpVerified(false);
+    // storage.setOtpVerified(false);
     storage.globalSharedPreference.remove(storage.PREF_USER);
     cartService.cartList.clear();
     favoriteService.favoritesList.clear();

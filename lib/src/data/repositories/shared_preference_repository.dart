@@ -257,30 +257,27 @@ class SharedPreferenceRepository {
   // RxBool islogged = false.obs;
   // bool get isLoggedIn => getOtpVerified(otpVerified);
   bool get isLoggedIn {
-    return !getOtpVerified() &&
-            (getTokenInfo()!.isEmpty || getTokenInfo() == null)
-        ? false
-        : true;
+    return (getTokenInfo()!.isEmpty || getTokenInfo() == null) ? false : true;
   }
 
   // String get sentOtp => getUserInfo() != null ? getUserInfo()!.top! : '';
   String get otpTime => getOtpTime() != null ? getOtpTime()! : '';
 
-  void setOtpVerified(bool otpVerified) {
-    setPreference(
-      dataType: DataType.BOOLEAN,
-      key: PREF_OTP_VERIFIED,
-      value: otpVerified,
-    );
-  }
+  // void setOtpVerified(bool otpVerified) {
+  //   setPreference(
+  //     dataType: DataType.BOOLEAN,
+  //     key: PREF_OTP_VERIFIED,
+  //     value: otpVerified,
+  //   );
+  // }
 
-  bool getOtpVerified() {
-    if (globalSharedPreference.containsKey(PREF_OTP_VERIFIED)) {
-      return getPreference(key: PREF_OTP_VERIFIED);
-    } else {
-      return false;
-    }
-  }
+  // bool getOtpVerified() {
+  //   if (globalSharedPreference.containsKey(PREF_OTP_VERIFIED)) {
+  //     return getPreference(key: PREF_OTP_VERIFIED);
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
   void setFirstLaunch(bool value) {
     setPreference(

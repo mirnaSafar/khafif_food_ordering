@@ -26,6 +26,8 @@ class SplashController extends BaseController {
     });
   }
 
+  RxBool get isOrderOptionsLoading =>
+      operationType.contains(OperationType.PRODUCT).obs;
   RxList<DeliveryOptionsModel> orderDeliveryOptions =
       <DeliveryOptionsModel>[].obs;
   getOrderDeliveryOptions() {

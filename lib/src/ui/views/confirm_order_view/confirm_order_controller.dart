@@ -50,10 +50,23 @@ class CartController extends BaseController {
   RxBool get isCartLoading => (operationType.contains(OperationType.CART) ||
           operationType.contains(OperationType.PRODUCT))
       .obs;
-  // void removeFromCart(Line model) {
-  //   cartService.removeFromCartList(model);
-  //   setOderCount = cartService.cartCount.value;
-  // }
+  void removeFromCart(Line model) {
+    cartService.removeFromCartList(
+      CartModel(
+          count: model.productUomQty!.toInt(),
+          total: model.priceTotal!,
+          product: ProductTemplateModel(
+            calories: 0.0,
+            description: model.productId!.description,
+            id: model.productId!.id,
+            image: model.productId!.image,
+            name: model.productId!.name,
+            price: model.productId!.price,
+            variantValue: [VariantValue()],
+          )),
+    );
+    setOderCount = cartService.cartCount.value;
+  }
 
   RxList<ProductTemplateModel> suggestedProducts = <ProductTemplateModel>[].obs;
 
@@ -106,10 +119,11 @@ class CartController extends BaseController {
             .then((value) => value.fold(
                     (l) => CustomToast.showMessage(
                         message: l, messageType: MessageType.WARNING), (r) {
-                  // removeFromCart(selectedCart.value);
-                  // CustomToast.showMessage(
-                  //     message: 'done', messageType: MessageType.SUCCESS);
+                  CustomToast.showMessage(
+                      message: 'Item deleted from cart',
+                      messageType: MessageType.SUCCESS);
                   getCart(showLoader: true);
+                  removeFromCart(selectedCart.value);
                   // Get.put(MyOrderController());
                   // myOrderController.getMyOrders();
                 })));

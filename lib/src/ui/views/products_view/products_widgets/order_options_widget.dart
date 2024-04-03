@@ -9,6 +9,7 @@ import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/cu
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_listview.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_popup_with_blur.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_radio.dart';
+import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_shimmer.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/map_view/map_view.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/shops_list_view/shops_list.dart';
@@ -19,6 +20,55 @@ void showOrderOptionsDialog(BuildContext context) {
   Get.find<SplashController>().orderDeliveryOptions.isEmpty
       ? Get.find<SplashController>().getOrderDeliveryOptions()
       : null;
+
+  Widget buildOption(String text, int value, void Function()? onTap) {
+    return Obx(() {
+      print(productsVieewController.orderOptionSelected.value);
+      return splashController.isOrderOptionsLoading.value
+          ? orderOptionsShimmer()
+          : InkWell(
+              onTap: () {
+                productsVieewController.orderOptionSelected.value = value;
+                onTap!();
+              },
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: screenWidth(7), vertical: screenWidth(80)),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.mainAppColor,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  padding: EdgeInsets.all(screenWidth(20)),
+                  child: Row(
+                    children: [
+                      CustomRadio(
+                        fillColor: AppColors.mainWhiteColor,
+
+                        value: value,
+                        selected: productsVieewController.orderOptionSelected
+                            .value, // Adjust as per your requirements
+                        onTaped: (int value) {
+                          productsVieewController.orderOptionSelected.value =
+                              value;
+                        },
+                      ),
+                      screenWidth(40).px,
+                      CustomText(
+                        text: text,
+                        darkTextColor: AppColors.mainBlackColor,
+                        fontWeight: FontWeight.w600,
+                        textColor: AppColors.mainTextColor,
+                        textType: TextStyleType.BODYSMALL,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+    });
+  }
+
   showModalBottomSheet(
     elevation: 0,
     context: context,
@@ -60,7 +110,7 @@ void showOrderOptionsDialog(BuildContext context) {
                 screenWidth(30).ph,
                 ...splashController.orderDeliveryOptions.map((element) {
                   var orderDeliveryOption = element;
-                  return _buildOption(
+                  return buildOption(
                       orderDeliveryOption.name ?? '', orderDeliveryOption.id!,
                       () {
                     !orderDeliveryOption.isPickup!
@@ -120,47 +170,19 @@ void showOrderOptionsDialog(BuildContext context) {
   );
 }
 
-Widget _buildOption(String text, int value, void Function()? onTap) {
-  return Obx(() {
-    print(productsVieewController.orderOptionSelected.value);
-    return InkWell(
-      onTap: () {
-        productsVieewController.orderOptionSelected.value = value;
-        onTap!();
-      },
+CustomShimmer orderOptionsShimmer() {
+  return CustomShimmer(
+      isLoading: true,
       child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: screenWidth(7), vertical: screenWidth(80)),
-        child: Container(
-          decoration: BoxDecoration(
-            color: AppColors.mainAppColor,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          padding: EdgeInsets.all(screenWidth(20)),
-          child: Row(
-            children: [
-              CustomRadio(
-                fillColor: AppColors.mainWhiteColor,
-
-                value: value,
-                selected: productsVieewController.orderOptionSelected
-                    .value, // Adjust as per your requirements
-                onTaped: (int value) {
-                  productsVieewController.orderOptionSelected.value = value;
-                },
+          padding: EdgeInsets.symmetric(
+              horizontal: screenWidth(7), vertical: screenWidth(80)),
+          child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.mainAppColor,
+                borderRadius: BorderRadius.circular(20),
               ),
-              screenWidth(40).px,
-              CustomText(
-                text: text,
-                darkTextColor: AppColors.mainBlackColor,
-                fontWeight: FontWeight.w600,
-                textColor: AppColors.mainTextColor,
-                textType: TextStyleType.BODYSMALL,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  });
+              padding: EdgeInsets.all(screenWidth(20)),
+              child: Container(
+                color: AppColors.mainWhiteColor,
+              ))));
 }

@@ -10,6 +10,7 @@ import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/sl
 import 'package:khafif_food_ordering_application/src/ui/views/addresses_view/address_bottomsheet.dart/address_bottomsheet.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/map_view/map_controller.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/shops_list_view/shops_controller.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 // ignore: must_be_immutable
 class MapPage extends StatefulWidget {
@@ -22,6 +23,7 @@ class MapPage extends StatefulWidget {
   final Widget Function(ScrollController)? panelBuilder;
   final double? openPanelHeight, closePanelHeight;
   final Widget? bottomsheet;
+  final PanelController? panelController;
   MapPage(
       {super.key,
       this.sourceLocation,
@@ -33,7 +35,8 @@ class MapPage extends StatefulWidget {
       this.addressModel,
       this.panelBuilder,
       this.openPanelHeight,
-      this.closePanelHeight});
+      this.closePanelHeight,
+      this.panelController});
 
   @override
   State<MapPage> createState() => MapPageState();
@@ -126,6 +129,7 @@ class MapPageState extends State<MapPage> {
               // setState(() {});
             },
           ),
+          panelController: widget.panelController,
         ),
         drawerEnableOpenDragGesture: false,
         // bottomSheet:

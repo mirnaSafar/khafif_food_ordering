@@ -40,6 +40,10 @@ class _CustomBranchOptionState extends State<CustomBranchOption> {
                     ? AppColors.mainAppColor
                     : AppColors.mainWhiteColor,
             child: CustomText(
+                darkTextColor: controller.selectedBranchesDisplayOption.value ==
+                        widget.index
+                    ? AppColors.mainWhiteColor
+                    : AppColors.mainAppColor,
                 textColor: controller.selectedBranchesDisplayOption.value ==
                         widget.index
                     ? AppColors.mainWhiteColor

@@ -72,10 +72,11 @@ class ProductDetailsController extends BaseController {
             .then((value) => value.fold(
                     (l) => CustomToast.showMessage(
                         message: l, messageType: MessageType.WARNING), (r) {
-                  if (cartService.cart.value == null) {
-                    Get.put(CartController());
-                    Get.find<CartController>().getCart(showLoader: false);
-                  }
+                  // if (cartService.cart.value == null) {
+
+                  // }
+                  Get.put(CartController());
+                  Get.find<CartController>().getCart(showLoader: false);
                   storage.setNewOrder(false);
 
                   cartService.addToCart(

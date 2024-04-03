@@ -45,7 +45,10 @@ class ProductsViewController extends BaseController {
     //
     //   update();
     // });
-
+    if (storage.isLoggedIn) {
+      favoriteService.getFavorites();
+      cartController.getCart();
+    }
     getAllCategories();
     getAllProducts();
     getBanners();
