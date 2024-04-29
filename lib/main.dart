@@ -8,8 +8,6 @@ import 'package:khafif_food_ordering_application/src/core/services/date_time_pic
 import 'package:khafif_food_ordering_application/src/core/services/favorites_service.dart';
 import 'package:khafif_food_ordering_application/src/core/services/location_service.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
-import 'package:khafif_food_ordering_application/src/ui/views/my_order_view/my_order_controller.dart';
-import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_view_controller.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/splash_screen/splash_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,29 +19,7 @@ import 'src/core/services/connectivity_service.dart';
 import 'src/core/services/notifacation_service.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Get.putAsync<SharedPreferences>(() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs;
-  });
-  Get.put(SharedPreferenceRepository());
-  Get.put(SplashController());
-
-  Get.put(CartService());
-
-  Get.put(LocationService());
-
-  // Get.find<SharedPreferences>().clear();
-  // storage.globalSharedPreference.clear();
-
-  Get.put(ConnectivityService());
-  Get.put(MyAppController());
-  Get.put(FavoriteService());
-  Get.put(AppTheme());
-
-  Get.put(NotificationService());
-  Get.put(ProductsViewController());
-  Get.put(DateTimeController());
+  await putProjectDepedencies();
   try {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
@@ -71,4 +47,27 @@ Future<void> main() async {
     print(e);
   }
   runApp(const MyApp());
+}
+
+Future<void> putProjectDepedencies() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Get.putAsync<SharedPreferences>(() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs;
+  });
+  Get.put(SharedPreferenceRepository());
+  storage.setFirstLaunchShowDeliveryService(true);
+  Get.put(SplashController());
+
+  Get.put(CartService());
+
+  Get.put(LocationService());
+
+  Get.put(ConnectivityService());
+  Get.put(MyAppController());
+  Get.put(FavoriteService());
+  Get.put(AppTheme());
+
+  Get.put(NotificationService());
+  Get.put(DateTimeController());
 }

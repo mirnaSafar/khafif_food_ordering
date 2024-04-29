@@ -4,9 +4,11 @@
  
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="khafif_food_ordering_application"
+        android:label="Khafif"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/logo"
+        android:windowDrawsSystemBarBackgrounds="true">
+        
         <activity
             android:name=".MainActivity"
             android:exported="true"
