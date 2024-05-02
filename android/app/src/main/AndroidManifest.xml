@@ -1,4 +1,6 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package= "com.example.khafif_food_ordering_application">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package= "com.khafif.android">
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
  
@@ -35,9 +37,34 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <data android:scheme="com.testpayment.payment" />
+                <data android:scheme="com.khafif.android" />
             </intent-filter>
         </activity>
+
+        <activity
+            tools:replace="android:theme"
+            android:name="com.oppwa.mobile.connect.checkout.dialog.CheckoutActivity"
+            android:theme="@style/Theme.Checkout.Light"
+            android:exported="false"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="com.khafif.android" />
+            </intent-filter>
+        </activity>
+
+
+
+
+        <receiver
+            android:name=".CheckoutBroadcastReceiver"
+            android:exported="false" />
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

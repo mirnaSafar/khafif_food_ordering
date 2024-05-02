@@ -1,4 +1,4 @@
-package com.example.khafif_food_ordering_application;
+package com.khafif.android;
 
 
 import android.content.BroadcastReceiver;

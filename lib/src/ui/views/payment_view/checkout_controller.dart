@@ -36,8 +36,8 @@ class CheckOutController extends BaseController {
   RxInt selectedItem = 0.obs;
 
   List<List<String>> PaymentMethodsInfo = [
-    ['mada', "8ac7a4c98e42878a018e4c6151bb05a6"],
-    ['visa', "8ac7a4ca72029fc0017202eed3c600dc"],
+    ['MADA', "8ac7a4c98e42878a018e4c6151bb05a6"],
+    ['VISA', "8ac7a4ca72029fc0017202eed3c600dc"],
   ];
 
   void checkout() {

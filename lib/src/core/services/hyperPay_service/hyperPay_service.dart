@@ -14,7 +14,7 @@ import 'package:khafif_food_ordering_application/src/ui/views/payment_view/check
 class InAppPaymentSetting {
   // shopperResultUrl : this name must like scheme in intent-filter , url scheme in xcode
   static const String shopperResultUrl =
-      "com.khafif_food_ordering_application.payment";
+      "com.khafif.food";
   static const String merchantId = "MerchantId";
   static const String countryCode = "SA";
   static getLang() {
@@ -56,6 +56,7 @@ class PaymentService {
       {required String entity,
       required String trans,
       required int paymentMethod}) async {
+    print("**************tttttesttttt*******");
     Uri myUrl =
         Uri.parse('$baseUrlTest/v1/checkouts/$trans/payment?entityId=$entity');
     print(myUrl);
@@ -114,6 +115,12 @@ class PaymentService {
       required int paymentMethod}) async {
     // hideLoadingOverlay();
     BotToast.closeAllLoading();
+    print("Android noooooooooooowww");
+    print(brandsName);
+    print(checkoutId);
+    print(entity);
+    print(paymentMethod);
+    print("Android noooooooooooowww");
     String transactionStatus;
     print(paymentMethod == 0 ? "mada" : brandsName);
     try {
@@ -215,6 +222,11 @@ class PaymentService {
         'Authorization': 'Bearer $_tokenTest'
       },
     );
+
+    print("******************************************");
+    print(response);
+    print("******************************************");
+
 
     print(response.body.toString());
     if (response.statusCode == 200) {
