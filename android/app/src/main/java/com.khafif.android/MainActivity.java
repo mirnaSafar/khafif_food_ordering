@@ -1,4 +1,4 @@
-package com.example.khafif_food_ordering_application;
+package com.khafif.android;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -205,7 +205,7 @@ public class MainActivity extends FlutterActivity implements ITransactionListene
 
         Set<String> paymentBrands = new LinkedHashSet<String>();
 
-        if (brands.equals("mada")) {
+        if (brands.equals("MADA")) {
 
             paymentBrands.add("MADA");
 
@@ -219,16 +219,16 @@ public class MainActivity extends FlutterActivity implements ITransactionListene
 
 
         CheckoutSettings checkoutSettings =  new CheckoutSettings(checkoutId,paymentBrands,
-                Connect.ProviderMode.TEST).setShopperResultUrl("com.example.khafif_food_ordering_application://result");
+                Connect.ProviderMode.TEST).setShopperResultUrl("com.khafif.android://result");
 
         if (mode.equals("LIVE")) {
             checkoutSettings =  new CheckoutSettings(checkoutId,paymentBrands,
-                    Connect.ProviderMode.LIVE).setShopperResultUrl("com.example.khafif_food_ordering_application://result");
+                    Connect.ProviderMode.LIVE).setShopperResultUrl("com.khafif.android://result");
         }
 
 
         ComponentName componentName = new ComponentName(
-                getPackageName(),CheckoutBroadcastReceiver.class.getName());
+                getPackageName(), CheckoutBroadcastReceiver.class.getName());
 
 
 
@@ -255,8 +255,8 @@ public class MainActivity extends FlutterActivity implements ITransactionListene
 
             try {
                 PaymentParams paymentParams = new PaymentParams(checkoutid,"STC_PAY");
-               // paymentParams.setShopperResultUrl("com.mosab.demohyperpayapp://result");
-                paymentParams.setShopperResultUrl("com.example.khafif_food_ordering_application://result");
+                // paymentParams.setShopperResultUrl("com.mosab.demohyperpayapp://result");
+                paymentParams.setShopperResultUrl("com.khafif.android://result");
                 Transaction transaction = new Transaction(paymentParams);
 
                 paymentProvider.setThreeDSWorkflowListener(new ThreeDSWorkflowListener() {
@@ -281,7 +281,7 @@ public class MainActivity extends FlutterActivity implements ITransactionListene
                 try {
                     TokenPaymentParams paymentParams = new TokenPaymentParams(checkoutid, token, " ",cvv);
 
-                    paymentParams.setShopperResultUrl("com.example.khafif_food_ordering_application://result");
+                    paymentParams.setShopperResultUrl("com.khafif.android://result");
 
                     Transaction transaction = new Transaction(paymentParams);
 
@@ -340,7 +340,7 @@ public class MainActivity extends FlutterActivity implements ITransactionListene
 
                 // To add MADA
 
-                if (brands.equals("mada")) {
+                if (brands.equals("MADA")) {
                     String bin = number.substring(0,6);
 
                     if (bin.matches(ptMadaVExp) || bin.matches(ptMadaMExp)) {
@@ -376,7 +376,7 @@ public class MainActivity extends FlutterActivity implements ITransactionListene
                             year,
                             cvv
                     );
-                    paymentParams.setShopperResultUrl("com.example.khafif_food_ordering_application://result");
+                    paymentParams.setShopperResultUrl("com.khafif.android://result");
 
                     Transaction transaction = new Transaction(paymentParams);
 
@@ -532,13 +532,13 @@ public class MainActivity extends FlutterActivity implements ITransactionListene
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
-if(intent.getScheme()!=null)
-{        if (intent.getScheme().equals("com.example.khafif_food_ordering_application")) {
+
+        if (intent.getScheme().equals("com.khafif.android")) {
 
             success("success");
 
         }
-}    }
+    }
 
 
 

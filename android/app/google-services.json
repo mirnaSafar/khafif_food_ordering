@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:584610308731:android:e1327d3cb77ec3fd4ef8de",
         "android_client_info": {
-          "package_name": "com.example.khafif_food_ordering_application"
+          "package_name": "com.khafif.android"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "584610308731-vkbdv7fvj76g03ou2t27clf2rudg07l3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.khafif_food_ordering_application",
+            "package_name": "com.khafif.android",
             "certificate_hash": "d984538d290ac91ddb01dd275270a42ba2630590"
           }
         },
@@ -42,7 +42,7 @@
               "client_id": "584610308731-k63i8p7tslc9epq8oqrhdli58lbcsp8k.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.khafifFoodOrderingApplication.RunnerTests"
+                "bundle_id": "com.khafifFoodOrderingApplication.RunnerTests"
               }
             }
           ]
