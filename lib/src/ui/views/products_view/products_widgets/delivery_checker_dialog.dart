@@ -106,17 +106,12 @@ showproductImageDialog({required String image}) {
     barrierColor: Colors.transparent,
     context: Get.context!,
     builder: (context) => CustomPopupWithBlurWidget(
+      // blur: false,
       customBlurChildType: CustomBlurChildType.DIALOUG,
       child: Center(
-          child: CustomContainer(
-              borderRadius: BorderRadius.circular(14),
-              height: Get.context!.screenHeight(2.7),
-              width: Get.context!.screenWidth(1.1),
-              backgroundColor: AppColors.mainWhiteColor,
-              padding: EdgeInsets.all(Get.context!.screenWidth(30)),
-              child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: CustomNetworkImage(imageUrl: image)))),
+          child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: CustomNetworkImage(imageUrl: image))),
     ),
   );
 }
