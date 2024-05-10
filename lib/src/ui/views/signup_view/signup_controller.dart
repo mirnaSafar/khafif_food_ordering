@@ -27,7 +27,7 @@ class SignUpController extends BaseController {
                 .signup(
             email: emailController.text,
             userName: nameController.text,
-            phone: phoneController.text,
+            phone: '+966${phoneController.text}',
           )
                 .then((value) {
             print(value);
@@ -40,7 +40,7 @@ class SignUpController extends BaseController {
               CustomToast.showMessage(
                   message: 'registered successfully!',
                   messageType: MessageType.SUCCESS);
-              Get.off(() => const LoginView());
+              Get.off(() => LoginView());
             });
           }))
         : null;

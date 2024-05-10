@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/app_assets.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/services/language_service.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
@@ -14,17 +17,18 @@ import 'package:khafif_food_ordering_application/src/ui/views/products_view/prod
 
 searchResultsView() {
   return Padding(
-    padding: EdgeInsets.symmetric(vertical: screenWidth(10)),
+    padding: EdgeInsets.symmetric(vertical: Get.context!.screenWidth(10)),
     child: GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisSpacing: screenWidth(20),
+        mainAxisSpacing: Get.context!.screenWidth(20),
       ),
       itemCount: productsVieewController.searchProductsList.length,
       itemBuilder: (context, index) {
         return Obx(
           () => Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth(80)),
+              padding: EdgeInsets.symmetric(
+                  horizontal: Get.context!.screenWidth(80)),
               child: productsVieewController.isShimmerLoader.value
                   ? productsShimmer(isLoading: true)
                   : CustomProductWidget(
@@ -44,7 +48,7 @@ buildSearchField() {
       storage.getAppLanguage() == LanguageService.enCode ? 8 : 0;
   return Expanded(
     child: UserInput(
-        height: screenWidth(9),
+        height: Get.context!.screenWidth(9),
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(rightRadius),
           bottomRight: Radius.circular(rightRadius),
@@ -88,13 +92,13 @@ class NoSearchResultsWidget extends StatelessWidget {
         // crossAxisAlignment:
         //     CrossAxisAlignment.center,
         children: [
-          Icon(Icons.search_off_rounded, size: screenWidth(6)),
+          Icon(Icons.search_off_rounded, size: Get.context!.screenWidth(6)),
           Padding(
-              padding: EdgeInsets.only(top: screenWidth(900)),
+              padding: EdgeInsets.only(top: Get.context!.screenWidth(900)),
               child: CustomText(
                   text: tr('no_matched_results_lb'),
                   textType: TextStyleType.TITLE)),
-          screenWidth(30).ph,
+          Get.context!.screenWidth(30).ph,
         ],
       ),
     );
@@ -104,18 +108,18 @@ class NoSearchResultsWidget extends StatelessWidget {
 buildFilterWidget() {
   return CustomContainer(
     backgroundColor: Get.theme.colorScheme.secondary,
-    height: screenHeight(18),
-    width: screenHeight(15),
-    borderRadius: const BorderRadiusDirectional.only(
+    height: Get.context!.screenHeight(18),
+    width: Get.context!.screenHeight(15),
+    borderRadius: BorderRadiusDirectional.only(
         topEnd: Radius.circular(8), bottomEnd: Radius.circular(8)),
     padding: EdgeInsets.all(
-      screenWidth(28),
+      Get.context!.screenWidth(28),
     ),
     child: SvgPicture.asset(
       color: Get.theme.colorScheme.primary,
       AppAssets.icFilter,
-      height: screenWidth(80),
-      width: screenWidth(80),
+      height: Get.context!.screenWidth(80),
+      width: Get.context!.screenWidth(80),
     ),
   );
 }

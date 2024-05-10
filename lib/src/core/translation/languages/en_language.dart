@@ -23,7 +23,15 @@ class ENLanguage {
         "google_lb": "Create with Google",
         "apple_lb": "Create with Apple",
         "joined_us_lb": "Joined us before?  ",
+        "number_exists_lb": "The Number Already exists please Login instead",
 
+        //?---- validation keys
+        'number_must_start_with_5_lb': 'Invalid number, it should start with 5',
+        'invalid_number_lb': 'Invalid number',
+        'invalid_email_lb': 'Invalid email',
+        'enter_number_lb': 'Enter your number',
+        'enter_email_lb': 'enter your email',
+        "enter_name_lb": 'enter your name',
         //?---- login view keys
         "login_lb": "Login ",
         "login_title_lb": "Login with your account OR Social Media",
@@ -32,7 +40,8 @@ class ENLanguage {
         "guest_view_lb": 'Guest view',
         'invalid_code_lb': 'invalid code',
         'verify_your_number_lb': 'Verify Your Number',
-
+        'you_dont_have_account_lb':
+            'There is no account for this number ,please signup first',
         //?---- products view keys
 
         "products_tilte_lb": "Order Delicious Meal!",
@@ -45,6 +54,7 @@ class ENLanguage {
         "fries_lb": "Fries",
         "drinks_lb": "Drinks",
         "upcoming_food_lb": "Upcoming Food",
+        "no_products_lb": 'No Products Found For this Category',
 
         //?---- product details view keys
 
@@ -59,7 +69,7 @@ class ENLanguage {
         "info_lb": "My Info",
         "addresses_lb": "Addresses",
         "orders_lb": "My Orders",
-        "wanees_ponts_lb": "Wanees Point",
+        "wanees_ponts_lb": " Points",
         "walaa_lb": "Loyalty program",
 
         "from": "From 1200 BGN",
@@ -104,10 +114,11 @@ class ENLanguage {
         "apple_pay_lb": "Apple Pay",
         "on_delivery_method": "On Delivery",
         "subtotal_lb": "Subtotal",
+        "total_amount_lb": "Total Amount",
         "delivery_amount_lb": 'Delivery Amount',
 
         "vat_lb": "Vat",
-        "total_include_lb": "Total+Include",
+        "total_include_lb": "Total",
         "place_order_lb": "Place Order",
         "currency_lb": 'SAR',
         "quantity_lb": 'Quantity: ',
@@ -119,6 +130,7 @@ class ENLanguage {
         "notifications_lb": "Notifications",
         "Languages_lb": "Languages",
         "privacy_policy_lb": "Privacy Policy",
+        "terms_of_service_lb": "Terms of Service",
         "delete_account_lb": "Delete Account",
 
         //?-------Order Options dialog
@@ -139,10 +151,12 @@ class ENLanguage {
         "order_lb": "Order",
         "price_lb": "Price: ",
         "calories_lb": "Calories",
+        "no_orders_lb": 'You don\'t have orders yet',
+
         //?---- confirm order view
         "selected_items_lb": "Selected Items",
         "remove_all_lb": "Remove all",
-        "confirm_order_lb": "Confirm Order",
+
         "action_needed_lb": 'action needed',
         "select_order_delivery_warning_lb":
             'select order delivery option first',
@@ -158,16 +172,28 @@ class ENLanguage {
         "submit_lb": "Submit",
         "selected_shop_lb": 'Successfully Selected!',
         "order_now_lb": "Order Now",
-
+        "order_date_lb": "Order Date: ",
+        "select_order_date_lb": "Select Order Date : ",
+        "select_order_time_lb": 'Select order time you like',
+        "open_lb": "open",
+        "close_lb": "close",
+        "no_open_branches_error_lb": 'There is no open branches at this time',
+        "time_is_invalid": 'Please select valid Time',
         //?-------tracking order view
 
         "tracking_order_lb": 'Tracking Order',
-        "order_accept_lb": "Order Accept",
-        "staff_pickup_lb": "Staff pickup goods",
+
+        "order_sent_lb": "Order Sent",
+        "order_accept_lb": "Order Accepted",
+        "staff_pickup_lb": "Your order is being prepared now",
         "shipping_lb": "Item is being shipped",
         "pickup_lb": "Pick-Up",
-        "sending_order_lb": "Sending Order",
-        "delivered_lb": "Delivered",
+        "sending_order_lb": "Driver on way to you",
+        "order_ready_lb": 'Order is ready',
+        "order_ready_to_pick_up": "Order is ready to pick up",
+        "order_picked_up_successfully":
+            'Order has been picked 0up successfully',
+        "delivered_lb": "Order Completed",
         "delivered_cuccessfully_lb": "Item has been delivered successfully",
         "delivery_service": "delivery service",
         //?--------rate dialog
@@ -201,11 +227,13 @@ class ENLanguage {
             'Sure you want to delete all this items?',
         "logout_warning_dialog":
             'Are you sure you want to logout,Your data will be cleared ',
-
+        "confirm_order_lb": "Confirm Order",
+        "confirm_location_lb": "Confirm Location",
+        "select_other_location_lb": "Select Other Location",
         "ability_to_deliver_lb":
             'Good news, we can deliver your order to that location',
         "no_ability_to_deliver_lb":
-            'Bad news, we can not deliver your order to that location',
+            'Sorry, we can not deliver your order to that location',
         "delivery_checker_lb": 'Delivery Checker:',
         "display_shops_lb": 'Display Shops List',
         "all_branches_lb": 'All branches',

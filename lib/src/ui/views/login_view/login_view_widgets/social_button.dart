@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
@@ -16,7 +18,7 @@ class SocialButton extends StatelessWidget {
     }
   }
 
-  const SocialButton(
+  SocialButton(
       {super.key,
       required this.path,
       required this.text,

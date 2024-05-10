@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -5,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/app_assets.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/data/models/apis/branch_model.dart';
@@ -17,8 +20,7 @@ import 'package:khafif_food_ordering_application/src/ui/views/shops_list_view/sh
 import 'package:khafif_food_ordering_application/src/ui/views/shops_list_view/widgets/shop_bottomsheet.dart';
 
 class ShopsListBottomSheet extends StatelessWidget {
-  const ShopsListBottomSheet(this.shopsList,
-      {super.key, this.scrollController});
+  ShopsListBottomSheet(this.shopsList, {super.key, this.scrollController});
   final List<BranchModel> shopsList;
   final ScrollController? scrollController;
   @override
@@ -30,18 +32,18 @@ class ShopsListBottomSheet extends StatelessWidget {
       return Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          // screenWidth(20).ph,
+          //  context .screenWidth(20).ph,
           InkWell(
             onTap: () => controller.panelController.isPanelClosed
                 ? controller.panelController.open()
                 : controller.panelController.close(),
             child: Container(
-              width: screenWidth(10),
-              height: screenWidth(100),
+              width: context.screenWidth(10),
+              height: context.screenWidth(100),
               color: AppColors.mainAppColor,
-            ).paddingSymmetric(vertical: screenWidth(40)),
+            ).paddingSymmetric(vertical: context.screenWidth(40)),
           ),
-          screenWidth(40).ph,
+          context.screenWidth(40).ph,
           Expanded(
             child: CustomListView(
               controller: scrollController,
@@ -49,7 +51,7 @@ class ShopsListBottomSheet extends StatelessWidget {
               separatorPadding: 10.ph,
               vertical: true,
               backgroundColor: AppColors.mainBlackColor,
-              listViewHeight: screenHeight(1.8),
+              listViewHeight: context.screenHeight(1.8),
               itemBuilder: (listcontext, index) => InkWell(
                 onTap: () {
                   Get.back();
@@ -57,12 +59,11 @@ class ShopsListBottomSheet extends StatelessWidget {
                   Get.delete<MapController>();
 
                   Get.to(MapPage(
+                    showAllbranchesButton: true,
                     sourceLocation: LatLng(
                       shopsList[index].latitude!,
                       shopsList[index].longitude!,
                     ),
-                    openPanelHeight: screenHeight(2),
-                    closePanelHeight: screenHeight(3),
                     bottomsheet: ShopBottomSheet(
                       shop: shopsList[index],
                       shops: shopsList,
@@ -75,15 +76,16 @@ class ShopsListBottomSheet extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: screenWidth(200)),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: context.screenWidth(200)),
                   child: Row(
                     children: [
                       CustomNetworkImage(
                         imageUrl: shopsList[index].image ?? '',
-                        height: screenWidth(4),
-                        width: screenWidth(4),
+                        height: context.screenWidth(4),
+                        width: context.screenWidth(4),
                       ),
-                      // screenWidth(50).px,
+                      //  context .screenWidth(50).px,
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,10 +111,10 @@ class ShopsListBottomSheet extends StatelessWidget {
                             children: [
                               SvgPicture.asset(
                                 AppAssets.icClock,
-                                height: screenWidth(35),
-                                width: screenWidth(35),
+                                height: context.screenWidth(35),
+                                width: context.screenWidth(35),
                               ),
-                              screenWidth(100).px,
+                              context.screenWidth(100).px,
                               CustomText(
                                   darkTextColor: AppColors.mainBlackColor,
                                   text: 'Opening time: ',

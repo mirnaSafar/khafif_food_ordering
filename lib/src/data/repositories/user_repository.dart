@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:bot_toast/bot_toast.dart';
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/enums.dart';
 import 'package:khafif_food_ordering_application/src/core/services/language_service.dart';
+import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/data/models/apis/user_points_model.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/dialogs/browsing_alert_dialog.dart';
@@ -69,7 +72,12 @@ class UserRepository {
         if (commonResponse.getStatus) {
           return Right(commonResponse.getStatus);
         } else {
-          return Left(commonResponse.message ?? '');
+          if (commonResponse.message == "API Phone number must be unique.") {
+            Get.off(LoginView());
+            return Left(tr('number_exists_lb'));
+          } else {
+            return Left(commonResponse.message ?? '');
+          }
         }
       });
     } catch (e) {
@@ -181,11 +189,11 @@ class UserRepository {
     if (storage.isLoggedIn) {
       customLoader();
       Future.delayed(
-          const Duration(seconds: 1), () => UserRepository().clearUserData());
+          Duration(seconds: 1), () => UserRepository().clearUserData());
       BotToast.closeAllLoading();
       showSnackbarText('Signed out successfully', internetSnack: false);
 
-      Get.offAll(const LoginView());
+      Get.offAll(LoginView());
     } else {
       showBrowsingDialogAlert(Get.context!);
     }
@@ -205,6 +213,7 @@ class UserRepository {
     // storage.setOtpVerified(false);
     storage.globalSharedPreference.remove(storage.PREF_USER);
     cartService.cartList.clear();
+    cartService.clearCart();
     favoriteService.favoritesList.clear();
     setLanguage(LanguageService.enCode);
     userAddresses.clear();

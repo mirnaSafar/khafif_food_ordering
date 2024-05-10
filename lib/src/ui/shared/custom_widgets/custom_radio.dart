@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 
@@ -12,7 +14,7 @@ class CustomRadio extends StatelessWidget {
   final double? scaleX;
   final double? scaleY;
 
-  const CustomRadio({
+  CustomRadio({
     super.key,
     required this.value,
     this.fillColor,
@@ -33,7 +35,7 @@ class CustomRadio extends StatelessWidget {
       ),
       child: Radio(
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+        visualDensity: VisualDensity(horizontal: -4, vertical: -4),
         fillColor: MaterialStateColor.resolveWith(
             (states) => fillColor ?? AppColors.mainAppColor),
         activeColor: fillColor ?? AppColors.mainAppColor,

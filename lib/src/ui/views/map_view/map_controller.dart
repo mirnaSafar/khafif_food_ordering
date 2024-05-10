@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -10,6 +12,7 @@ import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.
 import 'package:khafif_food_ordering_application/src/core/app/my_app.dart';
 import 'package:khafif_food_ordering_application/src/core/enums.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/navigator_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/services/base_controller.dart';
 import 'package:khafif_food_ordering_application/src/core/services/location_service.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
@@ -28,7 +31,7 @@ import 'package:location/location.dart';
 
 class MapController extends BaseController {
   LatLng? sourceLocation;
-  LatLng? destination = const LatLng(37.43296265331129, -100.06600357078792);
+  LatLng? destination = LatLng(37.43296265331129, -100.06600357078792);
   MapController({
     this.sourceLocation,
     this.destination,
@@ -56,10 +59,13 @@ class MapController extends BaseController {
     // getPolyPoints();
 
     // loadcustomIcon();
-
+    addtoMarkers(
+      'Current',
+      storage.userCurrentLocation!,
+    );
     selectedLocation = destination ??
         storage.userCurrentLocation ??
-        const LatLng(37.43296265331129, -100.06600357078792);
+        LatLng(37.43296265331129, -100.06600357078792);
 
     // changeStoreLoaction();
     // getStreetName();
@@ -74,6 +80,9 @@ class MapController extends BaseController {
   }
 
   void addNewAddress(String name) {
+    if (streetName.value.isEmpty && countryCode.value.isEmpty) {
+      getStreetName();
+    }
     UserAddressesRepository()
         .addAddress(
       address: AddressModel(
@@ -107,8 +116,8 @@ class MapController extends BaseController {
           );
           storage.addUserAddresses(userAddresses);
           update();
-          // CustomToast.showMessage(
-          //     message: 'address added', messageType: MessageType.SUCCESS);
+          CustomToast.showMessage(
+              message: tr('done_btn_lb'), messageType: MessageType.SUCCESS);
         },
       );
     });
@@ -144,37 +153,40 @@ class MapController extends BaseController {
 
   addtoMarkers(String markerId, LatLng position, {String? locationDesc}) {
     !markers.contains(Marker(markerId: MarkerId(markerId)))
-        ? locationDesc != null
-            ? markers
-                .addLabelMarker(LabelMarker(
-                icon: BitmapDescriptor.defaultMarker,
-                label: locationDesc,
-                markerId: MarkerId(markerId),
-                position: position,
-                textStyle: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    // height: screenWidth(100),
-                    fontSize: 50),
-                backgroundColor: AppColors.canceledRedColor,
-              ))
-                .then(
-                (value) {
-                  update();
-                },
-              )
-            : markers.add(Marker(
-                icon: BitmapDescriptor.defaultMarker,
-                draggable: true,
-                infoWindow: InfoWindow(title: locationDesc ?? ''),
-                markerId: MarkerId(markerId),
-                position: position))
+        ?
+        //  locationDesc != null
+        //     ? markers
+        //         .addLabelMarker(LabelMarker(
+        //         icon: BitmapDescriptor.defaultMarker,
+        //         label: locationDesc,
+        //         markerId: MarkerId(markerId),
+        //         position: position,
+        //         textStyle: TextStyle(
+        //             fontWeight: FontWeight.bold,
+        //             // height: screenWidth(100),
+        //             fontSize: 50),
+        //         backgroundColor: AppColors.canceledRedColor,
+        //       ))
+        //         .then(
+        //         (value) {
+        //           update();
+        //         },
+        //       ):
+        markers.add(Marker(
+            icon: BitmapDescriptor.defaultMarker,
+            draggable: true,
+            infoWindow: InfoWindow(title: locationDesc ?? ''),
+            markerId: MarkerId(markerId),
+            position: position))
         : null;
     update();
   }
 
   Future<void> loadcustomIcon() async {
     customIcon = await BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(size: Size(screenHeight(30), screenHeight(30))),
+        ImageConfiguration(
+            size: Size(
+                Get.context!.screenHeight(30), Get.context!.screenHeight(30))),
         'assets/images/map-marker.png',
         mipmaps: false);
     Get.appUpdate();
@@ -223,7 +235,7 @@ class MapController extends BaseController {
       googleMapController.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(
-            zoom: 14.5,
+            zoom: 16.5,
             target: newLocation ?? sourceLocation!,
           ),
         ),
@@ -266,7 +278,7 @@ class MapController extends BaseController {
         if (!(storage.isLoggedIn)) {
           showBrowsingDialogAlert(Get.context!);
         } else {
-          Get.offAll(const ProductsView());
+          Get.offAll(ProductsView());
         }
       });
     } else {
@@ -277,7 +289,7 @@ class MapController extends BaseController {
             globalContext.pop();
             Get.back();
 
-            Get.off(const ShopsListView());
+            Get.off(ShopsListView());
           });
     }
   }
@@ -296,7 +308,8 @@ class MapController extends BaseController {
               'longitude': longitude ?? selectedLocation.longitude
             }))
         .then((value) {
-      streetName.value = value?.street ?? 'No Street name';
+      streetName.value = '${value?.subAdministrativeArea ?? ''} '
+          '${value?.street ?? 'No Street name'}';
       countryCode.value = value?.postalCode ?? 'No postal code';
       city.value = value?.country ?? 'No city';
       currentAddressinfo.value = value!;

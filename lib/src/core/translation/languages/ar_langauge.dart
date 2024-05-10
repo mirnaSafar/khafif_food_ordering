@@ -24,16 +24,18 @@ class ARLanguage {
         "google_lb": "ابتكر مع جوجل",
         "apple_lb": "ابتكر مع جوجل",
         "joined_us_lb": "انضم إلينا من قبل؟  ",
+        "number_exists_lb": "الرقم موجود مسبقاً قم بتسجيل الدخول بدلاً من ذلك",
 
         //?---- login view keys
         "login_lb": "تسجيل الدخول",
         "login_title_lb": "تسجيل الدخول من حسابك أو وسائل التواصل الاجتماعي",
         "not_signup_lb": "لا تملك حساباً؟ ",
-        "guest_lb": 'لا تريد لإانشاء حساب؟   ',
+        "guest_lb": 'لا تريد إنشاء حساب؟   ',
         "guest_view_lb": 'استمرار كزائر',
         'invalid_code_lb': 'رمز التحقق غير صحيح',
         'verify_your_number_lb': 'تحقق من الرقم',
-
+        'you_dont_have_account_lb':
+            'لا يوجد حساب بهذا الرقم ،الرجاء القيام بإنشاء حساب جديد',
         //?---- products view keys
 
         "products_tilte_lb": "اطلب وجبة لذيذة!",
@@ -45,6 +47,7 @@ class ARLanguage {
         "nacho_lb": "ناتشو",
         "fries_lb": "بطاطس",
         "drinks_lb": "مشروبات",
+        "no_products_lb": 'لا يوجد منتجات خاصة بهذه الفئة بعد',
 
         //?---- product details view keys
 
@@ -59,7 +62,7 @@ class ARLanguage {
         "info_lb": "معلوماتي",
         "addresses_lb": "عناويني",
         "orders_lb": "طلباتي",
-        "wanees_ponts_lb": "نقاط ونيس ",
+        "wanees_ponts_lb": "نقاط  ",
         "walaa_lb": "برنامج الولاء",
         "available": "متاح",
         "from": "من 1200 BGN ",
@@ -95,16 +98,17 @@ class ARLanguage {
         "read_less_lb": "اقرأ اقل",
 
         //?------- payment view
-        "payment_lb": "قسط",
+        "payment_lb": "الدفع",
         "payment_method_lb": "طريقة الدفع او السداد:",
         "mada_cart_lb": "بطاقة مدى للخصم المباشر",
-        "visa_method_lb": "التأشيرة والماجستير",
+        "visa_method_lb": "فيزا و ماستر",
         "apple_pay_lb": "أبل الدفع",
         "on_delivery_method": "جاري الارسال",
-        "subtotal_lb": "المجموع الفرعي",
-        "delivery_amount_lb": 'مبلغ التسليم',
+        "subtotal_lb": "القيمة الإجمالية قبل الخصم",
+        "total_amount_lb": "المبلغ الكلي",
+        "delivery_amount_lb": 'سعر التوصيل',
         "vat_lb": "ضريبة القيمة المضافة",
-        "total_include_lb": "الإجمالي + التضمين",
+        "total_include_lb": "إجمالي المبلغ",
         "place_order_lb": "أرسل الطلب",
         "currency_lb": 'ر.س',
         "quantity_lb": 'الكمية: ',
@@ -116,6 +120,7 @@ class ARLanguage {
         "notifications_lb": "إشعارات",
         "Languages_lb": "اللغات",
         "privacy_policy_lb": "سياسة الخصوصية",
+        "terms_of_service_lb": "شروط الخدمة",
         "delete_account_lb": "حذف الحساب",
 
         //?-------Order Options dialog
@@ -136,17 +141,16 @@ class ARLanguage {
         "canceled_lb": "ألغيت",
         "price_lb": "السعر: ",
         "calories_lb": "سعرة حرارية",
-
+        "no_orders_lb": 'ليس لديك طلبات بعد',
         //?---- confirm order view
         "selected_items_lb": "المنتجات المختارة",
         "remove_all_lb": "إزالة الكل",
-        "confirm_order_lb": "تأكيد الطلب",
         "action_needed_lb": 'تنبيه',
         "select_order_delivery_warning_lb":
             'الرجاء اختيار خدمة توصيل الطلب أولاً',
         "empty_cart_waning_lb": "السلة فارغة!",
         "item_deleted_lb": 'تمت إزالة المنتج من السلة بنجاح',
-        "select_toppings_lb": "الرجاء القيام باختيار الإضافات أولاً",
+        "select_toppings_lb": "الرجاء القيام بإضافة النكهات أولاً",
         "add_to_cart_lb": 'أضف إلى السلة',
         "show_cart_lb": 'عرض السلة',
         "order_placed_lb": "تم إرسال الطلب بنجاح",
@@ -156,16 +160,26 @@ class ARLanguage {
         "submit_lb": "إرسال",
         "selected_shop_lb": 'تم اختيار الفرع بنجاح!',
         "order_now_lb": "اطلب الآن",
+        "order_date_lb": "موعد الطلب : ",
+        "select_order_date_lb": "حدد موعد الطلب  : ",
+        "select_order_time_lb": 'حدد الوقت الذي تحب',
+        "open_lb": "مفتوح",
+        "close_lb": "مغلق",
+        "no_open_branches_error_lb": 'لا يوجد فروع مفتوحة في هذا الموعد',
+        "time_is_invalid": 'الرجاء اختيار وقت صحيح',
         //?-------tracking order view
 
         "tracking_order_lb": 'تتبع الطلب',
 
-        "order_accept_lb": "قبول الطلب",
-        "pickup_lb": "يلتقط",
-        "staff_pickup_lb": "الموظفين بيك اب البضائع",
+        "order_accept_lb": "تم قبول الطلب",
+        "order_sent_lb": "تم إرسال الطلب",
+        "staff_pickup_lb": "يتم تحضير طلبك الآن",
         "shipping_lb": "يتم شحن السلعة",
-        "sending_order_lb": "إرسال الطلب",
-        "delivered_lb": "تم التوصيل",
+        "sending_order_lb": "المندوب في طريقه إليك",
+        "order_ready_lb": 'الطلب جاهز',
+        "order_ready_to_pick_up": "الطلب جاهز ليتم تسليمه",
+        "order_picked_up_successfully": 'تم تسليم الطلب بنجاح',
+        "delivered_lb": "الطلب مكتمل",
         "delivered_cuccessfully_lb": " تم تسليم السلعة بنجاح",
         "delivery_service": "خدمات التوصيل",
 
@@ -191,7 +205,7 @@ class ARLanguage {
         "select_address_lb": "اختر الموقع",
         //?-------Dialogs view
         "ok_lb": "موافق",
-        "cancel_lb": "إالغاء",
+        "cancel_lb": "إلغاء",
 
         "browsing_alert_lb":
             "  من فضلك قم بتسجيل الدخول أو إنشاء حساب جديد لتتمكن من المتابعة",
@@ -200,9 +214,11 @@ class ARLanguage {
             'هل انت متأكد من إزالة جميع المنتجات ؟',
         "logout_warning_dialog":
             'تسجيل الخروج \n سوف يؤدي الى ازالة جميع بياناتك ',
+        "confirm_order_lb": "تأكيد الطلب",
+        "confirm_location_lb": "تأكيد الموقع",
+        "select_other_location_lb": "اختيار موقع اخر",
         "ability_to_deliver_lb": 'أخبار جيدة ،يمكننا التوصيل الى هذا الموقع',
-        "no_ability_to_deliver_lb":
-            'أخبار سيئة ،لا يمكننا التوصيل الى هذا الموقع',
+        "no_ability_to_deliver_lb": 'عفواً ،لا يمكننا التوصيل الى هذا الموقع',
         "delivery_checker_lb": 'مدقق التوصيل:',
         "display_shops_lb": 'عرض قائمة المتاجر',
         "all_branches_lb": 'كل الفروع',

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/fonts.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_contaitner.dart';
@@ -31,7 +32,8 @@ class OrderStatus extends StatelessWidget {
         offset: const Offset(0, 4),
         borderRadius: BorderRadius.circular(5),
         padding: EdgeInsets.symmetric(
-            vertical: screenWidth(20), horizontal: screenWidth(30)),
+            vertical: context.screenWidth(20),
+            horizontal: context.screenWidth(30)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -41,12 +43,12 @@ class OrderStatus extends StatelessWidget {
                 secondText: orderNo,
                 firstFontWeight: FontWeight.w400,
                 secondFontWeight: FontWeight.w600,
-                firstFontSize: AppFonts.body,
+                firstFontSize: AppFonts(context).body,
                 firstColor: AppColors.mainBlackColor,
                 secondColor: AppColors.mainBlackColor,
-                secondFontSize: AppFonts.body,
+                secondFontSize: AppFonts(context).body,
               ),
-              screenWidth(40).ph,
+              context.screenWidth(40).ph,
               CustomText(
                 text: orderDate,
                 darkTextColor: AppColors.mainBlackColor,
@@ -54,7 +56,7 @@ class OrderStatus extends StatelessWidget {
                 fontWeight: FontWeight.w400,
                 textColor: AppColors.placeholderTextColor,
               ),
-              screenWidth(40).ph,
+              context.screenWidth(40).ph,
               CustomRichText(
                 firstText: tr('price_lb'),
                 secondText: orderPrice,
@@ -62,14 +64,14 @@ class OrderStatus extends StatelessWidget {
                 firstColor: AppColors.mainBlackColor,
                 secondColor: AppColors.mainBlackColor,
                 secondFontWeight: FontWeight.w500,
-                firstFontSize: AppFonts.small,
-                secondFontSize: AppFonts.bodySmall,
+                firstFontSize: AppFonts(context).small,
+                secondFontSize: AppFonts(context).bodySmall,
               ),
             ]),
             orderStatusTextStyle,
           ],
         )).paddingSymmetric(
-      vertical: screenWidth(40),
+      vertical: context.screenWidth(40),
     );
   }
 

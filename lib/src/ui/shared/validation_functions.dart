@@ -1,3 +1,4 @@
+import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/string_utils.dart';
 
 confirmPassword(value, password) {
@@ -22,23 +23,27 @@ String? passValidator(value) {
 
 String? numberValidator(value) {
   if (value!.isNotEmpty) {
-    if (!validNumber(value)) {
-      return 'invalid number';
+    if (!(value.toString().startsWith('5'))) {
+      return tr('number_must_start_with_5_lb');
     }
+    if (!validNumber(value)) {
+      return tr('invalid_number_lb');
+    }
+
     return null;
   } else {
-    return 'enter your number';
+    return tr('enter_number_lb');
   }
 }
 
 emailValidator(String? value) {
   if (value!.isNotEmpty) {
     if (!isEmail(value)) {
-      return 'invalid email';
+      return tr('invalid_email_lb');
     }
     return null;
   } else {
-    return 'enter your email';
+    return tr('enter_email_lb');
   }
 }
 
@@ -49,6 +54,6 @@ nameValidator(String? value) {
     // }
     // return null;
     // return 'invalid name';
-    return 'enter your name';
+    return tr('enter_name_lb');
   } else {}
 }

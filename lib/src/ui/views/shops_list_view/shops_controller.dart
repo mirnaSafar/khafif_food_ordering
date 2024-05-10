@@ -1,6 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:khafif_food_ordering_application/src/core/enums.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/services/base_controller.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
@@ -24,11 +28,31 @@ class ShopsController extends BaseController {
 
   RxInt selectedBranchesDisplayOption = 0.obs;
   RxBool get isShopsLoading => operationType.contains(OperationType.SHOP).obs;
+  RxBool get isSetShopLoading =>
+      operationType.contains(OperationType.SETSHOP).obs;
   RxList<BranchModel> shopsList = <BranchModel>[].obs;
+  RxList<BranchModel> openShopsList = <BranchModel>[].obs;
+  RxList<BranchModel> scheduledShopsList = <BranchModel>[].obs;
+  RxList<BranchModel> allShopsList = <BranchModel>[].obs;
   Rx<BranchModel> currentShop = BranchModel().obs;
   Rx<CustomerCartModel> currentCart =
       (storage.getCart() ?? CustomerCartModel()).obs;
   PanelController panelController = PanelController();
+
+  checkIfTheBrachOpenORClose(BranchModel branchModel) {
+    return openShopsList
+                .firstWhereOrNull((element) => element.id == branchModel.id) !=
+            null
+        ? true
+        : false;
+  }
+
+  int calcShopDistanceFromCurrentLocation(BranchModel branchModel) {
+    return locationService
+        .calculateDistanceFromCurrentLocationInKm(
+            LatLng(branchModel.latitude!, branchModel.longitude!))!
+        .toInt();
+  }
 
   Future getAll() {
     if (isOnline) {
@@ -43,12 +67,14 @@ class ShopsController extends BaseController {
                               messageType: MessageType.REJECTED,
                               message: l,
                             ));
-                    shopsList.clear();
+                    allShopsList.clear();
 
                     // isCategoriesShimmerLoader.value = false;
                   }, (r) {
-                    shopsList.clear();
-                    shopsList.addAll(r);
+                    allShopsList.clear();
+                    allShopsList.addAll(r);
+                    shopsList.value = r;
+                    sortShopsBaseOnDistanceFromCustomer();
                   });
                 },
               )));
@@ -56,7 +82,18 @@ class ShopsController extends BaseController {
     return Future(() => null);
   }
 
+  void sortShopsBaseOnDistanceFromCustomer() {
+    shopsList.sort((a, b) => locationService
+        .calculateDistanceFromCurrentLocationInKm(
+            LatLng(b.latitude!, b.longitude!))!
+        .compareTo(locationService.calculateDistanceFromCurrentLocationInKm(
+            LatLng(a.latitude!, a.longitude!))!));
+    shopsList.value = shopsList.reversed.toList();
+  }
+
   Future getOpenNowBranches() {
+    dateTimeController.selectedDate.value = DateTime.now();
+    dateTimeController.selectedTime.value = TimeOfDay.now();
     return getOpenBranches(
         dateTime: DateTime.now().toString().split('.')[0], branchId: 3);
   }
@@ -76,13 +113,14 @@ class ShopsController extends BaseController {
     }
 
     Get.to(MapPage(
+      showAllbranchesButton: false,
       panelController: panelController,
       sourceLocation: LatLng(
         shopsList[0].latitude!,
         shopsList[0].longitude!,
       ),
-      openPanelHeight: screenHeight(2),
-      closePanelHeight: screenHeight(3),
+      openPanelHeight: Get.context!.screenHeight(2),
+      closePanelHeight: Get.context!.screenHeight(3),
       bottomsheet:
           // shopsList[current],
           ShopsListBottomSheet(shopsList),
@@ -102,16 +140,23 @@ class ShopsController extends BaseController {
                   value.fold((l) {
                     checkTokenIsExpiredToShowLoginWarning(
                         apiMessage: l,
-                        function: () => CustomToast.showMessage(
-                              messageType: MessageType.REJECTED,
-                              message: l,
-                            ));
-                    shopsList.clear();
+                        function: () =>
+                            l == 'not found Open Brach in This Datatime'
+                                ? CustomToast.AwesomeDialog(
+                                    showMessageWithoutActions: true,
+                                    message: tr('no_open_branches_error_lb'))
+                                : CustomToast.showMessage(
+                                    messageType: MessageType.REJECTED,
+                                    message: l,
+                                  ));
+                    openShopsList.clear();
 
                     // isCategoriesShimmerLoader.value = false;
                   }, (r) {
-                    shopsList.clear();
-                    shopsList.addAll(r);
+                    openShopsList.clear();
+                    openShopsList.addAll(r);
+                    shopsList.value = r;
+                    sortShopsBaseOnDistanceFromCustomer();
                   });
                 },
               )));
@@ -144,7 +189,7 @@ class ShopsController extends BaseController {
   setShop({required int branchID}) {
     if (isOnline) {
       return runFullLoadingFutuerFunction(
-          type: OperationType.SHOP,
+          type: OperationType.SETSHOP,
           function: Future(
               () => BranchRepository().setBranch(branchId: branchID).then(
                     (value) {
@@ -172,8 +217,8 @@ class ShopsController extends BaseController {
                         productsVieewController.orderOptionSelected.value =
                             storage.getOrderDeliveryOptionSelected();
                         Future.delayed(
-                          const Duration(seconds: 1),
-                          () => Get.offAll(const ProductsView()),
+                          Duration(seconds: 1),
+                          () => Get.offAll(ProductsView()),
                         );
                       });
                     },

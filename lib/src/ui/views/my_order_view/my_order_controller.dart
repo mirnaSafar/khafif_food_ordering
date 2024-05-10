@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/enums.dart';
 import 'package:khafif_food_ordering_application/src/core/services/base_controller.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
+import 'package:khafif_food_ordering_application/src/data/models/apis/customer_cart_model.dart';
 import 'package:khafif_food_ordering_application/src/data/models/apis/order_model.dart';
 import 'package:khafif_food_ordering_application/src/data/repositories/order_repository.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_toast.dart';
@@ -26,10 +29,14 @@ class MyOrderController extends BaseController {
             (value) => value.fold(
               (l) => checkTokenIsExpiredToShowLoginWarning(
                   apiMessage: l,
-                  function: () => CustomToast.showMessage(
-                        messageType: MessageType.REJECTED,
-                        message: l,
-                      )),
+                  function: () {
+                    l.toLowerCase().contains('sale order')
+                        ? null
+                        : CustomToast.showMessage(
+                            messageType: MessageType.REJECTED,
+                            message: l,
+                          );
+                  }),
               (r) {
                 myOrders.clear();
                 myOrders.addAll(r);
@@ -40,7 +47,9 @@ class MyOrderController extends BaseController {
     );
   }
 
-  getMyOrderCart({required int orderID}) {
+  getMyOrderCart({
+    required int orderID,
+  }) {
     runFullLoadingFutuerFunction(
       function: OrdersRepository().getOrder(id: orderID).then(
             (value) => value.fold(
@@ -54,8 +63,8 @@ class MyOrderController extends BaseController {
                 storage.setCart(r);
                 cartService.calcCartCount(cart: r);
                 Get.put(CartController(customerCart: r.obs));
-
-                Get.to(const ConfirmOrderView(
+                cartStreamController.add(r);
+                Get.to(ConfirmOrderView(
                   showMyOrderCart: true,
                 ));
               },
@@ -64,18 +73,38 @@ class MyOrderController extends BaseController {
     );
   }
 
+  final StreamController<CustomerCartModel> cartStreamController =
+      StreamController<CustomerCartModel>();
+
+  Stream<CustomerCartModel> cartStream({required int orderID}) async* {
+    while (true) {
+      CustomerCartModel cart = cartService.cart.value!;
+      Future.delayed(
+        const Duration(milliseconds: 5000),
+        () {
+          OrdersRepository()
+              .getOrder(id: orderID)
+              .then((value) => value.fold((l) => null, (r) {
+                    cart = r;
+                  }));
+        },
+      );
+      yield cart;
+    }
+  }
+
   RxList<OrderStatusEnum> formattedOrderStatus = <OrderStatusEnum>[].obs;
 
   formatMyOrderStatus() {
     for (var order in myOrders) {
       switch (order.state) {
-        case "Ready":
+        case "Quotation Sent":
           formattedOrderStatus.add(OrderStatusEnum.READY);
           break;
-        case "Under Delivery":
+        case "Quotation":
           formattedOrderStatus.add(OrderStatusEnum.UNDERDELIVERY);
           break;
-        case "Cancel":
+        case "Sales Order":
           formattedOrderStatus.add(OrderStatusEnum.CANCELED);
           break;
 

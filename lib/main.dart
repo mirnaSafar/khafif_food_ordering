@@ -1,4 +1,6 @@
 // import 'package:firebase_app_check/firebase_app_check.dart';
+// ignore_for_file: prefer_const_constructors
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:khafif_food_ordering_application/firebase_options.dart';
@@ -19,11 +21,12 @@ import 'src/core/services/connectivity_service.dart';
 import 'src/core/services/notifacation_service.dart';
 
 Future<void> main() async {
-  await putProjectDepedencies();
+  WidgetsFlutterBinding.ensureInitialized();
+
   try {
-    // await Firebase.initializeApp(
-    //   options: DefaultFirebaseOptions.currentPlatform,
-    // );
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
     // await FirebaseAppCheck.instance.activate(
     //   // You can also use a `ReCaptchaEnterpriseProvider` provider instance as an
@@ -46,7 +49,8 @@ Future<void> main() async {
   } catch (e) {
     print(e);
   }
-  runApp(const MyApp());
+  await putProjectDepedencies();
+  runApp(MyApp());
 }
 
 Future<void> putProjectDepedencies() async {

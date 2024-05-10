@@ -1,9 +1,12 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/app_assets.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_appbar.dart';
@@ -12,7 +15,7 @@ import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/cu
 import 'notifications_controller.dart';
 
 class NotificationsView extends StatefulWidget {
-  const NotificationsView({super.key});
+  NotificationsView({super.key});
 
   @override
   State<NotificationsView> createState() => _NotificationsViewState();
@@ -29,7 +32,8 @@ class _NotificationsViewState extends State<NotificationsView> {
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: screenWidth(30), vertical: screenWidth(20)),
+                horizontal: context.screenWidth(30),
+                vertical: context.screenWidth(20)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -42,12 +46,12 @@ class _NotificationsViewState extends State<NotificationsView> {
                       : Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const CustomText(
+                            CustomText(
                               text: 'Today',
                               textType: TextStyleType.SUBTITLE,
                               fontWeight: FontWeight.w800,
                             ),
-                            screenWidth(30).ph,
+                            context.screenWidth(30).ph,
                             ListView.separated(
                               scrollDirection: Axis.vertical,
                               physics: const NeverScrollableScrollPhysics(),
@@ -71,10 +75,10 @@ class _NotificationsViewState extends State<NotificationsView> {
                                         children: [
                                           SvgPicture.asset(
                                             AppAssets.icNotification,
-                                            width: screenWidth(20),
-                                            height: screenWidth(20),
+                                            width: context.screenWidth(20),
+                                            height: context.screenWidth(20),
                                           ),
-                                          screenWidth(30).px,
+                                          context.screenWidth(30).px,
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -89,7 +93,7 @@ class _NotificationsViewState extends State<NotificationsView> {
                                                 textType:
                                                     TextStyleType.BODYSMALL,
                                               ),
-                                              // screenWidth(60).px,
+                                              // context .screenWidth(60).px,
                                               // CustomText(
                                               //   text: notificationService
                                               //           .notifcationsList[index]
@@ -98,15 +102,17 @@ class _NotificationsViewState extends State<NotificationsView> {
                                               //       '',
                                               //   textType: TextStyleType.BODY,
                                               // ),
-                                              screenWidth(100).ph,
+                                              context.screenWidth(100).ph,
                                               Row(
                                                 children: [
                                                   SvgPicture.asset(
                                                     AppAssets.icClock,
-                                                    width: screenWidth(25),
-                                                    height: screenWidth(25),
+                                                    width:
+                                                        context.screenWidth(25),
+                                                    height:
+                                                        context.screenWidth(25),
                                                   ),
-                                                  screenWidth(100).px,
+                                                  context.screenWidth(100).px,
                                                   CustomText(
                                                     text: '30 min ago',
                                                     textColor:
@@ -123,7 +129,7 @@ class _NotificationsViewState extends State<NotificationsView> {
                                       ),
                                       // SvgPicture.asset(AppAssets.icShoppingBag),
 
-                                      screenWidth(40).px,
+                                      context.screenWidth(40).px,
                                       CircleAvatar(
                                         backgroundColor:
                                             AppColors.greenSuccessColor,
@@ -135,7 +141,7 @@ class _NotificationsViewState extends State<NotificationsView> {
                               },
                               separatorBuilder:
                                   (BuildContext context, int index) {
-                                return screenWidth(40).ph;
+                                return context.screenWidth(40).ph;
                               },
                             ),
                           ],

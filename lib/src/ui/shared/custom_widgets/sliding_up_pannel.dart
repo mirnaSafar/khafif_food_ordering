@@ -1,11 +1,14 @@
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class CustomSlidingUpPannel extends StatefulWidget {
-  const CustomSlidingUpPannel(
+  CustomSlidingUpPannel(
       {super.key,
       required this.backgroundBody,
       required this.panel,
@@ -29,13 +32,13 @@ class _CustomSlidingUpPannelState extends State<CustomSlidingUpPannel> {
       backdropColor: AppColors.mainRedColor,
       color: Get.theme.scaffoldBackgroundColor,
       controller: PanelController(),
-      borderRadius: const BorderRadius.only(
+      borderRadius: BorderRadius.only(
         topRight: Radius.circular(20),
         topLeft: Radius.circular(20),
       ),
       panelBuilder: widget.panelBuilder,
-      maxHeight: widget.openPanelHeight ?? screenHeight(3),
-      minHeight: widget.closePanelHeight ?? screenHeight(3),
+      maxHeight: widget.openPanelHeight ?? context.screenHeight(3),
+      minHeight: widget.closePanelHeight ?? context.screenHeight(3),
       panel: widget.panel,
       body: widget.backgroundBody,
     );

@@ -59,7 +59,7 @@ import java.util.regex.Pattern;
 import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
-
+import android.os.Bundle;
 
 public class MainActivity extends FlutterActivity implements ITransactionListener,MethodChannel.Result {
 
@@ -469,10 +469,13 @@ public class MainActivity extends FlutterActivity implements ITransactionListene
     public void transactionFailed(Transaction transaction, PaymentError paymentError) {
 
     }
-
+    
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode,@Nullable Intent data) {
+       if(resultCode != CheckoutActivity.RESULT_OK &&  resultCode != CheckoutActivity.RESULT_CANCELED && 
+       resultCode != CheckoutActivity.RESULT_ERROR  )
+        {  super.onActivityResult(requestCode, resultCode, data);}
         switch (resultCode) {
             case CheckoutActivity.RESULT_OK:
                 /* transaction completed */
@@ -532,13 +535,17 @@ public class MainActivity extends FlutterActivity implements ITransactionListene
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
+        if(intent.getScheme()!=null)
+        {     
+            if (intent.getScheme().equals("com.khafif.android")) {
 
-        if (intent.getScheme().equals("com.khafif.android")) {
-
-            success("success");
-
-        }
+                    success("success");
+        
+                }
+        } 
+     
     }
+    
 
 
 

@@ -5,12 +5,14 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/app_assets.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_appbar.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_contaitner.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_listview.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
+import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custum_rich_text.dart';
 import 'package:khafif_food_ordering_application/src/ui/shimmers/shops_shimmer.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/map_view/map_view.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/shops_list_view/shops_controller.dart';
@@ -35,131 +37,207 @@ class _ShopsListViewState extends State<ShopsListView> {
 
   @override
   Widget build(BuildContext context) {
-    ShopsController controller = Get.put(ShopsController());
-
+    Get.put(ShopsController());
     return Scaffold(
       appBar: CustomAppbar(
         appbarTitle: tr('shops_lb'),
       ),
       body: Obx(() {
-        print(controller.isShopsLoading);
+        print(shopsController.isShopsLoading);
         return Padding(
           padding: EdgeInsets.symmetric(
-            vertical: screenWidth(30),
+            vertical: context.screenWidth(30),
           ),
-          child: Column(
-            children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    CustomBranchOption(
-                        onTap: () {
-                          controller.getOpenNowBranches();
-                        },
-                        displayOptionText: tr('open_now_lb'),
-                        index: 0),
-                    screenWidth(13).px,
-                    CustomBranchOption(
-                      onTap: () {
-                        controller.addAllBranchesMarkerToMap();
-                        // controller.getAll();
-                      },
-                      displayOptionText: tr('all_branches_lb'),
-                      index: 1,
-                    ),
-                    screenWidth(13).px,
-                    CustomBranchOption(
-                        onTap: () {
-                          dateTimeController.selectDate(context);
-                        },
-                        displayOptionText: tr('schedule_order_lb'),
-                        index: 2),
-                  ],
-                ).paddingSymmetric(
-                  horizontal: screenWidth(40),
-                ),
+          child: FutureBuilder(
+              future: whenNotZero(
+                Stream<double>.periodic(const Duration(milliseconds: 50),
+                    (x) => MediaQuery.of(context).size.width),
               ),
-              screenWidth(13).ph,
-              controller.isShopsLoading.value
-                  ? shopsShimmer(isLoading: controller.isShopsLoading.value)
-                  : controller.shopsList.isEmpty
-                      ? Center(
-                          child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CustomText(
-                              text: tr('shedule_order_warning_lb'),
-                              textType: TextStyleType.BODY),
-                        ))
-                      : Expanded(
-                          child: CustomListView(
-                            itemCount: controller.shopsList.length,
-                            vertical: true,
-                            listViewHeight: screenHeight(1),
-                            separatorPadding: screenWidth(20).ph,
-                            itemBuilder: (context, index) => InkWell(
-                              onTap: () {
-                                Get.to(MapPage(
-                                  sourceLocation: LatLng(
-                                    controller.shopsList[index].latitude!,
-                                    controller.shopsList[index].longitude!,
-                                  ),
-                                  bottomsheet: ShopBottomSheet(
-                                    shop: controller.shopsList[index],
-                                    shops: controller.shopsList,
-                                  ),
-                                  appBarTitle: tr('shops_lb'),
-                                ));
-                              },
-                              child: CustomContainer(
-                                      backgroundColor: Colors.white,
-                                      shadowColor: AppColors.shadowColor,
-                                      blurRadius: 4,
-                                      offset: const Offset(0, 4),
-                                      borderRadius: BorderRadius.circular(5),
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: screenWidth(20),
-                                          horizontal: screenWidth(30)),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          CustomText(
-                                            darkTextColor:
-                                                AppColors.mainBlackColor,
-
-                                            text: controller
-                                                    .shopsList[index].name ??
-                                                '',
-
-                                            textType: TextStyleType.BODY,
-                                            fontWeight: FontWeight.w600,
-                                            // textColor: AppColors.placeholderTextColor,
-                                          ),
-                                          Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                  AppAssets.icLocation),
-                                              CustomText(
-                                                darkTextColor:
-                                                    AppColors.mainBlackColor,
-                                                text: '20 km',
-                                                textType:
-                                                    TextStyleType.BODYSMALL,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ))
-                                  .paddingSymmetric(
-                                      horizontal: screenWidth(30)),
-                            ),
+              builder: (BuildContext context, snapshot) {
+                if (snapshot.hasData) {
+                  if (snapshot.data! > 0) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              CustomBranchOption(
+                                  onTap: () {
+                                    shopsController.getOpenNowBranches();
+                                  },
+                                  displayOptionText: tr('open_now_lb'),
+                                  index: 0),
+                              context.screenWidth(13).px,
+                              CustomBranchOption(
+                                onTap: () {
+                                  // shopsController.addAllBranchesMarkerToMap();
+                                  shopsController.getAll();
+                                },
+                                displayOptionText: tr('all_branches_lb'),
+                                index: 1,
+                              ),
+                              context.screenWidth(13).px,
+                              CustomBranchOption(
+                                  onTap: () {
+                                    dateTimeController.selectDate(context);
+                                  },
+                                  displayOptionText: tr('schedule_order_lb'),
+                                  index: 2),
+                            ],
+                          ).paddingSymmetric(
+                            horizontal: context.screenWidth(40),
                           ),
                         ),
-            ],
-          ),
+                        context.screenWidth(13).ph,
+                        // CustomText(
+                        //         text: 'Order Date: ${dateTimeController.selectedDate}',
+                        //         textType: TextStyleType.BODY)
+                        //     .paddingSymmetric(
+                        //   horizontal: context.screenWidth(40),
+                        // ),
+                        CustomRichText(
+                          firstText: tr('order_date_lb'),
+                          secondText: dateTimeController.formatDateTimeIn24(
+                              dateTimeController.selectedTime.value),
+                        ).paddingSymmetric(
+                          horizontal: context.screenWidth(40),
+                        ),
+                        context.screenWidth(13).ph,
+                        shopsController.isShopsLoading.value
+                            ? shopsShimmer(
+                                isLoading: shopsController.isShopsLoading.value)
+                            : shopsController.shopsList.isEmpty
+                                ? Center(
+                                    child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: CustomText(
+                                        text: tr('shedule_order_warning_lb'),
+                                        textType: TextStyleType.BODY),
+                                  ))
+                                : Expanded(
+                                    child: CustomListView(
+                                      itemCount:
+                                          shopsController.shopsList.length,
+                                      vertical: true,
+                                      listViewHeight: context.screenHeight(1),
+                                      separatorPadding:
+                                          context.screenWidth(20).ph,
+                                      itemBuilder: (context, index) => InkWell(
+                                        onTap: () {
+                                          shopsController
+                                                  .checkIfTheBrachOpenORClose(
+                                                      shopsController
+                                                          .shopsList[index])
+                                              ? Get.to(MapPage(
+                                                  showAllbranchesButton: true,
+                                                  sourceLocation: LatLng(
+                                                    shopsController
+                                                        .shopsList[index]
+                                                        .latitude!,
+                                                    shopsController
+                                                        .shopsList[index]
+                                                        .longitude!,
+                                                  ),
+                                                  bottomsheet: ShopBottomSheet(
+                                                    shop: shopsController
+                                                        .shopsList[index],
+                                                    shops: shopsController
+                                                        .shopsList,
+                                                  ),
+                                                  appBarTitle: tr('shops_lb'),
+                                                ))
+                                              : null;
+                                        },
+                                        child: CustomContainer(
+                                                backgroundColor: shopsController
+                                                        .checkIfTheBrachOpenORClose(
+                                                            shopsController
+                                                                .shopsList[index])
+                                                    ? Colors.white
+                                                    : Colors.grey[200],
+                                                shadowColor: AppColors.shadowColor,
+                                                blurRadius: 4,
+                                                offset: const Offset(0, 4),
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical:
+                                                        context.screenWidth(20),
+                                                    horizontal: context
+                                                        .screenWidth(30)),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    CustomText(
+                                                      darkTextColor: AppColors
+                                                          .mainBlackColor,
+
+                                                      text: shopsController
+                                                              .shopsList[index]
+                                                              .name ??
+                                                          '',
+
+                                                      textType:
+                                                          TextStyleType.BODY,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      // textColor: AppColors.placeholderTextColor,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        CustomText(
+                                                            darkTextColor: shopsController
+                                                                    .checkIfTheBrachOpenORClose(
+                                                                        shopsController.shopsList[
+                                                                            index])
+                                                                ? Colors.green
+                                                                : Colors.red,
+                                                            textColor: shopsController
+                                                                    .checkIfTheBrachOpenORClose(
+                                                                        shopsController.shopsList[
+                                                                            index])
+                                                                ? Colors.green
+                                                                : Colors.red,
+                                                            text:
+                                                                '(${shopsController.checkIfTheBrachOpenORClose(shopsController.shopsList[index]) ? tr('open_lb') : tr('close_lb')})',
+                                                            textType:
+                                                                TextStyleType
+                                                                    .SMALL),
+                                                        SvgPicture.asset(
+                                                            AppAssets
+                                                                .icLocation),
+                                                        CustomText(
+                                                          darkTextColor: AppColors
+                                                              .mainBlackColor,
+                                                          text:
+                                                              '${shopsController.calcShopDistanceFromCurrentLocation(shopsController.shopsList[index])} km',
+                                                          textType:
+                                                              TextStyleType
+                                                                  .BODYSMALL,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ))
+                                            .paddingSymmetric(
+                                                horizontal:
+                                                    context.screenWidth(30)),
+                                      ),
+                                    ),
+                                  ),
+                      ],
+                    );
+                  }
+                }
+                return Container();
+              }),
         );
       }),
     );

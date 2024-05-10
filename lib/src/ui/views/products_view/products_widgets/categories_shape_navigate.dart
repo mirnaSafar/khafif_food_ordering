@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -5,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/fonts.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_carousel_slider.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_listview.dart';
@@ -12,7 +15,7 @@ import 'package:khafif_food_ordering_application/src/ui/shimmers/products_view_s
 import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_widgets/custom_categories_widget.dart';
 
 class CategoriesShapeNavigation extends StatefulWidget {
-  const CategoriesShapeNavigation(
+  CategoriesShapeNavigation(
       {super.key, required this.scrolled, required this.scrollOffset});
   final bool scrolled;
   final double scrollOffset;
@@ -53,7 +56,7 @@ class _CategoriesShapeNavigationState extends State<CategoriesShapeNavigation>
                             : productsVieewController
                                 .carouselItems[sliderIndex].length,
                     separatorPadding:
-                        widget.scrolled ? 0.px : screenWidth(20).px,
+                        widget.scrolled ? 0.px : context.screenWidth(20).px,
                     backgroundColor: widget.scrolled &&
                             !productsVieewController
                                 .isCategoriesShimmerLoader.value
@@ -81,7 +84,7 @@ class _CategoriesShapeNavigationState extends State<CategoriesShapeNavigation>
                               scrolled: widget.scrolled,
                               fontsize: !widget.scrolled
                                   ? lerpDouble(
-                                      AppFonts.bodySmall,
+                                      AppFonts(context).bodySmall,
                                       10,
                                       (widget.scrollOffset / 10)
                                           .clamp(0.0, 1.0))

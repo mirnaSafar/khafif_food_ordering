@@ -5,8 +5,8 @@ class CustomShimmer extends StatelessWidget {
   final Widget child;
   final bool isLoading;
 
-  const CustomShimmer(
-      {super.key, required this.child, required this.isLoading});
+  // ignore: prefer_const_constructors_in_immutables
+  CustomShimmer({super.key, required this.child, required this.isLoading});
 
   @override
   Widget build(BuildContext context) {

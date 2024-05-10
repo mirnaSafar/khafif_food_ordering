@@ -54,32 +54,29 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDEoC3PjMNLOOuumoIU39nLyZ5FAmJi5Qg',
-    appId: '1:584610308731:android:e1327d3cb77ec3fd4ef8de',
-    messagingSenderId: '584610308731',
-    projectId: 'khafif-food-ordering',
-    storageBucket: 'khafif-food-ordering.appspot.com',
+    apiKey: 'AIzaSyBfirdCa7K-WxWGzu3fMKF_iAzA_iieeq0',
+    appId: '1:486734582737:android:297d65d7c3c4e4a04186f0',
+    messagingSenderId: '486734582737',
+    projectId: 'khafif-9797b',
+    storageBucket: 'khafif-9797b.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCGCWOXbA2SJldtyaKXvPoSkdY19Z98wv4',
-    appId: '1:584610308731:ios:fabd0045e83314884ef8de',
-    messagingSenderId: '584610308731',
-    projectId: 'khafif-food-ordering',
-    storageBucket: 'khafif-food-ordering.appspot.com',
-    androidClientId: '584610308731-vkbdv7fvj76g03ou2t27clf2rudg07l3.apps.googleusercontent.com',
-    iosClientId: '584610308731-l17va0a3vembkdqf3di3hks3jdfadfc6.apps.googleusercontent.com',
+    apiKey: 'AIzaSyD984DdZsJpPkNpLFEvThI83duhb_qj83Y',
+    appId: '1:486734582737:ios:a6a4435e49fd344c4186f0',
+    messagingSenderId: '486734582737',
+    projectId: 'khafif-9797b',
+    storageBucket: 'khafif-9797b.appspot.com',
     iosBundleId: 'com.example.khafifFoodOrderingApplication',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCGCWOXbA2SJldtyaKXvPoSkdY19Z98wv4',
-    appId: '1:584610308731:ios:8a2df1bdd6550b594ef8de',
-    messagingSenderId: '584610308731',
-    projectId: 'khafif-food-ordering',
-    storageBucket: 'khafif-food-ordering.appspot.com',
-    androidClientId: '584610308731-vkbdv7fvj76g03ou2t27clf2rudg07l3.apps.googleusercontent.com',
-    iosClientId: '584610308731-k63i8p7tslc9epq8oqrhdli58lbcsp8k.apps.googleusercontent.com',
-    iosBundleId: 'com.example.khafifFoodOrderingApplication.RunnerTests',
+    apiKey: 'AIzaSyD984DdZsJpPkNpLFEvThI83duhb_qj83Y',
+    appId: '1:486734582737:ios:42c9b59b9461f2714186f0',
+    messagingSenderId: '486734582737',
+    projectId: 'khafif-9797b',
+    storageBucket: 'khafif-9797b.appspot.com',
+    iosBundleId: 'com.khafif.app',
   );
+
 }

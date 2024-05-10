@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
 import '../../../core/app/app_config/colors.dart';
@@ -20,6 +21,7 @@ class CustomButton extends StatelessWidget {
   final void Function()? onPressed;
   final String? imageName;
   final bool? loader;
+  final BorderRadiusGeometry? borderRadius;
   const CustomButton({
     super.key,
     this.text,
@@ -33,6 +35,7 @@ class CustomButton extends StatelessWidget {
     this.child,
     this.height,
     this.textStyleType,
+    this.borderRadius,
   });
 
   @override
@@ -57,10 +60,11 @@ class CustomButton extends StatelessWidget {
               disabledBackgroundColor: Colors.transparent,
               fixedSize: Size(
                 size.width,
-                height ?? screenHeight(14),
+                height ?? context.screenHeight(14),
               ),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8)),
+              shape: RoundedRectangleBorder(
+                borderRadius:
+                    borderRadius ?? const BorderRadius.all(Radius.circular(8)),
               ),
               backgroundColor: color ?? AppColors.mainAppColor,
               side: borderColor != null
@@ -77,12 +81,15 @@ class CustomButton extends StatelessWidget {
                 10.px,
               ],
               text != null
-                  ? CustomText(
-                      text: text!,
-                      textColor: textColor,
-                      darkTextColor: AppColors.mainBlackColor,
-                      fontWeight: FontWeight.bold,
-                      textType: textStyleType ?? TextStyleType.BODY,
+                  ? Flexible(
+                      child: CustomText(
+                        text: text!,
+                        textColor: textColor,
+                        darkTextColor: AppColors.mainWhiteColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: fontsize,
+                        textType: textStyleType ?? TextStyleType.BODY,
+                      ),
                     )
                   : child!,
             ],

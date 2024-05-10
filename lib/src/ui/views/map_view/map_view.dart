@@ -1,24 +1,33 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/data/models/apis/address_model.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_appbar.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_button.dart';
+import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_contaitner.dart';
+import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/sliding_up_pannel.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/addresses_view/address_bottomsheet.dart/address_bottomsheet.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/addresses_view/addresses_view.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/map_view/map_controller.dart';
+import 'package:khafif_food_ordering_application/src/ui/views/shops_list_view/shops_controller.dart';
+import 'package:khafif_food_ordering_application/src/ui/views/shops_list_view/widgets/custom_branch_option.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 // ignore: must_be_immutable
 class MapPage extends StatefulWidget {
-  LatLng? sourceLocation = const LatLng(37.43296265331129, -122.08832357078792);
-  LatLng? destination = const LatLng(34.43296265331129, -100.06600357078792);
+  LatLng? sourceLocation = LatLng(37.43296265331129, -122.08832357078792);
+  LatLng? destination = LatLng(34.43296265331129, -100.06600357078792);
   final String? appBarTitle;
   final bool? newAddress;
+  final bool? showAllbranchesButton;
   final AddressModel? addressModel;
   Map<String, dynamic>? editAddress = {"edit": false, "index": null};
   final Widget Function(ScrollController)? panelBuilder;
@@ -37,7 +46,8 @@ class MapPage extends StatefulWidget {
       this.panelBuilder,
       this.openPanelHeight,
       this.closePanelHeight,
-      this.panelController});
+      this.panelController,
+      this.showAllbranchesButton = false});
 
   @override
   State<MapPage> createState() => MapPageState();
@@ -89,26 +99,51 @@ class MapPageState extends State<MapPage> {
                       onSubmitted: (name) => mapController.addNewAddress(name))
                   : widget.bottomsheet != null
                       ? Container(
-                          height: screenHeight(3),
-                          width: screenWidth(1),
+                          height: context.screenHeight(3),
+                          width: context.screenWidth(1),
                           decoration: BoxDecoration(
                             color: AppColors.mainBlackColor,
-                            borderRadius: const BorderRadius.only(
+                            borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(20),
                                 topRight: Radius.circular(20)),
                           ),
                           padding: EdgeInsets.symmetric(
-                              horizontal: screenWidth(20),
-                              vertical: screenWidth(30)),
-                          child: widget.bottomsheet,
+                              horizontal: context.screenWidth(20),
+                              vertical: context.screenWidth(30)),
+                          child: Stack(
+                            alignment: AlignmentDirectional.topEnd,
+                            fit: StackFit.expand,
+                            clipBehavior: Clip.none,
+                            children: [
+                              if (widget.bottomsheet != null)
+                                widget.bottomsheet!,
+                            ],
+                          ),
                         )
-                      : Container(),
+                      : InkWell(
+                          onTap: () {
+                            Get.back();
+                            Get.put(ShopsController())
+                                .addAllBranchesMarkerToMap();
+                          },
+                          child: CustomContainer(
+                              containerStyle: ContainerStyle.CYLINDER,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: context.screenWidth(30),
+                                  vertical: context.screenWidth(90)),
+                              backgroundColor: AppColors.mainAppColor,
+                              child: CustomText(
+                                  darkTextColor: AppColors.mainWhiteColor,
+                                  textColor: AppColors.mainWhiteColor,
+                                  text: tr('all_branches_lb'),
+                                  textType: TextStyleType.BODY)),
+                        ),
           backgroundBody: GoogleMap(
             polylines: {
               Polyline(
                   color: AppColors.mainBlackColor,
                   width: 5,
-                  polylineId: const PolylineId("route"),
+                  polylineId: PolylineId("route"),
                   points: mapController.polylineCoordinates),
             },
             mapType: MapType.normal,
@@ -144,19 +179,44 @@ class MapPageState extends State<MapPage> {
           panelController: widget.panelController,
         ),
         drawerEnableOpenDragGesture: false,
-        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+        floatingActionButtonLocation:
+            //  !widget.showAllbranchesButton!?
+            FloatingActionButtonLocation.startFloat,
+        // : FloatingActionButtonLocation.endTop,
         floatingActionButton: !widget.newAddress! &&
                 !(widget.editAddress?['edit'] ?? false) &&
                 widget.sourceLocation == null
             ? SizedBox(
-                width: screenWidth(2),
+                width: context.screenWidth(2),
                 child: CustomButton(
                     text: tr('select_address_lb'),
                     onPressed: () {
-                      Get.off(const AddressesView());
+                      Get.off(AddressesView());
                     }),
               )
-            : null,
+            : widget.showAllbranchesButton!
+                ? Align(
+                    alignment: AlignmentDirectional(0.8, 0.34),
+                    child: InkWell(
+                      onTap: () {
+                        Get.back();
+                        shopsController.getAll();
+                        shopsController.selectedBranchesDisplayOption.value = 1;
+                      },
+                      child: CustomContainer(
+                          containerStyle: ContainerStyle.CYLINDER,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: context.screenWidth(30),
+                              vertical: context.screenWidth(90)),
+                          backgroundColor: AppColors.mainAppColor,
+                          child: CustomText(
+                              darkTextColor: AppColors.mainWhiteColor,
+                              textColor: AppColors.mainWhiteColor,
+                              text: tr('all_branches_lb'),
+                              textType: TextStyleType.BODY)),
+                    ),
+                  )
+                : null,
       ),
     );
   }

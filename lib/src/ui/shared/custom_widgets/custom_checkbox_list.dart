@@ -1,13 +1,16 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_contaitner.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_radio.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
 
 class CustomCheckBoxList extends StatefulWidget {
-  const CustomCheckBoxList(
+  CustomCheckBoxList(
       {super.key,
       required this.index,
       this.selectedValue = -1,
@@ -31,20 +34,21 @@ class _CustomCheckBoxListState extends State<CustomCheckBoxList> {
       },
       child: Padding(
         padding: EdgeInsets.symmetric(
-            vertical: screenWidth(80), horizontal: screenWidth(200)),
+            vertical: context.screenWidth(80),
+            horizontal: context.screenWidth(200)),
         child: CustomContainer(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth(40)),
+          padding: EdgeInsets.symmetric(horizontal: context.screenWidth(40)),
           containerStyle: ContainerStyle.NORMAL,
           backgroundColor: widget.selectedValue == widget.index
               ? AppColors.mainAppColor
               : AppColors.mainWhiteColor,
-          // width: screenWidth(5),
+          // width:  context .screenWidth(5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomRadio(
-                  width: screenWidth(25),
-                  height: screenWidth(25),
+                  width: context.screenWidth(25),
+                  height: context.screenWidth(25),
                   borderColor: AppColors.buttonTextColor,
                   fillColor: AppColors.buttonTextColor,
                   value: widget.index,
@@ -54,7 +58,7 @@ class _CustomCheckBoxListState extends State<CustomCheckBoxList> {
                     }
                   },
                   selected: widget.selectedValue ?? -1),
-              screenWidth(45).px,
+              context.screenWidth(45).px,
               CustomText(
                 text: widget.text,
                 darkTextColor: AppColors.mainBlackColor,

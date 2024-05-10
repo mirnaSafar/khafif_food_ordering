@@ -1,16 +1,18 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/app_assets.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/data/models/apis/product_template_model.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_contaitner.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_view_controller.dart';
 
 class CustomFavorite extends StatefulWidget {
-  const CustomFavorite({
+  CustomFavorite({
     super.key,
     required this.product,
     required this.index,
@@ -36,8 +38,8 @@ class _CustomFavoriteState extends State<CustomFavorite> {
           blurRadius: 4,
           shadowColor: AppColors.shadowColor,
           offset: const Offset(0, 4),
-          width: screenWidth(12),
-          height: screenWidth(12),
+          width: context.screenWidth(12),
+          height: context.screenWidth(12),
           containerStyle: ContainerStyle.CIRCLE, // borderRadius: 17,
           backgroundColor: AppColors.mainWhiteColor,
           child: Transform.scale(

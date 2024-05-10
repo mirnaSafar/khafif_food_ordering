@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/navigator_extension.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/services/location_service.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
@@ -33,13 +36,14 @@ void showOrderOptionsDialog(BuildContext context) {
               },
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: screenWidth(7), vertical: screenWidth(80)),
+                    horizontal: context.screenWidth(7),
+                    vertical: context.screenWidth(80)),
                 child: Container(
                   decoration: BoxDecoration(
                     color: AppColors.mainAppColor,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  padding: EdgeInsets.all(screenWidth(20)),
+                  padding: EdgeInsets.all(context.screenWidth(20)),
                   child: Row(
                     children: [
                       CustomRadio(
@@ -53,7 +57,7 @@ void showOrderOptionsDialog(BuildContext context) {
                               value;
                         },
                       ),
-                      screenWidth(40).px,
+                      context.screenWidth(40).px,
                       CustomText(
                         text: text,
                         darkTextColor: AppColors.mainBlackColor,
@@ -79,20 +83,20 @@ void showOrderOptionsDialog(BuildContext context) {
           child: Container(
             decoration: BoxDecoration(
               color: AppColors.mainWhiteColor,
-              borderRadius: const BorderRadius.only(
+              borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40), topRight: Radius.circular(40)),
             ),
-            padding: EdgeInsets.all(screenWidth(20)),
+            padding: EdgeInsets.all(context.screenWidth(20)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  width: screenWidth(8),
-                  height: screenWidth(100),
+                  width: context.screenWidth(8),
+                  height: context.screenWidth(100),
                   color: AppColors.mainAppColor,
                 ),
-                screenWidth(30).ph,
+                context.screenWidth(30).ph,
                 CustomText(
                   text: tr('order_options_lb'),
                   fontWeight: FontWeight.w600,
@@ -107,13 +111,13 @@ void showOrderOptionsDialog(BuildContext context) {
                   darkTextColor: AppColors.mainBlackColor,
                   textType: TextStyleType.SMALL,
                 ),
-                screenWidth(30).ph,
+                context.screenWidth(30).ph,
                 ...splashController.orderDeliveryOptions.map((element) {
                   var orderDeliveryOption = element;
                   return buildOption(
                       orderDeliveryOption.name ?? '', orderDeliveryOption.id!,
                       () async {
-                    context.pop();
+                    Get.context!.pop();
                     if (!orderDeliveryOption.isPickup!) {
                       await LocationService().isPermissionGranted()
                           ? storage.userCurrentLocation == null
@@ -128,15 +132,15 @@ void showOrderOptionsDialog(BuildContext context) {
                           : null;
                     } else {
                       Get.to(
-                        const ShopsListView(),
+                        ShopsListView(),
                       );
                     }
                   });
                 }),
-                screenWidth(30).ph,
+                context.screenWidth(30).ph,
                 InkWell(
                   onTap: () {
-                    context.pop();
+                    Get.context!.pop();
                   },
                   child: CustomText(
                     text: tr('skip_now_lb'),
@@ -159,13 +163,14 @@ CustomShimmer orderOptionsShimmer() {
       isLoading: true,
       child: Padding(
           padding: EdgeInsets.symmetric(
-              horizontal: screenWidth(7), vertical: screenWidth(80)),
+              horizontal: Get.context!.screenWidth(7),
+              vertical: Get.context!.screenWidth(80)),
           child: Container(
               decoration: BoxDecoration(
                 color: AppColors.mainAppColor,
                 borderRadius: BorderRadius.circular(20),
               ),
-              padding: EdgeInsets.all(screenWidth(20)),
+              padding: EdgeInsets.all(Get.context!.screenWidth(20)),
               child: Container(
                 color: AppColors.mainWhiteColor,
               ))));

@@ -1,43 +1,58 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:awesome_dialog/awesome_dialog.dart';
-
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
+import 'package:khafif_food_ordering_application/src/core/enums.dart';
+import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_toast.dart';
 
-buildAwsomeDialog(
-    {required BuildContext context,
-    required String content,
-    required String firstBtnText,
-    required String secondBtnText,
-    void Function()? firstBtn,
-    void Function()? secondBtn,
-    DialogType? dialogType}) {
-  return AwesomeDialog(
-      btnOkColor: Colors.green,
-      dialogBackgroundColor: Get.theme.scaffoldBackgroundColor,
-      context: context,
-      animType: AnimType.scale,
-      dialogType: dialogType ?? DialogType.warning,
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Flexible(
-            child: CustomText(
-              text: content,
-              textType: TextStyleType.SUBTITLE,
-            ),
-          ),
-        ],
-      ),
-      btnCancelOnPress: () {
-        secondBtn!();
-      },
-      btnCancelText: secondBtnText,
-      btnOkText: firstBtnText,
-      btnOkOnPress: () {
-        firstBtn!();
-        // context.pushRepalceme(const LoginView());
-      }).show();
+buildAwsomeDialog({
+  required BuildContext context,
+  required String content,
+  String? firstBtnText,
+  String? secondBtnText,
+  void Function()? firstBtn,
+  void Function()? secondBtn,
+  MessageType? messageType,
+  bool? showMessageWithoutActions = false,
+}) {
+  return CustomToast.AwesomeDialog(
+      firstBtnFunction: firstBtn,
+      secBtnFunction: secondBtn,
+      showMessageWithoutActions: showMessageWithoutActions,
+      message: content,
+      firstBtnText: firstBtnText,
+      secondBtnText: secondBtnText,
+      messageType: messageType);
+  // autoHide:
+  //     showMessageWithoutActions! ?  Duration(seconds: 3) : null,
+  // btnOkColor: Colors.green,
+  // dialogBackgroundColor: Get.theme.scaffoldBackgroundColor,
+  // context: context,
+  // animType: AnimType.SCALE,
+  // dialogType: dialogType ?? DialogType.WARNING,
+  // body: Column(
+  //   mainAxisSize: MainAxisSize.min,
+  //   children: [
+  //     Flexible(
+  //       child: CustomText(
+  //         text: content,
+  //         textType: TextStyleType.SUBTITLE,
+  //       ),
+  //     ),
+  //     if (showMessageWithoutActions) screenWidth(30).ph,
+  //   ],
+  // ),
+  // btnCancelOnPress: showMessageWithoutActions
+  //     ? null
+  //     : () {
+  //         secondBtn!();
+  //       },
+  // btnCancelText: showMessageWithoutActions ? null : secondBtnText,
+  // btnOkText: showMessageWithoutActions ? null : firstBtnText,
+  // btnOkOnPress: showMessageWithoutActions
+  //     ? null
+  //     : () {
+  //         firstBtn!();
+  //         // context.pushRepalceme( LoginView());
+  // })
+  // .show();
 }

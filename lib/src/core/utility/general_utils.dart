@@ -22,11 +22,13 @@ import 'package:khafif_food_ordering_application/src/ui/shared/dialogs/browsing_
 import 'package:khafif_food_ordering_application/src/ui/views/cart_view/confirm_order_controller.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/product_details_view/product_details_controller.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_view_controller.dart';
+import 'package:khafif_food_ordering_application/src/ui/views/shops_list_view/shops_controller.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/splash_screen/splash_controller.dart';
 import '../app/my_app_controller.dart';
 import '../services/connectivity_service.dart';
 import '../services/notifacation_service.dart';
 import '../../data/repositories/shared_preference_repository.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 
 ConnectivityService get connectivityService => Get.find<ConnectivityService>();
 
@@ -43,6 +45,7 @@ ProductDetailsController get productsDetailsController =>
 CartController get cartController => Get.find<CartController>();
 SplashController get splashController => Get.find<SplashController>();
 DateTimeController get dateTimeController => Get.find<DateTimeController>();
+ShopsController get shopsController => Get.find<ShopsController>();
 AppTheme get appTheme => Get.find<AppTheme>();
 
 double get taxAmount => 0.10;
@@ -94,16 +97,14 @@ void showNoConnectionMessage() {
   }
 }
 
-double screenWidth(double percent) {
-  final width = MediaQuery.of(globalContext).size.width;
-  return width / percent;
-  // return Get.size.width / percent;
-}
-
-double screenHeight(double percent) {
-  // return Get.size.height / percent;
-  final height = MediaQuery.of(globalContext).size.height;
-  return height / percent;
+Future<double> whenNotZero(Stream<double> source) async {
+  await for (double value in source) {
+    if (value > 0) {
+      return value;
+    }
+  }
+  return 0.0;
+  // stream exited without a true value, maybe return an exception.
 }
 
 void customLoader() => BotToast.showCustomLoading(toastBuilder: (context) {
@@ -111,11 +112,11 @@ void customLoader() => BotToast.showCustomLoading(toastBuilder: (context) {
         decoration: BoxDecoration(
             color: AppColors.mainWhiteColor,
             borderRadius: BorderRadius.circular(20)),
-        width: screenWidth(4),
-        height: screenWidth(4),
+        width: Get.context!.screenWidth(4),
+        height: Get.context!.screenWidth(4),
         child: SpinKitFadingCircle(
           color: AppColors.mainAppColor,
-          size: screenWidth(8),
+          size: Get.context!.screenWidth(8),
         ),
       );
     });
@@ -126,12 +127,13 @@ showSnackbarText(String text, {bool? internetSnack = true, String? imageName}) {
     snackStyle: SnackStyle.GROUNDED,
     // forwardAnimationCurve: Curves.easeInCirc,
 
-    margin: EdgeInsets.all(screenWidth(20)),
+    margin: EdgeInsets.all(Get.context!.screenWidth(20)),
     borderRadius: 20,
-    maxWidth: screenWidth(1.3),
+    maxWidth: Get.context!.screenWidth(1.3),
 
     padding: EdgeInsets.symmetric(
-        horizontal: screenWidth(30), vertical: screenWidth(50)),
+        horizontal: Get.context!.screenWidth(30),
+        vertical: Get.context!.screenWidth(50)),
     animationDuration: const Duration(milliseconds: 500),
     duration: const Duration(seconds: 2),
     messageText: Row(
@@ -146,7 +148,7 @@ showSnackbarText(String text, {bool? internetSnack = true, String? imageName}) {
             'assets/images/$imageName.svg',
             // color: AppColors.mainWhiteColor,
           ),
-        screenWidth(40).px,
+        Get.context!.screenWidth(40).px,
         CustomText(
           textColor: AppColors.mainWhiteColor,
           darkTextColor: AppColors.mainWhiteColor,
@@ -170,7 +172,7 @@ void changeLanguageDialog() {
   // SetteingsController controller = Get.put(SetteingsController());
   Get.defaultDialog(
       title: tr('Languages_lb'),
-      titlePadding: EdgeInsets.only(top: screenWidth(20)),
+      titlePadding: EdgeInsets.only(top: Get.context!.screenWidth(20)),
       content: Column(
         children: [
           const Divider(),
@@ -180,8 +182,8 @@ void changeLanguageDialog() {
                     const MaterialStatePropertyAll(Colors.transparent),
                 fixedSize: MaterialStatePropertyAll(
                   Size(
-                    screenWidth(1),
-                    screenHeight(14),
+                    Get.context!.screenWidth(1),
+                    Get.context!.screenHeight(14),
                   ),
                 ),
                 overlayColor:
@@ -201,8 +203,8 @@ void changeLanguageDialog() {
                     const MaterialStatePropertyAll(Colors.transparent),
                 fixedSize: MaterialStatePropertyAll(
                   Size(
-                    screenWidth(1),
-                    screenHeight(14),
+                    Get.context!.screenWidth(1),
+                    Get.context!.screenHeight(14),
                   ),
                 ),
                 overlayColor:

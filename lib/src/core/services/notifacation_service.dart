@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -5,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:khafif_food_ordering_application/src/core/enums.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/navigator_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/data/repositories/fcm_token_repository.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
@@ -13,7 +17,7 @@ import 'package:khafif_food_ordering_application/src/ui/views/notifications_view
 class NotificationService {
   StreamController<RemoteMessage> notifcationStream =
       StreamController<RemoteMessage>.broadcast();
-  RxList<RemoteMessage> notifcationsList = <RemoteMessage>[].obs;
+  RxList<RemoteMessage> notifcationsList = storage.getNotificationList().obs;
 
   NotificationService() {
     onInit();
@@ -81,41 +85,44 @@ class NotificationService {
   void handelNotification(
       {required RemoteMessage model, required AppState appState}) {
     notifcationStream.add(model);
+    productsVieewController.notificationsCount.value++;
     notifcationsList.add(model);
+    storage.setNotificationList(notifications: notifcationsList);
+
     switch (appState) {
       case AppState.TERMINATED:
       case AppState.BACKGROUND:
-        Get.to(const NotificationsView());
+        Get.to(NotificationsView());
 
       case AppState.FOREGROUND:
         showDialog(
             context: Get.context!,
             builder: (BuildContext context) {
               return DefaultTextStyle(
-                style: const TextStyle(),
+                style: TextStyle(),
                 child: SizedBox(
-                  width: screenWidth(1),
-                  height: screenWidth(2),
+                  width: context.screenWidth(1),
+                  height: context.screenWidth(2),
                   child: AlertDialog(
                     alignment: Alignment.topCenter,
-
-                    // actions: [
-                    //   ElevatedButton(
-                    //       onPressed: () {
-                    //         Get.to(const NotificationsView());
-                    //       },
-                    //       child: const Text('ok'))
-                    // ],
+                    actions: [
+                      ElevatedButton(
+                          onPressed: () {
+                            context.pop();
+                            Get.to(NotificationsView());
+                          },
+                          child: Text('ok'))
+                    ],
                     title: CustomText(
                       text: model.notification!.title ?? '',
                       textType: TextStyleType.BODY,
                     ),
-                    // content: Text(model.notification!.body ?? ''),
+                    content: Text(model.notification!.body ?? ''),
                   ),
                 ),
               );
             });
-        Future.delayed(const Duration(seconds: 5), () {
+        Future.delayed(Duration(seconds: 5), () {
           Get.back();
         });
     }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:khafif_food_ordering_application/src/core/enums.dart';
@@ -34,6 +35,7 @@ class SharedPreferenceRepository {
   String PREF_ADDRESS_INFO = 'user address info';
   String PREF_FAVORITES = 'Favorites products';
   String PREF_Deliery_Service_Address = 'DelieryServiceAddress';
+  String PREF_NOTIFICATION_KEY = 'notifications';
 
   setDelieryServiceAddressOrBranch({required String address}) {
     setPreference(
@@ -48,6 +50,29 @@ class SharedPreferenceRepository {
       return getPreference(key: PREF_Deliery_Service_Address);
     } else {
       return '';
+    }
+  }
+
+  setNotificationList({required List<RemoteMessage> notifications}) {
+    setPreference(
+      dataType: DataType.STRING,
+      key: PREF_NOTIFICATION_KEY,
+      value: jsonEncode(notifications.toList()),
+    );
+  }
+
+  List<RemoteMessage> getNotificationList() {
+    if (globalSharedPreference.containsKey(PREF_NOTIFICATION_KEY)) {
+      List<dynamic> list =
+          jsonDecode(getPreference(key: PREF_NOTIFICATION_KEY));
+      List<RemoteMessage> notifications = [];
+      for (var element in list) {
+        notifications.add(RemoteMessage.fromMap(element));
+      }
+      return notifications;
+      // return getPreference(key: PREF_NOTIFICATION_KEY);
+    } else {
+      return [];
     }
   }
 

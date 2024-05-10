@@ -44,6 +44,6 @@ class IntroController extends BaseController {
   String get getDotsStatusText => 'lets go';
 
   void monitorDotsState() {
-    currentIndex.value != 2 ? currentIndex += 1 : Get.to(const LoginView());
+    currentIndex.value != 2 ? currentIndex += 1 : Get.to(LoginView());
   }
 }

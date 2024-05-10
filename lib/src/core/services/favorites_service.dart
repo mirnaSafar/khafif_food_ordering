@@ -21,8 +21,6 @@ class FavoriteService extends BaseController {
             null
         ? removeFromFavorites(product)
         : addToFavorites(product);
-
-    storage.setFavoritesList(favoritesList);
   }
 
   bool isFavorite(ProductTemplateModel product) {
@@ -50,7 +48,9 @@ class FavoriteService extends BaseController {
                     messageType: MessageType.SUCCESS,
                     message: tr('favorite_added_lb'),
                   );
+                  getFavorites();
                   favoritesList.add(product);
+                  storage.setFavoritesList(favoritesList);
                 });
               },
             )));
@@ -75,8 +75,10 @@ class FavoriteService extends BaseController {
                       messageType: MessageType.SUCCESS,
                       message: tr('favorite_removed_lb'),
                     );
+                    getFavorites();
                     favoritesList
                         .removeWhere((product1) => product.id == product1.id!);
+                    storage.setFavoritesList(favoritesList);
                   });
                 },
               )));

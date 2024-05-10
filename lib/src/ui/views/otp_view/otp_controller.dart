@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -70,8 +72,8 @@ class OtpController extends GetxController {
 
               CustomToast.showMessage(
                   message: tr("done_btn_lb"), messageType: MessageType.SUCCESS);
-              Future.delayed(const Duration(seconds: 2),
-                  () => Get.offAll(const ProductsView()));
+              Future.delayed(
+                  Duration(seconds: 2), () => Get.offAll(ProductsView()));
             }));
   }
 }

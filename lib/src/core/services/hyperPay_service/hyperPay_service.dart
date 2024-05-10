@@ -13,8 +13,7 @@ import 'package:khafif_food_ordering_application/src/ui/views/payment_view/check
 
 class InAppPaymentSetting {
   // shopperResultUrl : this name must like scheme in intent-filter , url scheme in xcode
-  static const String shopperResultUrl =
-      "com.khafif.food";
+  static const String shopperResultUrl = "com.khafif.food";
   static const String merchantId = "MerchantId";
   static const String countryCode = "SA";
   static getLang() {
@@ -58,13 +57,13 @@ class PaymentService {
       required int paymentMethod}) async {
     print("**************tttttesttttt*******");
     Uri myUrl =
-        Uri.parse('$baseUrlTest/v1/checkouts/$trans/payment?entityId=$entity');
+        Uri.parse('$baseUrl/v1/checkouts/$trans/payment?entityId=$entity');
     print(myUrl);
     final response = await http.get(
       myUrl,
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $_tokenTest'
+        'Authorization': 'Bearer $_token'
       },
     );
 
@@ -124,13 +123,14 @@ class PaymentService {
     String transactionStatus;
     print(paymentMethod == 0 ? "mada" : brandsName);
     try {
-      final String result = await platform.invokeMethod('gethyperpayresponse', {
+      final String? result =
+          await platform.invokeMethod('gethyperpayresponse', {
         "type": "ReadyUI",
-        "mode": "TEST",
+        "mode": "LIVE",
         "checkoutid": checkoutId,
         "brand": brandsName, // visa  // mada
       });
-      transactionStatus = result;
+      transactionStatus = result ?? 'error';
       getPaymentStatus(
           entity: entity, trans: checkoutId, paymentMethod: paymentMethod);
     } on PlatformException catch (e) {
@@ -154,7 +154,7 @@ class PaymentService {
   FlutterHyperPay? flutterHyperPay = FlutterHyperPay(
     shopperResultUrl:
         InAppPaymentSetting.shopperResultUrl, // return back to app
-    paymentMode: PaymentMode.test, // test or live
+    paymentMode: PaymentMode.live, // test or live
     lang: InAppPaymentSetting.getLang(),
   );
 
@@ -211,7 +211,7 @@ class PaymentService {
     var status;
 
     var myUrl = Uri.parse(
-        '$baseUrlTest/v1/checkouts?entityId=$entityID&amount=${(_cartController.cart.value!.amountTotal! + checkOutController.deliverAmount).toString().split('.')[0]}&currency=SAR&merchantTransactionId=$transactionId&paymentType=DB');
+        '$baseUrl/v1/checkouts?entityId=$entityID&amount=${(_cartController.cart.value!.amountTotal! + checkOutController.deliverAmount).toString().split('.')[0]}&currency=SAR&merchantTransactionId=$transactionId&paymentType=DB');
     print(myUrl);
 
     // Uri myUrl = "http://dev.hyperpay.com/hyperpay-demo/getcheckoutid.php" as Uri;
@@ -219,14 +219,13 @@ class PaymentService {
       myUrl,
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $_tokenTest'
+        'Authorization': 'Bearer $_token'
       },
     );
 
     print("******************************************");
     print(response);
     print("******************************************");
-
 
     print(response.body.toString());
     if (response.statusCode == 200) {

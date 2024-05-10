@@ -1,4 +1,7 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/fonts.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
@@ -6,7 +9,7 @@ import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/cu
 import 'package:rating_dialog/rating_dialog.dart';
 
 class CustomRate extends StatefulWidget {
-  const CustomRate({
+  CustomRate({
     super.key,
     this.size,
     this.enableRate = false,
@@ -69,13 +72,16 @@ final rateDialog = RatingDialog(
     title: Text(
       tr('khafif_rate_title'),
       textAlign: TextAlign.center,
-      style: TextStyle(fontWeight: FontWeight.w700, fontSize: AppFonts.body),
+      style: TextStyle(
+          fontWeight: FontWeight.w700, fontSize: AppFonts(Get.context!).body),
     ),
     message: Text(
       tr('khafif_rate_message'),
       textAlign: TextAlign.center,
       style: TextStyle(
-          height: 2.2, fontWeight: FontWeight.w400, fontSize: AppFonts.small),
+          height: 2.2,
+          fontWeight: FontWeight.w400,
+          fontSize: AppFonts(Get.context!).small),
     ),
     submitButtonText: tr('submit_lb'),
     onCancelled: () {},

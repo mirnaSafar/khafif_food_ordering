@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
@@ -11,7 +13,7 @@ class CustomPaymentSection extends StatelessWidget {
   final TextStyleType? pricetextStyleType;
   final FontWeight? pricefontweight;
 
-  const CustomPaymentSection(
+  CustomPaymentSection(
       {super.key,
       required this.titletext,
       this.titletextcolor,

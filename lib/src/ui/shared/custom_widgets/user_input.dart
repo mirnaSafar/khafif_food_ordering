@@ -1,4 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 
@@ -57,7 +60,7 @@ class _UserInputState extends State<UserInput> {
             focusNode: _focusNode,
             keyboardType: widget.keyboardType,
             onFieldSubmitted: widget.onSubmitted,
-            scrollPadding: const EdgeInsets.all(0),
+            scrollPadding: EdgeInsets.all(0),
             style: TextStyle(color: AppColors.mainBlackColor),
             obscureText: _obscureText,
             textInputAction: TextInputAction.next,
@@ -83,14 +86,14 @@ class _UserInputState extends State<UserInput> {
               hintText: isFieldEmpty && !_focusNode.hasFocus ? widget.text : '',
               prefixIcon: widget.prefixIcon,
               hintStyle: TextStyle(
-                fontSize: screenWidth(33),
+                fontSize: context.screenWidth(33),
                 color: AppColors.mainTextColor,
               ),
               filled: true,
               focusedBorder: OutlineInputBorder(
                   gapPadding: 0,
                   borderRadius: widget.borderRadius ??
-                      const BorderRadius.all(
+                      BorderRadius.all(
                         Radius.circular(8),
                       ),
                   borderSide: BorderSide(
@@ -99,7 +102,7 @@ class _UserInputState extends State<UserInput> {
               focusedErrorBorder: OutlineInputBorder(
                   gapPadding: 0,
                   borderRadius: widget.borderRadius ??
-                      const BorderRadius.all(
+                      BorderRadius.all(
                         Radius.circular(8),
                       ),
                   borderSide: BorderSide(
@@ -108,7 +111,7 @@ class _UserInputState extends State<UserInput> {
               errorBorder: OutlineInputBorder(
                   gapPadding: 0,
                   borderRadius: widget.borderRadius ??
-                      const BorderRadius.all(
+                      BorderRadius.all(
                         Radius.circular(8),
                       ),
                   borderSide: BorderSide(
@@ -117,7 +120,7 @@ class _UserInputState extends State<UserInput> {
               enabledBorder: OutlineInputBorder(
                   gapPadding: 0,
                   borderRadius: widget.borderRadius ??
-                      const BorderRadius.all(
+                      BorderRadius.all(
                         Radius.circular(8),
                       ),
                   borderSide: BorderSide(
@@ -125,7 +128,7 @@ class _UserInputState extends State<UserInput> {
                   )),
               fillColor: Colors.white,
               prefixText: widget.prefixText,
-              prefixStyle: const TextStyle(color: Colors.grey),
+              prefixStyle: TextStyle(color: Colors.grey),
             ),
             maxLength: widget.maxLength,
           ),

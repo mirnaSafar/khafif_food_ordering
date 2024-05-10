@@ -35,6 +35,7 @@ enum OperationType {
   CART,
   MODIFYUSERINFORMATION,
   SHOP,
+  SETSHOP,
   ADDRESS,
   order,
   NONE,

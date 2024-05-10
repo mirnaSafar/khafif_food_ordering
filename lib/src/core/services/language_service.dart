@@ -23,7 +23,7 @@ class LanguageService extends BaseController {
                             )), (r) {
                   setLanguage(langCode);
 
-                  Get.offAll(const ProductsView());
+                  Get.offAll(ProductsView());
                 })));
   }
 }

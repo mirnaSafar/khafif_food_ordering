@@ -21,22 +21,30 @@ class ProductsViewController extends BaseController {
   RxInt orderOptionSelected = storage.getOrderDeliveryOptionSelected().obs;
   Rx<Color> backgroundColor = AppColors.mainWhiteColor.obs;
   RxInt current = 0.obs;
+  RxInt notificationsCount = notificationService.notifcationsList.length.obs;
   // RxString orderMethodValue = orderMethod.value.obs;
   double? height;
   double? width;
 
   ProductTemplateModel? product;
   RxString orderMethodTitle = splashController.orderDeliveryOptions.isNotEmpty
-      ? slectedDeliveryService() == null
-          ? ''.obs
-          : '${slectedDeliveryService()!.isPickup! ? tr('pick_up_from_shop_lb') : tr('deliver_to_address_lb')} '
-              .obs
+      ? '${(slectedDeliveryService() == null) ? '' : slectedDeliveryService()!.isPickup! ? tr('pick_up_from_shop_lb') : tr('deliver_to_address_lb')} '
+          .obs
       : ''.obs;
+
+  // ? slectedDeliveryService() == null
+
+  //     ? ''.obs
+  //     : '${slectedDeliveryService()!.isPickup! ? tr('pick_up_from_shop_lb') : tr('deliver_to_address_lb')} '
+  //         .obs
+  // : ''.obs;
 
 // getDelieryServiceAddressOrBranch() {}
   setDelieryServiceAddressOrBranch({required String address}) {
     storage.setDelieryServiceAddressOrBranch(address: address);
-    orderMethodVal.value = address;
+    orderMethodVal.value = slectedDeliveryService() == null ? '' : address;
+    orderMethodTitle.value =
+        '${(slectedDeliveryService() == null) ? '' : slectedDeliveryService()!.isPickup! ? tr('pick_up_from_shop_lb') : tr('deliver_to_address_lb')} ';
   }
 
   RxInt sliderIndex = 0.obs;
@@ -52,7 +60,7 @@ class ProductsViewController extends BaseController {
   @override
   onInit() {
     super.onInit();
-    // Future.delayed(const Duration(seconds: 3), () {
+    // Future.delayed( Duration(seconds: 3), () {
     //
     //   update();
     // });
@@ -134,10 +142,13 @@ class ProductsViewController extends BaseController {
                 .then(
               (value) {
                 value.fold((l) {
-                  CustomToast.showMessage(
-                    messageType: MessageType.REJECTED,
-                    message: l,
-                  );
+                  if (l != 'not data') {
+                    CustomToast.showMessage(
+                      messageType: MessageType.REJECTED,
+                      message: l,
+                    );
+                  }
+
                   //
                 }, (r) {
                   productsList.clear();
@@ -223,10 +234,12 @@ class ProductsViewController extends BaseController {
                 .then(
               (value) {
                 value.fold((l) {
-                  CustomToast.showMessage(
-                    messageType: MessageType.REJECTED,
-                    message: l,
-                  );
+                  if (l != 'not data') {
+                    CustomToast.showMessage(
+                      messageType: MessageType.REJECTED,
+                      message: l,
+                    );
+                  }
                 }, (r) {
                   productsList.clear();
                   productsList.addAll(r[0]);

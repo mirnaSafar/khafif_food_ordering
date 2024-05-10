@@ -45,8 +45,11 @@ class CartService {
 
   calcCartCount({required CustomerCartModel cart}) {
     cartCustomerCount.value = 0;
+
+    cartCount.value = 0;
     for (var line in cart.line!) {
       cartCustomerCount.value += line.productUomQty!.toInt();
+      cartCount.value += line.productUomQty!.toInt();
     }
   }
 

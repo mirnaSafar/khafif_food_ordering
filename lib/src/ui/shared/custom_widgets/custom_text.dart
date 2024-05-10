@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/app_theme.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/fonts.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 
 enum TextStyleType {
@@ -16,7 +17,8 @@ enum TextStyleType {
 }
 
 class CustomText extends StatefulWidget {
-  const CustomText({
+  // ignore: prefer_const_constructors_in_immutables
+  CustomText({
     super.key,
     this.textColor,
     this.textAlign,
@@ -72,25 +74,25 @@ class _CustomTextState extends State<CustomText> {
   double get costumFontsize {
     switch (widget.textType) {
       case TextStyleType.HEADER:
-        return AppFonts.header;
+        return AppFonts(context).header;
 
       case TextStyleType.TITLE:
-        return AppFonts.title;
+        return AppFonts(context).title;
 
       case TextStyleType.SUBTITLE:
-        return AppFonts.subtitle;
+        return AppFonts(context).subtitle;
 
       case TextStyleType.BODY:
-        return AppFonts.body;
+        return AppFonts(context).body;
 
       case TextStyleType.BODYSMALL:
-        return AppFonts.bodySmall;
+        return AppFonts(context).bodySmall;
 
       case TextStyleType.SMALL:
-        return AppFonts.small;
+        return AppFonts(context).small;
 
       case TextStyleType.CUSTOM:
-        return widget.fontSize ?? screenWidth(20);
+        return widget.fontSize ?? context.screenWidth(20);
     }
   }
 }

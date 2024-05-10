@@ -1,10 +1,12 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
 
 class CustomPriceCurrency extends StatelessWidget {
-  const CustomPriceCurrency({super.key, required this.price});
+  CustomPriceCurrency({super.key, required this.price});
   final String price;
   @override
   Widget build(BuildContext context) {

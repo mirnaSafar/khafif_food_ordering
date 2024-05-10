@@ -1,6 +1,9 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/data/models/apis/product_template_model.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_contaitner.dart';
@@ -11,7 +14,7 @@ import 'package:khafif_food_ordering_application/src/ui/views/products_view/prod
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_network_image.dart';
 
 class CustomProductWidget extends StatelessWidget {
-  const CustomProductWidget({super.key, required this.product});
+  CustomProductWidget({super.key, required this.product});
   final ProductTemplateModel product;
 
   @override
@@ -25,8 +28,9 @@ class CustomProductWidget extends StatelessWidget {
       containerStyle: ContainerStyle.BIGSQUARE,
       borderRadius: BorderRadius.circular(12),
       padding: EdgeInsets.symmetric(
-          horizontal: screenWidth(50), vertical: screenWidth(90)),
-      width: screenWidth(2.3),
+          horizontal: context.screenWidth(50),
+          vertical: context.screenWidth(90)),
+      width: context.screenWidth(2.3),
       child: Stack(
         alignment: AlignmentDirectional.topEnd,
         children: [

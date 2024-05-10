@@ -1,8 +1,10 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/cupertino.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_blur.dart';
 
 class CustomPopupWithBlurWidget extends StatelessWidget {
-  const CustomPopupWithBlurWidget({
+  CustomPopupWithBlurWidget({
     this.blur = true,
     super.key,
     required this.child,
@@ -18,7 +20,7 @@ class CustomPopupWithBlurWidget extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         if (blur!)
-          const Positioned.fill(
+          Positioned.fill(
             child: CustomBlurWidget(),
           ),
         if (customBlurChildType == CustomBlurChildType.BOTTOMSHEET) ...[

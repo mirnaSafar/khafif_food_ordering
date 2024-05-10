@@ -1,13 +1,16 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_contaitner.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_radio.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
 
 class CustomPaymentMethod extends StatefulWidget {
-  const CustomPaymentMethod(
+  CustomPaymentMethod(
       {super.key,
       required this.value,
       required this.selected,
@@ -30,8 +33,8 @@ class _CustomPaymentMethodState extends State<CustomPaymentMethod> {
       child: CustomContainer(
         containerStyle: ContainerStyle.SMALLSQUARE,
         backgroundColor: AppColors.mainWhiteColor,
-        padding: EdgeInsets.symmetric(horizontal: screenWidth(30)),
-        height: screenHeight(11),
+        padding: EdgeInsets.symmetric(horizontal: context.screenWidth(30)),
+        height: context.screenHeight(11),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -41,7 +44,7 @@ class _CustomPaymentMethodState extends State<CustomPaymentMethod> {
                     value: widget.value,
                     onTaped: widget.onTaped,
                     selected: widget.selected),
-                screenWidth(50).px,
+                context.screenWidth(50).px,
                 CustomText(
                   darkTextColor: AppColors.mainBlackColor,
                   text: widget.text,

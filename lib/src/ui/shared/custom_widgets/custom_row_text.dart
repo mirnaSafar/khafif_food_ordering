@@ -1,8 +1,10 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
 
 class CustomRowText extends StatelessWidget {
-  const CustomRowText(
+  CustomRowText(
       {super.key,
       required this.firstText,
       required this.linkText,

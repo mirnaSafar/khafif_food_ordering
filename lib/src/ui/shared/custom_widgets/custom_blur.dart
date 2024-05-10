@@ -11,7 +11,8 @@ enum CustomBlurChildType {
 }
 
 class CustomBlurWidget extends StatelessWidget {
-  const CustomBlurWidget({
+  // ignore: prefer_const_constructors_in_immutables
+  CustomBlurWidget({
     super.key,
   });
 

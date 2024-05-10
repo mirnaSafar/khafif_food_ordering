@@ -1,8 +1,13 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/app_assets.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/navigator_extension.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_blur.dart';
@@ -22,22 +27,22 @@ showDeliveryCheckerDialog(
       child: Center(
         child: CustomContainer(
             borderRadius: BorderRadius.circular(14),
-            height: screenHeight(2.7),
-            width: screenWidth(1.1),
+            height: Get.context!.screenHeight(2.7),
+            width: Get.context!.screenWidth(1.1),
             backgroundColor: AppColors.mainWhiteColor,
-            padding: EdgeInsets.all(screenWidth(30)),
+            padding: EdgeInsets.all(Get.context!.screenWidth(30)),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Column(
                       children: [
                         Image.asset(AppAssets.icDeliveryChecker),
-                        screenWidth(20).ph,
+                        Get.context!.screenWidth(20).ph,
                         DefaultTextStyle(
-                          style: const TextStyle(),
+                          style: TextStyle(),
                           child: CustomText(
                             text: tr('delivery_checker_lb'),
                             darkTextColor: AppColors.mainBlackColor,
@@ -45,12 +50,12 @@ showDeliveryCheckerDialog(
                             fontWeight: FontWeight.w900,
                           ),
                         ),
-                        screenWidth(20).ph,
+                        Get.context!.screenWidth(20).ph,
                         Center(
                           child: DefaultTextStyle(
-                            style: const TextStyle(),
+                            style: TextStyle(),
                             child: SizedBox(
-                              width: screenWidth(1.5),
+                              width: Get.context!.screenWidth(1.5),
                               child: CustomText(
                                   textColor: AppColors.mainBlackColor,
                                   fontWeight: FontWeight.w400,
@@ -60,14 +65,32 @@ showDeliveryCheckerDialog(
                             ),
                           ),
                         ),
-                        screenWidth(20).ph,
+                        Get.context!.screenWidth(20).ph,
                       ],
                     ),
                   ),
-                  CustomButton(
-                    onPressed: onPressed,
-                    height: screenWidth(8),
-                    text: btnText ?? tr('confirm_order_lb'),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomButton(
+                          onPressed: onPressed,
+                          fontsize: context.screenWidth(34),
+                          textStyleType: TextStyleType.CUSTOM,
+                          height: Get.context!.screenWidth(8),
+                          text: btnText ?? tr('confirm_location_lb'),
+                        ),
+                      ),
+                      Get.context!.screenWidth(70).px,
+                      Expanded(
+                        child: CustomButton(
+                          onPressed: () => Get.context!.pop(),
+                          fontsize: context.screenWidth(34),
+                          textStyleType: TextStyleType.CUSTOM,
+                          height: Get.context!.screenWidth(8),
+                          text: tr('select_other_location_lb'),
+                        ),
+                      ),
+                    ],
                   )
                 ],
               ),

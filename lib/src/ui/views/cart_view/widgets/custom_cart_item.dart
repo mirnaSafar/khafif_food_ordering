@@ -1,8 +1,12 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/navigator_extension.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/data/models/apis/customer_cart_model.dart';
@@ -13,7 +17,7 @@ import 'package:khafif_food_ordering_application/src/ui/views/cart_view/confirm_
 class CartItem extends StatelessWidget {
   final double? imagewidth, imageheight;
   final Line cartModel;
-  const CartItem({
+  CartItem({
     super.key,
     this.imagewidth,
     this.imageheight,
@@ -38,13 +42,13 @@ class CartItem extends StatelessWidget {
                 return const Icon(Icons.error);
               },
               imageUrl: cartModel.productId!.image ?? '',
-              width: imagewidth ?? screenWidth(15),
-              height: imageheight ?? screenWidth(15),
+              width: imagewidth ?? context.screenWidth(15),
+              height: imageheight ?? context.screenWidth(15),
             ),
-            screenWidth(30).px,
+            context.screenWidth(30).px,
             SizedBox(
-              width: screenWidth(2),
-              // height: screenWidth(15),
+              width: context.screenWidth(2),
+              // height: context .screenWidth(15),
               child: SingleChildScrollView(
                 child: CustomText(
                   textAlign: TextAlign.start,
@@ -86,6 +90,7 @@ class CartItem extends StatelessWidget {
                         content: tr('delete_item_from_cart_lb'),
                         okBtn: () {
                           controller.deleteOrder();
+                          // context.pop();
                         },
                         context: context);
                   },

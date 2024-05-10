@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/fonts.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_row_text.dart';
@@ -20,7 +23,7 @@ class CustomPinCodeTextFields extends StatefulWidget {
   final String? obscuringCharacter;
   final String number;
 
-  const CustomPinCodeTextFields(
+  CustomPinCodeTextFields(
       {super.key,
       this.length,
       this.fieldHeight,
@@ -74,9 +77,9 @@ class _CustomPinCodeTextFieldsState extends State<CustomPinCodeTextFields>
     return Column(
       children: [
         if (otpCode == null)
-          const CustomText(
+          CustomText(
               text: "Listening for code...", textType: TextStyleType.BODYSMALL),
-        screenWidth(30).ph,
+        context.screenWidth(30).ph,
         PinFieldAutoFill(
           textInputAction: TextInputAction.next,
           enableInteractiveSelection: false,
@@ -90,7 +93,8 @@ class _CustomPinCodeTextFieldsState extends State<CustomPinCodeTextFields>
               strokeWidth: 2,
               hintText: '****',
               textStyle: TextStyle(
-                  color: AppColors.mainBlackColor, fontSize: AppFonts.title),
+                  color: AppColors.mainBlackColor,
+                  fontSize: AppFonts(context).title),
               radius: const Radius.circular(5),
               gapSpace: 20),
 
@@ -102,8 +106,8 @@ class _CustomPinCodeTextFieldsState extends State<CustomPinCodeTextFields>
 
           //     //     ObscureStyle(isTextObscure: true, obscureText: '*'),
           //     textStyle: TextStyle(
-          //         fontSize: AppFonts.body, color: AppColors.mainBlackColor),
-          //     colorBuilder: const FixedColorBuilder(Colors.transparent),
+          //         fontSize: AppFonts(context).body, color: AppColors.mainBlackColor),
+          //     colorBuilder:  FixedColorBuilder(Colors.transparent),
           //     bgColorBuilder: FixedColorBuilder(
           //       AppColors.mainGreyColor.withOpacity(0.3),
           //     )),
@@ -121,7 +125,7 @@ class _CustomPinCodeTextFieldsState extends State<CustomPinCodeTextFields>
           },
           codeLength: 4,
         ),
-        screenWidth(15).ph,
+        context.screenWidth(15).ph,
         Countdown(
           onFinished: () {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -164,9 +168,9 @@ class _CustomPinCodeTextFieldsState extends State<CustomPinCodeTextFields>
 //     return Column(
 //       children: [
 //         if (otpCode == null)
-//           const CustomText(
+//            CustomText(
 //               text: "Listening for code...", textType: TextStyleType.BODYSMALL),
-//         screenWidth(30).ph,
+//         context .screenWidth(30).ph,
 //         PinCodeTextField(
 
 //           appContext: context,
@@ -183,8 +187,8 @@ class _CustomPinCodeTextFieldsState extends State<CustomPinCodeTextFields>
 //           pinTheme: PinTheme(
 //             shape: PinCodeFieldShape.box,
 //             borderRadius: BorderRadius.circular(4),
-//             fieldHeight: widget.fieldHeight ?? screenWidth(7),
-//             fieldWidth: widget.fieldWidth ?? screenWidth(7),
+//             fieldHeight: widget.fieldHeight ?? context .screenWidth(7),
+//             fieldWidth: widget.fieldWidth ?? context .screenWidth(7),
 //             activeFillColor: AppColors.fieldBorderColor,
 //             inactiveColor: AppColors.greyColor,
 //             inactiveFillColor: AppColors.fieldBorderColor,
@@ -198,7 +202,7 @@ class _CustomPinCodeTextFieldsState extends State<CustomPinCodeTextFields>
 
 //           hintCharacter: '*',
 //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//           animationDuration: const Duration(milliseconds: 300),
+//           animationDuration:  Duration(milliseconds: 300),
 //           // backgroundColor: Colors.white,
 //           enableActiveFill: true,
 //           enablePinAutofill: true,
@@ -213,7 +217,7 @@ class _CustomPinCodeTextFieldsState extends State<CustomPinCodeTextFields>
 //         Countdown(
 //           controller: countdownController,
 //           seconds: double.parse(storage.otpTime).toInt() * 60,
-//           interval: const Duration(milliseconds: 1000),
+//           interval:  Duration(milliseconds: 1000),
 //           build: (context, currentRemainingTime) {
 //             if (currentRemainingTime == 0.0) {
 //               return CustomRowText(

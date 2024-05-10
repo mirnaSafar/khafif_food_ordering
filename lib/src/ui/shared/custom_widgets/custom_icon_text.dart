@@ -1,11 +1,14 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
 
 class CustomIconText extends StatelessWidget {
-  const CustomIconText(
+  CustomIconText(
       {super.key,
       this.imagename,
       this.imageHeight,
@@ -36,18 +39,18 @@ class CustomIconText extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: screenWidth(30)),
+        padding: EdgeInsets.symmetric(vertical: context.screenWidth(30)),
         child: Row(
           mainAxisAlignment: mainAxisAlignment!,
           children: [
             image ??
                 SvgPicture.asset(
                   imagename!,
-                  height: imageHeight ?? screenWidth(15),
-                  width: imageWidth ?? screenWidth(15),
+                  height: imageHeight ?? context.screenWidth(15),
+                  width: imageWidth ?? context.screenWidth(15),
                   color: imagecolor ?? Theme.of(context).colorScheme.secondary,
                 ),
-            screenWidth(40).px,
+            context.screenWidth(40).px,
             CustomText(
               textType: textType ?? TextStyleType.BODY,
               text: text,

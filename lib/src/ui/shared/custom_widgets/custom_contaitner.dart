@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 
@@ -10,7 +12,7 @@ enum ContainerStyle {
 }
 
 class CustomContainer extends StatelessWidget {
-  const CustomContainer(
+  CustomContainer(
       {super.key,
       this.backgroundColor,
       this.borderRadius,

@@ -3,7 +3,9 @@
     package= "com.khafif.android">
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
- 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="Khafif"
@@ -73,12 +75,13 @@
             
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCq7hlabnqxQyrP2xPUlRMycNZR1eWQZmc"/>
+            android:value="AIzaSyBWD5-Aznmsr-k3XuLdmi4odi3_gFMM01I"/>
+ 
 <!-- A custom Android Notification Channel to deliver FCM notification on a non-default channel -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="high_importance_channel" />
             
-            
+            <meta-data android:name="android.graphics.cts.use_legacy_hwui" android:value="true" />
     </application>
 </manifest>

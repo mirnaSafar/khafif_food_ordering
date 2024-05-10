@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
+
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,7 +16,7 @@ import '../utility/general_utils.dart';
 late BuildContext globalContext;
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     globalContext = context;
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
       DeviceOrientation.portraitUp,
     ]);
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
     return StreamProvider<ConnectivityStatus>(
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
               initialBinding: SplashBinding(),
               navigatorKey: Get.key,
               defaultTransition: Transition.circularReveal,
-              transitionDuration: const Duration(milliseconds: 12),
+              transitionDuration: Duration(milliseconds: 12),
               title: 'Khafif',
               builder: BotToastInit(),
               locale: getLocal(),
@@ -46,18 +48,18 @@ class MyApp extends StatelessWidget {
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
               debugShowCheckedModeBanner: false,
-              home: const SplashScreenView());
-          // : const ProductsView());
+              home: SplashScreenView());
+          // :  ProductsView());
         }));
   }
 }
 
 Locale getLocal() {
   if (storage.getAppLanguage() == 'ar_001') {
-    return const Locale('ar', 'SA');
+    return Locale('ar', 'SA');
   } else if (storage.getAppLanguage() == 'tr') {
-    return const Locale('tr', 'TR');
+    return Locale('tr', 'TR');
   } else {
-    return const Locale('en', 'US');
+    return Locale('en', 'US');
   }
 }

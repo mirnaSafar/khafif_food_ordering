@@ -66,6 +66,18 @@ class UrlLauncherUtil {
     }
   }
 
+  void openWhatsApp(String phoneNumber) async {
+    final url = 'whatsapp://send?phone=$phoneNumber';
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      CustomToast.showMessage(
+        message: 'WhatsApp is not installed',
+        messageType: MessageType.WARNING,
+      );
+    }
+  }
+
   Uri createUri({
     String? scheme,
     String? path,

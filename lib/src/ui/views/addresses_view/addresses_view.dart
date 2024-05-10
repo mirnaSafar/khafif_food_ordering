@@ -1,9 +1,13 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/app_assets.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/navigator_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_appbar.dart';
@@ -18,7 +22,7 @@ import 'package:khafif_food_ordering_application/src/ui/views/map_view/map_contr
 import 'package:khafif_food_ordering_application/src/ui/views/map_view/map_view.dart';
 
 class AddressesView extends StatefulWidget {
-  const AddressesView({super.key});
+  AddressesView({super.key});
 
   @override
   State<AddressesView> createState() => _AddressesViewState();
@@ -34,7 +38,7 @@ class _AddressesViewState extends State<AddressesView> {
         appBar: CustomAppbar(appbarTitle: tr('my_addresses_lb')),
         body: Padding(
           padding: EdgeInsets.all(
-            screenWidth(30),
+            context.screenWidth(30),
           ),
           child: Stack(
             fit: StackFit.expand,
@@ -57,8 +61,8 @@ class _AddressesViewState extends State<AddressesView> {
 
                                 int index = userAddresses.indexOf(address);
                                 return Padding(
-                                  padding:
-                                      EdgeInsets.only(bottom: screenWidth(30)),
+                                  padding: EdgeInsets.only(
+                                      bottom: context.screenWidth(30)),
                                   child: Dismissible(
                                     direction: DismissDirection.endToStart,
                                     key: Key(address.hashCode.toString()),
@@ -92,21 +96,21 @@ class _AddressesViewState extends State<AddressesView> {
                                           addressID: address.id!, index: index);
                                     },
                                     movementDuration:
-                                        const Duration(milliseconds: 2000),
-                                    dismissThresholds: const {
+                                        Duration(milliseconds: 2000),
+                                    dismissThresholds: {
                                       DismissDirection.endToStart: 0.08
                                     },
-                                    resizeDuration: const Duration(seconds: 1),
+                                    resizeDuration: Duration(seconds: 1),
                                     behavior: HitTestBehavior.deferToChild,
                                     background: CustomContainer(
                                       containerStyle: ContainerStyle.BIGSQUARE,
                                       blurRadius: 4,
                                       shadowColor: AppColors.shadowColor,
-                                      offset: const Offset(0, 4),
+                                      offset: Offset(0, 4),
 
-                                      width: screenWidth(1),
+                                      width: context.screenWidth(1),
                                       padding: EdgeInsetsDirectional.only(
-                                          end: screenWidth(10)),
+                                          end: context.screenWidth(10)),
                                       // alignment: AlignmentDirectional.centerEnd,
                                       backgroundColor: AppColors.mainRedColor,
                                       child: Align(
@@ -120,6 +124,10 @@ class _AddressesViewState extends State<AddressesView> {
                                     ),
                                     child: InkWell(
                                       onTap: () {
+                                        if (Get.isRegistered<MapController>()) {
+                                          Get.delete<MapController>();
+                                        }
+
                                         Get.to(MapPage(
                                           newAddress: true,
                                           editAddress: {
@@ -127,7 +135,8 @@ class _AddressesViewState extends State<AddressesView> {
                                             "index": index
                                           },
                                           destination: destination,
-                                          closePanelHeight: screenHeight(8),
+                                          closePanelHeight:
+                                              context.screenHeight(4),
                                         ));
                                       },
                                       child: CustomContainer(
@@ -137,10 +146,10 @@ class _AddressesViewState extends State<AddressesView> {
                                             ContainerStyle.BIGSQUARE,
                                         blurRadius: 4,
                                         shadowColor: AppColors.shadowColor,
-                                        offset: const Offset(0, 4),
-                                        padding:
-                                            EdgeInsets.all(screenWidth(15)),
-                                        width: screenWidth(1),
+                                        offset: Offset(0, 4),
+                                        padding: EdgeInsets.all(
+                                            context.screenWidth(15)),
+                                        width: context.screenWidth(1),
                                         child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -171,6 +180,10 @@ class _AddressesViewState extends State<AddressesView> {
                                                                 "edit": true,
                                                                 "index": index
                                                               },
+                                                              closePanelHeight:
+                                                                  context
+                                                                      .screenHeight(
+                                                                          4),
                                                               destination:
                                                                   destination,
                                                             ));
@@ -185,7 +198,8 @@ class _AddressesViewState extends State<AddressesView> {
                                               ),
                                               Padding(
                                                 padding: EdgeInsets.symmetric(
-                                                    vertical: screenWidth(60)),
+                                                    vertical: context
+                                                        .screenWidth(60)),
                                                 child: CustomText(
                                                   textAlign: TextAlign.start,
                                                   text: address.street ?? '',
@@ -238,7 +252,7 @@ class _AddressesViewState extends State<AddressesView> {
                               }).toList(),
                             );
                 }),
-              ).paddingOnly(bottom: screenWidth(6)),
+              ).paddingOnly(bottom: context.screenWidth(6)),
               Positioned(
                 bottom: 5,
                 right: 5,
@@ -246,10 +260,11 @@ class _AddressesViewState extends State<AddressesView> {
                 child: CustomButton(
                   onPressed: () {
                     Get.to(MapPage(
-                      editAddress: const {"edit": false, "index": null},
+                      editAddress: {"edit": false, "index": null},
                       newAddress: true,
-                      closePanelHeight: screenHeight(5),
+                      closePanelHeight: context.screenHeight(4),
                     ));
+                    Get.put(MapController()).getStreetName();
                   },
                   text: tr('add_addresse_lb'),
                   imageName: 'add_ic',

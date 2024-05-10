@@ -1,12 +1,16 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/navigator_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_contaitner.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppbar({super.key, this.appbarTitle, this.action});
+  CustomAppbar({super.key, this.appbarTitle, this.action});
   final String? appbarTitle;
   final Widget? action;
   @override
@@ -15,12 +19,12 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
       scrolledUnderElevation: 0,
       centerTitle: true,
       title: Padding(
-        padding: EdgeInsets.only(top: screenWidth(30)),
+        padding: EdgeInsets.only(top: context.screenWidth(30)),
         child: CustomText(
           textColor: Theme.of(context).colorScheme.secondary,
           text: appbarTitle ?? '',
           textType: TextStyleType.TITLE,
-          fontSize: screenWidth(20.5),
+          fontSize: context.screenWidth(20.5),
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -30,21 +34,21 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
       leading: Container(
         alignment: Alignment.bottomRight,
         padding: EdgeInsetsDirectional.only(
-            start: screenWidth(30), top: screenWidth(30)),
+            start: context.screenWidth(30), top: context.screenWidth(30)),
         child: InkWell(
           onTap: () {
             context.pop();
           },
           child: CustomContainer(
             backgroundColor: AppColors.mainAppColor,
-            width: screenWidth(6),
-            height: screenWidth(6),
-            padding: EdgeInsetsDirectional.only(start: screenWidth(35)),
+            width: context.screenWidth(6),
+            height: context.screenWidth(6),
+            padding: EdgeInsetsDirectional.only(start: context.screenWidth(35)),
             borderRadius: BorderRadius.circular(8),
             child: Icon(
               color: AppColors.mainTextColor,
               Icons.arrow_back_ios,
-              size: screenWidth(20),
+              size: context.screenWidth(20),
             ),
           ),
         ),
@@ -54,5 +58,6 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   // TODO: implement preferredSize
-  Size get preferredSize => Size(screenWidth(1), screenHeight(11));
+  Size get preferredSize =>
+      Size(Get.context!.screenWidth(1), Get.context!.screenHeight(11));
 }

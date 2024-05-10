@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:bot_toast/bot_toast.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -51,8 +53,7 @@ onTapLoginWithGoogle() async {
     if (googleUser != null) {
       CustomToast.showMessage(
           message: 'Signed in Successfully!', messageType: MessageType.SUCCESS);
-      Future.delayed(const Duration(seconds: 1),
-          () => Get.off(() => const ProductsView()));
+      Future.delayed(Duration(seconds: 1), () => Get.off(() => ProductsView()));
     } else {
       Get.snackbar('Error', 'user data is empty');
     }

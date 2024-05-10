@@ -1,7 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_carousel_slider.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_contaitner.dart';
@@ -12,16 +15,17 @@ Widget categoriesShimmer({required bool scrolled, required bool isLoading}) {
   return CustomShimmer(
     isLoading: isLoading,
     child: Padding(
-      padding: EdgeInsets.all(scrolled ? 0 : screenWidth(200)),
+      padding: EdgeInsets.all(scrolled ? 0 : Get.context!.screenWidth(200)),
       child: Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: screenWidth(600), vertical: screenWidth(100)),
+            horizontal: Get.context!.screenWidth(600),
+            vertical: Get.context!.screenWidth(100)),
         child: CustomContainer(
           containerStyle: !scrolled ? ContainerStyle.CYLINDER : null,
           borderRadius: BorderRadius.circular(20),
-          width: screenWidth(scrolled ? 4.5 : 5.5),
-          padding:
-              EdgeInsets.symmetric(vertical: scrolled ? 0 : screenWidth(50)),
+          width: Get.context!.screenWidth(scrolled ? 4.5 : 5.5),
+          padding: EdgeInsets.symmetric(
+              vertical: scrolled ? 0 : Get.context!.screenWidth(50)),
           child: Container(),
         ),
       ),
@@ -37,13 +41,14 @@ Widget productsShimmer({
     child: CustomContainer(
         blurRadius: 4,
         shadowColor: AppColors.shadowColor,
-        offset: const Offset(0, 4),
+        offset: Offset(0, 4),
         containerStyle: ContainerStyle.BIGSQUARE,
         padding: EdgeInsets.symmetric(
-            horizontal: screenWidth(50), vertical: screenWidth(90)),
+            horizontal: Get.context!.screenWidth(50),
+            vertical: Get.context!.screenWidth(90)),
         // borderRadius: 19,
         // height: 207,
-        width: screenWidth(2.3),
+        width: Get.context!.screenWidth(2.3),
         child: Container()),
   );
 }
@@ -54,22 +59,23 @@ Widget searchProductsShimmer({
   return CustomShimmer(
       isLoading: isLoading,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: screenWidth(10)),
+        padding: EdgeInsets.symmetric(vertical: Get.context!.screenWidth(10)),
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            mainAxisSpacing: screenWidth(20),
+            mainAxisSpacing: Get.context!.screenWidth(20),
           ),
           itemCount: 4,
           itemBuilder: (context, index) {
             return Padding(
-                padding: EdgeInsets.symmetric(horizontal: screenWidth(80)),
+                padding: EdgeInsets.symmetric(
+                    horizontal: Get.context!.screenWidth(80)),
                 child: Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12)),
-                  width: screenWidth(8),
-                  height: screenWidth(8),
+                  width: Get.context!.screenWidth(8),
+                  height: Get.context!.screenWidth(8),
                 ));
           },
         ),
@@ -81,12 +87,13 @@ Widget bannersShimmer({
 }) {
   return Padding(
     padding: EdgeInsets.symmetric(
-        vertical: screenWidth(30), horizontal: screenWidth(20)),
+        vertical: Get.context!.screenWidth(30),
+        horizontal: Get.context!.screenWidth(20)),
     child: CustomCarouselSlider(
       autoPlay: true,
       scrolled: true,
       padEnds: false,
-      sliderHeight: screenHeight(5),
+      sliderHeight: Get.context!.screenHeight(5),
       itemCount: 2,
       itemBuilder: (context, int index, int realIndex) => CustomShimmer(
         isLoading: isLoading,
@@ -109,75 +116,76 @@ Widget productDetailsShimmer({
   return CustomShimmer(
     isLoading: isLoading,
     child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: screenWidth(20)),
+        padding: EdgeInsets.symmetric(horizontal: Get.context!.screenWidth(20)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Center(
             child: CustomContainer(
-              width: screenWidth(3),
-              height: screenWidth(4),
+              width: Get.context!.screenWidth(3),
+              height: Get.context!.screenWidth(4),
               child: Container(),
             ),
           ),
-          screenWidth(10).ph,
+          Get.context!.screenWidth(10).ph,
           Row(
             children: [
               CustomContainer(
-                width: screenWidth(3),
+                width: Get.context!.screenWidth(3),
                 child: Container(
-                  height: screenWidth(30),
+                  height: Get.context!.screenWidth(30),
                 ),
               ),
-              screenWidth(20).px,
+              Get.context!.screenWidth(20).px,
               CustomContainer(
-                width: screenWidth(2),
+                width: Get.context!.screenWidth(2),
                 child: Container(
-                  height: screenWidth(30),
+                  height: Get.context!.screenWidth(30),
                 ),
               ),
             ],
           ),
-          screenWidth(30).ph,
+          Get.context!.screenWidth(30).ph,
 
           CustomContainer(
-            width: screenWidth(3),
+            width: Get.context!.screenWidth(3),
             child: Container(
-              height: screenWidth(20),
+              height: Get.context!.screenWidth(20),
             ),
           ),
-          screenWidth(3).ph,
+          Get.context!.screenWidth(3).ph,
 
           CustomListView(
             itemCount: 3,
             separatorPadding: 0.px,
-            listViewHeight: screenHeight(18),
+            listViewHeight: Get.context!.screenHeight(18),
             itemBuilder: (context, index) => CustomContainer(
-              width: screenWidth(4),
+              width: Get.context!.screenWidth(4),
               child: Container(
-                height: screenWidth(30),
+                height: Get.context!.screenWidth(30),
               ),
             ),
           ),
-          screenWidth(20).ph, // CustomListView(
+          Get.context!.screenWidth(20).ph, // CustomListView(
           CustomContainer(
-            width: screenWidth(3),
+            width: Get.context!.screenWidth(3),
             child: Container(
-              height: screenWidth(20),
+              height: Get.context!.screenWidth(20),
             ),
           ),
-          screenWidth(30).ph,
+          Get.context!.screenWidth(30).ph,
           CustomListView(
             vertical: true,
             itemCount: 6,
-            listViewHeight: screenWidth(2),
+            listViewHeight: Get.context!.screenWidth(2),
             backgroundColor: Get.theme.scaffoldBackgroundColor,
             itemBuilder: (p0, p1) => Padding(
-              padding: EdgeInsets.symmetric(vertical: screenWidth(30)),
+              padding:
+                  EdgeInsets.symmetric(vertical: Get.context!.screenWidth(30)),
               child: CustomContainer(
-                width: screenWidth(2.3),
+                width: Get.context!.screenWidth(2.3),
                 child: CustomContainer(
-                  // width: screenWidth(3),
+                  // width:  Get.context! .screenWidth(3),
                   child: Container(
-                      // height: screenWidth(20),
+                      // height:  Get.context! .screenWidth(20),
                       ),
                 ),
               ),

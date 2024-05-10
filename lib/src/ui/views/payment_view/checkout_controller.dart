@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
+import 'package:khafif_food_ordering_application/src/core/app/app_config/app_assets.dart';
 import 'package:khafif_food_ordering_application/src/core/enums.dart';
 import 'package:khafif_food_ordering_application/src/core/services/base_controller.dart';
 import 'package:khafif_food_ordering_application/src/core/services/hyperPay_service/hyperPay_service.dart';
@@ -23,7 +26,7 @@ class CheckOutController extends BaseController {
 
   RxBool viewMore = true.obs;
   SplashController splashController = Get.put(SplashController());
-  double get deliverAmount => slectedDeliveryService()!.fixedPrice!;
+  double get deliverAmount => slectedDeliveryService()?.fixedPrice! ?? 0.0;
 
   CustomerCartModel emptyCart = CustomerCartModel(
     line: [],
@@ -36,8 +39,15 @@ class CheckOutController extends BaseController {
   RxInt selectedItem = 0.obs;
 
   List<List<String>> PaymentMethodsInfo = [
-    ['MADA', "8ac7a4c98e42878a018e4c6151bb05a6"],
-    ['VISA', "8ac7a4ca72029fc0017202eed3c600dc"],
+    ['MADA', "8ac9a4cd7203c05401720dbda35a77c3"],
+    ['VISA', "8ac9a4cd7203c05401720db769337728"],
+    ['APPLEPAY', "8acda4c97a811f85017a84a62be31f89"],
+  ];
+  List<String> PaymentMethodsImages = [
+    AppAssets.icMadaCart,
+    AppAssets.icVisa,
+    if (Platform.isIOS) AppAssets.icApplePay,
+    AppAssets.icDelivery,
   ];
 
   void checkout() {
@@ -60,8 +70,8 @@ class CheckOutController extends BaseController {
         function: OrdersRepository()
             .closeOrder(
                 transactionId: transactionId,
-                paymentMethod:
-                    int.parse(paymentMethods[selectedItem.value].mobileCode!),
+                paymentMethod: int.parse(
+                    filteredPaymentModelList[selectedItem.value].mobileCode!),
                 shippingMethod:
                     productsVieewController.orderOptionSelected.value - 1,
                 amount:
@@ -74,6 +84,9 @@ class CheckOutController extends BaseController {
                       messageType: MessageType.SUCCESS);
 
                   cartController.setOderCount = 0;
+                  storage.setOrderDeliveryOptionSelected(0);
+                  productsVieewController.setDelieryServiceAddressOrBranch(
+                      address: '');
                   storage.setNewOrder(true);
                   storage.setCart(emptyCart);
                   // cartController.cart.value = emptyCart;
@@ -87,10 +100,10 @@ class CheckOutController extends BaseController {
                   Get.off(TrackingOrderView(
                     cartModel: cartController.cart.value!,
                   ));
-                  // Navigator.of(globalContext)
+                  cartService.cart.value = null; // Navigator.of(globalContext)
                   //     .popUntil((route) => route.isFirst);
                   //                                   Get.offUntil(
-                  // GetPageRoute(page: () => const TrackingOrderView()),
+                  // GetPageRoute(page: () =>  TrackingOrderView()),
                   // ModalRoute.withName('/'));
                 })));
   }
@@ -111,7 +124,11 @@ class CheckOutController extends BaseController {
               //     .skipWhile((element) => element.mobileCode == '2')
               //     .toList();
               for (PaymentModel paymentModel in paymentMethods) {
-                if (paymentModel.mobileCode != excludedId) {
+                if (Platform.isAndroid) {
+                  if (paymentModel.mobileCode != excludedId) {
+                    filteredPaymentModelList.add(paymentModel);
+                  }
+                } else {
                   filteredPaymentModelList.add(paymentModel);
                 }
               }

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -5,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/app_assets.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/data/models/apis/branch_model.dart';
@@ -15,7 +18,7 @@ import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/cu
 import 'package:khafif_food_ordering_application/src/ui/views/shops_list_view/shops_controller.dart';
 
 class ShopBottomSheet extends StatefulWidget {
-  const ShopBottomSheet({super.key, required this.shop, required this.shops});
+  ShopBottomSheet({super.key, required this.shop, required this.shops});
   final BranchModel shop;
   final List<BranchModel> shops;
   @override
@@ -40,22 +43,23 @@ class _MyWidgetState extends State<ShopBottomSheet> {
           child: Column(
             children: [
               Container(
-                width: screenWidth(8),
-                height: screenWidth(100),
+                width: context.screenWidth(8),
+                height: context.screenWidth(100),
                 color: AppColors.mainAppColor,
               ),
-              screenWidth(13).ph,
+              context.screenWidth(13).ph,
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: screenWidth(200)),
+                padding:
+                    EdgeInsets.symmetric(horizontal: context.screenWidth(200)),
                 child: DefaultTextStyle(
                   style: const TextStyle(),
                   child: SizedBox(
-                    // width: screenWidth(8),
-                    height: screenWidth(2),
+                    // width:  context .screenWidth(8),
+                    height: context.screenWidth(2),
                     child: PageView.builder(
                       allowImplicitScrolling: true,
                       padEnds: false,
@@ -88,10 +92,10 @@ class _MyWidgetState extends State<ShopBottomSheet> {
                               children: [
                                 CustomNetworkImage(
                                   imageUrl: widget.shops[index].image ?? '',
-                                  height: screenWidth(4),
-                                  width: screenWidth(4),
+                                  height: context.screenWidth(4),
+                                  width: context.screenWidth(4),
                                 ),
-                                // screenWidth(50).px,
+                                //  context .screenWidth(50).px,
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,10 +123,10 @@ class _MyWidgetState extends State<ShopBottomSheet> {
                                       children: [
                                         SvgPicture.asset(
                                           AppAssets.icClock,
-                                          height: screenWidth(17),
-                                          width: screenWidth(17),
+                                          height: context.screenWidth(17),
+                                          width: context.screenWidth(17),
                                         ).paddingOnly(top: 6),
-                                        screenWidth(100).px,
+                                        context.screenWidth(100).px,
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -153,12 +157,12 @@ class _MyWidgetState extends State<ShopBottomSheet> {
                                 controller.setShop(
                                     branchID: widget.shops[index].id!);
                                 // context
-                                //     .pushRepalceme(const ProductsView())
+                                //     .pushRepalceme( ProductsView())
                                 //     .then((value) => context.pop());
                               },
-                              loader: controller.isShopsLoading.value,
+                              loader: controller.isSetShopLoading.value,
                               text: tr('order_now_lb'),
-                              height: screenWidth(8),
+                              height: context.screenWidth(8),
                             ).paddingSymmetric(horizontal: 30, vertical: 10)
                           ],
                         );

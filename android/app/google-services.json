@@ -1,51 +1,26 @@
 {
   "project_info": {
-    "project_number": "584610308731",
-    "project_id": "khafif-food-ordering",
-    "storage_bucket": "khafif-food-ordering.appspot.com"
+    "project_number": "486734582737",
+    "project_id": "khafif-9797b",
+    "storage_bucket": "khafif-9797b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:584610308731:android:e1327d3cb77ec3fd4ef8de",
+        "mobilesdk_app_id": "1:486734582737:android:297d65d7c3c4e4a04186f0",
         "android_client_info": {
           "package_name": "com.khafif.android"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "584610308731-vkbdv7fvj76g03ou2t27clf2rudg07l3.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.khafif.android",
-            "certificate_hash": "d984538d290ac91ddb01dd275270a42ba2630590"
-          }
-        },
-        {
-          "client_id": "584610308731-e0akfcra8ojjpjds8dvha7c6lb9ctld0.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDEoC3PjMNLOOuumoIU39nLyZ5FAmJi5Qg"
+          "current_key": "AIzaSyBfirdCa7K-WxWGzu3fMKF_iAzA_iieeq0"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "584610308731-e0akfcra8ojjpjds8dvha7c6lb9ctld0.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "584610308731-k63i8p7tslc9epq8oqrhdli58lbcsp8k.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.khafifFoodOrderingApplication.RunnerTests"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

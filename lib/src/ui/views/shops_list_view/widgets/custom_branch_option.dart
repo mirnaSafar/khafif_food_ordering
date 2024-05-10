@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_contaitner.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
@@ -35,7 +36,8 @@ class _CustomBranchOptionState extends State<CustomBranchOption> {
         child: CustomContainer(
             containerStyle: ContainerStyle.CYLINDER,
             padding: EdgeInsets.symmetric(
-                horizontal: screenWidth(30), vertical: screenWidth(90)),
+                horizontal: context.screenWidth(30),
+                vertical: context.screenWidth(90)),
             backgroundColor:
                 controller.selectedBranchesDisplayOption.value == widget.index
                     ? AppColors.mainAppColor

@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 
 class CustomNetworkImage extends StatefulWidget {
-  const CustomNetworkImage(
+  // ignore: prefer_const_constructors_in_immutables
+  CustomNetworkImage(
       {super.key,
       required this.imageUrl,
       this.height,

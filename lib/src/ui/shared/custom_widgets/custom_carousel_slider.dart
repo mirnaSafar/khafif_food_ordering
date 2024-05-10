@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CustomCarouselSlider extends StatefulWidget {
-  const CustomCarouselSlider(
+  // ignore: prefer_const_constructors_in_immutables
+  CustomCarouselSlider(
       {super.key,
       this.onPageChanged,
       required this.itemCount,
@@ -61,7 +63,7 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
         children: [
           SizedBox(
             height: widget.sliderHeight,
-            width: widget.scrolled! ? screenWidth(1.1) : null,
+            width: widget.scrolled! ? context.screenWidth(1.1) : null,
             child: CarouselSlider.builder(
               disableGesture: true,
               carouselController: carouselController,
@@ -89,9 +91,9 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
             ),
           ),
           if (!widget.scrolled!) ...[
-            screenWidth(20).ph,
+            context.screenWidth(20).ph,
             Center(child: indicatorBuilder()),
-            // screenWidth(20).ph,
+            //  context .screenWidth(20).ph,
           ],
         ],
       );

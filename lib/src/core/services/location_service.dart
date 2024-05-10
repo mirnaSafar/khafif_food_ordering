@@ -1,4 +1,5 @@
 import 'package:bot_toast/bot_toast.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:khafif_food_ordering_application/src/core/app/app_config/app_config.dart';
@@ -103,5 +104,32 @@ class LocationService {
     }
 
     return permissionGranted == PermissionStatus.granted;
+  }
+
+  double calculateDistanceInKm(LatLng latLng1, LatLng latLng2) {
+    return Geolocator.distanceBetween(
+          latLng1.latitude,
+          latLng1.longitude,
+          latLng2.latitude,
+          latLng2.longitude,
+        ) /
+        1000;
+  }
+
+  double? calculateDistanceFromCurrentLocationInKm(LatLng latLng1) {
+    if (storage.userCurrentLocation != null) {
+      return Geolocator.distanceBetween(
+            // 24.6612280, 46.7299990,
+            storage.userCurrentLocation!.latitude,
+            storage.userCurrentLocation!.longitude,
+            latLng1.latitude,
+            latLng1.longitude,
+          ) /
+          1000;
+    } else {
+      getUserCurrentLocation()
+          .then((value) => calculateDistanceFromCurrentLocationInKm(latLng1));
+    }
+    return null;
   }
 }

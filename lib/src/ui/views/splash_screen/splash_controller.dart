@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/enums.dart';
 import 'package:khafif_food_ordering_application/src/core/services/base_controller.dart';
@@ -15,14 +17,14 @@ class SplashController extends BaseController {
   void onInit() {
     super.onInit();
     Future.delayed(
-      const Duration(seconds: 5),
+      Duration(seconds: 5),
     ).then((value) {
       if (storage.getFirstLaunch()) {
-        Get.off(const IntroWidget());
+        Get.off(IntroWidget());
 
         storage.setFirstLaunch(false);
       } else {
-        Get.off(const ProductsView());
+        Get.off(ProductsView());
       }
     });
   }

@@ -1,6 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
+import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_radio.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
@@ -41,13 +44,13 @@ class _CustomToppingWidgetState extends State<CustomToppingWidget> {
             children: [
               CachedNetworkImage(
                 imageUrl: widget.imagename,
-                width: widget.imagewidth ?? screenWidth(15),
-                height: widget.imageheight ?? screenWidth(15),
+                width: widget.imagewidth ?? context.screenWidth(15),
+                height: widget.imageheight ?? context.screenWidth(15),
                 errorWidget: (context, url, error) {
-                  return const Icon(Icons.error);
+                  return Icon(Icons.error);
                 },
               ),
-              screenWidth(30).px,
+              context.screenWidth(30).px,
               CustomText(
                 text: widget.text,
                 textType: TextStyleType.BODYSMALL,
@@ -62,7 +65,7 @@ class _CustomToppingWidgetState extends State<CustomToppingWidget> {
                 textType: TextStyleType.BODYSMALL,
                 fontWeight: FontWeight.w600,
               ),
-              screenWidth(35).px,
+              context.screenWidth(35).px,
               CustomRadio(
                   value: widget.value,
                   onTaped: (value) {

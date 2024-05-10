@@ -1,8 +1,10 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/fonts.dart';
 
 class CustomRichText extends StatelessWidget {
-  const CustomRichText(
+  CustomRichText(
       {super.key,
       required this.firstText,
       required this.secondText,
@@ -22,7 +24,7 @@ class CustomRichText extends StatelessWidget {
     return RichText(
       text: TextSpan(
         style: TextStyle(
-          fontSize: firstFontSize ?? AppFonts.body,
+          fontSize: firstFontSize ?? AppFonts(context).body,
           color: firstColor ?? Theme.of(context).colorScheme.secondary,
           fontWeight: firstFontWeight ?? FontWeight.w400,
         ),
@@ -32,7 +34,7 @@ class CustomRichText extends StatelessWidget {
             text: secondText,
             style: TextStyle(
               color: secondColor ?? Theme.of(context).colorScheme.secondary,
-              fontSize: secondFontSize ?? AppFonts.body,
+              fontSize: secondFontSize ?? AppFonts(context).body,
               fontWeight: secondFontWeight ?? FontWeight.w600,
             ),
           ),

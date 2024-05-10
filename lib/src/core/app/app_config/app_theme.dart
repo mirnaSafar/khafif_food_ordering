@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/fonts.dart';
+import 'package:khafif_food_ordering_application/src/core/app/my_app.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 
 class AppTheme extends GetxController {
@@ -78,23 +79,27 @@ class AppTheme extends GetxController {
             displayLarge: TextStyle(
                 color: AppColors.mainTextColor,
                 fontFamily: 'Baloo 2',
-                fontSize: AppFonts.header), // Define custom color for headline1
+                fontSize: AppFonts(Get.context ?? globalContext)
+                    .header), // Define custom color for headline1
             displayMedium: TextStyle(
                 color: AppColors.mainTextColor,
                 fontFamily: 'Baloo 2',
-                fontSize: AppFonts.title), // Define custom color for headline2
+                fontSize: AppFonts(Get.context ?? globalContext)
+                    .title), // Define custom color for headline2
             bodyLarge: TextStyle(
                 color: AppColors.mainTextColor,
                 fontFamily: 'Baloo 2',
-                fontSize: AppFonts.body), // Define custom color for bodyText1
+                fontSize: AppFonts(Get.context ?? globalContext)
+                    .body), // Define custom color for bodyText1
             bodyMedium: TextStyle(
                 fontFamily: 'Baloo 2',
                 color: AppColors.mainTextColor,
-                fontSize: AppFonts.bodySmall),
+                fontSize: AppFonts(Get.context ?? globalContext).bodySmall),
             bodySmall: TextStyle(
                 fontFamily: 'Baloo 2',
                 color: AppColors.greyColor,
-                fontSize: AppFonts.small), // Define custom color for bodyText2
+                fontSize: AppFonts(Get.context ?? globalContext)
+                    .small), // Define custom color for bodyText2
             // Add more text styles as needed
           ),
       scaffoldBackgroundColor: AppColors.backgroundColor,
@@ -178,23 +183,27 @@ class AppTheme extends GetxController {
             displayLarge: TextStyle(
                 color: const Color(0xffcdcdcd),
                 fontFamily: 'Baloo 2',
-                fontSize: AppFonts.header), // Define custom color for headline1
+                fontSize: AppFonts(Get.context ?? globalContext)
+                    .header), // Define custom color for headline1
             displayMedium: TextStyle(
                 color: const Color(0xffcdcdcd),
                 fontFamily: 'Baloo 2',
-                fontSize: AppFonts.title), // Define custom color for headline2
+                fontSize: AppFonts(Get.context ?? globalContext)
+                    .title), // Define custom color for headline2
             bodyLarge: TextStyle(
                 color: const Color(0xffcdcdcd),
                 fontFamily: 'Baloo 2',
-                fontSize: AppFonts.body), // Define custom color for bodyText1
+                fontSize: AppFonts(Get.context ?? globalContext)
+                    .body), // Define custom color for bodyText1
             bodyMedium: TextStyle(
                 fontFamily: 'Baloo 2',
                 color: const Color(0xffcdcdcd),
-                fontSize: AppFonts.bodySmall),
+                fontSize: AppFonts(Get.context ?? globalContext).bodySmall),
             bodySmall: TextStyle(
                 fontFamily: 'Baloo 2',
                 color: const Color(0xffcdcdcd),
-                fontSize: AppFonts.small), // Define custom color for bodyText2
+                fontSize: AppFonts(Get.context ?? globalContext)
+                    .small), // Define custom color for bodyText2
             // Add more text styles as needed
           ),
       scaffoldBackgroundColor: AppColors.secondaryblackColor,

@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
+import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/date_time_picker/custom_time_picker_widget.dart';
 
 class DateTimeController extends GetxController {
@@ -24,9 +25,10 @@ class DateTimeController extends GetxController {
               child: child!),
         );
       },
+      helpText: tr('select_order_date_lb'),
       context: context,
       initialDate: selectedDate.value,
-      firstDate: DateTime(2020),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2025),
     );
 
@@ -53,6 +55,23 @@ class DateTimeController extends GetxController {
     // Format the DateTime object to a new 24-hour format string
     String formattedDateTime =
         DateFormat("yyyy-MM-dd HH:mm:ss").format(dateTime);
+    return formattedDateTime;
+  }
+
+  DateTime parseFormattedStringDateTimeInToDateTimeObject(
+      TimeOfDay pickedTime) {
+    String selectedDateOnly = selectedDate.toString().split(' ')[0];
+    String selectedTime = pickedTime.format(Get.context!).toString();
+    DateTime dateTime = DateFormat("yyyy-MM-dd hh:mm a")
+        .parse('$selectedDateOnly $selectedTime');
+
+    return dateTime;
+  }
+
+  String parse24TimeToDayPeriod({required String stringDateTime}) {
+    DateTime dateTime = DateFormat("yyyy-MM-dd HH:mm:ss").parse(stringDateTime);
+    String formattedDateTime =
+        DateFormat("yyyy-MM-dd hh:mm a").format(dateTime);
     return formattedDateTime;
   }
 }
