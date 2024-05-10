@@ -12,6 +12,7 @@ import 'package:khafif_food_ordering_application/src/core/translation/app_transl
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_blur.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_contaitner.dart';
+import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_network_image.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_popup_with_blur.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
 
@@ -96,6 +97,26 @@ showDeliveryCheckerDialog(
               ),
             )),
       ),
+    ),
+  );
+}
+
+showproductImageDialog({required String image}) {
+  showDialog(
+    barrierColor: Colors.transparent,
+    context: Get.context!,
+    builder: (context) => CustomPopupWithBlurWidget(
+      customBlurChildType: CustomBlurChildType.DIALOUG,
+      child: Center(
+          child: CustomContainer(
+              borderRadius: BorderRadius.circular(14),
+              height: Get.context!.screenHeight(2.7),
+              width: Get.context!.screenWidth(1.1),
+              backgroundColor: AppColors.mainWhiteColor,
+              padding: EdgeInsets.all(Get.context!.screenWidth(30)),
+              child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: CustomNetworkImage(imageUrl: image)))),
     ),
   );
 }

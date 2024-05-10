@@ -24,6 +24,7 @@ import 'package:khafif_food_ordering_application/src/ui/views/cart_view/confirm_
 import 'package:khafif_food_ordering_application/src/ui/views/cart_view/confirm_order_view.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/product_details_view/custom_widgets/custom_topping_widget.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_network_image.dart';
+import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_widgets/delivery_checker_dialog.dart';
 
 import 'product_details_controller.dart';
 
@@ -75,12 +76,24 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Center(
-                              child: SizedBox(
-                                height: context.screenHeight(6),
-                                child: CustomNetworkImage(
-                                    imageUrl: productDetailsController
-                                            .productVariantsModel.value.image ??
-                                        ''),
+                              child: InkWell(
+                                onTap: () {
+                                  showproductImageDialog(
+                                      image: productDetailsController
+                                              .productVariantsModel
+                                              .value
+                                              .image ??
+                                          '');
+                                },
+                                child: SizedBox(
+                                  height: context.screenHeight(6),
+                                  child: CustomNetworkImage(
+                                      imageUrl: productDetailsController
+                                              .productVariantsModel
+                                              .value
+                                              .image ??
+                                          ''),
+                                ),
                               ),
                             ),
                             context.screenWidth(15).ph,
