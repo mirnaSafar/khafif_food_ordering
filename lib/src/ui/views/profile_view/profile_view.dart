@@ -86,16 +86,14 @@ class _ProfileViewState extends State<ProfileView> {
                                                   height:
                                                       context.screenWidth(5),
                                                   child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                    child: CustomNetworkImage(
-                                                      scale: 1.2,
-                                                      imageUrl: userinfo
-                                                              ?.value?.image ??
-                                                          '',
-                                                    ),
-                                                  )),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      child: Image.network(
+                                                        userinfo?.value
+                                                                ?.image ??
+                                                            '',
+                                                      ))),
                                               context.screenWidth(30).px,
                                               ConstrainedBox(
                                                 constraints:

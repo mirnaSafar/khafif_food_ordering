@@ -12,10 +12,14 @@ buildAwsomeDialog({
   void Function()? firstBtn,
   void Function()? secondBtn,
   MessageType? messageType,
+  Color? firstBtnColor,
+  Color? secondBtnColor,
   bool? showMessageWithoutActions = false,
 }) {
   return CustomToast.AwesomeDialog(
       firstBtnFunction: firstBtn,
+      firstBtnColor: firstBtnColor,
+      secondBtnColor: secondBtnColor,
       secBtnFunction: secondBtn,
       showMessageWithoutActions: showMessageWithoutActions,
       message: content,

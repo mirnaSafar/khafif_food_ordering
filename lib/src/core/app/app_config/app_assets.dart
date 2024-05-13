@@ -10,8 +10,8 @@ class AppAssets {
   static String icEmail = "assets/images/sms_ic.svg";
   static String icAddress = "assets/images/address_ic.svg";
   static String icBack = "assets/images/back_ic.svg";
-  static String icChicken = "assets/images/chicken_ic.svg";
-  static String icDrink = "assets/images/drink_ic.svg";
+  // static String icChicken = "assets/images/chicken_ic.svg";
+  // static String icDrink = "assets/images/drink_ic.svg";
   static String icPhone = "assets/images/phone_ic.svg";
   static String icFavorite = "assets/images/favorite_ic.svg";
   static String icNotFavorite = "assets/images/heart.svg";
@@ -20,7 +20,7 @@ class AppAssets {
   static String icSignOut = "assets/images/signout_ic.svg";
 
   static String icFire = "assets/images/fire_ic.svg";
-  static String icFries = "assets/images/fries.svg";
+  // static String icFries = "assets/images/fries.svg";
   static String icHelp = "assets/images/help_ic.svg";
 
   static String icLogo = "assets/images/logo.svg";
@@ -34,12 +34,12 @@ class AppAssets {
   static String icRate = "assets/images/rate_ic.svg";
   static String icSearch = "assets/images/search_ic.svg";
   static String icSettings = "assets/images/settings_ic.svg";
-  static String icShoppingBag = "assets/images/shopping_bag_ic.svg";
+  static String icShoppingBag = "assets/images/shopping-cart.png";
   static String icEdit = "assets/images/edit_ic.svg";
   static String icAdd = "assets/images/add_ic.svg";
 
   static String icUserCard = "assets/images/user_card_ic.svg";
-  static String icQrCode = "assets/images/qr_code_ic.svg";
+  // static String icQrCode = "assets/images/qr_code_ic.svg";
   static String icStar = "assets/images/star_ic.svg";
   static String icSupport = "assets/images/support_ic.svg";
   static String icClock = "assets/images/clock_ic.svg";

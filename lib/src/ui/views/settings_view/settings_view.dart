@@ -174,6 +174,19 @@ class _SettingsViewState extends State<SettingsView> {
                             ),
 
                             InkWell(
+                              onTap: () {
+                                buildAwsomeDialog(
+                                  context: context,
+                                  content: tr('logout_warning_dialog'),
+                                  firstBtnColor: Colors.red,
+                                  secondBtnColor: Colors.green,
+                                  firstBtnText: tr('logout_lb'),
+                                  secondBtnText: tr('cancel_lb'),
+                                  firstBtn: () {
+                                    UserRepository().logout();
+                                  },
+                                );
+                              },
                               child: SizedBox(
                                 width: context.screenWidth(1),
                                 height: context.screenWidth(8),
@@ -195,6 +208,8 @@ class _SettingsViewState extends State<SettingsView> {
                               onTap: () {
                                 buildAwsomeDialog(
                                   context: context,
+                                  firstBtnColor: Colors.red,
+                                  secondBtnColor: Colors.green,
                                   content: tr('logout_warning_dialog'),
                                   firstBtnText: tr('logout_lb'),
                                   secondBtnText: tr('cancel_lb'),

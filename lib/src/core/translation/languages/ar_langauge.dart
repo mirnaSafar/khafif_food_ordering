@@ -80,8 +80,7 @@ class ARLanguage {
 
         //?------- otp view
         "reset_pass_lb": 'اعد ضبط كلمه السر',
-        "enter_number_lb":
-            'أدخل رقمك، وسنرسل لك رمزًا \nلإعادة تعيين كلمة المرور الخاصة بك.',
+        "enter_number_lb": 'أدخل الرقم الخاص بك.',
         "send_me_code_lb": "أرسل لي الرمز",
         "enter_code_lb": "أدخل الرمز الذي أرسلناه إلى هاتفك.",
         "code_not_received_lb": "لم أحصل على الرمز.",
@@ -218,7 +217,7 @@ class ARLanguage {
         "confirm_location_lb": "تأكيد الموقع",
         "select_other_location_lb": "اختيار موقع اخر",
         "ability_to_deliver_lb": 'أخبار جيدة ،يمكننا التوصيل الى هذا الموقع',
-        "no_ability_to_deliver_lb": 'عفواً ،لا يمكننا التوصيل الى هذا الموقع',
+        "no_ability_to_deliver_lb": 'عذراً ،لا يمكننا التوصيل الى هذا الموقع',
         "delivery_checker_lb": 'مدقق التوصيل:',
         "display_shops_lb": 'عرض قائمة المتاجر',
         "all_branches_lb": 'كل الفروع',

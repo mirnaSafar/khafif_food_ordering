@@ -89,8 +89,7 @@ class ENLanguage {
 
         //?------- otp view
         "reset_pass_lb": 'Reset your password',
-        "enter_number_lb":
-            'Enter your number, and we\'ll send a code \nto reset your password.',
+
         "send_me_code_lb": "Send me code",
         "enter_code_lb": "Enter the code we sent to your phone.",
         "code_not_received_lb": "I didn't get the code.",

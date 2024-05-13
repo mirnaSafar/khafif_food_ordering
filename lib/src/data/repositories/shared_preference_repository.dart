@@ -32,6 +32,7 @@ class SharedPreferenceRepository {
   String PREF_CART_LIST = 'cart list';
   String PREF_CUSTOMER_CART = 'CURRENT cart';
   String PREF_SUB_STATUS = 'sub_status';
+  String PREF_NOTIFICATIONS_STATUS = 'notifications status';
   String PREF_ADDRESS_INFO = 'user address info';
   String PREF_FAVORITES = 'Favorites products';
   String PREF_Deliery_Service_Address = 'DelieryServiceAddress';
@@ -57,7 +58,7 @@ class SharedPreferenceRepository {
     setPreference(
       dataType: DataType.STRING,
       key: PREF_NOTIFICATION_KEY,
-      value: jsonEncode(notifications.toList()),
+      value: jsonEncode(notifications.toString()),
     );
   }
 
@@ -95,6 +96,22 @@ class SharedPreferenceRepository {
       return addresses;
     } else {
       return [];
+    }
+  }
+
+  void recieveNotifications(bool value) {
+    setPreference(
+      dataType: DataType.BOOLEAN,
+      key: PREF_NOTIFICATIONS_STATUS,
+      value: value,
+    );
+  }
+
+  bool isReceiveNotifications() {
+    if (Get.find<SharedPreferences>().containsKey(PREF_NOTIFICATIONS_STATUS)) {
+      return getPreference(key: PREF_NOTIFICATIONS_STATUS);
+    } else {
+      return false;
     }
   }
 
