@@ -332,9 +332,9 @@ class _ProductsViewState extends State<ProductsView> {
                                                                       context.screenWidth(1),
                                                                       context.screenHeight(
                                                                         scrolled
-                                                                            ? 14
+                                                                            ? 15
                                                                             : lerpDouble(
-                                                                                4.6,
+                                                                                5,
                                                                                 10,
                                                                                 (constraints.scrollOffset / 25).clamp(0.0, 1))!,
                                                                       )),

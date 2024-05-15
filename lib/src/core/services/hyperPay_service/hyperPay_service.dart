@@ -13,7 +13,7 @@ import 'package:khafif_food_ordering_application/src/ui/views/payment_view/check
 
 class InAppPaymentSetting {
   // shopperResultUrl : this name must like scheme in intent-filter , url scheme in xcode
-  static const String shopperResultUrl = "com.khafif.food";
+  static const String shopperResultUrl = "com.khafif.android";
   static const String merchantId = "MerchantId";
   static const String countryCode = "SA";
   static getLang() {

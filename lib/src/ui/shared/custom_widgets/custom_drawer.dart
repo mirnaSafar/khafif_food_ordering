@@ -171,7 +171,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       vertical: context
                           .screenWidth(userinfo?.value == null ? 10 : 30)),
                   child: SizedBox(
-                    height: context.screenHeight(1.5),
+                    height: context
+                        .screenHeight(userinfo?.value != null ? 1.5 : 1.3),
                     child: SingleChildScrollView(
                       // shrinkWrap: true,
                       child: Column(
@@ -306,9 +307,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                 buildAwsomeDialog(
                                   context: context,
                                   content: tr('logout_warning_dialog'),
-                                  secondBtnText: tr('logout_lb'),
-                                  firstBtnText: tr('cancel_lb'),
-                                  secondBtn: () {
+                                  firstBtnColor: Colors.red,
+                                  secondBtnColor: Colors.green,
+                                  firstBtnText: tr('logout_lb'),
+                                  secondBtnText: tr('cancel_lb'),
+                                  firstBtn: () {
                                     UserRepository().logout();
                                   },
                                 );

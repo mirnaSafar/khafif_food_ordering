@@ -68,9 +68,9 @@ class _LoginViewState extends State<LoginView> {
                             maxLength: 9,
                             keyboardType: TextInputType.phone,
                             validator: (number) {
-                              // return null;
+                              return null;
 //
-                              return numberValidator(number!);
+                              // return numberValidator(number!);
                             },
                             controller: controller.phoneController,
                             text: tr('phone_field_lb'),
