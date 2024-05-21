@@ -49,8 +49,10 @@ class _PaymentViewState extends State<PaymentView> {
           child: Obx(() {
             print(controller.operationType);
             return Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: context.screenWidth(30)),
+                padding: EdgeInsets.symmetric(
+                  horizontal: context.screenWidth(30),
+                  vertical: context.screenWidth(30),
+                ),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -223,7 +225,6 @@ class _PaymentViewState extends State<PaymentView> {
                             controller.checkout();
                           },
                           text: tr('place_order_lb')),
-                      context.screenWidth(12).ph,
                     ]));
           }),
         ),

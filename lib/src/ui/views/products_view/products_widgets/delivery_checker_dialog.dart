@@ -28,7 +28,7 @@ showDeliveryCheckerDialog(
       child: Center(
         child: CustomContainer(
             borderRadius: BorderRadius.circular(14),
-            height: Get.context!.screenHeight(2.7),
+            // height: Get.context!.screenHeight(2.7),
             width: Get.context!.screenWidth(1.1),
             backgroundColor: AppColors.mainWhiteColor,
             padding: EdgeInsets.all(Get.context!.screenWidth(30)),

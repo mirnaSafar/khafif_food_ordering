@@ -281,7 +281,9 @@ class _ProductsViewState extends State<ProductsView> {
                                                             //     (constraints.scrollOffset / 100)
                                                             //         .clamp(0.0, 1.0);
                                                             return SliverAppBar(
-                                                              titleSpacing: 30,
+                                                              titleSpacing: context
+                                                                  .screenWidth(
+                                                                      70),
                                                               pinned: true,
                                                               // scrolledUnderElevation: 2,
                                                               // floating: true,
@@ -334,7 +336,7 @@ class _ProductsViewState extends State<ProductsView> {
                                                                         scrolled
                                                                             ? 15
                                                                             : lerpDouble(
-                                                                                5,
+                                                                                4.2,
                                                                                 10,
                                                                                 (constraints.scrollOffset / 25).clamp(0.0, 1))!,
                                                                       )),

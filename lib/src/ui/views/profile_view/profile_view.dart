@@ -54,6 +54,7 @@ class _ProfileViewState extends State<ProfileView> {
                         Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: context.screenWidth(15),
+                            vertical: context.screenWidth(15),
                           ),
                           child: Obx(() {
                             print(controller.showQrCode.value);

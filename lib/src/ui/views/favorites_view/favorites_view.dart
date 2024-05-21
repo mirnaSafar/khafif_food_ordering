@@ -33,108 +33,116 @@ class _FavoritesViewState extends State<FavoritesView> {
       body: Obx(() {
         return controller.favoritesList.isEmpty
             ? Center(child: Text(tr('no_favorites_lb')))
-            : GridView.builder(
-                shrinkWrap: true,
-                itemCount: controller.favoritesList.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: context.screenWidth(30)),
-                itemBuilder: (BuildContext context, int index) {
-                  return Obx(() {
-                    print(controller.operationType);
-                    return FutureBuilder(
-                        future: whenNotZero(
-                          Stream<double>.periodic(Duration(milliseconds: 50),
-                              (x) => MediaQuery.of(context).size.width),
-                        ),
-                        builder: (BuildContext context, snapshot) {
-                          if (snapshot.hasData) {
-                            if (snapshot.data! > 0) {
-                              return Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8),
-                                child: CustomContainer(
-                                  blurRadius: 4,
-                                  shadowColor: AppColors.shadowColor,
-                                  borderRadius: BorderRadius.circular(12),
+            : Padding(
+                padding:
+                    EdgeInsets.symmetric(vertical: context.screenWidth(20)),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  itemCount: controller.favoritesList.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: context.screenWidth(30)),
+                  itemBuilder: (BuildContext context, int index) {
+                    return Obx(() {
+                      print(controller.operationType);
+                      return FutureBuilder(
+                          future: whenNotZero(
+                            Stream<double>.periodic(Duration(milliseconds: 50),
+                                (x) => MediaQuery.of(context).size.width),
+                          ),
+                          builder: (BuildContext context, snapshot) {
+                            if (snapshot.hasData) {
+                              if (snapshot.data! > 0) {
+                                return Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 8),
+                                  child: CustomContainer(
+                                    blurRadius: 4,
+                                    shadowColor: AppColors.shadowColor,
+                                    borderRadius: BorderRadius.circular(12),
 
-                                  offset: Offset(0, 4),
-                                  containerStyle: ContainerStyle.BIGSQUARE,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: context.screenWidth(50),
-                                      vertical: context.screenWidth(90)),
-                                  // borderRadius: 19,
-                                  // height: 207,
-                                  width: context.screenWidth(2.3),
+                                    offset: Offset(0, 4),
+                                    containerStyle: ContainerStyle.BIGSQUARE,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: context.screenWidth(50),
+                                        vertical: context.screenWidth(90)),
+                                    // borderRadius: 19,
+                                    // height: 207,
+                                    width: context.screenWidth(2.3),
 
-                                  child: Stack(
-                                    alignment: AlignmentDirectional.topEnd,
-                                    children: [
-                                      InkWell(
-                                        onTap: () {
-                                          Get.to(ProductDetailsView(
-                                              product: controller
-                                                  .favoritesList[index]));
-                                        },
-                                        child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Flexible(
-                                                // height:
-                                                //     context .screenWidth(20),
+                                    child: Stack(
+                                      alignment: AlignmentDirectional.topEnd,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            Get.to(ProductDetailsView(
+                                                product: controller
+                                                    .favoritesList[index]));
+                                          },
+                                          child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Flexible(
+                                                  // height:
+                                                  //     context .screenWidth(20),
 
-                                                child: CustomNetworkImage(
-                                                  imageUrl: controller
-                                                          .favoritesList[index]
-                                                          .image ??
-                                                      '',
+                                                  child: CustomNetworkImage(
+                                                    imageUrl: controller
+                                                            .favoritesList[
+                                                                index]
+                                                            .image ??
+                                                        '',
+                                                  ),
                                                 ),
-                                              ),
 
-                                              //  SvgPicture.asset(e.values.first[0]),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  CustomNameCalories(
-                                                      productname: controller
-                                                              .favoritesList[
-                                                                  index]
-                                                              .name ??
-                                                          '',
-                                                      calory: controller
-                                                          .favoritesList[index]
-                                                          .calories
-                                                          .toString()),
-                                                  CustomPriceCurrency(
-                                                      price: controller
-                                                          .favoritesList[index]
-                                                          .price
-                                                          .toString()),
-                                                ],
-                                              )
-                                            ]),
-                                      ),
-                                      InkWell(
-                                        onTap: () =>
-                                            selectedIndex.value = index,
-                                        child: CustomFavorite(
-                                            index: selectedIndex.value,
-                                            product: controller
-                                                .favoritesList[index]),
-                                      ),
-                                    ],
+                                                //  SvgPicture.asset(e.values.first[0]),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    CustomNameCalories(
+                                                        productname: controller
+                                                                .favoritesList[
+                                                                    index]
+                                                                .name ??
+                                                            '',
+                                                        calory: controller
+                                                            .favoritesList[
+                                                                index]
+                                                            .calories
+                                                            .toString()),
+                                                    CustomPriceCurrency(
+                                                        price: controller
+                                                            .favoritesList[
+                                                                index]
+                                                            .price
+                                                            .toString()),
+                                                  ],
+                                                )
+                                              ]),
+                                        ),
+                                        InkWell(
+                                          onTap: () =>
+                                              selectedIndex.value = index,
+                                          child: CustomFavorite(
+                                              index: selectedIndex.value,
+                                              product: controller
+                                                  .favoritesList[index]),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              );
+                                );
+                              }
+                              return Container();
                             }
                             return Container();
-                          }
-                          return Container();
-                        });
-                  });
-                },
+                          });
+                    });
+                  },
+                ),
               );
       }),
     );

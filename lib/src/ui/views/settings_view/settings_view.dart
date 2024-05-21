@@ -36,7 +36,9 @@ class _SettingsViewState extends State<SettingsView> {
         child: Obx(() {
           print(controller.receiveNotification.value);
           return Padding(
-            padding: EdgeInsets.symmetric(horizontal: context.screenWidth(20)),
+            padding: EdgeInsets.symmetric(
+                horizontal: context.screenWidth(20),
+                vertical: context.screenWidth(20)),
             child: SingleChildScrollView(
               child: FutureBuilder(
                   future: whenNotZero(

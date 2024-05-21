@@ -182,10 +182,12 @@ class ProductsViewController extends BaseController {
                     .then(
                     (value) {
                       value.fold((l) {
-                        CustomToast.showMessage(
-                          messageType: MessageType.REJECTED,
-                          message: l,
-                        );
+                        if (l != 'not data') {
+                          CustomToast.showMessage(
+                            messageType: MessageType.REJECTED,
+                            message: l,
+                          );
+                        }
                       }, (r) {
                         productsList.addAll(r[0]);
 

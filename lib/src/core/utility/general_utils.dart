@@ -171,6 +171,7 @@ setLanguage(String lan) {
 void changeLanguageDialog() {
   // SetteingsController controller = Get.put(SetteingsController());
   Get.defaultDialog(
+      backgroundColor: AppColors.mainWhiteColor,
       title: tr('Languages_lb'),
       titlePadding: EdgeInsets.only(top: Get.context!.screenWidth(20)),
       content: Column(
@@ -194,7 +195,7 @@ void changeLanguageDialog() {
             child: CustomText(
               text: 'English',
               textType: TextStyleType.BODY,
-              textColor: AppColors.mainTextColor,
+              // textColor: AppColors.mainAppColor,
             ),
           ),
           TextButton(
@@ -215,7 +216,7 @@ void changeLanguageDialog() {
             child: CustomText(
               text: 'العربية',
               textType: TextStyleType.BODY,
-              textColor: AppColors.mainTextColor,
+              // textColor: AppColors.mainAppColor,
             ),
           ),
         ],

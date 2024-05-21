@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 
 import 'package:khafif_food_ordering_application/src/core/enums.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/navigator_extension.dart';
@@ -95,33 +96,38 @@ class NotificationService {
         Get.to(NotificationsView());
 
       case AppState.FOREGROUND:
-        showDialog(
-            context: Get.context!,
-            builder: (BuildContext context) {
-              return DefaultTextStyle(
-                style: TextStyle(),
-                child: SizedBox(
-                  width: context.screenWidth(1),
-                  height: context.screenWidth(2),
-                  child: AlertDialog(
-                    alignment: Alignment.topCenter,
-                    actions: [
-                      ElevatedButton(
-                          onPressed: () {
-                            context.pop();
-                            Get.to(NotificationsView());
-                          },
-                          child: Text('ok'))
-                    ],
-                    title: CustomText(
-                      text: model.notification!.title ?? '',
-                      textType: TextStyleType.BODY,
-                    ),
-                    content: Text(model.notification!.body ?? ''),
-                  ),
-                ),
-              );
-            });
+        Get.snackbar(
+          backgroundColor: AppColors.mainWhiteColor,
+          model.notification!.title ?? '',
+          model.notification!.body ?? '',
+        );
+        // showDialog(
+        //     context: Get.context!,
+        //     builder: (BuildContext context) {
+        //       return DefaultTextStyle(
+        //         style: TextStyle(),
+        //         child: SizedBox(
+        //           width: context.screenWidth(1),
+        //           height: context.screenWidth(2),
+        //           child: AlertDialog(
+        //             alignment: Alignment.topCenter,
+        //             actions: [
+        //               ElevatedButton(
+        //                   onPressed: () {
+        //                     context.pop();
+        //                     Get.to(NotificationsView());
+        //                   },
+        //                   child: Text('ok'))
+        //             ],
+        //             title: CustomText(
+        //               text: model.notification!.title ?? '',
+        //               textType: TextStyleType.BODY,
+        //             ),
+        //             content: Text(model.notification!.body ?? ''),
+        //           ),
+        //         ),
+        //       );
+        //     });
         Future.delayed(Duration(seconds: 5), () {
           Get.back();
         });

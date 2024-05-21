@@ -117,82 +117,85 @@ Widget productDetailsShimmer({
     isLoading: isLoading,
     child: Padding(
         padding: EdgeInsets.symmetric(horizontal: Get.context!.screenWidth(20)),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Center(
-            child: CustomContainer(
-              width: Get.context!.screenWidth(3),
-              height: Get.context!.screenWidth(4),
-              child: Container(),
-            ),
-          ),
-          Get.context!.screenWidth(10).ph,
-          Row(
-            children: [
-              CustomContainer(
-                width: Get.context!.screenWidth(3),
-                child: Container(
-                  height: Get.context!.screenWidth(30),
-                ),
-              ),
-              Get.context!.screenWidth(20).px,
-              CustomContainer(
-                width: Get.context!.screenWidth(2),
-                child: Container(
-                  height: Get.context!.screenWidth(30),
-                ),
-              ),
-            ],
-          ),
-          Get.context!.screenWidth(30).ph,
-
-          CustomContainer(
-            width: Get.context!.screenWidth(3),
-            child: Container(
-              height: Get.context!.screenWidth(20),
-            ),
-          ),
-          Get.context!.screenWidth(3).ph,
-
-          CustomListView(
-            itemCount: 3,
-            separatorPadding: 0.px,
-            listViewHeight: Get.context!.screenHeight(18),
-            itemBuilder: (context, index) => CustomContainer(
-              width: Get.context!.screenWidth(4),
-              child: Container(
-                height: Get.context!.screenWidth(30),
-              ),
-            ),
-          ),
-          Get.context!.screenWidth(20).ph, // CustomListView(
-          CustomContainer(
-            width: Get.context!.screenWidth(3),
-            child: Container(
-              height: Get.context!.screenWidth(20),
-            ),
-          ),
-          Get.context!.screenWidth(30).ph,
-          CustomListView(
-            vertical: true,
-            itemCount: 6,
-            listViewHeight: Get.context!.screenWidth(2),
-            backgroundColor: Get.theme.scaffoldBackgroundColor,
-            itemBuilder: (p0, p1) => Padding(
-              padding:
-                  EdgeInsets.symmetric(vertical: Get.context!.screenWidth(30)),
+        child: SingleChildScrollView(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Center(
               child: CustomContainer(
-                width: Get.context!.screenWidth(2.3),
-                child: CustomContainer(
-                  // width:  Get.context! .screenWidth(3),
+                width: Get.context!.screenWidth(3),
+                height: Get.context!.screenWidth(4),
+                child: Container(),
+              ),
+            ),
+            Get.context!.screenWidth(10).ph,
+            Row(
+              children: [
+                CustomContainer(
+                  width: Get.context!.screenWidth(3),
                   child: Container(
-                      // height:  Get.context! .screenWidth(20),
-                      ),
+                    height: Get.context!.screenWidth(30),
+                  ),
+                ),
+                Get.context!.screenWidth(20).px,
+                CustomContainer(
+                  width: Get.context!.screenWidth(2),
+                  child: Container(
+                    height: Get.context!.screenWidth(30),
+                  ),
+                ),
+              ],
+            ),
+            Get.context!.screenWidth(30).ph,
+
+            CustomContainer(
+              width: Get.context!.screenWidth(3),
+              child: Container(
+                height: Get.context!.screenWidth(20),
+              ),
+            ),
+            Get.context!.screenWidth(3).ph,
+
+            CustomListView(
+              itemCount: 3,
+              separatorPadding: 0.px,
+              listViewHeight: Get.context!.screenHeight(18),
+              itemBuilder: (context, index) => CustomContainer(
+                width: Get.context!.screenWidth(4),
+                child: Container(
+                  height: Get.context!.screenWidth(30),
                 ),
               ),
             ),
-            separatorPadding: 60.ph,
-          )
-          // .insert(index, value)
-        ])),
+            Get.context!.screenWidth(20).ph, // CustomListView(
+            CustomContainer(
+              width: Get.context!.screenWidth(3),
+              child: Container(
+                height: Get.context!.screenWidth(20),
+              ),
+            ),
+            Get.context!.screenWidth(30).ph,
+            CustomListView(
+              vertical: true,
+              itemCount: 6,
+              listViewHeight: Get.context!.screenWidth(2),
+              backgroundColor: Get.theme.scaffoldBackgroundColor,
+              itemBuilder: (p0, p1) => Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: Get.context!.screenWidth(30)),
+                child: CustomContainer(
+                  width: Get.context!.screenWidth(2.3),
+                  child: CustomContainer(
+                    // width:  Get.context! .screenWidth(3),
+                    child: Container(
+                        // height:  Get.context! .screenWidth(20),
+                        ),
+                  ),
+                ),
+              ),
+              separatorPadding: 60.ph,
+            )
+            // .insert(index, value)
+          ]),
+        )),
   );
 }

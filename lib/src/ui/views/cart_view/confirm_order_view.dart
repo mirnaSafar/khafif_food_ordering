@@ -81,8 +81,8 @@ class _ConfirmOrderViewState extends State<ConfirmOrderView> {
                                     secondFontSize: AppFonts(context).title,
                                   ),
                                 ),
-                                context.screenWidth(20).ph,
                               ],
+                              context.screenWidth(20).ph,
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -280,132 +280,144 @@ class _ConfirmOrderViewState extends State<ConfirmOrderView> {
                                                                 .icPlusContainer,
                                                           ),
                                                         ),
-                                                        PositionedDirectional(
-                                                          top: context
-                                                              .screenWidth(45),
-                                                          start: context
-                                                              .screenWidth(25),
-                                                          child:
-                                                              CustomNetworkImage(
-                                                            imageUrl: controller
-                                                                    .suggestedProducts[
-                                                                        index]
-                                                                    .image ??
-                                                                '',
-                                                            height: context
-                                                                .screenWidth(8),
-                                                            width: context
-                                                                .screenWidth(8),
-                                                          ),
-                                                        ),
+                                                        // Align(
+                                                        //   alignment:
+                                                        //       Alignment.center,
+                                                        //   // top: context
+                                                        //   //     .screenWidth(45),
+                                                        //   // start: context
+                                                        //   //     .screenWidth(25),
+                                                        //   child:
+                                                        //       CustomNetworkImage(
+                                                        //     imageUrl: controller
+                                                        //             .suggestedProducts[
+                                                        //                 index]
+                                                        //             .image ??
+                                                        //         '',
+                                                        //     height: context
+                                                        //         .screenWidth(8),
+                                                        //     width: context
+                                                        //         .screenWidth(8),
+                                                        //   ),
+                                                        // ),
                                                         // context .screenWidth(80).ph
                                                         PositionedDirectional(
                                                           bottom: 0,
                                                           start: 0,
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              context
-                                                                  .screenWidth(
-                                                                      10)
-                                                                  .ph,
-                                                              SizedBox(
-                                                                width: context
-                                                                    .screenWidth(
-                                                                        4),
-                                                                height: context
-                                                                    .screenWidth(
-                                                                        20),
-                                                                child:
-                                                                    SingleChildScrollView(
-                                                                  child:
-                                                                      CustomText(
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .start,
-                                                                    text: controller
-                                                                            .suggestedProducts[index]
-                                                                            .name ??
-                                                                        '',
-                                                                    darkTextColor:
-                                                                        AppColors
-                                                                            .mainBlackColor,
-                                                                    textType:
-                                                                        TextStyleType
-                                                                            .SMALL,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              context
-                                                                  .screenWidth(
-                                                                      200)
-                                                                  .ph,
-                                                              Row(
-                                                                children: [
-                                                                  Image.asset(
-                                                                    'assets/images/fire.png',
-                                                                    width: context
-                                                                        .screenWidth(
-                                                                            30),
-                                                                    height: context
-                                                                        .screenWidth(
-                                                                            30),
-                                                                  ),
-                                                                  context
+                                                          // top: context
+                                                          // .screenWidth(8),
+                                                          child:
+                                                              SingleChildScrollView(
+                                                            child: Column(
+                                                              children: [
+                                                                CustomNetworkImage(
+                                                                  imageUrl: controller
+                                                                          .suggestedProducts[
+                                                                              index]
+                                                                          .image ??
+                                                                      '',
+                                                                  height: context
                                                                       .screenWidth(
-                                                                          80)
-                                                                      .px,
-                                                                  CustomText(
-                                                                      darkTextColor:
-                                                                          AppColors
-                                                                              .mainBlackColor,
-                                                                      textType:
-                                                                          TextStyleType
-                                                                              .CUSTOM,
-                                                                      fontSize:
-                                                                          10,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w400,
-                                                                      textColor:
+                                                                          8),
+                                                                  width: context
+                                                                      .screenWidth(
+                                                                          8),
+                                                                ),
+                                                                context
+                                                                    .screenWidth(
+                                                                        30)
+                                                                    .ph,
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    SizedBox(
+                                                                      width: context
+                                                                          .screenWidth(
+                                                                              4),
+                                                                      height: context
+                                                                          .screenWidth(
+                                                                              20),
+                                                                      child:
+                                                                          SingleChildScrollView(
+                                                                        child:
+                                                                            CustomText(
+                                                                          textAlign:
+                                                                              TextAlign.start,
+                                                                          text: controller.suggestedProducts[index].name ??
+                                                                              '',
+                                                                          darkTextColor:
+                                                                              AppColors.mainBlackColor,
+                                                                          textType:
+                                                                              TextStyleType.SMALL,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                    context
+                                                                        .screenWidth(
+                                                                            200)
+                                                                        .ph,
+                                                                    Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        Image
+                                                                            .asset(
+                                                                          'assets/images/fire.png',
+                                                                          width:
+                                                                              context.screenWidth(30),
+                                                                          height:
+                                                                              context.screenWidth(30),
+                                                                        ),
+                                                                        context
+                                                                            .screenWidth(80)
+                                                                            .px,
+                                                                        CustomText(
+                                                                            darkTextColor:
+                                                                                AppColors.mainBlackColor,
+                                                                            textType: TextStyleType.CUSTOM,
+                                                                            fontSize: context.screenWidth(40),
+                                                                            fontWeight: FontWeight.w400,
+                                                                            textColor: AppColors.greyUnderlineText,
+                                                                            text: '${controller.suggestedProducts[index].calories} Calories'),
+                                                                      ],
+                                                                    ),
+                                                                    context
+                                                                        .screenWidth(
+                                                                            100)
+                                                                        .ph,
+                                                                    CustomRichText(
+                                                                      firstColor:
                                                                           AppColors
                                                                               .greyUnderlineText,
-                                                                      text:
-                                                                          '${controller.suggestedProducts[index].calories} Calories'),
-                                                                ],
-                                                              ),
-                                                              context
-                                                                  .screenWidth(
-                                                                      100)
-                                                                  .ph,
-                                                              CustomRichText(
-                                                                firstColor:
-                                                                    AppColors
-                                                                        .greyUnderlineText,
-                                                                firstFontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                firstFontSize:
-                                                                    10,
-                                                                firstText: tr(
-                                                                    'price_lb'),
-                                                                secondText:
-                                                                    '${controller.suggestedProducts[index].price} SAR',
-                                                                secondColor:
-                                                                    AppColors
-                                                                        .mainBlackColor,
-                                                                secondFontSize:
-                                                                    10,
-                                                                secondFontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                              ),
-                                                            ],
+                                                                      firstFontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      firstFontSize:
+                                                                          context
+                                                                              .screenWidth(40),
+                                                                      firstText:
+                                                                          tr('price_lb'),
+                                                                      secondText:
+                                                                          '${controller.suggestedProducts[index].price} SAR',
+                                                                      secondColor:
+                                                                          AppColors
+                                                                              .mainBlackColor,
+                                                                      secondFontSize:
+                                                                          context
+                                                                              .screenWidth(40),
+                                                                      secondFontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
                                                       ],

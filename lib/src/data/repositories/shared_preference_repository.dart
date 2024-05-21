@@ -58,7 +58,7 @@ class SharedPreferenceRepository {
     setPreference(
       dataType: DataType.STRING,
       key: PREF_NOTIFICATION_KEY,
-      value: jsonEncode(notifications.toString()),
+      value: jsonEncode(notifications),
     );
   }
 

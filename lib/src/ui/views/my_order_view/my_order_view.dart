@@ -47,29 +47,33 @@ class _MyOrderViewState extends State<MyOrderView> {
                                   text: tr('no_orders_lb'),
                                   textType: TextStyleType.BODY),
                             )
-                          : Column(
-                              children: [
-                                ...controller.myOrders.map(
-                                  (order) {
-                                    int index =
-                                        controller.myOrders.indexOf(order);
-                                    return InkWell(
-                                      onTap: () {
-                                        controller.getMyOrderCart(
-                                            orderID: order.id!);
-                                      },
-                                      child: OrderStatus(
-                                          orderNo: order.number ?? "",
-                                          orderDate: order.dateOrder ?? '',
-                                          orderPrice: order.amount.toString(),
-                                          orderStatusEnum: controller
-                                              .formattedOrderStatus[index]),
-                                    );
-                                  },
-                                ),
-                              ],
-                            ).paddingSymmetric(
-                              horizontal: context.screenWidth(30));
+                          : Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: context.screenWidth(30)),
+                              child: Column(
+                                children: [
+                                  ...controller.myOrders.map(
+                                    (order) {
+                                      int index =
+                                          controller.myOrders.indexOf(order);
+                                      return InkWell(
+                                        onTap: () {
+                                          controller.getMyOrderCart(
+                                              orderID: order.id!);
+                                        },
+                                        child: OrderStatus(
+                                            orderNo: order.number ?? "",
+                                            orderDate: order.dateOrder ?? '',
+                                            orderPrice: order.amount.toString(),
+                                            orderStatusEnum: controller
+                                                .formattedOrderStatus[index]),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ).paddingSymmetric(
+                                  horizontal: context.screenWidth(30)),
+                            );
                     }
                   }
                   return Container();

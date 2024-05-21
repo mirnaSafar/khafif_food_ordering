@@ -40,138 +40,148 @@ class _MyWidgetState extends State<ShopBottomSheet> {
           onPopInvoked: (didPop) {
             Get.delete<MapController>();
           },
-          child: Column(
-            children: [
-              Container(
-                width: context.screenWidth(8),
-                height: context.screenWidth(100),
-                color: AppColors.mainAppColor,
-              ),
-              context.screenWidth(13).ph,
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  width: context.screenWidth(8),
+                  height: context.screenWidth(100),
+                  color: AppColors.mainAppColor,
                 ),
-                padding:
-                    EdgeInsets.symmetric(horizontal: context.screenWidth(200)),
-                child: DefaultTextStyle(
-                  style: const TextStyle(),
-                  child: SizedBox(
-                    // width:  context .screenWidth(8),
-                    height: context.screenWidth(2),
-                    child: PageView.builder(
-                      allowImplicitScrolling: true,
-                      padEnds: false,
-                      onPageChanged: (index) {
-                        LatLng sourceLocation = LatLng(
-                            widget.shops[index].latitude!,
-                            widget.shops[index].longitude!);
+                context.screenWidth(13).ph,
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: context.screenWidth(200)),
+                  child: DefaultTextStyle(
+                    style: const TextStyle(),
+                    child: SizedBox(
+                      // width:  context .screenWidth(8),
+                      height: context.screenWidth(2),
+                      child: PageView.builder(
+                        allowImplicitScrolling: true,
+                        padEnds: false,
+                        onPageChanged: (index) {
+                          LatLng sourceLocation = LatLng(
+                              widget.shops[index].latitude!,
+                              widget.shops[index].longitude!);
 
-                        mapController
-                            .changeCameraPosition(newLocation: sourceLocation)
-                            .then((value) {
-                          mapController.addtoMarkers('Source', sourceLocation,
-                              locationDesc: widget.shops[index].name);
-                          setState(() {});
-                        });
-                        mapController.update();
-                        // Get.forceAppUpdate();
-                        // Get.reloa
+                          mapController
+                              .changeCameraPosition(newLocation: sourceLocation)
+                              .then((value) {
+                            mapController.addtoMarkers('Source', sourceLocation,
+                                locationDesc: widget.shops[index].name);
+                            setState(() {});
+                          });
+                          mapController.update();
+                          // Get.forceAppUpdate();
+                          // Get.reloa
 
-                        // controller.currentPage.value = index;
-                      },
-                      controller: PageController(
-                          initialPage: widget.shops.indexOf(widget.shop)),
-                      itemCount: widget.shops.length,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Row(
+                          // controller.currentPage.value = index;
+                        },
+                        controller: PageController(
+                            initialPage: widget.shops.indexOf(widget.shop)),
+                        itemCount: widget.shops.length,
+                        itemBuilder: (context, index) {
+                          return SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
                               children: [
-                                CustomNetworkImage(
-                                  imageUrl: widget.shops[index].image ?? '',
-                                  height: context.screenWidth(4),
-                                  width: context.screenWidth(4),
-                                ),
-                                //  context .screenWidth(50).px,
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                Row(
                                   children: [
-                                    CustomText(
-                                      darkTextColor: AppColors.mainBlackColor,
-                                      text: widget.shops[index].name ?? '',
-                                      fontWeight: FontWeight.w700,
-                                      textColor: AppColors.mainTextColor,
-                                      textType: TextStyleType.TITLE,
+                                    CustomNetworkImage(
+                                      imageUrl: widget.shops[index].image ?? '',
+                                      height: context.screenWidth(4),
+                                      width: context.screenWidth(4),
                                     ),
-                                    CustomText(
-                                      darkTextColor: AppColors.mainBlackColor,
-                                      text:
-                                          '${widget.shops[index].city} - 2.5 km .15 min walk',
-                                      fontWeight: FontWeight.w400,
-                                      textColor: AppColors.greyTextColor,
-                                      textType: TextStyleType.BODYSMALL,
-                                    ),
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                    //  context .screenWidth(50).px,
+                                    Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        SvgPicture.asset(
-                                          AppAssets.icClock,
-                                          height: context.screenWidth(17),
-                                          width: context.screenWidth(17),
-                                        ).paddingOnly(top: 6),
-                                        context.screenWidth(100).px,
-                                        Column(
+                                        CustomText(
+                                          darkTextColor:
+                                              AppColors.mainBlackColor,
+                                          text: widget.shops[index].name ?? '',
+                                          fontWeight: FontWeight.w700,
+                                          textColor: AppColors.mainTextColor,
+                                          textType: TextStyleType.TITLE,
+                                        ),
+                                        CustomText(
+                                          darkTextColor:
+                                              AppColors.mainBlackColor,
+                                          text:
+                                              '${widget.shops[index].city} - 2.5 km .15 min walk',
+                                          fontWeight: FontWeight.w400,
+                                          textColor: AppColors.greyTextColor,
+                                          textType: TextStyleType.BODYSMALL,
+                                        ),
+                                        Row(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
-                                            CustomText(
-                                                darkTextColor:
-                                                    AppColors.mainBlackColor,
-                                                text: 'Opening time: ',
-                                                fontWeight: FontWeight.w600,
-                                                textType: TextStyleType.BODY),
-                                            CustomText(
-                                                darkTextColor:
-                                                    AppColors.mainBlackColor,
-                                                text:
-                                                    '${widget.shops[index].workTimeFrom}AM - ${widget.shops[index].workTimeTo}PM',
-                                                fontWeight: FontWeight.w600,
-                                                textType: TextStyleType.BODY),
+                                            SvgPicture.asset(
+                                              AppAssets.icClock,
+                                              height: context.screenWidth(17),
+                                              width: context.screenWidth(17),
+                                            ).paddingOnly(top: 6),
+                                            context.screenWidth(100).px,
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                CustomText(
+                                                    darkTextColor: AppColors
+                                                        .mainBlackColor,
+                                                    text: 'Opening time: ',
+                                                    fontWeight: FontWeight.w600,
+                                                    textType:
+                                                        TextStyleType.BODY),
+                                                CustomText(
+                                                    darkTextColor: AppColors
+                                                        .mainBlackColor,
+                                                    text:
+                                                        '${widget.shops[index].workTimeFrom}AM - ${widget.shops[index].workTimeTo}PM',
+                                                    fontWeight: FontWeight.w600,
+                                                    textType:
+                                                        TextStyleType.BODY),
+                                              ],
+                                            )
                                           ],
                                         )
                                       ],
-                                    )
+                                    ),
                                   ],
                                 ),
+                                CustomButton(
+                                  onPressed: () {
+                                    controller.setShop(
+                                        branchID: widget.shops[index].id!);
+                                    // context
+                                    //     .pushRepalceme( ProductsView())
+                                    //     .then((value) => context.pop());
+                                  },
+                                  loader: controller.isSetShopLoading.value,
+                                  text: tr('order_now_lb'),
+                                  height: context.screenWidth(8),
+                                ).paddingSymmetric(horizontal: 30, vertical: 10)
                               ],
                             ),
-                            CustomButton(
-                              onPressed: () {
-                                controller.setShop(
-                                    branchID: widget.shops[index].id!);
-                                // context
-                                //     .pushRepalceme( ProductsView())
-                                //     .then((value) => context.pop());
-                              },
-                              loader: controller.isSetShopLoading.value,
-                              text: tr('order_now_lb'),
-                              height: context.screenWidth(8),
-                            ).paddingSymmetric(horizontal: 30, vertical: 10)
-                          ],
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

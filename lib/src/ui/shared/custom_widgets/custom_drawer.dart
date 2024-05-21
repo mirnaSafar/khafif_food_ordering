@@ -99,7 +99,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
     Widget profileSection = Obx(() {
       print(userinfo?.value);
       return Container(
-        height: context.screenHeight(3.8),
         padding: EdgeInsetsDirectional.only(
             top: context.screenWidth(10), start: context.screenWidth(20)),
         color: AppColors.mainAppColor,
@@ -121,28 +120,24 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ),
                 )
               ]),
-              CustomContainer(
-                  padding: EdgeInsets.symmetric(
-                    vertical: context.screenWidth(50),
-                    horizontal: context.screenWidth(48),
-                  ),
-                  containerStyle: ContainerStyle.CIRCLE,
-                  backgroundColor: AppColors.mainAppColor,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SvgPicture.asset(AppAssets.icStarPoints),
-                      context.screenWidth(80).px,
-                      profileController.isUserPointsLoading.value
-                          ? pointsShimmer()
-                          : CustomText(
-                              darkTextColor: AppColors.mainBlackColor,
-                              textType: TextStyleType.SMALL,
-                              fontWeight: FontWeight.w500,
-                              // textColor: AppColors.mainWhiteColor,
-                              text: profileController.intUserPoints.value),
-                    ],
-                  )),
+              Padding(
+                padding: EdgeInsets.all(context.screenWidth(30)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    SvgPicture.asset(AppAssets.icStarPoints),
+                    context.screenWidth(80).px,
+                    profileController.isUserPointsLoading.value
+                        ? pointsShimmer()
+                        : CustomText(
+                            darkTextColor: AppColors.mainBlackColor,
+                            textType: TextStyleType.SMALL,
+                            fontWeight: FontWeight.w500,
+                            // textColor: AppColors.mainWhiteColor,
+                            text: profileController.intUserPoints.value),
+                  ],
+                ),
+              )
             ],
           ),
         ),
@@ -172,7 +167,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           .screenWidth(userinfo?.value == null ? 10 : 30)),
                   child: SizedBox(
                     height: context
-                        .screenHeight(userinfo?.value != null ? 1.5 : 1.3),
+                        .screenHeight(userinfo?.value != null ? 1.65 : 1.15),
                     child: SingleChildScrollView(
                       // shrinkWrap: true,
                       child: Column(
@@ -321,7 +316,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                               imageHeight: context.screenWidth(18),
                               imageWidth: context.screenWidth(18),
                             ),
-                          context.screenWidth(30).ph
+                          // context.screenWidth(30).ph
                         ],
                       ),
                     ),
@@ -336,7 +331,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 child: Container(
                   padding:
                       EdgeInsets.symmetric(vertical: context.screenWidth(300)),
-                  // color: Get.isDarkMode ? Get.theme.highlightColor : null,
+                  color: Get.theme.scaffoldBackgroundColor,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -409,7 +404,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       ),
                     ],
                   ),
-                ))
+                )),
           ]),
         ),
       ),

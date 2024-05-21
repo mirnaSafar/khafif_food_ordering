@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -51,7 +52,7 @@ class _LoginViewState extends State<LoginView> {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          context.screenWidth(1.7).ph,
+                          context.screenWidth(2).ph,
                           CustomText(
                             text: tr("login_lb"),
                             textType: TextStyleType.HEADER,
@@ -70,7 +71,9 @@ class _LoginViewState extends State<LoginView> {
                             validator: (number) {
                               // return null;
 //
-                              return numberValidator(number!);
+                              return kDebugMode
+                                  ? null
+                                  : numberValidator(number!);
                             },
                             controller: controller.phoneController,
                             text: tr('phone_field_lb'),
@@ -98,7 +101,7 @@ class _LoginViewState extends State<LoginView> {
                             },
                             text: tr("login_lb"),
                           ),
-                          context.screenWidth(6).ph,
+                          context.screenWidth(9).ph,
                           // Center(
                           //   child: CustomText(
                           //       text: tr("or_lb"),
@@ -116,11 +119,12 @@ class _LoginViewState extends State<LoginView> {
                           //   textStyleType: TextStyleType.BODYSMALL,
                           //   imageName: 'google_ic',
                           // ),
-                          context.screenWidth(3).ph,
+                          context.screenWidth(8).ph,
                           CustomRowText(
                               onTap: () => Get.off(SignUpView()),
                               firstText: tr('not_signup_lb'),
                               linkText: tr('signup_lb')),
+                          context.screenWidth(10).ph,
                         ],
                       );
                     } else {
