@@ -120,24 +120,25 @@ class MapPageState extends State<MapPage> {
                             ],
                           ),
                         )
-                      : InkWell(
-                          onTap: () {
-                            Get.back();
-                            Get.put(ShopsController())
-                                .addAllBranchesMarkerToMap();
-                          },
-                          child: CustomContainer(
-                              containerStyle: ContainerStyle.CYLINDER,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: context.screenWidth(30),
-                                  vertical: context.screenWidth(90)),
-                              backgroundColor: AppColors.mainAppColor,
-                              child: CustomText(
-                                  darkTextColor: AppColors.mainWhiteColor,
-                                  textColor: AppColors.mainWhiteColor,
-                                  text: tr('all_branches_lb'),
-                                  textType: TextStyleType.BODY)),
-                        ),
+                      : Container(),
+          // : InkWell(
+          //     onTap: () {
+          //       Get.back();
+          //       Get.put(ShopsController())
+          //           .addAllBranchesMarkerToMap();
+          //     },
+          //     child: CustomContainer(
+          //         containerStyle: ContainerStyle.CYLINDER,
+          //         padding: EdgeInsets.symmetric(
+          //             horizontal: context.screenWidth(30),
+          //             vertical: context.screenWidth(90)),
+          //         backgroundColor: AppColors.mainAppColor,
+          //         child: CustomText(
+          //             darkTextColor: AppColors.mainWhiteColor,
+          //             textColor: AppColors.mainWhiteColor,
+          //             text: tr('all_branches_lb'),
+          //             textType: TextStyleType.BODY)),
+          //   ),
           backgroundBody: GoogleMap(
             polylines: {
               Polyline(

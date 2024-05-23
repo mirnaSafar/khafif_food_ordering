@@ -60,6 +60,7 @@ Future<void> putProjectDepedencies() async {
     return prefs;
   });
   Get.put(SharedPreferenceRepository());
+  // storage.globalSharedPreference.clear();
   storage.setFirstLaunchShowDeliveryService(true);
   Get.put(SplashController());
 

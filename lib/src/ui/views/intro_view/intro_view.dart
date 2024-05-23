@@ -65,7 +65,7 @@ class _IntroWidgetState extends State<IntroWidget>
                   if (snapshot.data! > 0) {
                     return SingleChildScrollView(
                       child: Padding(
-                        padding: EdgeInsets.only(top: context.screenWidth(8)),
+                        padding: EdgeInsets.only(top: context.screenWidth(5)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [

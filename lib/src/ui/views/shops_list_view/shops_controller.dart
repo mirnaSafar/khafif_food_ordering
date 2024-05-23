@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:khafif_food_ordering_application/src/core/enums.dart';
-import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/services/base_controller.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
@@ -12,20 +11,23 @@ import 'package:khafif_food_ordering_application/src/data/models/apis/branch_mod
 import 'package:khafif_food_ordering_application/src/data/models/apis/customer_cart_model.dart';
 import 'package:khafif_food_ordering_application/src/data/repositories/branch_reository.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_toast.dart';
-import 'package:khafif_food_ordering_application/src/ui/views/map_view/map_controller.dart';
-import 'package:khafif_food_ordering_application/src/ui/views/map_view/map_view.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_view.dart';
-import 'package:khafif_food_ordering_application/src/ui/views/shops_list_view/widgets/shops_list_bottomshhet.dart';
+import 'package:location/location.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class ShopsController extends BaseController {
   @override
   void onInit() {
     // getAll();
+    locationService
+        .getUserCurrentLocation()
+        .then((value) => currentLocation = value!);
     getOpenNowBranches();
+
     super.onInit();
   }
 
+  late LocationData currentLocation;
   RxInt selectedBranchesDisplayOption = 0.obs;
   RxBool get isShopsLoading => operationType.contains(OperationType.SHOP).obs;
   RxBool get isSetShopLoading =>
@@ -49,9 +51,12 @@ class ShopsController extends BaseController {
 
   int calcShopDistanceFromCurrentLocation(BranchModel branchModel) {
     return locationService
-        .calculateDistanceFromCurrentLocationInKm(
-            LatLng(branchModel.latitude!, branchModel.longitude!))!
+        .calculateDistanceInKm(
+            LatLng(currentLocation.latitude!, currentLocation.longitude!),
+            LatLng(branchModel.latitude!, branchModel.longitude!))
         .toInt();
+
+    // return;
   }
 
   Future getAll() {
@@ -84,10 +89,12 @@ class ShopsController extends BaseController {
 
   void sortShopsBaseOnDistanceFromCustomer() {
     shopsList.sort((a, b) => locationService
-        .calculateDistanceFromCurrentLocationInKm(
-            LatLng(b.latitude!, b.longitude!))!
-        .compareTo(locationService.calculateDistanceFromCurrentLocationInKm(
-            LatLng(a.latitude!, a.longitude!))!));
+        .calculateDistanceInKm(
+            LatLng(currentLocation.latitude!, currentLocation.longitude!),
+            LatLng(b.latitude!, b.longitude!))
+        .compareTo(locationService.calculateDistanceInKm(
+            LatLng(currentLocation.latitude!, currentLocation.longitude!),
+            LatLng(a.latitude!, a.longitude!))));
     shopsList.value = shopsList.reversed.toList();
   }
 
@@ -98,36 +105,36 @@ class ShopsController extends BaseController {
         dateTime: DateTime.now().toString().split('.')[0], branchId: 3);
   }
 
-  addAllBranchesMarkerToMap() {
-    MapController mapController = Get.put(MapController(
-      sourceLocation: LatLng(
-        shopsList[0].latitude!,
-        shopsList[0].longitude!,
-      ),
-    ));
+  // addAllBranchesMarkerToMap() {
+  //   MapController mapController = Get.put(MapController(
+  //     sourceLocation: LatLng(
+  //       shopsList[0].latitude!,
+  //       shopsList[0].longitude!,
+  //     ),
+  //   ));
 
-    for (var shop in shopsList) {
-      mapController.addtoMarkers(
-          shop.name!, LatLng(shop.latitude!, shop.longitude!),
-          locationDesc: shop.name);
-    }
+  //   for (var shop in shopsList) {
+  //     mapController.addtoMarkers(
+  //         shop.name!, LatLng(shop.latitude!, shop.longitude!),
+  //         locationDesc: shop.name);
+  //   }
 
-    Get.to(MapPage(
-      showAllbranchesButton: false,
-      panelController: panelController,
-      sourceLocation: LatLng(
-        shopsList[0].latitude!,
-        shopsList[0].longitude!,
-      ),
-      openPanelHeight: Get.context!.screenHeight(2),
-      closePanelHeight: Get.context!.screenHeight(3),
-      bottomsheet:
-          // shopsList[current],
-          ShopsListBottomSheet(shopsList),
-      appBarTitle: tr('shops_lb'),
-    ));
-    mapController.update();
-  }
+  //   Get.to(MapPage(
+  //     showAllbranchesButton: false,
+  //     panelController: panelController,
+  //     sourceLocation: LatLng(
+  //       shopsList[0].latitude!,
+  //       shopsList[0].longitude!,
+  //     ),
+  //     openPanelHeight: Get.context!.screenHeight(2),
+  //     closePanelHeight: Get.context!.screenHeight(3),
+  //     bottomsheet:
+  //         // shopsList[current],
+  //         ShopsListBottomSheet(shopsList),
+  //     appBarTitle: tr('shops_lb'),
+  //   ));
+  //   mapController.update();
+  // }
 
   Future getOpenBranches({required String dateTime, required int branchId}) {
     if (isOnline) {

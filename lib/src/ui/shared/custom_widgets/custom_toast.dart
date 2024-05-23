@@ -216,7 +216,7 @@ class CustomToast {
         builder: (context) {
           if (showMessageWithoutActions!) {
             Future.delayed(Duration(seconds: 5), () {
-              Navigator.of(context).pop(true);
+              if (context.mounted) Navigator.of(context).pop(true);
             });
           }
           return GestureDetector(

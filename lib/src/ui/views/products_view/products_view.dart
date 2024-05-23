@@ -306,7 +306,7 @@ class _ProductsViewState extends State<ProductsView> {
                                                                 titlePadding: EdgeInsets.only(
                                                                     top: context
                                                                         .screenWidth(
-                                                                            5)),
+                                                                            4.5)),
                                                                 centerTitle:
                                                                     true,
                                                                 expandedTitleScale:
@@ -334,11 +334,8 @@ class _ProductsViewState extends State<ProductsView> {
                                                                       context.screenWidth(1),
                                                                       context.screenHeight(
                                                                         scrolled
-                                                                            ? 15
-                                                                            : lerpDouble(
-                                                                                4.2,
-                                                                                10,
-                                                                                (constraints.scrollOffset / 25).clamp(0.0, 1))!,
+                                                                            ? 13
+                                                                            : 4.2,
                                                                       )),
                                                                   child: Container()),
 

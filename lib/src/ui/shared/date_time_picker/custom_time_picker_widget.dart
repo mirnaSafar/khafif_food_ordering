@@ -48,6 +48,7 @@ class CustomTimePicker {
         timeController.updateTime(pickedTime);
         if (timeController
             .parseFormattedStringDateTimeInToDateTimeObject(pickedTime)
+            .add(const Duration(minutes: 2))
             .isBefore(DateTime.now())) {
           CustomToast.AwesomeDialog(
               showMessageWithoutActions: true,

@@ -29,11 +29,10 @@ class _MyWidgetState extends State<ShopBottomSheet> {
   @override
   Widget build(BuildContext context) {
     ShopsController controller = Get.put(ShopsController());
+    MapController mapController = Get.put(MapController());
 
     return Obx(
       () {
-        MapController mapController = Get.put(MapController());
-
         print(controller.isShopsLoading);
 
         return PopScope(

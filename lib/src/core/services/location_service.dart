@@ -117,19 +117,20 @@ class LocationService {
   }
 
   double? calculateDistanceFromCurrentLocationInKm(LatLng latLng1) {
-    if (storage.userCurrentLocation != null) {
-      return Geolocator.distanceBetween(
-            // 24.6612280, 46.7299990,
-            storage.userCurrentLocation!.latitude,
-            storage.userCurrentLocation!.longitude,
-            latLng1.latitude,
-            latLng1.longitude,
-          ) /
-          1000;
-    } else {
-      getUserCurrentLocation()
-          .then((value) => calculateDistanceFromCurrentLocationInKm(latLng1));
-    }
+    // if (storage.userCurrentLocation != null) {
+    //   return Geolocator.distanceBetween(
+    //         // 24.6612280, 46.7299990,
+    //         storage.userCurrentLocation!.latitude,
+    //         storage.userCurrentLocation!.longitude,
+    //         latLng1.latitude,
+    //         latLng1.longitude,
+    //       ) /
+    //       1000;
+    // } else {
+    getUserCurrentLocation().then((value) => calculateDistanceInKm(
+        LatLng(value!.latitude!, value.longitude!), latLng1));
     return null;
+    // }
+    // return null;
   }
 }

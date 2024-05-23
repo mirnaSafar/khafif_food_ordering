@@ -8,6 +8,7 @@ import 'package:khafif_food_ordering_application/src/core/app/app_config/app_ass
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/navigator_extension.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
+import 'package:khafif_food_ordering_application/src/core/services/location_service.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_appbar.dart';
@@ -224,13 +225,20 @@ class _AddressesViewState extends State<AddressesView> {
                                                     .bottomEnd,
                                                 child: TextButton(
                                                     onPressed: () {
-                                                      Get.put(MapController())
-                                                          .checkDeliveryAbility(
-                                                        target: LatLng(
-                                                          address.latitude!,
-                                                          address.longitude!,
-                                                        ),
-                                                      );
+                                                      locationService
+                                                          .getUserCurrentLocation()
+                                                          .then((loc) {
+                                                        Get.put(MapController(
+                                                          destination: LatLng(
+                                                              loc!.latitude!,
+                                                              loc.longitude!),
+                                                        )).checkDeliveryAbility(
+                                                          target: LatLng(
+                                                            address.latitude!,
+                                                            address.longitude!,
+                                                          ),
+                                                        );
+                                                      });
                                                     },
                                                     child: CustomText(
                                                       textAlign: TextAlign.end,
@@ -258,13 +266,20 @@ class _AddressesViewState extends State<AddressesView> {
                 right: 5,
                 left: 5,
                 child: CustomButton(
-                  onPressed: () {
-                    Get.to(MapPage(
-                      editAddress: {"edit": false, "index": null},
-                      newAddress: true,
-                      closePanelHeight: context.screenHeight(4),
-                    ));
-                    Get.put(MapController()).getStreetName();
+                  onPressed: () async {
+                    if (await LocationService().isPermissionGranted()) {
+                      locationService.getUserCurrentLocation().then((loc) {
+                        Get.to(MapPage(
+                          editAddress: {"edit": false, "index": null},
+                          newAddress: true,
+                          destination: LatLng(loc!.latitude!, loc.longitude!),
+                          closePanelHeight: context.screenHeight(4),
+                        ));
+                        Get.put(MapController(
+                          destination: LatLng(loc.latitude!, loc.longitude!),
+                        )).getStreetName();
+                      });
+                    }
                   },
                   text: tr('add_addresse_lb'),
                   imageName: 'add_ic',

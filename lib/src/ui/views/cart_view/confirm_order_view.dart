@@ -251,35 +251,6 @@ class _ConfirmOrderViewState extends State<ConfirmOrderView> {
                                                           AlignmentDirectional
                                                               .topEnd,
                                                       children: [
-                                                        InkWell(
-                                                          onTap: () {
-                                                            controller
-                                                                .suggestedProductsIndex
-                                                                .value = index;
-                                                            Get.delete<
-                                                                ProductDetailsController>();
-
-                                                            Get.to(
-                                                                ProductDetailsView(
-                                                                  suggested:
-                                                                      true,
-                                                                  product: controller
-                                                                          .suggestedProducts[
-                                                                      index],
-                                                                ),
-                                                                duration: Duration(
-                                                                    milliseconds:
-                                                                        500),
-                                                                transition:
-                                                                    Transition
-                                                                        .leftToRight);
-                                                          },
-                                                          child:
-                                                              SvgPicture.asset(
-                                                            AppAssets
-                                                                .icPlusContainer,
-                                                          ),
-                                                        ),
                                                         // Align(
                                                         //   alignment:
                                                         //       Alignment.center,
@@ -418,6 +389,35 @@ class _ConfirmOrderViewState extends State<ConfirmOrderView> {
                                                                 ),
                                                               ],
                                                             ),
+                                                          ),
+                                                        ),
+                                                        InkWell(
+                                                          onTap: () {
+                                                            controller
+                                                                .suggestedProductsIndex
+                                                                .value = index;
+                                                            Get.delete<
+                                                                ProductDetailsController>();
+
+                                                            Get.to(
+                                                                ProductDetailsView(
+                                                                  suggested:
+                                                                      true,
+                                                                  product: controller
+                                                                          .suggestedProducts[
+                                                                      index],
+                                                                ),
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        500),
+                                                                transition:
+                                                                    Transition
+                                                                        .leftToRight);
+                                                          },
+                                                          child:
+                                                              SvgPicture.asset(
+                                                            AppAssets
+                                                                .icPlusContainer,
                                                           ),
                                                         ),
                                                       ],

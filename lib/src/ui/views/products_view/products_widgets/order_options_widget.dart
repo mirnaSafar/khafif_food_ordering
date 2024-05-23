@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/navigator_extension.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
@@ -123,7 +124,9 @@ void showOrderOptionsDialog(BuildContext context) {
                           ? storage.userCurrentLocation == null
                               ? locationService
                                   .getUserCurrentLocation()
-                                  .then((value) => Get.to(() => MapPage(
+                                  .then((loc) => Get.to(() => MapPage(
+                                        destination: LatLng(
+                                            loc!.latitude!, loc.longitude!),
                                         closePanelHeight: 0,
                                       )))
                               : Get.to(() => MapPage(

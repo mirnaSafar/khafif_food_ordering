@@ -47,7 +47,7 @@ class MapController extends BaseController {
       Completer<GoogleMapController>();
 
   RxList<LatLng> polylineCoordinates = <LatLng>[].obs;
-  late Rx<LocationData> currentLocation;
+  late LocationData currentLocation;
   @override
   onInit() {
     destination != null
@@ -59,10 +59,14 @@ class MapController extends BaseController {
     // getPolyPoints();
 
     // loadcustomIcon();
-    addtoMarkers(
-      'Current',
-      storage.userCurrentLocation!,
-    );
+    locationService.getUserCurrentLocation().then((value) {
+      currentLocation = value!;
+      addtoMarkers(
+        'Current',
+        LatLng(value.latitude!, value.longitude!),
+      );
+      getCurrentLocation();
+    });
     selectedLocation = destination ??
         storage.userCurrentLocation ??
         LatLng(37.43296265331129, -100.06600357078792);
@@ -206,7 +210,7 @@ class MapController extends BaseController {
         'Destination',
         LatLng(location.latitude!, location.longitude!),
       );
-      currentLocation.value = location;
+      currentLocation = location;
       changeCameraPosition();
     });
   }

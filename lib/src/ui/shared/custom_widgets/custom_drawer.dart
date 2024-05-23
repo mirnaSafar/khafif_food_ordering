@@ -167,7 +167,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           .screenWidth(userinfo?.value == null ? 10 : 30)),
                   child: SizedBox(
                     height: context
-                        .screenHeight(userinfo?.value != null ? 1.65 : 1.15),
+                        .screenHeight(userinfo?.value != null ? 1.5 : 1.15),
                     child: SingleChildScrollView(
                       // shrinkWrap: true,
                       child: Column(
@@ -316,7 +316,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                               imageHeight: context.screenWidth(18),
                               imageWidth: context.screenWidth(18),
                             ),
-                          // context.screenWidth(30).ph
+                          context.screenWidth(20).ph
                         ],
                       ),
                     ),
