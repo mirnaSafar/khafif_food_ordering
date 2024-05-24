@@ -64,372 +64,370 @@ class _ConfirmOrderViewState extends State<ConfirmOrderView> {
                         return Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: context.screenWidth(30)),
-                          child: Column(
-                            children: [
-                              if (widget.showMyOrderCart!) ...[
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                if (widget.showMyOrderCart!) ...[
+                                  context.screenWidth(20).ph,
+                                  Align(
+                                    alignment: AlignmentDirectional.centerStart,
+                                    child: CustomRichText(
+                                      firstText: tr('order_no_lb'),
+                                      secondText: controller
+                                              .customerCart?.value.number ??
+                                          '',
+                                      firstFontWeight: FontWeight.w400,
+                                      secondFontWeight: FontWeight.w700,
+                                      firstFontSize: AppFonts(context).title,
+                                      secondFontSize: AppFonts(context).title,
+                                    ),
+                                  ),
+                                ],
                                 context.screenWidth(20).ph,
-                                Align(
-                                  alignment: AlignmentDirectional.centerStart,
-                                  child: CustomRichText(
-                                    firstText: tr('order_no_lb'),
-                                    secondText:
-                                        controller.customerCart?.value.number ??
-                                            '',
-                                    firstFontWeight: FontWeight.w400,
-                                    secondFontWeight: FontWeight.w700,
-                                    firstFontSize: AppFonts(context).title,
-                                    secondFontSize: AppFonts(context).title,
-                                  ),
-                                ),
-                              ],
-                              context.screenWidth(20).ph,
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  controller.isCartLoading.value
-                                      ? totalShimmer()
-                                      : CustomText(
-                                          text:
-                                              '${controller.customerCart?.value.amountTotal ?? 0.0} SAR',
-                                          fontWeight: FontWeight.w600,
-                                          textType: TextStyleType.HEADER,
-                                        ),
-                                  context.screenWidth(40).px,
-                                  Row(
-                                    children: [
-                                      if (!widget.showMyOrderCart!)
-                                        btnCart(
-                                          onPressed: () {
-                                            controller.selectedCart.value
-                                                        .productUomQty! >
-                                                    1
-                                                ? controller.updateOrder(
-                                                    incress: false)
-                                                : null;
-                                          },
-                                          plusBtn: false,
-                                        ),
-                                      context.screenWidth(40).px,
-                                      controller.isCartLoading.value
-                                          ? totalCountShimmer()
-                                          : CustomText(
-                                              text: controller.orderCount.value,
-                                              fontWeight: FontWeight.w600,
-                                              textType: TextStyleType.SUBTITLE,
-                                            ),
-                                      context.screenWidth(40).px,
-                                      if (!widget.showMyOrderCart!)
-                                        btnCart(
-                                            onPressed: () {
-                                              if (controller.customerCart !=
-                                                  null) {
-                                                controller.customerCart!.value
-                                                        .line!.isNotEmpty
-                                                    ? controller.updateOrder(
-                                                        incress: true)
-                                                    : null;
-                                              }
-                                            },
-                                            plusBtn: true,
-                                            btnColor: AppColors.mainAppColor),
-                                    ],
-                                  ),
-                                ],
-                              ).paddingOnly(bottom: context.screenWidth(30)),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  CustomText(
-                                    text: tr('selected_items_lb'),
-                                    textType: TextStyleType.BODY,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  // if (!widget.showMyOrderCart!)
-                                  //   InkWell(
-                                  //     onTap: () {
-                                  //       if (controller.customerCart != null) {
-                                  //         controller.customerCart!.value.line!.isNotEmpty
-                                  //             ? warninDialog(
-                                  //                 content:
-                                  //                     tr('delete_all_items_from_cart_lb'),
-                                  //                 okBtn: () {
-                                  //                   controller.clearCart();
-                                  //                 },
-                                  //                 context: context)
-                                  //             : null;
-                                  //       }
-                                  //     },
-                                  //     child: CustomText(
-                                  //       decoration: TextDecoration.underline,
-                                  //       text: tr('remove_all_lb'),
-                                  //       textType: TextStyleType.BODY,
-                                  //       textColor: AppColors.greyUnderlineText,
-                                  //       fontWeight: FontWeight.w400,
-                                  //     ),
-                                  //   )
-                                ],
-                              ).paddingOnly(
-                                bottom: context.screenWidth(30),
-                              ),
-                              SizedBox(
-                                height: context.screenHeight(1.6),
-                                child: controller.isCartLoading.value
-                                    ? cartProductsShimmer()
-                                    : ListView(
-                                        shrinkWrap: true,
-                                        children: [
-                                          if (controller.customerCart != null)
-                                            ...controller
-                                                .customerCart!.value.line!
-                                                .map(
-                                              (cart) {
-                                                // var index =    if (controller.customerCart != null) controller.customerCart!.value.line!.indexOf(cart);
-                                                return InkWell(
-                                                  onTap: () {
-                                                    controller.setOderCount =
-                                                        cart.productUomQty!
-                                                            .toInt();
-                                                    controller.selectedCart
-                                                        .value = cart;
-                                                  },
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            vertical: context
-                                                                .screenWidth(
-                                                                    30)),
-                                                    child: CartItem(
-                                                        cartModel: cart,
-                                                        showMyOrderCart: widget
-                                                            .showMyOrderCart),
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          Divider(
-                                            height: context.screenWidth(16),
-                                            color: AppColors.greyTextColor,
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    controller.isCartLoading.value
+                                        ? totalShimmer()
+                                        : CustomText(
+                                            text:
+                                                '${controller.customerCart?.value.amountTotal ?? 0.0} SAR',
+                                            fontWeight: FontWeight.w600,
+                                            textType: TextStyleType.HEADER,
                                           ),
-                                          context.screenWidth(20).ph,
-                                          if (!widget.showMyOrderCart!)
-                                            Obx(() {
-                                              print(controller
-                                                  .selectedCart.value);
-                                              return CustomListView(
-                                                itemCount: controller
-                                                    .suggestedProducts.length,
-                                                listViewHeight:
-                                                    context.screenHeight(5.5),
-                                                separatorPadding:
-                                                    context.screenWidth(30).px,
-                                                itemBuilder: (context, index) {
-                                                  return CustomContainer(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                      horizontal: context
-                                                          .screenWidth(30),
-                                                      vertical:
-                                                          context.screenWidth(
-                                                        60,
-                                                      ),
-                                                    ),
-                                                    width: context
-                                                        .screenWidth(3.2),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                    backgroundColor: AppColors
-                                                        .mainWhiteColor,
-                                                    blurRadius: 4,
-                                                    shadowColor:
-                                                        AppColors.shadowColor,
-                                                    offset: Offset(0, 4),
-                                                    child: Stack(
-                                                      alignment:
-                                                          AlignmentDirectional
-                                                              .topEnd,
-                                                      children: [
-                                                        // Align(
-                                                        //   alignment:
-                                                        //       Alignment.center,
-                                                        //   // top: context
-                                                        //   //     .screenWidth(45),
-                                                        //   // start: context
-                                                        //   //     .screenWidth(25),
-                                                        //   child:
-                                                        //       CustomNetworkImage(
-                                                        //     imageUrl: controller
-                                                        //             .suggestedProducts[
-                                                        //                 index]
-                                                        //             .image ??
-                                                        //         '',
-                                                        //     height: context
-                                                        //         .screenWidth(8),
-                                                        //     width: context
-                                                        //         .screenWidth(8),
-                                                        //   ),
-                                                        // ),
-                                                        // context .screenWidth(80).ph
-                                                        PositionedDirectional(
-                                                          bottom: 0,
-                                                          start: 0,
-                                                          // top: context
-                                                          // .screenWidth(8),
-                                                          child:
-                                                              SingleChildScrollView(
-                                                            child: Column(
-                                                              children: [
-                                                                CustomNetworkImage(
-                                                                  imageUrl: controller
-                                                                          .suggestedProducts[
-                                                                              index]
-                                                                          .image ??
-                                                                      '',
-                                                                  height: context
-                                                                      .screenWidth(
-                                                                          8),
-                                                                  width: context
-                                                                      .screenWidth(
-                                                                          8),
-                                                                ),
-                                                                context
-                                                                    .screenWidth(
-                                                                        30)
-                                                                    .ph,
-                                                                Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    SizedBox(
-                                                                      width: context
-                                                                          .screenWidth(
-                                                                              4),
-                                                                      height: context
-                                                                          .screenWidth(
-                                                                              20),
-                                                                      child:
-                                                                          SingleChildScrollView(
-                                                                        child:
-                                                                            CustomText(
-                                                                          textAlign:
-                                                                              TextAlign.start,
-                                                                          text: controller.suggestedProducts[index].name ??
-                                                                              '',
-                                                                          darkTextColor:
-                                                                              AppColors.mainBlackColor,
-                                                                          textType:
-                                                                              TextStyleType.SMALL,
-                                                                          fontWeight:
-                                                                              FontWeight.w500,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                    context
-                                                                        .screenWidth(
-                                                                            200)
-                                                                        .ph,
-                                                                    Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Image
-                                                                            .asset(
-                                                                          'assets/images/fire.png',
-                                                                          width:
-                                                                              context.screenWidth(30),
-                                                                          height:
-                                                                              context.screenWidth(30),
-                                                                        ),
-                                                                        context
-                                                                            .screenWidth(80)
-                                                                            .px,
-                                                                        CustomText(
-                                                                            darkTextColor:
-                                                                                AppColors.mainBlackColor,
-                                                                            textType: TextStyleType.CUSTOM,
-                                                                            fontSize: context.screenWidth(40),
-                                                                            fontWeight: FontWeight.w400,
-                                                                            textColor: AppColors.greyUnderlineText,
-                                                                            text: '${controller.suggestedProducts[index].calories} Calories'),
-                                                                      ],
-                                                                    ),
-                                                                    context
-                                                                        .screenWidth(
-                                                                            100)
-                                                                        .ph,
-                                                                    CustomRichText(
-                                                                      firstColor:
-                                                                          AppColors
-                                                                              .greyUnderlineText,
-                                                                      firstFontWeight:
-                                                                          FontWeight
-                                                                              .w400,
-                                                                      firstFontSize:
-                                                                          context
-                                                                              .screenWidth(40),
-                                                                      firstText:
-                                                                          tr('price_lb'),
-                                                                      secondText:
-                                                                          '${controller.suggestedProducts[index].price} SAR',
-                                                                      secondColor:
-                                                                          AppColors
-                                                                              .mainBlackColor,
-                                                                      secondFontSize:
-                                                                          context
-                                                                              .screenWidth(40),
-                                                                      secondFontWeight:
-                                                                          FontWeight
-                                                                              .w400,
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        InkWell(
-                                                          onTap: () {
-                                                            controller
-                                                                .suggestedProductsIndex
-                                                                .value = index;
-                                                            Get.delete<
-                                                                ProductDetailsController>();
-
-                                                            Get.to(
-                                                                ProductDetailsView(
-                                                                  suggested:
-                                                                      true,
-                                                                  product: controller
-                                                                          .suggestedProducts[
-                                                                      index],
-                                                                ),
-                                                                duration: Duration(
-                                                                    milliseconds:
-                                                                        500),
-                                                                transition:
-                                                                    Transition
-                                                                        .leftToRight);
-                                                          },
-                                                          child:
-                                                              SvgPicture.asset(
-                                                            AppAssets
-                                                                .icPlusContainer,
-                                                          ),
-                                                        ),
-                                                      ],
+                                    context.screenWidth(40).px,
+                                    Row(
+                                      children: [
+                                        if (!widget.showMyOrderCart!)
+                                          btnCart(
+                                            onPressed: () {
+                                              controller.selectedCart.value
+                                                          .productUomQty! >
+                                                      1
+                                                  ? controller.updateOrder(
+                                                      incress: false)
+                                                  : null;
+                                            },
+                                            plusBtn: false,
+                                          ),
+                                        context.screenWidth(40).px,
+                                        controller.isCartLoading.value
+                                            ? totalCountShimmer()
+                                            : CustomText(
+                                                text:
+                                                    controller.orderCount.value,
+                                                fontWeight: FontWeight.w600,
+                                                textType:
+                                                    TextStyleType.SUBTITLE,
+                                              ),
+                                        context.screenWidth(40).px,
+                                        if (!widget.showMyOrderCart!)
+                                          btnCart(
+                                              onPressed: () {
+                                                if (controller.customerCart !=
+                                                    null) {
+                                                  controller.customerCart!.value
+                                                          .line!.isNotEmpty
+                                                      ? controller.updateOrder(
+                                                          incress: true)
+                                                      : null;
+                                                }
+                                              },
+                                              plusBtn: true,
+                                              btnColor: AppColors.mainAppColor),
+                                      ],
+                                    ),
+                                  ],
+                                ).paddingOnly(bottom: context.screenWidth(30)),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CustomText(
+                                      text: tr('selected_items_lb'),
+                                      textType: TextStyleType.BODY,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    // if (!widget.showMyOrderCart!)
+                                    //   InkWell(
+                                    //     onTap: () {
+                                    //       if (controller.customerCart != null) {
+                                    //         controller.customerCart!.value.line!.isNotEmpty
+                                    //             ? warninDialog(
+                                    //                 content:
+                                    //                     tr('delete_all_items_from_cart_lb'),
+                                    //                 okBtn: () {
+                                    //                   controller.clearCart();
+                                    //                 },
+                                    //                 context: context)
+                                    //             : null;
+                                    //       }
+                                    //     },
+                                    //     child: CustomText(
+                                    //       decoration: TextDecoration.underline,
+                                    //       text: tr('remove_all_lb'),
+                                    //       textType: TextStyleType.BODY,
+                                    //       textColor: AppColors.greyUnderlineText,
+                                    //       fontWeight: FontWeight.w400,
+                                    //     ),
+                                    //   )
+                                  ],
+                                ).paddingOnly(
+                                  bottom: context.screenWidth(30),
+                                ),
+                                SizedBox(
+                                  height: context.screenHeight(1.6),
+                                  child: controller.isCartLoading.value
+                                      ? cartProductsShimmer()
+                                      : ListView(
+                                          shrinkWrap: true,
+                                          children: [
+                                            if (controller.customerCart != null)
+                                              ...controller
+                                                  .customerCart!.value.line!
+                                                  .map(
+                                                (cart) {
+                                                  // var index =    if (controller.customerCart != null) controller.customerCart!.value.line!.indexOf(cart);
+                                                  return InkWell(
+                                                    onTap: () {
+                                                      controller.setOderCount =
+                                                          cart.productUomQty!
+                                                              .toInt();
+                                                      controller.selectedCart
+                                                          .value = cart;
+                                                    },
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: context
+                                                                  .screenWidth(
+                                                                      30)),
+                                                      child: CartItem(
+                                                          cartModel: cart,
+                                                          showMyOrderCart: widget
+                                                              .showMyOrderCart),
                                                     ),
                                                   );
                                                 },
-                                              );
-                                            }),
-                                        ],
-                                      ),
-                              ),
-                            ],
+                                              ),
+                                            Divider(
+                                              height: context.screenWidth(16),
+                                              color: AppColors.greyTextColor,
+                                            ),
+                                            context.screenWidth(20).ph,
+                                            if (!widget.showMyOrderCart!)
+                                              Obx(() {
+                                                print(controller
+                                                    .selectedCart.value);
+                                                return SizedBox(
+                                                  height:
+                                                      context.screenHeight(4.7),
+                                                  child: ListView.separated(
+                                                    shrinkWrap: true,
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    itemCount: controller
+                                                        .suggestedProducts
+                                                        .length,
+                                                    // listViewHeight:
+                                                    //     context.screenHeight(5.5),
+                                                    separatorBuilder:
+                                                        (context, index) =>
+                                                            context
+                                                                .screenWidth(30)
+                                                                .px,
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return CustomContainer(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                          horizontal: context
+                                                              .screenWidth(30),
+                                                          vertical: context
+                                                              .screenWidth(
+                                                            60,
+                                                          ),
+                                                        ),
+                                                        width: context
+                                                            .screenWidth(3.2),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8),
+                                                        backgroundColor:
+                                                            AppColors
+                                                                .mainWhiteColor,
+                                                        blurRadius: 4,
+                                                        shadowColor: AppColors
+                                                            .shadowColor,
+                                                        offset: Offset(0, 4),
+                                                        child: Stack(
+                                                          alignment:
+                                                              AlignmentDirectional
+                                                                  .topEnd,
+                                                          children: [
+                                                            // Align(
+                                                            //   alignment:
+                                                            //       Alignment.center,
+                                                            //   // top: context
+                                                            //   //     .screenWidth(45),
+                                                            //   // start: context
+                                                            //   //     .screenWidth(25),
+                                                            //   child:
+                                                            //       CustomNetworkImage(
+                                                            //     imageUrl: controller
+                                                            //             .suggestedProducts[
+                                                            //                 index]
+                                                            //             .image ??
+                                                            //         '',
+                                                            //     height: context
+                                                            //         .screenWidth(8),
+                                                            //     width: context
+                                                            //         .screenWidth(8),
+                                                            //   ),
+                                                            // ),
+                                                            // context .screenWidth(80).ph
+                                                            PositionedDirectional(
+                                                              bottom: 0,
+                                                              start: 0,
+                                                              top: context
+                                                                  .screenWidth(
+                                                                      90),
+                                                              child:
+                                                                  SingleChildScrollView(
+                                                                child: Column(
+                                                                  children: [
+                                                                    CustomNetworkImage(
+                                                                      imageUrl:
+                                                                          controller.suggestedProducts[index].image ??
+                                                                              '',
+                                                                      height: context
+                                                                          .screenWidth(
+                                                                              8),
+                                                                      width: context
+                                                                          .screenWidth(
+                                                                              8),
+                                                                    ),
+                                                                    context
+                                                                        .screenWidth(
+                                                                            30)
+                                                                        .ph,
+                                                                    Column(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        SizedBox(
+                                                                          width:
+                                                                              context.screenWidth(4),
+                                                                          height:
+                                                                              context.screenWidth(20),
+                                                                          child:
+                                                                              SingleChildScrollView(
+                                                                            child:
+                                                                                CustomText(
+                                                                              textAlign: TextAlign.start,
+                                                                              text: controller.suggestedProducts[index].name ?? '',
+                                                                              darkTextColor: AppColors.mainBlackColor,
+                                                                              textType: TextStyleType.SMALL,
+                                                                              fontWeight: FontWeight.w500,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                        context
+                                                                            .screenWidth(200)
+                                                                            .ph,
+                                                                        Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.start,
+                                                                          children: [
+                                                                            Image.asset(
+                                                                              'assets/images/fire.png',
+                                                                              width: context.screenWidth(30),
+                                                                              height: context.screenWidth(30),
+                                                                            ),
+                                                                            context.screenWidth(80).px,
+                                                                            CustomText(
+                                                                                darkTextColor: AppColors.mainBlackColor,
+                                                                                textType: TextStyleType.CUSTOM,
+                                                                                fontSize: context.screenWidth(40),
+                                                                                fontWeight: FontWeight.w400,
+                                                                                textColor: AppColors.greyUnderlineText,
+                                                                                text: '${controller.suggestedProducts[index].calories} Calories'),
+                                                                          ],
+                                                                        ),
+                                                                        context
+                                                                            .screenWidth(100)
+                                                                            .ph,
+                                                                        CustomRichText(
+                                                                          firstColor:
+                                                                              AppColors.greyUnderlineText,
+                                                                          firstFontWeight:
+                                                                              FontWeight.w400,
+                                                                          firstFontSize:
+                                                                              context.screenWidth(40),
+                                                                          firstText:
+                                                                              tr('price_lb'),
+                                                                          secondText:
+                                                                              '${controller.suggestedProducts[index].price} SAR',
+                                                                          secondColor:
+                                                                              AppColors.mainBlackColor,
+                                                                          secondFontSize:
+                                                                              context.screenWidth(40),
+                                                                          secondFontWeight:
+                                                                              FontWeight.w400,
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            InkWell(
+                                                              onTap: () {
+                                                                controller
+                                                                    .suggestedProductsIndex
+                                                                    .value = index;
+                                                                Get.delete<
+                                                                    ProductDetailsController>();
+
+                                                                Get.to(
+                                                                    ProductDetailsView(
+                                                                      suggested:
+                                                                          true,
+                                                                      product: controller
+                                                                              .suggestedProducts[
+                                                                          index],
+                                                                    ),
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            500),
+                                                                    transition:
+                                                                        Transition
+                                                                            .leftToRight);
+                                                              },
+                                                              child: SvgPicture
+                                                                  .asset(
+                                                                AppAssets
+                                                                    .icPlusContainer,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                );
+                                              }),
+                                            context.screenHeight(15).ph,
+                                          ],
+                                        ),
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       } else {

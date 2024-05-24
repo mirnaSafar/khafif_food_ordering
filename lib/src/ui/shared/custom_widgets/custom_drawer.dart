@@ -154,23 +154,23 @@ class _CustomDrawerState extends State<CustomDrawer> {
           // color: AppColors.mainWhiteColor,
           width: context.screenWidth(1.32),
           child: Stack(children: [
-            Column(
-              children: [
-                Visibility(
-                  visible: userinfo?.value != null,
-                  child: profileSection,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: context.screenWidth(20),
-                      vertical: context
-                          .screenWidth(userinfo?.value == null ? 10 : 30)),
-                  child: SizedBox(
-                    height: context
-                        .screenHeight(userinfo?.value != null ? 1.5 : 1.15),
+            SingleChildScrollView(
+              // shrinkWrap: true,
+              child: Column(
+                children: [
+                  Visibility(
+                    visible: userinfo?.value != null,
+                    child: profileSection,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: context.screenWidth(20),
+                        vertical: context
+                            .screenWidth(userinfo?.value == null ? 10 : 30)),
                     child: SingleChildScrollView(
                       // shrinkWrap: true,
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Visibility(
                             visible: userinfo?.value != null,
@@ -316,21 +316,21 @@ class _CustomDrawerState extends State<CustomDrawer> {
                               imageHeight: context.screenWidth(18),
                               imageWidth: context.screenWidth(18),
                             ),
-                          context.screenWidth(20).ph
+                          context.screenWidth(15).ph
                         ],
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Positioned(
-                bottom: context.screenWidth(30),
+                bottom: 0,
                 left: 0,
                 right: 0,
                 child: Container(
                   padding:
-                      EdgeInsets.symmetric(vertical: context.screenWidth(300)),
+                      EdgeInsets.symmetric(vertical: context.screenWidth(50)),
                   color: Get.theme.scaffoldBackgroundColor,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,

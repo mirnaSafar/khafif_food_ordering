@@ -59,14 +59,14 @@ class MapController extends BaseController {
     // getPolyPoints();
 
     // loadcustomIcon();
-    locationService.getUserCurrentLocation().then((value) {
-      currentLocation = value!;
-      addtoMarkers(
-        'Current',
-        LatLng(value.latitude!, value.longitude!),
-      );
-      getCurrentLocation();
-    });
+    // locationService.getUserCurrentLocation().then((value) {
+    //   currentLocation = value!;
+    //   addtoMarkers(
+    //     'Current',
+    //     LatLng(value.latitude!, value.longitude!),
+    //   );
+    getCurrentLocation();
+    // });
     selectedLocation = destination ??
         storage.userCurrentLocation ??
         LatLng(37.43296265331129, -100.06600357078792);
@@ -198,20 +198,24 @@ class MapController extends BaseController {
 
   getCurrentLocation() async {
     await locationService.getUserCurrentLocation().then((location) {
-      initalCameraPosition = CameraPosition(
-        target: LatLng(location!.latitude!, location.longitude!),
-        zoom: 7.4746,
-      );
+      // initalCameraPosition = CameraPosition(
+      //   target: LatLng(location!.latitude!, location.longitude!),
+      //   zoom: 7.4746,
+      // );
       storage.setCurrentUserLocation(
-        LatLng(location.latitude!, location.longitude!),
+        LatLng(location!.latitude!, location.longitude!),
       );
-      destination = LatLng(location.latitude!, location.longitude!);
-      addtoMarkers(
-        'Destination',
-        LatLng(location.latitude!, location.longitude!),
-      );
+      // destination = LatLng(location.latitude!, location.longitude!);
+      // addtoMarkers(
+      //   'Destination',
+      //   LatLng(location.latitude!, location.longitude!),
+      // );
       currentLocation = location;
-      changeCameraPosition();
+      addtoMarkers(
+        'Current',
+        LatLng(location.latitude!, location.longitude!),
+      );
+      // changeCameraPosition();
     });
   }
 
