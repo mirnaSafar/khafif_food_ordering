@@ -264,7 +264,7 @@ class _ProductsViewState extends State<ProductsView> {
                                                                           fit: BoxFit
                                                                               .fill,
                                                                           scale:
-                                                                              1.05,
+                                                                              1.0,
                                                                           imageUrl:
                                                                               productsVieewController.bannerList[index].image ?? ''),
                                                                     ),
@@ -334,8 +334,8 @@ class _ProductsViewState extends State<ProductsView> {
                                                                       context.screenWidth(1),
                                                                       context.screenHeight(
                                                                         scrolled
-                                                                            ? 13
-                                                                            : 4.2,
+                                                                            ? 11
+                                                                            : 4.0,
                                                                       )),
                                                                   child: Container()),
 

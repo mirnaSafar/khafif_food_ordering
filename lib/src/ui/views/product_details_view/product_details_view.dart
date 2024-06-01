@@ -86,7 +86,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                                           '');
                                 },
                                 child: SizedBox(
-                                  height: context.screenHeight(3.0),
+                                  height: context.screenHeight(4),
                                   child: CustomNetworkImage(
                                       imageUrl: productDetailsController
                                               .productVariantsModel

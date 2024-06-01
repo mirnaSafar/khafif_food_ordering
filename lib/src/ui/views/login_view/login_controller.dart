@@ -48,4 +48,41 @@ class LoginController extends BaseController {
       }));
     }
   }
+
+  void loginAfterGoogleAuth({required String email, required String userName}) {
+    runFullLoadingFutuerFunction(
+        function: UserRepository()
+            .signup(
+      email: email,
+      userName: userName,
+      phone:
+          kReleaseMode ? '+966${phoneController.text}' : phoneController.text,
+    )
+            .then((value) {
+      value.fold((l) {
+        isLoading.value = false;
+
+        CustomToast.showMessage(message: l, messageType: MessageType.REJECTED);
+      }, (r) {
+        runFullLoadingFutuerFunction(
+            function: UserRepository()
+                .login(
+                    phone: kReleaseMode
+                        ? '+966${phoneController.text}'
+                        : phoneController.text)
+                .then((value) {
+          value.fold((l) {
+            isLoading.value = false;
+          }, (r) {
+            isLoading.value = false;
+            storage.setTokenIno(r.token ?? '');
+            storage.setOtpTime(r.timeOtpMinutes.toString());
+
+            //SharedPrefrenceRepository.setLoggedIn(true);
+            Get.to(SignVerification(number: phoneController.text));
+          });
+        }));
+      });
+    }));
+  }
 }

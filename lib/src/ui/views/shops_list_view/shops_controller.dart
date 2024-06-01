@@ -19,9 +19,10 @@ class ShopsController extends BaseController {
   @override
   void onInit() {
     // getAll();
-    locationService
-        .getUserCurrentLocation()
-        .then((value) => currentLocation = value!);
+    storage.userCurrentLocation ??
+        locationService
+            .getUserCurrentLocation()
+            .then((value) => currentLocation = value!);
     getOpenNowBranches();
 
     super.onInit();
@@ -52,7 +53,8 @@ class ShopsController extends BaseController {
   int calcShopDistanceFromCurrentLocation(BranchModel branchModel) {
     return locationService
         .calculateDistanceInKm(
-            LatLng(currentLocation.latitude!, currentLocation.longitude!),
+            storage.userCurrentLocation ??
+                LatLng(currentLocation.latitude!, currentLocation.longitude!),
             LatLng(branchModel.latitude!, branchModel.longitude!))
         .toInt();
 
@@ -90,10 +92,12 @@ class ShopsController extends BaseController {
   void sortShopsBaseOnDistanceFromCustomer() {
     shopsList.sort((a, b) => locationService
         .calculateDistanceInKm(
-            LatLng(currentLocation.latitude!, currentLocation.longitude!),
+            storage.userCurrentLocation ??
+                LatLng(currentLocation.latitude!, currentLocation.longitude!),
             LatLng(b.latitude!, b.longitude!))
         .compareTo(locationService.calculateDistanceInKm(
-            LatLng(currentLocation.latitude!, currentLocation.longitude!),
+            storage.userCurrentLocation ??
+                LatLng(currentLocation.latitude!, currentLocation.longitude!),
             LatLng(a.latitude!, a.longitude!))));
     shopsList.value = shopsList.reversed.toList();
   }

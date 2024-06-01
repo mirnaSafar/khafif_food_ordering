@@ -268,17 +268,26 @@ class _AddressesViewState extends State<AddressesView> {
                 child: CustomButton(
                   onPressed: () async {
                     if (await LocationService().isPermissionGranted()) {
-                      locationService.getUserCurrentLocation().then((loc) {
+                      if (storage.userCurrentLocation == null) {
+                        locationService.getUserCurrentLocation().then((loc) {
+                          Get.to(MapPage(
+                            editAddress: {"edit": false, "index": null},
+                            newAddress: true,
+                            destination: LatLng(loc!.latitude!, loc.longitude!),
+                            closePanelHeight: context.screenHeight(4),
+                          ));
+                          Get.put(MapController(
+                            destination: LatLng(loc.latitude!, loc.longitude!),
+                          )).getStreetName();
+                        });
+                      } else {
                         Get.to(MapPage(
                           editAddress: {"edit": false, "index": null},
                           newAddress: true,
-                          destination: LatLng(loc!.latitude!, loc.longitude!),
                           closePanelHeight: context.screenHeight(4),
                         ));
-                        Get.put(MapController(
-                          destination: LatLng(loc.latitude!, loc.longitude!),
-                        )).getStreetName();
-                      });
+                        Get.put(MapController()).getStreetName();
+                      }
                     }
                   },
                   text: tr('add_addresse_lb'),

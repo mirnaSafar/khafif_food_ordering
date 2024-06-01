@@ -42,6 +42,7 @@ class ENLanguage {
         'verify_your_number_lb': 'Verify Your Number',
         'you_dont_have_account_lb':
             'There is no account for this number ,please signup first',
+        "continue_lb": "Continue",
         //?---- products view keys
 
         "products_tilte_lb": "Order Delicious Meal!",

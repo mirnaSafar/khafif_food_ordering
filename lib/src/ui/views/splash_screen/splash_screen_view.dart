@@ -19,22 +19,20 @@ class _SplashScreenViewState extends State<SplashScreenView> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: AppColors.mainWhiteColor,
-        body: Align(
-          alignment: Alignment.bottomCenter,
-          child: Stack(fit: StackFit.expand, children: [
-            Transform.scale(
-              scale: 0.8,
-              child: Image.asset(
-                'assets/images/khafif_logo.jpg',
-                width: context.screenWidth(40),
-                height: context.screenWidth(40),
-              ),
-            )
-          ]),
-        ),
+    return Scaffold(
+      backgroundColor: AppColors.mainWhiteColor,
+      body: Align(
+        alignment: Alignment.bottomCenter,
+        child: Stack(fit: StackFit.expand, children: [
+          Transform.scale(
+            scale: 0.8,
+            child: Image.asset(
+              'assets/images/khafif_logo.jpg',
+              width: context.screenWidth(40),
+              height: context.screenWidth(40),
+            ),
+          )
+        ]),
       ),
     );
   }

@@ -12,7 +12,20 @@
           "package_name": "com.khafif.android"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "486734582737-528vdmba65pm00rcg3qdq9cfvuqfdudu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.khafif.android",
+            "certificate_hash": "d984538d290ac91ddb01dd275270a42ba2630590"
+          }
+        },
+        {
+          "client_id": "486734582737-npqd15u3qtnc2d58urm19os0q4p4mf88.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBfirdCa7K-WxWGzu3fMKF_iAzA_iieeq0"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486734582737-npqd15u3qtnc2d58urm19os0q4p4mf88.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486734582737-3c18k13ug2qp59ldj5uafkp7v3jg3iej.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.khafif.app"
+              }
+            }
+          ]
         }
       }
     }

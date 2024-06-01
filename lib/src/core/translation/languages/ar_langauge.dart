@@ -36,6 +36,7 @@ class ARLanguage {
         'verify_your_number_lb': 'تحقق من الرقم',
         'you_dont_have_account_lb':
             'لا يوجد حساب بهذا الرقم ،الرجاء القيام بإنشاء حساب جديد',
+        "continue_lb": "متابعة",
         //?---- products view keys
 
         "products_tilte_lb": "اطلب وجبة لذيذة!",

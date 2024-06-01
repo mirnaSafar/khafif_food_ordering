@@ -16,6 +16,7 @@ import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/cu
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_shimmer.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/map_view/map_view.dart';
+import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_view_controller.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/shops_list_view/shops_list.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/splash_screen/splash_controller.dart';
 
@@ -24,15 +25,16 @@ void showOrderOptionsDialog(BuildContext context) {
   Get.find<SplashController>().orderDeliveryOptions.isEmpty
       ? Get.find<SplashController>().getOrderDeliveryOptions()
       : null;
-
+  ProductsViewController productsViewController =
+      Get.put(ProductsViewController());
   Widget buildOption(String text, int value, void Function()? onTap) {
     return Obx(() {
-      print(productsVieewController.orderOptionSelected.value);
+      print(productsViewController.orderOptionSelected.value);
       return splashController.isOrderOptionsLoading.value
           ? orderOptionsShimmer()
           : InkWell(
               onTap: () {
-                productsVieewController.orderOptionSelected.value = value;
+                productsViewController.orderOptionSelected.value = value;
                 onTap!();
               },
               child: Padding(
@@ -51,10 +53,10 @@ void showOrderOptionsDialog(BuildContext context) {
                         fillColor: AppColors.mainWhiteColor,
 
                         value: value,
-                        selected: productsVieewController.orderOptionSelected
+                        selected: productsViewController.orderOptionSelected
                             .value, // Adjust as per your requirements
                         onTaped: (int value1) {
-                          productsVieewController.orderOptionSelected.value =
+                          productsViewController.orderOptionSelected.value =
                               value;
                         },
                       ),

@@ -52,7 +52,7 @@ class MapController extends BaseController {
   onInit() {
     destination != null
         ? addtoMarkers('Destination', destination!)
-        : locationService.getUserCurrentLocation();
+        : getCurrentLocation();
     destination ??= storage.userCurrentLocation;
     initalCameraPosition =
         CameraPosition(target: sourceLocation ?? destination!, zoom: 14.5);
@@ -65,7 +65,6 @@ class MapController extends BaseController {
     //     'Current',
     //     LatLng(value.latitude!, value.longitude!),
     //   );
-    getCurrentLocation();
     // });
     selectedLocation = destination ??
         storage.userCurrentLocation ??

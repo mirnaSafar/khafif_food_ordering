@@ -49,95 +49,101 @@ class CustomToast {
       backgroundColor: AppColors.mainBlackColor.withOpacity(0.2),
       duration: Duration(seconds: 3),
       toastBuilder: (value) {
-        return Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Dismissible(
-              key: UniqueKey(),
-              onDismissed: (direction) {
-                BotToast.cleanAll();
-              },
-              child: Align(
-                alignment: AlignmentDirectional.bottomCenter,
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: Get.context!.screenWidth(9)),
-                  child: Container(
-                    width: Get.context!.screenWidth(1.3),
-                    decoration: BoxDecoration(
-                        color: AppColors.mainWhiteColor,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: ShadowColor.withOpacity(0.5),
-                            blurRadius: 7,
-                            spreadRadius: 5,
-                            offset: Offset(0, 3),
-                          )
-                        ]),
-                    child: Row(
-                      children: [
-                        Get.context!.screenWidth(20).px,
-                        Lottie.asset(
-                          'assets/lotties/$imageName.json',
-                          width: Get.context!.screenWidth(10),
-                          height: Get.context!.screenWidth(10),
-                        ),
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              // SvgPicture.asset(
-                              //   'assets/images/$imageName.svg',
-                              //   width: context .screenWidth(10),
-                              //   height: context .screenWidth(10),
-                              // ),
-
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                  vertical: Get.context!.screenWidth(25),
-                                  horizontal: Get.context!.screenWidth(30),
-                                ),
-                                child: CustomText(
-                                  textAlign: TextAlign.start,
-                                  text: message,
-                                  textType: TextStyleType.BODY,
-                                  darkTextColor: AppColors.mainBlackColor,
-                                  textColor: AppColors.mainBlackColor,
-                                ),
-                              ),
-                            ],
+        return GestureDetector(
+          onTap: () {
+            BotToast.cleanAll();
+          },
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Dismissible(
+                key: UniqueKey(),
+                onDismissed: (direction) {
+                  BotToast.cleanAll();
+                },
+                child: Align(
+                  alignment: AlignmentDirectional.bottomCenter,
+                  child: Padding(
+                    padding:
+                        EdgeInsets.only(bottom: Get.context!.screenWidth(9)),
+                    child: Container(
+                      width: Get.context!.screenWidth(1.3),
+                      decoration: BoxDecoration(
+                          color: AppColors.mainWhiteColor,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: ShadowColor.withOpacity(0.5),
+                              blurRadius: 7,
+                              spreadRadius: 5,
+                              offset: Offset(0, 3),
+                            )
+                          ]),
+                      child: Row(
+                        children: [
+                          Get.context!.screenWidth(20).px,
+                          Lottie.asset(
+                            'assets/lotties/$imageName.json',
+                            width: Get.context!.screenWidth(10),
+                            height: Get.context!.screenWidth(10),
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                // SvgPicture.asset(
+                                //   'assets/images/$imageName.svg',
+                                //   width: context .screenWidth(10),
+                                //   height: context .screenWidth(10),
+                                // ),
+
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: Get.context!.screenWidth(25),
+                                    horizontal: Get.context!.screenWidth(30),
+                                  ),
+                                  child: CustomText(
+                                    textAlign: TextAlign.start,
+                                    text: message,
+                                    textType: TextStyleType.BODY,
+                                    darkTextColor: AppColors.mainBlackColor,
+                                    textColor: AppColors.mainBlackColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            // Positioned(
-            //     bottom: 0,
-            //     child: ClipRRect(
-            //       borderRadius:
-            //            BorderRadius.only(bottomLeft: Radius.circular(20)),
-            //       child: SvgPicture.asset(
-            //         'assets/images/bubble-svgrepo-com.svg',
-            //         width: context .screenWidth(10),
-            //         height: context .screenWidth(7),
-            //         color: ShadowColor.withOpacity(0.4),
-            //       ),
-            //     )),
-            // PositionedDirectional(
-            //   top: -context .screenWidth(11.6),
-            //   start: context .screenWidth(3.2),
-            //   child: Lottie.asset(
-            //     'assets/lotties/$imageName.json',
-            //     width: context .screenWidth(8),
-            //     height: context .screenWidth(8),
-            //   ),
-            // ),
-          ],
+              // Positioned(
+              //     bottom: 0,
+              //     child: ClipRRect(
+              //       borderRadius:
+              //            BorderRadius.only(bottomLeft: Radius.circular(20)),
+              //       child: SvgPicture.asset(
+              //         'assets/images/bubble-svgrepo-com.svg',
+              //         width: context .screenWidth(10),
+              //         height: context .screenWidth(7),
+              //         color: ShadowColor.withOpacity(0.4),
+              //       ),
+              //     )),
+              // PositionedDirectional(
+              //   top: -context .screenWidth(11.6),
+              //   start: context .screenWidth(3.2),
+              //   child: Lottie.asset(
+              //     'assets/lotties/$imageName.json',
+              //     width: context .screenWidth(8),
+              //     height: context .screenWidth(8),
+              //   ),
+              // ),
+            ],
+          ),
         );
       },
     );

@@ -47,9 +47,11 @@ class CartService {
     cartCustomerCount.value = 0;
 
     cartCount.value = 0;
-    for (var line in cart.line!) {
-      cartCustomerCount.value += line.productUomQty!.toInt();
-      cartCount.value += line.productUomQty!.toInt();
+    if (cart.line != null) {
+      for (var line in cart.line!) {
+        cartCustomerCount.value += line.productUomQty!.toInt();
+        cartCount.value += line.productUomQty!.toInt();
+      }
     }
   }
 
@@ -96,6 +98,7 @@ class CartService {
   void clearCart() {
     cartList.clear();
     cartCount.value = getCartCount();
+    cartCustomerCount.value = 0;
     calcCartTotal();
     calcCartCount(cart: cart.value!);
     storage.setCartList(cartList);
