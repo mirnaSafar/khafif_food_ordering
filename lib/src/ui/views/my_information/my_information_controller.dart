@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,7 +30,9 @@ class MyInfoController extends BaseController {
               image: path.value,
               userName: userNameController.text,
               email: userEmailController.text,
-              // phone: userNumberController.text,
+              phone: kReleaseMode
+                  ? '+966${userNumberController.text}'
+                  : userNumberController.text,
             )
                 .then((value) {
               value.fold(

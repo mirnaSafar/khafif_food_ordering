@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:khafif_food_ordering_application/src/core/app/app_config/app_config.dart';
 import 'package:khafif_food_ordering_application/src/core/enums.dart';
 import 'package:khafif_food_ordering_application/src/core/services/base_controller.dart';
 import 'package:get/get.dart';
@@ -24,7 +25,7 @@ class LoginController extends BaseController {
           function: UserRepository()
               .login(
                   phone: kReleaseMode
-                      ? '+966${phoneController.text}'
+                      ? '${AppConfig.countryCode}${phoneController.text}'
                       : phoneController.text)
               .then((value) {
         value.fold((l) {

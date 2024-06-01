@@ -89,6 +89,7 @@ class UserRepository {
     required String userName,
     required String email,
     required String image,
+    required String phone,
   }) async {
     try {
       return NetworkUtil.sendMultipartRequest(
@@ -105,6 +106,7 @@ class UserRepository {
             "name": userName,
             "email": email,
             "lang": storage.getAppLanguage(),
+            "phone": phone,
           }).then((response) {
         print(response);
 

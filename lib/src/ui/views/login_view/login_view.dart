@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/app_assets.dart';
+import 'package:khafif_food_ordering_application/src/core/app/app_config/app_config.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
@@ -29,7 +30,6 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   LoginController controller = Get.put(LoginController());
 
-  String countryCode = "+966";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +83,7 @@ class _LoginViewState extends State<LoginView> {
                                   SvgPicture.asset(AppAssets.icPhone),
                                   context.screenWidth(30).px,
                                   CustomText(
-                                    text: '+966 | ',
+                                    text: '${AppConfig.countryCode} | ',
                                     textType: TextStyleType.BODYSMALL,
                                     darkTextColor: AppColors.mainTextColor,
                                   ),

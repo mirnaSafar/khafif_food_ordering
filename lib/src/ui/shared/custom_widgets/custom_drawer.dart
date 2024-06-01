@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/app_assets.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
@@ -83,10 +85,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
         print(userinfo?.value);
         return Visibility(
           visible: userinfo?.value != null,
-          child: CustomText(
-              text: userinfo?.value?.name ?? '',
-              fontWeight: FontWeight.bold,
-              textType: TextStyleType.BODY),
+          child: SingleChildScrollView(
+            child: CustomText(
+                text: userinfo?.value?.name ?? '',
+                fontWeight: FontWeight.bold,
+                textType: TextStyleType.BODY),
+          ),
         );
       }),
       Visibility(
@@ -111,12 +115,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
               closeIcon,
               Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 userImage,
-                Padding(
-                  padding: EdgeInsets.all(context.screenWidth(30)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: userNameEmail,
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(context.screenWidth(30)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: userNameEmail,
+                    ),
                   ),
                 )
               ]),

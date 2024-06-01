@@ -6,6 +6,8 @@ import 'package:khafif_food_ordering_application/src/data/repositories/user_repo
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_toast.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/login_view/login_view.dart';
 
+import '../../../core/app/app_config/app_config.dart';
+
 class SignUpController extends BaseController {
   TextEditingController emailController = TextEditingController();
 
@@ -27,7 +29,7 @@ class SignUpController extends BaseController {
                 .signup(
             email: emailController.text,
             userName: nameController.text,
-            phone: '+966${phoneController.text}',
+            phone: '${AppConfig.countryCode}${phoneController.text}',
           )
                 .then((value) {
             print(value);

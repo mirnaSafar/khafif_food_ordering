@@ -19,6 +19,8 @@ import 'package:khafif_food_ordering_application/src/ui/views/login_view/login_v
 import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_view.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/signup_view/signup_controller.dart';
 
+import '../../../core/app/app_config/app_config.dart';
+
 class SignUpView extends StatefulWidget {
   SignUpView({super.key});
 
@@ -88,7 +90,7 @@ class _SignUpViewState extends State<SignUpView> {
                               SvgPicture.asset(AppAssets.icPhone),
                               context.screenWidth(30).px,
                               CustomText(
-                                text: '+966 | ',
+                                text: '${AppConfig.countryCode} | ',
                                 textType: TextStyleType.BODYSMALL,
                                 darkTextColor: AppColors.mainTextColor,
                               ),
