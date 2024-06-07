@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "486734582737-4790ijmievdjirdgjkpabp4c6j7mergn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.khafif.android",
+            "certificate_hash": "bec4f05856c2df14ae988264992b38a7b81a6065"
+          }
+        },
+        {
           "client_id": "486734582737-528vdmba65pm00rcg3qdq9cfvuqfdudu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
