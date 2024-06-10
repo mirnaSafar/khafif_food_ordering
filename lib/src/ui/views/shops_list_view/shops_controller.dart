@@ -42,7 +42,7 @@ class ShopsController extends BaseController {
       (storage.getCart() ?? CustomerCartModel()).obs;
   PanelController panelController = PanelController();
 
-  checkIfTheBrachOpenORClose(BranchModel branchModel) {
+  bool checkIfTheBrachOpenORClose(BranchModel branchModel) {
     return openShopsList
                 .firstWhereOrNull((element) => element.id == branchModel.id) !=
             null

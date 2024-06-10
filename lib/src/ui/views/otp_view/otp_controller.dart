@@ -63,7 +63,9 @@ class OtpController extends GetxController {
         .verifyUser(userOtp: otpCode.value, phone: phone)
         .then((value) => value.fold((l) {
               CustomToast.showMessage(
-                  message: l.isNotEmpty ? l : tr('invalid_code_lb'),
+                  message: l.toLowerCase() != 'otp in not verify'
+                      ? l
+                      : tr('invalid_code_lb'),
                   messageType: MessageType.REJECTED);
               storage.setOtpVerified(false);
             }, (r) {

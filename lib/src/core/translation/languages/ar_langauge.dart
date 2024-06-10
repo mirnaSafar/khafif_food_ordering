@@ -28,7 +28,7 @@ class ARLanguage {
 
         //?---- login view keys
         "login_lb": "تسجيل الدخول",
-        "login_title_lb": "تسجيل الدخول من حسابك أو وسائل التواصل الاجتماعي",
+        "login_title_lb": "تسجيل الدخول عبر رقم هاتفك ",
         "not_signup_lb": "لا تملك حساباً؟ ",
         "guest_lb": 'لا تريد إنشاء حساب؟   ',
         "guest_view_lb": 'استمرار كزائر',
@@ -36,6 +36,7 @@ class ARLanguage {
         'verify_your_number_lb': 'تحقق من الرقم',
         'you_dont_have_account_lb':
             'لا يوجد حساب بهذا الرقم ،الرجاء القيام بإنشاء حساب جديد',
+        "registered_successfully": 'تم التسجيل بنجاح!',
         "continue_lb": "متابعة",
         //?---- products view keys
 
@@ -93,7 +94,7 @@ class ARLanguage {
 
         "details_screen_title": "شاشة التفاصيل",
         "all_reviews_lb": "شاهد جميع التقييمات",
-        "available_toppings_lb": "الطبقة المتاحة",
+        "available_toppings_lb": "الإضافات المتاحة",
         "read_more_lb": ".اقرأ المزيد",
         "read_less_lb": "اقرأ اقل",
 
@@ -150,7 +151,7 @@ class ARLanguage {
             'الرجاء اختيار خدمة توصيل الطلب أولاً',
         "empty_cart_waning_lb": "السلة فارغة!",
         "item_deleted_lb": 'تمت إزالة المنتج من السلة بنجاح',
-        "select_toppings_lb": "الرجاء القيام بإضافة النكهات أولاً",
+        "select_toppings_lb": "يرجى اختيار النكهات أولاً",
         "add_to_cart_lb": 'أضف إلى السلة',
         "show_cart_lb": 'عرض السلة',
         "order_placed_lb": "تم إرسال الطلب بنجاح",
@@ -220,7 +221,7 @@ class ARLanguage {
         "ability_to_deliver_lb": 'أخبار جيدة ،يمكننا التوصيل الى هذا الموقع',
         "no_ability_to_deliver_lb": 'عذراً ،لا يمكننا التوصيل الى هذا الموقع',
         "delivery_checker_lb": 'مدقق التوصيل:',
-        "display_shops_lb": 'عرض قائمة المتاجر',
+        "display_shops_lb": 'استلام من متجر',
         "all_branches_lb": 'كل الفروع',
         "schedule_order_lb": 'تحديد موعد الطلب',
         'open_now_lb': 'مفتوح الآن',

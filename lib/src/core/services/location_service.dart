@@ -94,7 +94,8 @@ class LocationService {
     permissionGranted = await location.hasPermission();
     if (permissionGranted == PermissionStatus.denied) {
       permissionGranted = await location.requestPermission();
-      if (permissionGranted != PermissionStatus.granted) {
+      if (permissionGranted != PermissionStatus.granted ||
+          permissionGranted == PermissionStatus.grantedLimited) {
         if (AppConfig.isLocationRequired) {
           CustomToast.showMessage(message: 'location is required');
         }
@@ -103,7 +104,8 @@ class LocationService {
       }
     }
 
-    return permissionGranted == PermissionStatus.granted;
+    return permissionGranted == PermissionStatus.granted ||
+        permissionGranted == PermissionStatus.grantedLimited;
   }
 
   double calculateDistanceInKm(LatLng latLng1, LatLng latLng2) {

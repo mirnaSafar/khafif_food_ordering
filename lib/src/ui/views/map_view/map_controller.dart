@@ -31,10 +31,10 @@ import 'package:location/location.dart';
 
 class MapController extends BaseController {
   LatLng? sourceLocation;
-  LatLng? destination = LatLng(37.43296265331129, -100.06600357078792);
+  LatLng destination;
   MapController({
     this.sourceLocation,
-    this.destination,
+    required this.destination,
   });
   RxSet<Marker> markers = <Marker>{}.obs;
   late CameraPosition initalCameraPosition;
@@ -50,12 +50,12 @@ class MapController extends BaseController {
   late LocationData currentLocation;
   @override
   onInit() {
-    destination != null
-        ? addtoMarkers('Destination', destination!)
-        : getCurrentLocation();
-    destination ??= storage.userCurrentLocation;
+    // destination != null
+    addtoMarkers('Destination', destination);
+    getCurrentLocation();
+    // destination ??= storage.userCurrentLocation;
     initalCameraPosition =
-        CameraPosition(target: sourceLocation ?? destination!, zoom: 14.5);
+        CameraPosition(target: sourceLocation ?? destination, zoom: 14.5);
     // getPolyPoints();
 
     // loadcustomIcon();
@@ -139,7 +139,7 @@ class MapController extends BaseController {
       result = await polylinePoints.getRouteBetweenCoordinates(
         AppConfig.google_api_key,
         PointLatLng(sourceLocation!.latitude, sourceLocation!.longitude),
-        PointLatLng(destination!.latitude, destination!.longitude),
+        PointLatLng(destination.latitude, destination.longitude),
       );
       if (result.points.isNotEmpty) {
         for (PointLatLng point in result.points) {

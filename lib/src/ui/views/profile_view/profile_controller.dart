@@ -17,6 +17,9 @@ class ProfileController extends BaseController {
   void onInit() {
     update();
     super.onInit();
+    storage.userStreetName.isEmpty
+        ? locationService.getCurrentAddressInfo()
+        : null;
     getUserPoints();
   } // final MapController _mapControlsler = Get.put(MapController());
 

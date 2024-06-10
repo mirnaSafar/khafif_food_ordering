@@ -147,12 +147,9 @@ class _CustomPinCodeTextFieldsState extends State<CustomPinCodeTextFields>
             } else {
               return CustomRowText(
                   onTap: () {
-                    // countdownController.onRestart!();
                     loginController.login();
 
                     countdownController.restart();
-                    // countdownController = CountdownController(autoStart: true);
-                    // _handleResendCodeTap();
                   },
                   firstText: tr('code_not_received_lb'),
                   linkText: tr('resend_code_lb'),

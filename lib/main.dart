@@ -10,6 +10,7 @@ import 'package:khafif_food_ordering_application/src/core/services/date_time_pic
 import 'package:khafif_food_ordering_application/src/core/services/favorites_service.dart';
 import 'package:khafif_food_ordering_application/src/core/services/location_service.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
+import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_toast.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/splash_screen/splash_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -63,7 +64,6 @@ Future<void> putProjectDepedencies() async {
   // storage.globalSharedPreference.clear();
   storage.setFirstLaunchShowDeliveryService(true);
   Get.put(SplashController());
-
   Get.put(CartService());
 
   Get.put(LocationService());
@@ -75,4 +75,5 @@ Future<void> putProjectDepedencies() async {
 
   Get.put(NotificationService());
   Get.put(DateTimeController());
+  Get.put(CustomToast());
 }

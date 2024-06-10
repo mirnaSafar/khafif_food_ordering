@@ -7,7 +7,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/enums.dart';
 import 'package:khafif_food_ordering_application/src/core/services/date_time_picker_service.dart';
+import 'package:khafif_food_ordering_application/src/core/services/location_service.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
+import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_toast.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/map_view/map_view.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/shops_list_view/shops_controller.dart';
@@ -60,20 +62,26 @@ class CustomTimePicker {
               .getOpenBranches(
                   dateTime: timeController.formatDateTimeIn24(pickedTime),
                   branchId: 3)
-              .then((value) => shopsController.openShopsList.isEmpty
+              .then((value) async => shopsController.openShopsList.isEmpty
                   ? null
-                  : Get.to(MapPage(
-                      showAllbranchesButton: true,
-                      sourceLocation: LatLng(
-                        shopsController.shopsList[0].latitude!,
-                        shopsController.shopsList[0].longitude!,
-                      ),
-                      bottomsheet: ShopBottomSheet(
-                        shop: shopsController.shopsList[0],
-                        shops: shopsController.shopsList,
-                      ),
-                      appBarTitle: tr('shops_lb'),
-                    )));
+                  : await LocationService().isPermissionGranted()
+                      ? locationService
+                          .getUserCurrentLocation()
+                          .then((loc) => Get.to(MapPage(
+                                showAllbranchesButton: true,
+                                sourceLocation: LatLng(
+                                  shopsController.shopsList[0].latitude!,
+                                  shopsController.shopsList[0].longitude!,
+                                ),
+                                bottomsheet: ShopBottomSheet(
+                                  shop: shopsController.shopsList[0],
+                                  shops: shopsController.shopsList,
+                                ),
+                                appBarTitle: tr('shops_lb'),
+                                destination:
+                                    LatLng(loc!.latitude!, loc.longitude!),
+                              )))
+                      : null);
         }
       }
     });

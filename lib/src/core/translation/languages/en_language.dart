@@ -34,14 +34,15 @@ class ENLanguage {
         "enter_name_lb": 'enter your name',
         //?---- login view keys
         "login_lb": "Login ",
-        "login_title_lb": "Login with your account OR Social Media",
+        "login_title_lb": "Login with your phone number",
         "not_signup_lb": "Don’t have account?  ",
         "guest_lb": 'Don’t want to create an account ?   ',
         "guest_view_lb": 'Guest view',
-        'invalid_code_lb': 'invalid code',
+        'invalid_code_lb': 'Code is not correct',
         'verify_your_number_lb': 'Verify Your Number',
         'you_dont_have_account_lb':
             'There is no account for this number ,please signup first',
+        "registered_successfully": 'registered successfully!',
         "continue_lb": "Continue",
         //?---- products view keys
 
@@ -162,7 +163,7 @@ class ENLanguage {
             'select order delivery option first',
         "empty_cart_waning_lb": "Cart is Empty!",
         "item_deleted_lb": 'Item deleted from cart',
-        "select_toppings_lb": "You should select the topping first",
+        "select_toppings_lb": "You should select the flavors first",
         "add_to_cart_lb": 'Add to Cart',
         "show_cart_lb": 'Show Cart',
         "order_placed_lb": "Order placed successfully",
@@ -235,7 +236,7 @@ class ENLanguage {
         "no_ability_to_deliver_lb":
             'Sorry, we can not deliver your order to that location',
         "delivery_checker_lb": 'Delivery Checker:',
-        "display_shops_lb": 'Display Shops List',
+        "display_shops_lb": 'Pickup from shop',
         "all_branches_lb": 'All branches',
         "schedule_order_lb": 'Schedule Order',
         'open_now_lb': 'Open now',

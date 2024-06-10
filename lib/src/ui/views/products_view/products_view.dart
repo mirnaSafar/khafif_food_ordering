@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
 
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:auto_scroll_text/auto_scroll_text.dart';
@@ -256,7 +257,7 @@ class _ProductsViewState extends State<ProductsView> {
                                                                       // padEnds: false,
                                                                       sliderHeight:
                                                                           context
-                                                                              .screenHeight(4),
+                                                                              .screenHeight(4.5),
                                                                       itemCount: productsVieewController
                                                                           .bannerList
                                                                           .length,
@@ -304,9 +305,10 @@ class _ProductsViewState extends State<ProductsView> {
                                                                   FlexibleSpaceBar(
                                                                 // collapseMode: CollapseMode.pin,
                                                                 titlePadding: EdgeInsets.only(
-                                                                    top: context
-                                                                        .screenWidth(
-                                                                            4.5)),
+                                                                    top: context.screenWidth(Platform
+                                                                            .isIOS
+                                                                        ? 3.5
+                                                                        : 4.5)),
                                                                 centerTitle:
                                                                     true,
                                                                 expandedTitleScale:
@@ -335,7 +337,7 @@ class _ProductsViewState extends State<ProductsView> {
                                                                       context.screenHeight(
                                                                         scrolled
                                                                             ? 11
-                                                                            : 4.0,
+                                                                            : 4.5,
                                                                       )),
                                                                   child: Container()),
 

@@ -109,27 +109,14 @@ class _MyInformationViewState extends State<MyInformationView> {
                         ),
                         context.screenWidth(30).ph,
                         UserInput(
-                          maxLength: kDebugMode ? null : 9,
+                          enabled: false,
+                          fillColor: const Color.fromARGB(255, 224, 224, 224),
                           keyboardType: TextInputType.phone,
-                          validator: (number) {
-                            return kDebugMode ? null : numberValidator(number!);
-                          },
                           controller: infoController.userNumberController,
                           text: tr('phone_field_lb'),
-                          prefixIcon: SizedBox(
-                            width: context.screenWidth(4.1),
-                            child: Row(
-                              children: <Widget>[
-                                context.screenWidth(30).px,
-                                SvgPicture.asset(AppAssets.icPhone),
-                                context.screenWidth(30).px,
-                                CustomText(
-                                  text: '+966 | ',
-                                  textType: TextStyleType.BODYSMALL,
-                                  darkTextColor: AppColors.mainTextColor,
-                                ),
-                              ],
-                            ),
+                          prefixIcon: Transform.scale(
+                            scale: 0.5,
+                            child: SvgPicture.asset(AppAssets.icPhone),
                           ),
                         ),
                       ],

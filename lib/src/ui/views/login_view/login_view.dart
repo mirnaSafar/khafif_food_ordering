@@ -100,24 +100,24 @@ class _LoginViewState extends State<LoginView> {
                             text: tr("login_lb"),
                           ),
                           context.screenWidth(9).ph,
-                          Center(
-                            child: CustomText(
-                                text: tr("or_lb"),
-                                customtextStyle:
-                                    Theme.of(context).textTheme.bodyLarge!,
-                                fontWeight: FontWeight.bold,
-                                textType: TextStyleType.BODY),
-                          ),
-                          context.screenWidth(10).ph,
-                          CustomButton(
-                            key: Key('google1'),
-                            onPressed: () => onTapLoginWithGoogle(),
-                            text: tr("google_lb"),
-                            color: Colors.white,
-                            textColor: AppColors.mainTextColor,
-                            textStyleType: TextStyleType.BODYSMALL,
-                            imageName: 'google_ic',
-                          ),
+                          // Center(
+                          //   child: CustomText(
+                          //       text: tr("or_lb"),
+                          //       customtextStyle:
+                          //           Theme.of(context).textTheme.bodyLarge!,
+                          //       fontWeight: FontWeight.bold,
+                          //       textType: TextStyleType.BODY),
+                          // ),
+                          // context.screenWidth(10).ph,
+                          // CustomButton(
+                          //   key: Key('google1'),
+                          //   onPressed: () => onTapLoginWithGoogle(),
+                          //   text: tr("google_lb"),
+                          //   color: Colors.white,
+                          //   textColor: AppColors.mainTextColor,
+                          //   textStyleType: TextStyleType.BODYSMALL,
+                          //   imageName: 'google_ic',
+                          // ),
                           context.screenWidth(8).ph,
                           CustomRowText(
                               onTap: () => Get.off(SignUpView()),

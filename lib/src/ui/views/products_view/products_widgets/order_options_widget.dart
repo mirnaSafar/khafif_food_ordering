@@ -15,6 +15,7 @@ import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/cu
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_radio.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_shimmer.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
+import 'package:khafif_food_ordering_application/src/ui/shared/dialogs/browsing_alert_dialog.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/map_view/map_view.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_view_controller.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/shops_list_view/shops_list.dart';
@@ -121,24 +122,29 @@ void showOrderOptionsDialog(BuildContext context) {
                       orderDeliveryOption.name ?? '', orderDeliveryOption.id!,
                       () async {
                     Get.context!.pop();
-                    if (!orderDeliveryOption.isPickup!) {
-                      await LocationService().isPermissionGranted()
-                          ? storage.userCurrentLocation == null
-                              ? locationService
-                                  .getUserCurrentLocation()
-                                  .then((loc) => Get.to(() => MapPage(
-                                        destination: LatLng(
-                                            loc!.latitude!, loc.longitude!),
-                                        closePanelHeight: 0,
-                                      )))
-                              : Get.to(() => MapPage(
-                                    closePanelHeight: 0,
-                                  ))
-                          : null;
+                    if (storage.isLoggedIn) {
+                      if (!orderDeliveryOption.isPickup!) {
+                        await LocationService().isPermissionGranted()
+                            ? storage.userCurrentLocation == null
+                                ? locationService
+                                    .getUserCurrentLocation()
+                                    .then((loc) => Get.to(() => MapPage(
+                                          destination: LatLng(
+                                              loc!.latitude!, loc.longitude!),
+                                          closePanelHeight: 0,
+                                        )))
+                                : Get.to(() => MapPage(
+                                      destination: storage.userCurrentLocation!,
+                                      closePanelHeight: 0,
+                                    ))
+                            : null;
+                      } else {
+                        Get.to(
+                          ShopsListView(),
+                        );
+                      }
                     } else {
-                      Get.to(
-                        ShopsListView(),
-                      );
+                      showBrowsingDialogAlert(context);
                     }
                   });
                 }),

@@ -24,7 +24,7 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 // ignore: must_be_immutable
 class MapPage extends StatefulWidget {
   LatLng? sourceLocation = LatLng(37.43296265331129, -122.08832357078792);
-  LatLng? destination = LatLng(34.43296265331129, -100.06600357078792);
+  LatLng destination;
   final String? appBarTitle;
   final bool? newAddress;
   final bool? showAllbranchesButton;
@@ -37,7 +37,7 @@ class MapPage extends StatefulWidget {
   MapPage(
       {super.key,
       this.sourceLocation,
-      this.destination,
+      required this.destination,
       this.bottomsheet,
       this.appBarTitle,
       this.newAddress = false,
@@ -60,7 +60,7 @@ class MapPageState extends State<MapPage> {
     // ShopsController shopsController = Get.put(ShopsController());
 
     var sourceLocation = widget.sourceLocation;
-    var destination = widget.destination ?? storage.userCurrentLocation;
+    LatLng destination = widget.destination;
     mapController = Get.put(MapController(
         sourceLocation: sourceLocation, destination: destination));
 
@@ -68,7 +68,7 @@ class MapPageState extends State<MapPage> {
     //? the new address means that the user wants to save the location and doesnt want to check the deliver ability
     if (sourceLocation == null && !widget.newAddress!) {
       mapController.checkDeliveryAbility(
-        target: destination!,
+        target: destination,
       );
     }
   }

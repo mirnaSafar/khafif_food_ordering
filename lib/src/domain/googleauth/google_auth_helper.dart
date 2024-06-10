@@ -24,6 +24,8 @@ RxString userGoogleEmail = ''.obs;
 RxString userGoogleName = ''.obs;
 
 class GoogleAuthHelper {
+  GoogleAuthHelper();
+
   /// Handle Google Signin to authenticate user
   Future<GoogleSignInAccount?> googleSignInProcess() async {
     customLoader();
@@ -46,7 +48,7 @@ class GoogleAuthHelper {
   }
 
   /// To Check if the user is already signedin through google
-  alreadySignIn() async {
+  Future<bool> alreadySignIn() async {
     GoogleSignIn googleSignIn = GoogleSignIn();
     bool alreadySignIn = await googleSignIn.isSignedIn();
     return alreadySignIn;
@@ -62,12 +64,15 @@ class GoogleAuthHelper {
 }
 
 onTapLoginWithGoogle() async {
+  if (await GoogleAuthHelper().alreadySignIn()) {
+    await GoogleAuthHelper().googleSignOutProcess();
+  }
   await GoogleAuthHelper().googleSignInProcess().then((googleUser) {
     if (googleUser != null) {
       // CustomToast.showMessage(
       //     message: 'Signed in Successfully!', messageType: MessageType.SUCCESS);
       Future.delayed(
-          Duration(seconds: 1), () => Get.off(() => LoginAfterGoogleAuth()));
+          Duration(seconds: 1), () => Get.to(() => LoginAfterGoogleAuth()));
     } else {
       Get.snackbar('Error', 'user data is empty');
     }
@@ -82,53 +87,58 @@ class LoginAfterGoogleAuth extends StatelessWidget {
   LoginAfterGoogleAuth({super.key});
 
   LoginController controller = Get.put(LoginController());
-
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(context.screenWidth(30)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            UserInput(
-              maxLength: kDebugMode ? null : 9,
-              keyboardType: TextInputType.phone,
-              validator: (number) {
-                // return null;
-                //
-                return kDebugMode ? null : numberValidator(number!);
-              },
-              controller: controller.phoneController,
-              text: tr('phone_field_lb'),
-              prefixIcon: SizedBox(
-                width: context.screenWidth(4.1),
-                child: Row(
-                  children: <Widget>[
-                    context.screenWidth(30).px,
-                    SvgPicture.asset(AppAssets.icPhone),
-                    context.screenWidth(30).px,
-                    CustomText(
-                      text: '+966 | ',
-                      textType: TextStyleType.BODYSMALL,
-                      darkTextColor: AppColors.mainTextColor,
-                    ),
-                  ],
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              UserInput(
+                maxLength: kDebugMode ? null : 9,
+                keyboardType: TextInputType.phone,
+                validator: (number) {
+                  // return null;
+                  //
+                  return kDebugMode ? null : numberValidator(number!);
+                },
+                controller: controller.phoneController,
+                text: tr('phone_field_lb'),
+                prefixIcon: SizedBox(
+                  width: context.screenWidth(4.1),
+                  child: Row(
+                    children: <Widget>[
+                      context.screenWidth(30).px,
+                      SvgPicture.asset(AppAssets.icPhone),
+                      context.screenWidth(30).px,
+                      CustomText(
+                        text: '+966 | ',
+                        textType: TextStyleType.BODYSMALL,
+                        darkTextColor: AppColors.mainTextColor,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            context.screenWidth(10).ph,
-            CustomButton(
-              key: Key('google login'),
-              onPressed: () {
-                controller.loginAfterGoogleAuth(
-                    email: userGoogleEmail.value,
-                    userName: userGoogleName.value);
-              },
-              text: tr("continue_lb"),
-            ),
-            context.screenWidth(9).ph,
-          ],
+              context.screenWidth(10).ph,
+              CustomButton(
+                key: Key('google login'),
+                onPressed: () {
+                  formKey.currentState!.validate()
+                      ? controller.registerAfterGoogleAuth(
+                          email: userGoogleEmail.value,
+                          userName: userGoogleName.value)
+                      : null;
+                },
+                text: tr("continue_lb"),
+              ),
+              context.screenWidth(9).ph,
+            ],
+          ),
         ),
       ),
     );

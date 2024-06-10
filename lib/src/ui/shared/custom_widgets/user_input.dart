@@ -22,7 +22,9 @@ class UserInput extends StatefulWidget {
       this.prefixText,
       this.height,
       this.onChange,
-      this.borderColor});
+      this.borderColor,
+      this.enabled,
+      this.fillColor});
   bool? obscureText;
   final Icon? suffixIcon;
   final Widget? prefixIcon;
@@ -35,6 +37,8 @@ class UserInput extends StatefulWidget {
   final Color? borderColor;
   final int? maxLength;
   final String? prefixText;
+  final Color? fillColor;
+  final bool? enabled;
   final void Function(String)? onSubmitted;
   final void Function(String)? onChange;
   @override
@@ -55,6 +59,7 @@ class _UserInputState extends State<UserInput> {
         child: SizedBox(
           height: widget.height,
           child: TextFormField(
+            enabled: widget.enabled,
             textAlignVertical: TextAlignVertical.center,
             onChanged: widget.onChange,
             focusNode: _focusNode,
@@ -97,7 +102,7 @@ class _UserInputState extends State<UserInput> {
                         Radius.circular(8),
                       ),
                   borderSide: BorderSide(
-                    color: widget.borderColor ?? Colors.transparent,
+                    color: Colors.black,
                   )),
               focusedErrorBorder: OutlineInputBorder(
                   gapPadding: 0,
@@ -106,7 +111,7 @@ class _UserInputState extends State<UserInput> {
                         Radius.circular(8),
                       ),
                   borderSide: BorderSide(
-                    color: widget.borderColor ?? Colors.transparent,
+                    color: Colors.red,
                   )),
               errorBorder: OutlineInputBorder(
                   gapPadding: 0,
@@ -115,7 +120,7 @@ class _UserInputState extends State<UserInput> {
                         Radius.circular(8),
                       ),
                   borderSide: BorderSide(
-                    color: widget.borderColor ?? Colors.transparent,
+                    color: Colors.red,
                   )),
               enabledBorder: OutlineInputBorder(
                   gapPadding: 0,
@@ -126,7 +131,25 @@ class _UserInputState extends State<UserInput> {
                   borderSide: BorderSide(
                     color: widget.borderColor ?? Colors.transparent,
                   )),
-              fillColor: Colors.white,
+              border: OutlineInputBorder(
+                  gapPadding: 0,
+                  borderRadius: widget.borderRadius ??
+                      BorderRadius.all(
+                        Radius.circular(8),
+                      ),
+                  borderSide: BorderSide(
+                    color: widget.borderColor ?? Colors.transparent,
+                  )),
+              disabledBorder: OutlineInputBorder(
+                  gapPadding: 0,
+                  borderRadius: widget.borderRadius ??
+                      BorderRadius.all(
+                        Radius.circular(8),
+                      ),
+                  borderSide: BorderSide(
+                    color: widget.borderColor ?? Colors.transparent,
+                  )),
+              fillColor: widget.fillColor ?? Colors.white,
               prefixText: widget.prefixText,
               prefixStyle: TextStyle(color: Colors.grey),
             ),

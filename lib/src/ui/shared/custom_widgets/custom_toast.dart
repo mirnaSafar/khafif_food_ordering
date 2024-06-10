@@ -18,7 +18,64 @@ import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/cu
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
 import 'package:lottie/lottie.dart';
 
-class CustomToast {
+class CustomToast extends GetxController with WidgetsBindingObserver {
+  CustomToast() {
+    WidgetsBinding.instance.addObserver(this);
+    print('Observer added');
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void onClose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.onClose(); // Ensures proper cleanup
+  }
+
+  void _closeBotToasts() {
+    if (WidgetsBinding.instance.lifecycleState != AppLifecycleState.resumed) {
+      // BotToast.cleanAll();
+      for (var context in _dialogContexts) {
+        if (context.mounted && Navigator.of(context).canPop()) {
+          Navigator.of(context).pop();
+        }
+      }
+      _dialogContexts.clear();
+      print('BotToast cleaned');
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state); // Ensures base class functionality
+    print('App lifecycle state changed: $state');
+    switch (state) {
+      case AppLifecycleState.resumed:
+        // Handle the app resuming
+        break;
+      case AppLifecycleState.inactive:
+        // Handle the app becoming inactive
+        break;
+      case AppLifecycleState.paused:
+        _closeBotToasts();
+
+        break;
+      case AppLifecycleState.detached:
+        // Handle the app being detached
+        break;
+      case AppLifecycleState.hidden:
+      // _closeBotToasts();
+      // Clear all toasts
+
+      default:
+        break;
+    }
+  }
+
   static showMessage(
       {required String message, MessageType? messageType = MessageType.INFO}) {
     String imageName = 'warning';
@@ -121,27 +178,6 @@ class CustomToast {
                   ),
                 ),
               ),
-              // Positioned(
-              //     bottom: 0,
-              //     child: ClipRRect(
-              //       borderRadius:
-              //            BorderRadius.only(bottomLeft: Radius.circular(20)),
-              //       child: SvgPicture.asset(
-              //         'assets/images/bubble-svgrepo-com.svg',
-              //         width: context .screenWidth(10),
-              //         height: context .screenWidth(7),
-              //         color: ShadowColor.withOpacity(0.4),
-              //       ),
-              //     )),
-              // PositionedDirectional(
-              //   top: -context .screenWidth(11.6),
-              //   start: context .screenWidth(3.2),
-              //   child: Lottie.asset(
-              //     'assets/lotties/$imageName.json',
-              //     width: context .screenWidth(8),
-              //     height: context .screenWidth(8),
-              //   ),
-              // ),
             ],
           ),
         );
@@ -149,39 +185,7 @@ class CustomToast {
     );
   }
 
-  // AwesomeDialog(
-  //         autoHide =
-  //             showMessageWithoutActions! ?  Duration(seconds: 3) : null,
-  //         btnOkColor = Colors.green,
-  //         dialogBackgroundColor = Get.theme.scaffoldBackgroundColor,
-  //         context = context,
-  //         animType = AnimType.SCALE,
-  //         dialogType = dialogType ?? DialogType.WARNING,
-  //         body = Column(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             Flexible(
-  //               child: CustomText(
-  //                 text: content,
-  //                 textType: TextStyleType.SUBTITLE,
-  //               ),
-  //             ),
-  //             if (showMessageWithoutActions) context .screenWidth(30).ph,
-  //           ],
-  //         ),
-  //         btnCancelOnPress = showMessageWithoutActions
-  //             ? null
-  //             : () {
-  //                 secondBtn!();
-  //               },
-  //         btnCancelText = showMessageWithoutActions ? null : secondBtnText,
-  //         btnOkText = showMessageWithoutActions ? null : firstBtnText,
-  //         btnOkOnPress = showMessageWithoutActions
-  //             ? null
-  //             : () {
-  //                 firstBtn!();
-  //                 // context.pushRepalceme( LoginView());
-  //               });
+  static final List<BuildContext> _dialogContexts = [];
   static AwesomeDialog(
       {Color? firstBtnColor,
       Color? secondBtnColor,
@@ -220,13 +224,18 @@ class CustomToast {
         context: Get.context!,
         barrierDismissible: true,
         builder: (context) {
+          _dialogContexts.add(context);
           if (showMessageWithoutActions!) {
             Future.delayed(Duration(seconds: 5), () {
-              if (context.mounted) Navigator.of(context).pop(true);
+              if (context.mounted && _dialogContexts.contains(context)) {
+                Navigator.of(context).pop(true);
+                _dialogContexts.remove(context);
+              }
             });
           }
           return GestureDetector(
             onTap: () {
+              _dialogContexts.remove(context);
               Get.context!.pop();
             },
             child: Dialog(

@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:khafif_food_ordering_application/src/core/app/app_config/app_config.dart';
 import 'package:khafif_food_ordering_application/src/core/enums.dart';
 import 'package:khafif_food_ordering_application/src/core/services/base_controller.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
@@ -31,7 +32,7 @@ class MyInfoController extends BaseController {
               userName: userNameController.text,
               email: userEmailController.text,
               phone: kReleaseMode
-                  ? '+966${userNumberController.text}'
+                  ? '${AppConfig.countryCode}${userNumberController.text}'
                   : userNumberController.text,
             )
                 .then((value) {

@@ -29,7 +29,8 @@ class _MyWidgetState extends State<ShopBottomSheet> {
   @override
   Widget build(BuildContext context) {
     ShopsController controller = Get.put(ShopsController());
-    MapController mapController = Get.put(MapController());
+    MapController mapController =
+        Get.put(MapController(destination: storage.userCurrentLocation!));
 
     return Obx(
       () {

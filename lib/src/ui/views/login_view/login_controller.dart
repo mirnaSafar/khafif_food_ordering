@@ -8,6 +8,7 @@ import 'package:khafif_food_ordering_application/src/core/translation/app_transl
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/data/repositories/user_repository.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_toast.dart';
+import 'package:khafif_food_ordering_application/src/ui/views/login_view/login_view.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/sign_verification/sign_verification_view.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/signup_view/signup_view.dart';
 
@@ -50,39 +51,47 @@ class LoginController extends BaseController {
     }
   }
 
-  void loginAfterGoogleAuth({required String email, required String userName}) {
+  void registerAfterGoogleAuth(
+      {required String email, required String userName}) {
     runFullLoadingFutuerFunction(
         function: UserRepository()
             .signup(
       email: email,
       userName: userName,
-      phone:
-          kReleaseMode ? '+966${phoneController.text}' : phoneController.text,
+      phone: kReleaseMode
+          ? '${AppConfig.countryCode}${phoneController.text}'
+          : phoneController.text,
     )
             .then((value) {
       value.fold((l) {
         isLoading.value = false;
-
+        if (l == tr('number_exists_lb')) {
+          Get.offAll(LoginView());
+        }
         CustomToast.showMessage(message: l, messageType: MessageType.REJECTED);
       }, (r) {
-        runFullLoadingFutuerFunction(
-            function: UserRepository()
-                .login(
-                    phone: kReleaseMode
-                        ? '+966${phoneController.text}'
-                        : phoneController.text)
-                .then((value) {
-          value.fold((l) {
-            isLoading.value = false;
-          }, (r) {
-            isLoading.value = false;
-            storage.setTokenIno(r.token ?? '');
-            storage.setOtpTime(r.timeOtpMinutes.toString());
+        googleLogin();
+      });
+    }));
+  }
 
-            //SharedPrefrenceRepository.setLoggedIn(true);
-            Get.to(SignVerification(number: phoneController.text));
-          });
-        }));
+  void googleLogin() {
+    runFullLoadingFutuerFunction(
+        function: UserRepository()
+            .login(
+                phone: kReleaseMode
+                    ? '${AppConfig.countryCode}${phoneController.text}'
+                    : phoneController.text)
+            .then((value) {
+      value.fold((l) {
+        isLoading.value = false;
+      }, (r) {
+        isLoading.value = false;
+        storage.setTokenIno(r.token ?? '');
+        storage.setOtpTime(r.timeOtpMinutes.toString());
+
+        //SharedPrefrenceRepository.setLoggedIn(true);
+        Get.to(SignVerification(number: phoneController.text));
       });
     }));
   }

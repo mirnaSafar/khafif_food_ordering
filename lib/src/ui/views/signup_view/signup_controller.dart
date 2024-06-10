@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/enums.dart';
 import 'package:khafif_food_ordering_application/src/core/services/base_controller.dart';
+import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/data/repositories/user_repository.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_toast.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/login_view/login_view.dart';
@@ -35,12 +36,14 @@ class SignUpController extends BaseController {
             print(value);
             value.fold((l) {
               isLoading.value = false;
-
+              if (l == tr('number_exists_lb')) {
+                Get.offAll(LoginView());
+              }
               CustomToast.showMessage(
                   message: l, messageType: MessageType.REJECTED);
             }, (r) {
               CustomToast.showMessage(
-                  message: 'registered successfully!',
+                  message: tr('registered_successfully'),
                   messageType: MessageType.SUCCESS);
               Get.off(() => LoginView());
             });

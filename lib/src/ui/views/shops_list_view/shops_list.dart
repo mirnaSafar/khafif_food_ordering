@@ -7,6 +7,7 @@ import 'package:khafif_food_ordering_application/src/core/app/app_config/app_ass
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
+import 'package:khafif_food_ordering_application/src/core/services/location_service.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_appbar.dart';
@@ -86,12 +87,6 @@ class _ShopsListViewState extends State<ShopsListView> {
                   ),
                 ),
                 context.screenWidth(13).ph,
-                // CustomText(
-                //         text: 'Order Date: ${dateTimeController.selectedDate}',
-                //         textType: TextStyleType.BODY)
-                //     .paddingSymmetric(
-                //   horizontal: context.screenWidth(40),
-                // ),
                 CustomRichText(
                   firstText: tr('order_date_lb'),
                   secondText: dateTimeController.formatDateTimeIn24(
@@ -119,10 +114,38 @@ class _ShopsListViewState extends State<ShopsListView> {
                               // backgroundColor: AppColors.mainAppColor,
                               separatorPadding: context.screenWidth(20).ph,
                               itemBuilder: (context, index) => InkWell(
-                                onTap: () {
-                                  shopsController.checkIfTheBrachOpenORClose(
-                                          shopsController.shopsList[index])
-                                      ? Get.to(MapPage(
+                                onTap: () async {
+                                  if (shopsController
+                                      .checkIfTheBrachOpenORClose(
+                                          shopsController.shopsList[index])) {
+                                    if (await LocationService()
+                                        .isPermissionGranted()) {
+                                      if (storage.userCurrentLocation == null) {
+                                        locationService
+                                            .getUserCurrentLocation()
+                                            .then((loc) {
+                                          Get.to(MapPage(
+                                            destination: LatLng(
+                                                loc!.latitude!, loc.longitude!),
+                                            showAllbranchesButton: true,
+                                            sourceLocation: LatLng(
+                                              shopsController
+                                                  .shopsList[index].latitude!,
+                                              shopsController
+                                                  .shopsList[index].longitude!,
+                                            ),
+                                            bottomsheet: ShopBottomSheet(
+                                              shop: shopsController
+                                                  .shopsList[index],
+                                              shops: shopsController.shopsList,
+                                            ),
+                                            appBarTitle: tr('shops_lb'),
+                                          ));
+                                        });
+                                      } else {
+                                        Get.to(MapPage(
+                                          destination:
+                                              storage.userCurrentLocation!,
                                           showAllbranchesButton: true,
                                           sourceLocation: LatLng(
                                             shopsController
@@ -136,8 +159,12 @@ class _ShopsListViewState extends State<ShopsListView> {
                                             shops: shopsController.shopsList,
                                           ),
                                           appBarTitle: tr('shops_lb'),
-                                        ))
-                                      : null;
+                                        ));
+                                      }
+                                    }
+                                  } else {
+                                    null;
+                                  }
                                 },
                                 child: CustomContainer(
                                         backgroundColor: shopsController

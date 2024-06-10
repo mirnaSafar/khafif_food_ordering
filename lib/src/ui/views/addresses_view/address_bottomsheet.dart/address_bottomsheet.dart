@@ -22,7 +22,12 @@ class AddressBottomSheet extends StatelessWidget {
   final AddressModel address;
   @override
   Widget build(BuildContext context) {
-    MapController mapController = Get.put(MapController());
+    MapController mapController = Get.put(MapController(
+      destination: LatLng(
+        address.latitude!,
+        address.longitude!,
+      ),
+    ));
     // ShopsController shopsController = Get.put(ShopsController());
     TextEditingController locationController =
         TextEditingController(text: address.name);

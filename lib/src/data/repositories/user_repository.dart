@@ -8,6 +8,7 @@ import 'package:khafif_food_ordering_application/src/core/services/language_serv
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/data/models/apis/user_points_model.dart';
+import 'package:khafif_food_ordering_application/src/domain/googleauth/google_auth_helper.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/dialogs/browsing_alert_dialog.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/login_view/login_view.dart';
 
@@ -73,7 +74,6 @@ class UserRepository {
           return Right(commonResponse.getStatus);
         } else {
           if (commonResponse.message == "API Phone number must be unique.") {
-            Get.off(LoginView());
             return Left(tr('number_exists_lb'));
           } else {
             return Left(commonResponse.message ?? '');
@@ -202,6 +202,7 @@ class UserRepository {
   }
 
   clearUserData() {
+    GoogleAuthHelper().googleSignOutProcess();
     storage.globalSharedPreference.clear();
     clearData();
     Get.appUpdate();

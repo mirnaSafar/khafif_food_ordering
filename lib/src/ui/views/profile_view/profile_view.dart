@@ -241,7 +241,7 @@ class _ProfileViewState extends State<ProfileView> {
                                     ),
                                   ],
                                 ),
-                                context.screenWidth(15).ph,
+                                // context.screenWidth(0).ph,
                               ],
                             );
                           }),

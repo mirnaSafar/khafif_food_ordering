@@ -284,9 +284,12 @@ class _AddressesViewState extends State<AddressesView> {
                         Get.to(MapPage(
                           editAddress: {"edit": false, "index": null},
                           newAddress: true,
+                          destination: storage.userCurrentLocation!,
                           closePanelHeight: context.screenHeight(4),
                         ));
-                        Get.put(MapController()).getStreetName();
+                        Get.put(MapController(
+                                destination: storage.userCurrentLocation!))
+                            .getStreetName();
                       }
                     }
                   },

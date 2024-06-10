@@ -19,9 +19,9 @@ class MyAppController extends BaseController {
 
       checkConnection(() {
         if (Get.isRegistered<ProductsViewController>()) homeRefreshingMethod();
-        !notShowOnlineMessageOnAppStart.value
-            ? showSnackbarText(tr("key_bot_toast_online"))
-            : notShowOnlineMessageOnAppStart.value = false;
+        // !notShowOnlineMessageOnAppStart.value
+        //     ? showSnackbarText(tr("key_bot_toast_online"))
+        //     : notShowOnlineMessageOnAppStart.value = false;
       });
     });
   }

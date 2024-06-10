@@ -59,6 +59,7 @@ class ShopsListBottomSheet extends StatelessWidget {
                   Get.delete<MapController>();
 
                   Get.to(MapPage(
+                    destination: storage.userCurrentLocation!,
                     showAllbranchesButton: true,
                     sourceLocation: LatLng(
                       shopsList[index].latitude!,

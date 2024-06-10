@@ -52,7 +52,7 @@ class _SignUpViewState extends State<SignUpView> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      context.screenWidth(2.5).ph,
+                      context.screenWidth(4).ph,
                       CustomText(
                         text: tr("signup_lb"),
                         textType: TextStyleType.HEADER,
@@ -119,24 +119,24 @@ class _SignUpViewState extends State<SignUpView> {
                           controller.signup();
                         }, // color: Theme.of(context).primaryColor,
                       ),
-                      context.screenWidth(20).ph,
-                      // Center(
-                      //   child: CustomText(
-                      //       customtextStyle:
-                      //           Theme.of(context).textTheme.bodyLarge!,
-                      //       text: tr("or_lb"),
-                      //       fontWeight: FontWeight.bold,
-                      //       textType: TextStyleType.BODY),
-                      // ),
-                      // context.screenWidth(20).ph,
-                      // CustomButton(
-                      //   key: const Key('google2'),
-                      //   onPressed: () => onTapLoginWithGoogle(),
-                      //   text: tr("google_lb"),
-                      //   color: Colors.white,
-                      //   imageName: 'google_ic',
-                      // ),
-                      context.screenWidth(4).ph,
+                      context.screenWidth(8).ph,
+                      Center(
+                        child: CustomText(
+                            customtextStyle:
+                                Theme.of(context).textTheme.bodyLarge!,
+                            text: tr("or_lb"),
+                            fontWeight: FontWeight.bold,
+                            textType: TextStyleType.BODY),
+                      ),
+                      context.screenWidth(60).ph,
+                      CustomButton(
+                        key: const Key('google2'),
+                        onPressed: () => onTapLoginWithGoogle(),
+                        text: tr("google_lb"),
+                        color: Colors.white,
+                        imageName: 'google_ic',
+                      ),
+                      context.screenWidth(8).ph,
                       CustomRowText(
                         key: const Key('sign log in'),
                         onTap: () => Get.off(LoginView(

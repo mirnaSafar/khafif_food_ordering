@@ -159,184 +159,176 @@ class _CustomDrawerState extends State<CustomDrawer> {
         child: SizedBox(
           // color: AppColors.mainWhiteColor,
           width: context.screenWidth(1.32),
-          child: Stack(children: [
-            SingleChildScrollView(
-              // shrinkWrap: true,
-              child: Column(
-                children: [
-                  Visibility(
-                    visible: userinfo?.value != null,
-                    child: profileSection,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: context.screenWidth(20),
-                        vertical: context
-                            .screenWidth(userinfo?.value == null ? 10 : 30)),
-                    child: SingleChildScrollView(
-                      // shrinkWrap: true,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Visibility(
-                            visible: userinfo?.value != null,
-                            child: Column(
-                              children: [
-                                CustomIconText(
-                                  onTap: () {
-                                    Get.to(const ProfileView());
-                                  },
-                                  imagename: AppAssets.icProfileInfo,
-                                  textType: TextStyleType.BODY,
-                                  text: tr('my_profile_lb'),
-                                ),
-                                const Divider(),
-                              ],
-                            ),
+          child: SingleChildScrollView(
+            // shrinkWrap: true,
+            child: Column(
+              children: [
+                Visibility(
+                  visible: userinfo?.value != null,
+                  child: profileSection,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: context.screenWidth(20),
+                      vertical: context
+                          .screenWidth(userinfo?.value == null ? 9 : 30)),
+                  child: SingleChildScrollView(
+                    // shrinkWrap: true,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Visibility(
+                          visible: userinfo?.value != null,
+                          child: Column(
+                            children: [
+                              CustomIconText(
+                                onTap: () {
+                                  Get.to(const ProfileView());
+                                },
+                                imagename: AppAssets.icProfileInfo,
+                                textType: TextStyleType.BODY,
+                                text: tr('my_profile_lb'),
+                              ),
+                              const Divider(),
+                            ],
                           ),
-                          CustomIconText(
-                            onTap: () {
-                              Get.to(SettingsView());
-                            },
-                            imagename: AppAssets.icSettings,
-                            textType: TextStyleType.BODY,
-                            text: tr('settings_lb'),
+                        ),
+                        CustomIconText(
+                          onTap: () {
+                            Get.to(SettingsView());
+                          },
+                          imagename: AppAssets.icSettings,
+                          textType: TextStyleType.BODY,
+                          text: tr('settings_lb'),
+                        ),
+                        const Divider(),
+                        InkWell(
+                          onTap: () {
+                            appTheme.toggleTheme();
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              CustomIconText(
+                                text: tr('dark_mode_lb'),
+                                textType: TextStyleType.BODY,
+                                image: const Icon(Icons.dark_mode_outlined),
+                              ),
+                              Switch(
+                                  activeColor: Colors.white,
+                                  activeTrackColor:
+                                      AppColors.swithTileActiveColor,
+                                  value: appTheme.isDarkMode.value,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      appTheme.toggleTheme();
+                                      // themeController.toggleTheme();
+                                    });
+                                  }),
+                            ],
                           ),
-                          const Divider(),
-                          InkWell(
-                            onTap: () {
-                              appTheme.toggleTheme();
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                CustomIconText(
-                                  text: tr('dark_mode_lb'),
-                                  textType: TextStyleType.BODY,
-                                  image: const Icon(Icons.dark_mode_outlined),
-                                ),
-                                Switch(
-                                    activeColor: Colors.white,
-                                    activeTrackColor:
-                                        AppColors.swithTileActiveColor,
-                                    value: appTheme.isDarkMode.value,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        appTheme.toggleTheme();
-                                        // themeController.toggleTheme();
-                                      });
-                                    }),
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            height: context.screenWidth(20),
-                            color: AppColors.greyColor,
-                          ),
-                          CustomIconText(
-                            onTap: () {
-                              Get.to(MyOrderView());
-                            },
-                            imagename: AppAssets.icBox,
-                            textType: TextStyleType.BODY,
-                            text: tr('orders_lb'),
-                          ),
-                          const Divider(),
-                          CustomIconText(
-                            onTap: () {
-                              storage.isLoggedIn
-                                  ? Get.to(AddressesView())
-                                  : showBrowsingDialogAlert(context);
-                            },
-                            textType: TextStyleType.BODY,
-                            imagename: AppAssets.icAddress,
-                            text: tr('addresses_lb'),
-                          ),
-                          const Divider(),
-                          CustomIconText(
-                            onTap: () {},
-                            imagename: AppAssets.icTicket,
-                            textType: TextStyleType.BODY,
-                            text: tr('offers_lb'),
-                          ),
-                          const Divider(),
-                          CustomIconText(
-                            onTap: () {
-                              changeLanguageDialog();
-                            },
-                            image: const Icon(Icons.language),
-                            textType: TextStyleType.BODY,
-                            text: tr('Languages_lb'),
-                          ),
+                        ),
+                        Divider(
+                          height: context.screenWidth(20),
+                          color: AppColors.greyColor,
+                        ),
+                        CustomIconText(
+                          onTap: () {
+                            Get.to(MyOrderView());
+                          },
+                          imagename: AppAssets.icBox,
+                          textType: TextStyleType.BODY,
+                          text: tr('orders_lb'),
+                        ),
+                        const Divider(),
+                        CustomIconText(
+                          onTap: () {
+                            storage.isLoggedIn
+                                ? Get.to(AddressesView())
+                                : showBrowsingDialogAlert(context);
+                          },
+                          textType: TextStyleType.BODY,
+                          imagename: AppAssets.icAddress,
+                          text: tr('addresses_lb'),
+                        ),
+                        const Divider(),
+                        CustomIconText(
+                          onTap: () {},
+                          imagename: AppAssets.icTicket,
+                          textType: TextStyleType.BODY,
+                          text: tr('offers_lb'),
+                        ),
+                        const Divider(),
+                        CustomIconText(
+                          onTap: () {
+                            changeLanguageDialog();
+                          },
+                          image: const Icon(Icons.language),
+                          textType: TextStyleType.BODY,
+                          text: tr('Languages_lb'),
+                        ),
 
-                          // 1.px
+                        // 1.px
 
-                          const Divider(),
+                        const Divider(),
+                        CustomIconText(
+                          // imagecolor: AppColors.mainTextColor,
+                          onTap: () {
+                            Get.to(FavoritesView());
+                          },
+                          imageHeight: context.screenWidth(18),
+                          imagename: AppAssets.icNotFavorite,
+                          text: tr('favorites_lb'),
+                          textType: TextStyleType.BODY,
+                        ),
+                        const Divider(),
+                        CustomIconText(
+                          onTap: () {
+                            Get.to(() => const HelpCenterView());
+                          },
+                          imagename: AppAssets.icHelp,
+                          textType: TextStyleType.BODY,
+                          text: tr('help_center_lb'),
+                        ),
+                        const Divider(),
+                        if (!storage.isLoggedIn)
                           CustomIconText(
-                            // imagecolor: AppColors.mainTextColor,
                             onTap: () {
-                              Get.to(FavoritesView());
+                              Get.offAll(LoginView());
                             },
+                            text: tr('login_lb'),
+                            imagename: AppAssets.icSignOut,
                             imageHeight: context.screenWidth(18),
-                            imagename: AppAssets.icNotFavorite,
-                            text: tr('favorites_lb'),
-                            textType: TextStyleType.BODY,
+                            imageWidth: context.screenWidth(18),
                           ),
-                          const Divider(),
+                        if (storage.isLoggedIn)
                           CustomIconText(
                             onTap: () {
-                              Get.to(() => const HelpCenterView());
+                              buildAwsomeDialog(
+                                context: context,
+                                content: tr('logout_warning_dialog'),
+                                firstBtnColor: Colors.red,
+                                secondBtnColor: Colors.green,
+                                firstBtnText: tr('logout_lb'),
+                                secondBtnText: tr('cancel_lb'),
+                                firstBtn: () {
+                                  UserRepository().logout();
+                                },
+                              );
                             },
-                            imagename: AppAssets.icHelp,
-                            textType: TextStyleType.BODY,
-                            text: tr('help_center_lb'),
+                            text: tr('logout_lb'),
+                            imagename: AppAssets.icSignOut,
+                            imageHeight: context.screenWidth(18),
+                            imageWidth: context.screenWidth(18),
                           ),
-                          const Divider(),
-                          if (!storage.isLoggedIn)
-                            CustomIconText(
-                              onTap: () {
-                                Get.offAll(LoginView());
-                              },
-                              text: tr('login_lb'),
-                              imagename: AppAssets.icSignOut,
-                              imageHeight: context.screenWidth(18),
-                              imageWidth: context.screenWidth(18),
-                            ),
-                          if (storage.isLoggedIn)
-                            CustomIconText(
-                              onTap: () {
-                                buildAwsomeDialog(
-                                  context: context,
-                                  content: tr('logout_warning_dialog'),
-                                  firstBtnColor: Colors.red,
-                                  secondBtnColor: Colors.green,
-                                  firstBtnText: tr('logout_lb'),
-                                  secondBtnText: tr('cancel_lb'),
-                                  firstBtn: () {
-                                    UserRepository().logout();
-                                  },
-                                );
-                              },
-                              text: tr('logout_lb'),
-                              imagename: AppAssets.icSignOut,
-                              imageHeight: context.screenWidth(18),
-                              imageWidth: context.screenWidth(18),
-                            ),
-                          context.screenWidth(15).ph
-                        ],
-                      ),
+                        // context.screenWidth(35).ph
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
-            Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Container(
+                ),
+                Container(
                   padding:
-                      EdgeInsets.symmetric(vertical: context.screenWidth(50)),
+                      EdgeInsets.symmetric(vertical: context.screenWidth(30)),
                   color: Get.theme.scaffoldBackgroundColor,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -410,8 +402,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       ),
                     ],
                   ),
-                )),
-          ]),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
