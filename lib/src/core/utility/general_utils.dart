@@ -174,9 +174,16 @@ void changeLanguageDialog() {
       backgroundColor: Get.theme.scaffoldBackgroundColor,
       title: tr('Languages_lb'),
       titlePadding: EdgeInsets.only(top: Get.context!.screenWidth(20)),
-      // ignore: deprecated_member_use
       content: Theme(
-        data: Get.theme.copyWith(useMaterial3: false),
+        data: Get.theme.copyWith(
+            // ignore: deprecated_member_use
+            // useMaterial3: false,
+            // dialogBackgroundColor: Get.theme.scaffoldBackgroundColor,
+            // dialogTheme: DialogTheme(
+            //   backgroundColor: Get.theme.scaffoldBackgroundColor,
+            //   surfaceTintColor: Colors.transparent,
+            // ),
+            ),
         child: Column(
           children: [
             const Divider(),

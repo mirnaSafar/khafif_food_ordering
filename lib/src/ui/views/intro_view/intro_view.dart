@@ -139,7 +139,7 @@ class _IntroWidgetState extends State<IntroWidget>
                                           color: AppColors.greyColor,
                                           activeColor: AppColors.mainAppColor),
                                     ),
-                                    context.screenHeight(10).ph,
+                                    context.screenHeight(13).ph,
                                     Padding(
                                       padding: EdgeInsets.symmetric(
                                           vertical: 0,

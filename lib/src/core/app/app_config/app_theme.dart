@@ -40,7 +40,12 @@ class AppTheme extends GetxController {
       dividerTheme: DividerThemeData(
         color: AppColors.mainGreyColor,
       ),
-      dialogBackgroundColor: AppColors.backgroundColor,
+      dialogBackgroundColor: Get.theme.scaffoldBackgroundColor,
+      dialogTheme: DialogTheme(
+        backgroundColor: Get.theme.scaffoldBackgroundColor,
+        surfaceTintColor: Colors.transparent,
+      ),
+
       unselectedWidgetColor:
           AppColors.buttonTextColor, // Color of the checkbox when unchecked
       checkboxTheme: CheckboxThemeData(
@@ -143,7 +148,10 @@ class AppTheme extends GetxController {
       ),
 
       dialogBackgroundColor: AppColors.secondaryblackColor,
-
+      dialogTheme: DialogTheme(
+        backgroundColor: Get.theme.scaffoldBackgroundColor,
+        surfaceTintColor: Colors.transparent,
+      ),
       unselectedWidgetColor:
           AppColors.buttonTextColor, // Color of the checkbox when unchecked
       checkboxTheme: CheckboxThemeData(
