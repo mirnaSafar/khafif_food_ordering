@@ -48,6 +48,7 @@ buildSearchField() {
       storage.getAppLanguage() == LanguageService.enCode ? 8 : 0;
   return Expanded(
     child: UserInput(
+        fillColor: Get.theme.colorScheme.primary,
         height: Get.context!.screenWidth(9),
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(rightRadius),
@@ -58,6 +59,7 @@ buildSearchField() {
         prefixIcon: Transform.scale(
           scale: 0.4,
           child: SvgPicture.asset(
+            color: Get.theme.colorScheme.secondary,
             AppAssets.icSearch,
           ),
         ),
@@ -107,7 +109,7 @@ class NoSearchResultsWidget extends StatelessWidget {
 
 buildFilterWidget() {
   return CustomContainer(
-    backgroundColor: Get.theme.colorScheme.secondary,
+    backgroundColor: Get.theme.colorScheme.primary,
     height: Get.context!.screenHeight(18),
     width: Get.context!.screenHeight(15),
     borderRadius: BorderRadiusDirectional.only(
@@ -116,7 +118,7 @@ buildFilterWidget() {
       Get.context!.screenWidth(28),
     ),
     child: SvgPicture.asset(
-      color: Get.theme.colorScheme.primary,
+      color: Get.theme.colorScheme.secondary,
       AppAssets.icFilter,
       height: Get.context!.screenWidth(80),
       width: Get.context!.screenWidth(80),

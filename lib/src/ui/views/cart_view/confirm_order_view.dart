@@ -92,7 +92,7 @@ class _ConfirmOrderViewState extends State<ConfirmOrderView> {
                                         ? totalShimmer()
                                         : CustomText(
                                             text:
-                                                '${controller.customerCart?.value.amountTotal ?? 0.0} SAR',
+                                                '${controller.customerCart?.value.amountTotal!.toInt() ?? 0} ${tr('currency_lb')}',
                                             fontWeight: FontWeight.w600,
                                             textType: TextStyleType.HEADER,
                                           ),
@@ -255,8 +255,10 @@ class _ConfirmOrderViewState extends State<ConfirmOrderView> {
                                                             BorderRadius
                                                                 .circular(8),
                                                         backgroundColor:
-                                                            AppColors
-                                                                .mainWhiteColor,
+                                                            Get.isDarkMode
+                                                                ? AppColors
+                                                                    .secondary2blackColor
+                                                                : Colors.white,
                                                         blurRadius: 4,
                                                         shadowColor: AppColors
                                                             .shadowColor,
@@ -331,7 +333,7 @@ class _ConfirmOrderViewState extends State<ConfirmOrderView> {
                                                                                 CustomText(
                                                                               textAlign: TextAlign.start,
                                                                               text: controller.suggestedProducts[index].name ?? '',
-                                                                              darkTextColor: AppColors.mainBlackColor,
+                                                                              // darkTextColor: AppColors.mainBlackColor,
                                                                               textType: TextStyleType.SMALL,
                                                                               fontWeight: FontWeight.w500,
                                                                             ),
@@ -351,7 +353,7 @@ class _ConfirmOrderViewState extends State<ConfirmOrderView> {
                                                                             ),
                                                                             context.screenWidth(80).px,
                                                                             CustomText(
-                                                                                darkTextColor: AppColors.mainBlackColor,
+                                                                                // darkTextColor: AppColors.mainBlackColor,
                                                                                 textType: TextStyleType.CUSTOM,
                                                                                 fontSize: context.screenWidth(40),
                                                                                 fontWeight: FontWeight.w400,
@@ -372,9 +374,9 @@ class _ConfirmOrderViewState extends State<ConfirmOrderView> {
                                                                           firstText:
                                                                               tr('price_lb'),
                                                                           secondText:
-                                                                              '${controller.suggestedProducts[index].price} SAR',
-                                                                          secondColor:
-                                                                              AppColors.mainBlackColor,
+                                                                              '${controller.suggestedProducts[index].price} ${tr('currency_lb')} ',
+                                                                          // secondColor:
+                                                                          //     AppColors.mainBlackColor,
                                                                           secondFontSize:
                                                                               context.screenWidth(40),
                                                                           secondFontWeight:
@@ -411,6 +413,10 @@ class _ConfirmOrderViewState extends State<ConfirmOrderView> {
                                                               },
                                                               child: SvgPicture
                                                                   .asset(
+                                                                color: Get
+                                                                    .theme
+                                                                    .colorScheme
+                                                                    .secondary,
                                                                 AppAssets
                                                                     .icPlusContainer,
                                                               ),

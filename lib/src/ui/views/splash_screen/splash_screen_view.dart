@@ -20,14 +20,14 @@ class _SplashScreenViewState extends State<SplashScreenView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.mainWhiteColor,
+      backgroundColor: Get.theme.scaffoldBackgroundColor,
       body: Align(
         alignment: Alignment.bottomCenter,
         child: Stack(fit: StackFit.expand, children: [
           Transform.scale(
-            scale: 0.8,
+            scale: 0.6,
             child: Image.asset(
-              'assets/images/khafif_logo.jpg',
+              'assets/images/khafif logo without Back.png',
               width: context.screenWidth(40),
               height: context.screenWidth(40),
             ),

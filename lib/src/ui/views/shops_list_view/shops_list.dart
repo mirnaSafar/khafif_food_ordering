@@ -89,8 +89,9 @@ class _ShopsListViewState extends State<ShopsListView> {
                 context.screenWidth(13).ph,
                 CustomRichText(
                   firstText: tr('order_date_lb'),
-                  secondText: dateTimeController.formatDateTimeIn24(
-                      dateTimeController.selectedTime.value),
+                  secondText: dateTimeController.parse24TimeToDayPeriod(
+                      stringDateTime: dateTimeController.formatDateTimeIn24(
+                          dateTimeController.selectedTime.value)),
                 ).paddingSymmetric(
                   horizontal: context.screenWidth(40),
                 ),
@@ -171,8 +172,8 @@ class _ShopsListViewState extends State<ShopsListView> {
                                                 .checkIfTheBrachOpenORClose(
                                                     shopsController
                                                         .shopsList[index])
-                                            ? Colors.white
-                                            : Colors.grey[200],
+                                            ? Get.theme.colorScheme.primary
+                                            : Get.theme.colorScheme.onBackground,
                                         shadowColor: AppColors.shadowColor,
                                         blurRadius: 4,
                                         offset: const Offset(0, 4),
@@ -191,8 +192,8 @@ class _ShopsListViewState extends State<ShopsListView> {
                                             Flexible(
                                               child: CustomText(
                                                 textAlign: TextAlign.start,
-                                                darkTextColor:
-                                                    AppColors.mainBlackColor,
+                                                // darkTextColor:
+                                                //     AppColors.mainBlackColor,
 
                                                 text: shopsController
                                                         .shopsList[index]
@@ -223,16 +224,18 @@ class _ShopsListViewState extends State<ShopsListView> {
                                                         ? Colors.green
                                                         : Colors.red,
                                                     text:
-                                                        '(${shopsController.checkIfTheBrachOpenORClose(shopsController.shopsList[index]) ? tr('open_lb') : tr('close_lb')})',
+                                                        '(${shopsController.checkIfTheBrachOpenORClose(shopsController.shopsList[index]) ? tr('open_lb') : tr('close_lb')})  ',
                                                     textType:
                                                         TextStyleType.SMALL),
                                                 SvgPicture.asset(
+                                                    color: Get.theme.colorScheme
+                                                        .secondary,
                                                     AppAssets.icLocation),
                                                 CustomText(
-                                                  darkTextColor:
-                                                      AppColors.mainBlackColor,
+                                                  // darkTextColor:
+                                                  //     AppColors.mainBlackColor,
                                                   text:
-                                                      '${shopsController.calcShopDistanceFromCurrentLocation(shopsController.shopsList[index])} km',
+                                                      ' ${shopsController.calcShopDistanceFromCurrentLocation(shopsController.shopsList[index])} km',
                                                   textType:
                                                       TextStyleType.BODYSMALL,
                                                   fontWeight: FontWeight.w500,

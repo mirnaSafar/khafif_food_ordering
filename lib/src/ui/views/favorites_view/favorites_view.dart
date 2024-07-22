@@ -14,6 +14,7 @@ import 'package:khafif_food_ordering_application/src/ui/views/products_view/prod
 import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_widgets/custom_name_calories.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_widgets/custom_price_currency.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_network_image.dart';
+import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_widgets/custom_product_widget.dart';
 
 class FavoritesView extends StatefulWidget {
   FavoritesView({super.key});
@@ -55,84 +56,8 @@ class _FavoritesViewState extends State<FavoritesView> {
                               if (snapshot.data! > 0) {
                                 return Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 8),
-                                  child: CustomContainer(
-                                    blurRadius: 4,
-                                    shadowColor: AppColors.shadowColor,
-                                    borderRadius: BorderRadius.circular(12),
-
-                                    offset: Offset(0, 4),
-                                    containerStyle: ContainerStyle.BIGSQUARE,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: context.screenWidth(50),
-                                        vertical: context.screenWidth(90)),
-                                    // borderRadius: 19,
-                                    // height: 207,
-                                    width: context.screenWidth(2.3),
-
-                                    child: Stack(
-                                      alignment: AlignmentDirectional.topEnd,
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            Get.to(ProductDetailsView(
-                                                product: controller
-                                                    .favoritesList[index]));
-                                          },
-                                          child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Flexible(
-                                                  // height:
-                                                  //     context .screenWidth(20),
-
-                                                  child: CustomNetworkImage(
-                                                    imageUrl: controller
-                                                            .favoritesList[
-                                                                index]
-                                                            .image ??
-                                                        '',
-                                                  ),
-                                                ),
-
-                                                //  SvgPicture.asset(e.values.first[0]),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    CustomNameCalories(
-                                                        productname: controller
-                                                                .favoritesList[
-                                                                    index]
-                                                                .name ??
-                                                            '',
-                                                        calory: controller
-                                                            .favoritesList[
-                                                                index]
-                                                            .calories
-                                                            .toString()),
-                                                    CustomPriceCurrency(
-                                                        price: controller
-                                                            .favoritesList[
-                                                                index]
-                                                            .price
-                                                            .toString()),
-                                                  ],
-                                                )
-                                              ]),
-                                        ),
-                                        InkWell(
-                                          onTap: () =>
-                                              selectedIndex.value = index,
-                                          child: CustomFavorite(
-                                              index: selectedIndex.value,
-                                              product: controller
-                                                  .favoritesList[index]),
-                                        ),
-                                      ],
-                                    ),
+                                  child: CustomProductWidget(
+                                    product: controller.favoritesList[index],
                                   ),
                                 );
                               }

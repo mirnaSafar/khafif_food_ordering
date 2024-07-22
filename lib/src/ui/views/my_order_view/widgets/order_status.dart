@@ -26,7 +26,7 @@ class OrderStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomContainer(
-        backgroundColor: Colors.white,
+        backgroundColor: Get.theme.colorScheme.primary,
         shadowColor: AppColors.shadowColor,
         blurRadius: 4,
         offset: const Offset(0, 4),
@@ -44,14 +44,14 @@ class OrderStatus extends StatelessWidget {
                 firstFontWeight: FontWeight.w400,
                 secondFontWeight: FontWeight.w600,
                 firstFontSize: AppFonts(context).body,
-                firstColor: AppColors.mainBlackColor,
-                secondColor: AppColors.mainBlackColor,
+                // firstColor: AppColors.mainBlackColor,
+                // secondColor: AppColors.mainBlackColor,
                 secondFontSize: AppFonts(context).body,
               ),
               context.screenWidth(40).ph,
               CustomText(
                 text: orderDate,
-                darkTextColor: AppColors.mainBlackColor,
+                // darkTextColor: AppColors.mainBlackColor,
                 textType: TextStyleType.SMALL,
                 fontWeight: FontWeight.w400,
                 textColor: AppColors.placeholderTextColor,
@@ -61,8 +61,8 @@ class OrderStatus extends StatelessWidget {
                 firstText: tr('price_lb'),
                 secondText: orderPrice,
                 firstFontWeight: FontWeight.w400,
-                firstColor: AppColors.mainBlackColor,
-                secondColor: AppColors.mainBlackColor,
+                // firstColor: AppColors.mainBlackColor,
+                // secondColor: AppColors.mainBlackColor,
                 secondFontWeight: FontWeight.w500,
                 firstFontSize: AppFonts(context).small,
                 secondFontSize: AppFonts(context).bodySmall,

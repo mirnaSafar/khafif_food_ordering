@@ -49,8 +49,7 @@ class ProfileController extends BaseController {
                   userPointsModel.value = r;
                   userPoints.value = r.point ?? 0.0;
                   userCode.value = r.code ?? '';
-                  intUserPoints.value =
-                      '${userPoints.value.toString().split('.')[0]}.00';
+                  intUserPoints.value = userPoints.value.toInt().toString();
                 })));
   }
 

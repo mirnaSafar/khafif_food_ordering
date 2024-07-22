@@ -30,7 +30,7 @@ showDeliveryCheckerDialog(
             borderRadius: BorderRadius.circular(14),
             // height: Get.context!.screenHeight(2.7),
             width: Get.context!.screenWidth(1.1),
-            backgroundColor: AppColors.mainWhiteColor,
+            backgroundColor: Get.theme.colorScheme.primary,
             padding: EdgeInsets.all(Get.context!.screenWidth(30)),
             child: SingleChildScrollView(
               child: Column(
@@ -46,7 +46,7 @@ showDeliveryCheckerDialog(
                           style: TextStyle(),
                           child: CustomText(
                             text: tr('delivery_checker_lb'),
-                            darkTextColor: AppColors.mainBlackColor,
+                            // darkTextColor: AppColors.mainBlackColor,
                             textType: TextStyleType.SUBTITLE,
                             fontWeight: FontWeight.w900,
                           ),
@@ -60,7 +60,7 @@ showDeliveryCheckerDialog(
                               child: CustomText(
                                   textColor: AppColors.mainBlackColor,
                                   fontWeight: FontWeight.w400,
-                                  darkTextColor: AppColors.mainBlackColor,
+                                  // darkTextColor: AppColors.mainBlackColor,
                                   text: subtitle ?? tr('ability_to_deliver_lb'),
                                   textType: TextStyleType.BODY),
                             ),
@@ -77,6 +77,7 @@ showDeliveryCheckerDialog(
                           onPressed: onPressed,
                           fontsize: context.screenWidth(34),
                           textStyleType: TextStyleType.CUSTOM,
+                          textColor: AppColors.mainTextColor,
                           height: Get.context!.screenWidth(8),
                           text: btnText ?? tr('confirm_location_lb'),
                         ),
@@ -85,6 +86,7 @@ showDeliveryCheckerDialog(
                       Expanded(
                         child: CustomButton(
                           onPressed: () => Get.context!.pop(),
+                          textColor: AppColors.mainTextColor,
                           fontsize: context.screenWidth(34),
                           textStyleType: TextStyleType.CUSTOM,
                           height: Get.context!.screenWidth(8),

@@ -22,6 +22,7 @@ import 'package:khafif_food_ordering_application/src/data/repositories/order_rep
 import 'package:khafif_food_ordering_application/src/data/repositories/user_addresses_repository.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_toast.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/dialogs/browsing_alert_dialog.dart';
+import 'package:khafif_food_ordering_application/src/ui/views/cart_view/confirm_order_view.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_view.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/products_view/products_widgets/delivery_checker_dialog.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/shops_list_view/shops_list.dart';
@@ -251,7 +252,7 @@ class MapController extends BaseController {
     });
   }
 
-  Future checkDeliveryAbility({required LatLng target}) async {
+  checkDeliveryAbility({required LatLng target}) async {
     return runFullLoadingFutuerFunction(
         function: OrdersRepository()
             .orderDelivery(
@@ -260,7 +261,8 @@ class MapController extends BaseController {
                   deliveryToAddressOptions(canDeliver: false);
                   // getStreetName(
                   //     latitude: target.latitude, longitude: target.longitude);
-                  return null;
+                  // CustomToast.showMessage(
+                  //     message: l, messageType: MessageType.WARNING);
                 }, (r) {
                   r
                       ? getStreetName(
@@ -268,8 +270,6 @@ class MapController extends BaseController {
                           longitude: target.longitude)
                       : null;
                   deliveryToAddressOptions(canDeliver: r);
-
-                  return r;
                 })));
   }
 
@@ -285,7 +285,7 @@ class MapController extends BaseController {
         if (!(storage.isLoggedIn)) {
           showBrowsingDialogAlert(Get.context!);
         } else {
-          Get.offAll(ProductsView());
+          Get.off(ConfirmOrderView());
         }
       });
     } else {

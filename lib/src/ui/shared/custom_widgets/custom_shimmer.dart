@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CustomShimmer extends StatelessWidget {
@@ -12,8 +13,8 @@ class CustomShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isLoading) {
       return Shimmer.fromColors(
-        baseColor: Colors.grey[350]!,
-        highlightColor: Colors.grey[100]!,
+        baseColor: Get.theme.colorScheme.surface,
+        highlightColor: Get.theme.colorScheme.onSurface,
         child: child,
       );
     } else {

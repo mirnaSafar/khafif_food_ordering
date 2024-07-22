@@ -30,7 +30,7 @@ class SignUpController extends BaseController {
                 .signup(
             email: emailController.text,
             userName: nameController.text,
-            phone: '${AppConfig.countryCode}${phoneController.text}',
+            phone: phoneController.text,
           )
                 .then((value) {
             print(value);

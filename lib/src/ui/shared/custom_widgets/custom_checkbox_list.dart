@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
@@ -41,7 +42,9 @@ class _CustomCheckBoxListState extends State<CustomCheckBoxList> {
           containerStyle: ContainerStyle.NORMAL,
           backgroundColor: widget.selectedValue == widget.index
               ? AppColors.mainAppColor
-              : AppColors.mainWhiteColor,
+              : Get.theme.colorScheme.background,
+          shadowColor: Get.theme.colorScheme.background,
+
           // width:  context .screenWidth(5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -49,8 +52,8 @@ class _CustomCheckBoxListState extends State<CustomCheckBoxList> {
               CustomRadio(
                   width: context.screenWidth(25),
                   height: context.screenWidth(25),
-                  borderColor: AppColors.buttonTextColor,
-                  fillColor: AppColors.buttonTextColor,
+                  borderColor: Get.theme.colorScheme.secondary,
+                  fillColor: Get.theme.colorScheme.secondary,
                   value: widget.index,
                   onTaped: (value) {
                     if (value != null) {
@@ -61,7 +64,6 @@ class _CustomCheckBoxListState extends State<CustomCheckBoxList> {
               context.screenWidth(45).px,
               CustomText(
                 text: widget.text,
-                darkTextColor: AppColors.mainBlackColor,
                 textType: TextStyleType.SMALL,
                 fontWeight: FontWeight.bold,
               ),

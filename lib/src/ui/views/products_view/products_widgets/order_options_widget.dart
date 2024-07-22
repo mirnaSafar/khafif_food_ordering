@@ -86,7 +86,7 @@ void showOrderOptionsDialog(BuildContext context) {
           customBlurChildType: CustomBlurChildType.BOTTOMSHEET,
           child: Container(
             decoration: BoxDecoration(
-              color: AppColors.mainWhiteColor,
+              color: Get.theme.scaffoldBackgroundColor,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40), topRight: Radius.circular(40)),
             ),
@@ -104,15 +104,11 @@ void showOrderOptionsDialog(BuildContext context) {
                 CustomText(
                   text: tr('order_options_lb'),
                   fontWeight: FontWeight.w600,
-                  darkTextColor: AppColors.mainBlackColor,
-                  textColor: AppColors.mainBlackColor,
                   textType: TextStyleType.SUBTITLE,
                 ),
                 CustomText(
                   text: tr('how_can_help_lb'),
                   fontWeight: FontWeight.w400,
-                  textColor: AppColors.mainBlackColor,
-                  darkTextColor: AppColors.mainBlackColor,
                   textType: TextStyleType.SMALL,
                 ),
                 context.screenWidth(30).ph,

@@ -38,7 +38,7 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: CustomAppbar(appbarTitle: tr('personal_details_lb')),
         body: SingleChildScrollView(
           child: FutureBuilder(
@@ -66,7 +66,8 @@ class _ProfileViewState extends State<ProfileView> {
                                     padding: EdgeInsets.symmetric(
                                         horizontal: context.screenWidth(40),
                                         vertical: context.screenWidth(50)),
-                                    backgroundColor: AppColors.mainWhiteColor,
+                                    backgroundColor:
+                                        Get.theme.colorScheme.primary,
                                     containerStyle: ContainerStyle.BIGSQUARE,
                                     blurRadius: 4,
                                     shadowColor: AppColors.shadowColor,
@@ -81,8 +82,8 @@ class _ProfileViewState extends State<ProfileView> {
                                               CustomContainer(
                                                   containerStyle: ContainerStyle
                                                       .SMALLSQUARE,
-                                                  backgroundColor:
-                                                      AppColors.backgroundColor,
+                                                  backgroundColor: Get.theme
+                                                      .colorScheme.primary,
                                                   width: context.screenWidth(5),
                                                   height:
                                                       context.screenWidth(5),
@@ -113,8 +114,8 @@ class _ProfileViewState extends State<ProfileView> {
                                                       scrollDirection:
                                                           Axis.horizontal,
                                                       child: CustomText(
-                                                          darkTextColor: AppColors
-                                                              .mainBlackColor,
+                                                          // darkTextColor: AppColors
+                                                          //     .mainBlackColor,
                                                           textType:
                                                               TextStyleType
                                                                   .BODY,
@@ -125,8 +126,8 @@ class _ProfileViewState extends State<ProfileView> {
                                                               ''),
                                                     ).paddingOnly(bottom: 0),
                                                     CustomText(
-                                                      darkTextColor: AppColors
-                                                          .mainBlackColor,
+                                                      // darkTextColor: AppColors
+                                                      //     .mainBlackColor,
                                                       textType:
                                                           TextStyleType.SMALL,
                                                       fontWeight:
@@ -142,8 +143,8 @@ class _ProfileViewState extends State<ProfileView> {
                                                       child: CustomText(
                                                         textAlign:
                                                             TextAlign.center,
-                                                        darkTextColor: AppColors
-                                                            .mainBlackColor,
+                                                        // darkTextColor: AppColors
+                                                        //     .mainBlackColor,
                                                         textType:
                                                             TextStyleType.SMALL,
                                                         fontWeight:
@@ -187,9 +188,9 @@ class _ProfileViewState extends State<ProfileView> {
                                                           scrollDirection:
                                                               Axis.horizontal,
                                                           child: CustomText(
-                                                              darkTextColor:
-                                                                  AppColors
-                                                                      .mainBlackColor,
+                                                              // darkTextColor:
+                                                              //     AppColors
+                                                              // .mainBlackColor,
                                                               textType:
                                                                   TextStyleType
                                                                       .SMALL,
@@ -296,9 +297,11 @@ class _ProfileViewState extends State<ProfileView> {
                                   buildAwsomeDialog(
                                     context: context,
                                     content: tr('logout_warning_dialog'),
-                                    secondBtnText: tr('logout_lb'),
-                                    firstBtnText: tr('cancel_lb'),
-                                    secondBtn: () {
+                                    firstBtnColor: Colors.red,
+                                    secondBtnColor: Colors.green,
+                                    firstBtnText: tr('logout_lb'),
+                                    secondBtnText: tr('cancel_lb'),
+                                    firstBtn: () {
                                       UserRepository().logout();
                                     },
                                   );

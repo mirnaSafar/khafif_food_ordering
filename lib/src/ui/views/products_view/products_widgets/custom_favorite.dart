@@ -41,7 +41,7 @@ class _CustomFavoriteState extends State<CustomFavorite> {
           width: context.screenWidth(12),
           height: context.screenWidth(12),
           containerStyle: ContainerStyle.CIRCLE, // borderRadius: 17,
-          backgroundColor: AppColors.mainWhiteColor,
+          backgroundColor: Get.theme.colorScheme.onBackground,
           child: Transform.scale(
             scale: 0.4,
             child: SvgPicture.asset(

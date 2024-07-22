@@ -74,20 +74,18 @@ void homeRefreshingMethod() {
   checkConnection(() {});
   storage.isLoggedIn ? favoriteService.getFavorites() : null;
 
-  getCurrentProducts();
+  // getCurrentProducts();
   productsVieewController.getAllCategories();
   productsVieewController.getBanners();
   // Get.find<SplashController>().getOrderDeliveryOptions();
 }
 
 void getCurrentProducts() {
-  productsVieewController.categoryIndex.value == -1
-      ? productsVieewController.getAllProducts()
-      : productsVieewController.getProductsByCategory(
-          id: productsVieewController
-              .carouselItems[productsVieewController.sliderIndex.value]
-                  [productsVieewController.categoryIndex.value]
-              .id!);
+  productsVieewController.getProductsByCategory(
+      id: productsVieewController
+          .carouselItems[productsVieewController.sliderIndex.value]
+              [productsVieewController.categoryIndex.value]
+          .id!);
 }
 
 void showNoConnectionMessage() {
@@ -110,7 +108,7 @@ Future<double> whenNotZero(Stream<double> source) async {
 void customLoader() => BotToast.showCustomLoading(toastBuilder: (context) {
       return Container(
         decoration: BoxDecoration(
-            color: AppColors.mainWhiteColor,
+            color: Get.theme.colorScheme.primary,
             borderRadius: BorderRadius.circular(20)),
         width: Get.context!.screenWidth(4),
         height: Get.context!.screenWidth(4),
@@ -176,14 +174,14 @@ void changeLanguageDialog() {
       titlePadding: EdgeInsets.only(top: Get.context!.screenWidth(20)),
       content: Theme(
         data: Get.theme.copyWith(
-            // ignore: deprecated_member_use
-            // useMaterial3: false,
-            // dialogBackgroundColor: Get.theme.scaffoldBackgroundColor,
-            // dialogTheme: DialogTheme(
-            //   backgroundColor: Get.theme.scaffoldBackgroundColor,
-            //   surfaceTintColor: Colors.transparent,
-            // ),
-            ),
+          // ignore: deprecated_member_use
+          useMaterial3: false,
+          dialogBackgroundColor: Get.theme.scaffoldBackgroundColor,
+          dialogTheme: DialogTheme(
+            backgroundColor: Get.theme.scaffoldBackgroundColor,
+            surfaceTintColor: Colors.transparent,
+          ),
+        ),
         child: Column(
           children: [
             const Divider(),
@@ -265,3 +263,5 @@ DeliveryOptionsModel? slectedDeliveryService() {
     (element) => element.id == storage.getOrderDeliveryOptionSelected(),
   );
 }
+
+int formatPriceToInt(String price) => double.parse(price).toInt();

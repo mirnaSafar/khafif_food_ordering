@@ -23,12 +23,8 @@ class LoginController extends BaseController {
       isLoading.value = true;
 
       runFullLoadingFutuerFunction(
-          function: UserRepository()
-              .login(
-                  phone: kReleaseMode
-                      ? '${AppConfig.countryCode}${phoneController.text}'
-                      : phoneController.text)
-              .then((value) {
+          function:
+              UserRepository().login(phone: phoneController.text).then((value) {
         value.fold((l) {
           String message = l;
           isLoading.value = false;
@@ -42,7 +38,7 @@ class LoginController extends BaseController {
         }, (r) {
           isLoading.value = false;
           storage.setTokenIno(r.token ?? '');
-          storage.setOtpTime(r.timeOtpMinutes.toString());
+          storage.setOtp(r.top ?? '');
 
           //SharedPrefrenceRepository.setLoggedIn(true);
           Get.to(SignVerification(number: phoneController.text));
@@ -58,9 +54,7 @@ class LoginController extends BaseController {
             .signup(
       email: email,
       userName: userName,
-      phone: kReleaseMode
-          ? '${AppConfig.countryCode}${phoneController.text}'
-          : phoneController.text,
+      phone: phoneController.text,
     )
             .then((value) {
       value.fold((l) {
@@ -77,18 +71,14 @@ class LoginController extends BaseController {
 
   void googleLogin() {
     runFullLoadingFutuerFunction(
-        function: UserRepository()
-            .login(
-                phone: kReleaseMode
-                    ? '${AppConfig.countryCode}${phoneController.text}'
-                    : phoneController.text)
-            .then((value) {
+        function:
+            UserRepository().login(phone: phoneController.text).then((value) {
       value.fold((l) {
         isLoading.value = false;
       }, (r) {
         isLoading.value = false;
         storage.setTokenIno(r.token ?? '');
-        storage.setOtpTime(r.timeOtpMinutes.toString());
+        storage.setOtp(r.top ?? '');
 
         //SharedPrefrenceRepository.setLoggedIn(true);
         Get.to(SignVerification(number: phoneController.text));

@@ -26,6 +26,15 @@ class ARLanguage {
         "joined_us_lb": "انضم إلينا من قبل؟  ",
         "number_exists_lb": "الرقم موجود مسبقاً قم بتسجيل الدخول بدلاً من ذلك",
 
+        //?---- validation keys
+        'number_must_start_with_5_lb': 'رقم غير صالح ، يجب ان يبدأ ب 05',
+        'invalid_number_lb': 'رقم غير صالح',
+        'invalid_email_lb': 'ايميل غير صالح',
+        "enter_number_lb": 'أدخل الرقم الخاص بك.',
+
+        'enter_email_lb': 'ادخل الايميل الخاص بك',
+        "enter_name_lb": 'ادخل اسمك',
+
         //?---- login view keys
         "login_lb": "تسجيل الدخول",
         "login_title_lb": "تسجيل الدخول عبر رقم هاتفك ",
@@ -64,7 +73,7 @@ class ARLanguage {
         "info_lb": "معلوماتي",
         "addresses_lb": "عناويني",
         "orders_lb": "طلباتي",
-        "wanees_ponts_lb": "نقاط  ",
+        "wanees_ponts_lb": "   ",
         "walaa_lb": "برنامج الولاء",
         "available": "متاح",
         "from": "من 1200 BGN ",
@@ -82,7 +91,6 @@ class ARLanguage {
 
         //?------- otp view
         "reset_pass_lb": 'اعد ضبط كلمه السر',
-        "enter_number_lb": 'أدخل الرقم الخاص بك.',
         "send_me_code_lb": "أرسل لي الرمز",
         "enter_code_lb": "أدخل الرمز الذي أرسلناه إلى هاتفك.",
         "code_not_received_lb": "لم أحصل على الرمز.",
@@ -168,6 +176,8 @@ class ARLanguage {
         "close_lb": "مغلق",
         "no_open_branches_error_lb": 'لا يوجد فروع مفتوحة في هذا الموعد',
         "time_is_invalid": 'الرجاء اختيار وقت صحيح',
+        'opening_time_lb': 'أوقات العمل:',
+
         //?-------tracking order view
 
         "tracking_order_lb": 'تتبع الطلب',

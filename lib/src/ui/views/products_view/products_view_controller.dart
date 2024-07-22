@@ -17,7 +17,7 @@ import '../../../core/services/base_controller.dart';
 
 class ProductsViewController extends BaseController {
   TextEditingController searchController = TextEditingController();
-  RxInt produtSelected = (-1).obs;
+  // RxInt produtSelected = (0).obs;
   RxInt orderOptionSelected = storage.getOrderDeliveryOptionSelected().obs;
   Rx<Color> backgroundColor = AppColors.mainWhiteColor.obs;
   RxInt current = 0.obs;
@@ -48,7 +48,7 @@ class ProductsViewController extends BaseController {
   }
 
   RxInt sliderIndex = 0.obs;
-  RxInt categoryIndex = (-1).obs;
+  RxInt categoryIndex = (0).obs;
   RxList<ProductTemplateModel> productsList = <ProductTemplateModel>[].obs;
   RxList<ProductTemplateModel> searchProductsList =
       <ProductTemplateModel>[].obs;
@@ -74,13 +74,15 @@ class ProductsViewController extends BaseController {
       storage.setFirstLaunchShowDeliveryService(false);
     }
     getAllCategories();
-    getAllProducts();
+    // getAllProducts();
     getBanners();
     update();
   }
 
   RxBool get isShimmerLoader =>
-      operationType.contains(OperationType.PRODUCT).obs;
+      (operationType.contains(OperationType.PRODUCT) ||
+              operationType.contains(OperationType.CATEGORY))
+          .obs;
   RxBool get isSearchLoader =>
       operationType.contains(OperationType.SEARCHPRODUCT).obs;
   RxBool get isCategoriesShimmerLoader =>
@@ -120,6 +122,10 @@ class ProductsViewController extends BaseController {
                           : categoriesList.length;
                       carouselItems.add(categoriesList.sublist(i, end));
                     }
+                    getProductsByCategory(
+                        id: carouselItems[sliderIndex.value]
+                                [categoryIndex.value]
+                            .id!);
                   });
                 },
               )));
@@ -127,39 +133,39 @@ class ProductsViewController extends BaseController {
     return Future(() => null);
   }
 
-  Future getAllProducts() {
-    productsList.clear();
-    searchProductsList.clear();
-    showNoSearchResult.value = false;
+  // Future getAllProducts() {
+  //   productsList.clear();
+  //   searchProductsList.clear();
+  //   showNoSearchResult.value = false;
 
-    return runLoadingFutuerFunction(
-        type: OperationType.PRODUCT,
-        function: Future(() => ProductsRepository()
-                .getProductsTemplates(
-              page: 1,
-              perPage: perPage.value,
-            )
-                .then(
-              (value) {
-                value.fold((l) {
-                  if (l != 'not data') {
-                    CustomToast.showMessage(
-                      messageType: MessageType.REJECTED,
-                      message: l,
-                    );
-                  }
+  //   return runLoadingFutuerFunction(
+  //       type: OperationType.PRODUCT,
+  //       function: Future(() => ProductsRepository()
+  //               .getProductsTemplates(
+  //             page: 1,
+  //             perPage: perPage.value,
+  //           )
+  //               .then(
+  //             (value) {
+  //               value.fold((l) {
+  //                 if (l != 'not data') {
+  //                   CustomToast.showMessage(
+  //                     messageType: MessageType.REJECTED,
+  //                     message: l,
+  //                   );
+  //                 }
 
-                  //
-                }, (r) {
-                  productsList.clear();
+  //                 //
+  //               }, (r) {
+  //                 productsList.clear();
 
-                  productsList.addAll(r[0]);
-                  totalPages.value = r[1].totalPages!;
-                  currentPage.value = r[1].currentPage!;
-                });
-              },
-            )));
-  }
+  //                 productsList.addAll(r[0]);
+  //                 totalPages.value = r[1].totalPages!;
+  //                 currentPage.value = r[1].currentPage!;
+  //               });
+  //             },
+  //           )));
+  // }
 
   RxInt currentPage = 1.obs;
   RxInt perPage = 6.obs;
@@ -267,7 +273,7 @@ class ProductsViewController extends BaseController {
   }
 
   changeBackgroundcolor(int index) {
-    backgroundColor.value = produtSelected.value == index
+    backgroundColor.value = categoryIndex.value == index
         ? AppColors.mainAppColor
         : AppColors.mainWhiteColor;
   }
@@ -281,8 +287,8 @@ class ProductsViewController extends BaseController {
     searchProductsList.clear();
     showNoSearchResult.value = false;
     operationType.remove(OperationType.PRODUCTNEXTPAGE);
-    // productsVieewController.sliderIndex.value = -1;
-    // productsVieewController.categoryIndex.value = -1;
+    // productsVieewController.sliderIndex.value = 0;
+    // productsVieewController.categoryIndex.value = 0;
     return runLoadingFutuerFunction(
         type: OperationType.SEARCHPRODUCT,
         function: Future(() =>

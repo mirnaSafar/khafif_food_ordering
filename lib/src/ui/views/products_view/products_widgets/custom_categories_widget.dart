@@ -52,7 +52,7 @@ class _CustomCategoriesWidgetState extends State<CustomCategoriesWidget> {
           child: InkWell(
             onTap: () {
               widget.onTap!();
-              controller.produtSelected.value = widget.index;
+              controller.categoryIndex.value = widget.index;
               controller.changeBackgroundcolor(widget.index);
 
               // controller.changeItemSize(
@@ -61,10 +61,11 @@ class _CustomCategoriesWidgetState extends State<CustomCategoriesWidget> {
             child: CustomContainer(
               containerStyle: !widget.scrolled ? ContainerStyle.CYLINDER : null,
               borderRadius: BorderRadius.circular(20),
+              shadowColor: Get.theme.colorScheme.background,
               backgroundColor: controller.categoryIndex.value == widget.index &&
                       controller.sliderIndex.value == widget.sliderIndex
                   ? AppColors.mainAppColor
-                  : AppColors.mainWhiteColor,
+                  : Get.theme.colorScheme.primary,
               width: context.screenWidth(widget.scrolled ? 4.5 : 5.5),
               // height: 115,
               padding: EdgeInsets.symmetric(
@@ -82,8 +83,9 @@ class _CustomCategoriesWidgetState extends State<CustomCategoriesWidget> {
                       child: CustomContainer(
                           borderRadius: BorderRadius.circular(100),
                           height: context.screenWidth(7),
+                          shadowColor: Get.theme.colorScheme.background,
                           width: context.screenWidth(7),
-                          backgroundColor: AppColors.mainWhiteColor,
+                          backgroundColor: Get.theme.colorScheme.background,
                           // padding: EdgeInsets.all( context .screenWidth(40)),
                           child: Transform.scale(
                               scale: 0.7,
@@ -124,7 +126,7 @@ class _CustomCategoriesWidgetState extends State<CustomCategoriesWidget> {
                                         : TextStyleType.BODYSMALL,
                                     fontWeight: FontWeight.w600,
                                     fontSize: widget.fontsize,
-                                    darkTextColor: AppColors.mainBlackColor,
+                                    // darkTextColor: AppColors.mainBlackColor,
                                   ),
                                 ),
                               ),

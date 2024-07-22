@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
               navigatorKey: Get.key,
               defaultTransition: Transition.circularReveal,
               transitionDuration: Duration(milliseconds: 12),
-              title: 'Khafif',
+              title: 'خفيف',
               builder: BotToastInit(),
               locale: getLocal(),
               fallbackLocale: getLocal(),

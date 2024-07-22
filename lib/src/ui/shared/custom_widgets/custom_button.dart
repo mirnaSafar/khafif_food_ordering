@@ -84,8 +84,8 @@ class CustomButton extends StatelessWidget {
                   ? Flexible(
                       child: CustomText(
                         text: text!,
-                        textColor: textColor,
-                        darkTextColor: textColor,
+                        textColor: textColor ?? AppColors.mainTextColor,
+                        darkTextColor: textColor ?? AppColors.mainTextColor,
                         fontWeight: FontWeight.bold,
                         fontSize: fontsize,
                         textType: textStyleType ?? TextStyleType.BODY,

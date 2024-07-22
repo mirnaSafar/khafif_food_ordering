@@ -72,7 +72,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           Get.to(const ProfileView());
         },
         child: CircleAvatar(
-            backgroundColor: AppColors.mainWhiteColor,
+            backgroundColor: Get.theme.colorScheme.primary,
             radius: context.screenWidth(10),
             backgroundImage: NetworkImage(
               userinfo?.value?.image ?? '',

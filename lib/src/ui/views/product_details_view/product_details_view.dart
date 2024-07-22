@@ -58,7 +58,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
           widget.suggested! ? Get.find<CartController>().getCart() : null;
         },
         child: Scaffold(
-          appBar: CustomAppbar(appbarTitle: tr('details_screen_title')),
+          appBar: CustomAppbar(),
           body: productDetailsController.isShimmerLoader.value
               ? productDetailsShimmer(isLoading: true)
               : Padding(
@@ -111,64 +111,64 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                                         textType: TextStyleType.TITLE),
                                   ),
                                 ),
-                                context.screenWidth(30).px,
-                                RichText(
-                                  text: TextSpan(children: [
-                                    TextSpan(
-                                        text: '4.5 ',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall!),
-                                    WidgetSpan(
-                                        alignment: PlaceholderAlignment.middle,
-                                        child: SvgPicture.asset(
-                                          AppAssets.icStar,
-                                          color: AppColors.mainAppColor,
-                                        ))
-                                  ]),
-                                ),
-                                CustomText(
-                                    text: '(100+)    ',
-                                    fontSize: context.screenWidth(50),
-                                    textType: TextStyleType.CUSTOM),
-                                CustomText(
-                                    text: tr('all_reviews_lb'),
-                                    fontWeight: FontWeight.w500,
-                                    textColor: AppColors.mainAppColor,
-                                    textType: TextStyleType.SMALL),
+                                // context.screenWidth(30).px,
+                                // RichText(
+                                //   text: TextSpan(children: [
+                                //     TextSpan(
+                                //         text: '4.5 ',
+                                //         style: Theme.of(context)
+                                //             .textTheme
+                                //             .bodySmall!),
+                                //     WidgetSpan(
+                                //         alignment: PlaceholderAlignment.middle,
+                                //         child: SvgPicture.asset(
+                                //           AppAssets.icStar,
+                                //           color: AppColors.mainAppColor,
+                                //         ))
+                                //   ]),
+                                // ),
+                                // CustomText(
+                                //     text: '(100+)    ',
+                                //     fontSize: context.screenWidth(50),
+                                //     textType: TextStyleType.CUSTOM),
+                                // CustomText(
+                                //     text: tr('all_reviews_lb'),
+                                //     fontWeight: FontWeight.w500,
+                                //     textColor: AppColors.mainAppColor,
+                                //     textType: TextStyleType.SMALL),
                               ],
                             ),
-                            Row(
-                              children: [
-                                CustomText(
-                                    text: 'Khafif Popcorn',
-                                    fontWeight: FontWeight.w400,
-                                    textColor: AppColors.greyTextColor,
-                                    textType: TextStyleType.BODY),
-                                context.screenWidth(40).px,
-                                RichText(
-                                  text: TextSpan(children: [
-                                    WidgetSpan(
-                                        child: SvgPicture.asset(
-                                      color: Get.theme.colorScheme.secondary,
-                                      AppAssets.icClock,
-                                    )),
-                                    TextSpan(
-                                        text: '  60 min  ',
-                                        style: Get.theme.textTheme.bodyMedium!
-                                            .copyWith(
-                                                fontWeight: FontWeight.w600)),
-                                  ]),
-                                ),
-                              ],
-                            ),
+                            // Row(
+                            //   children: [
+                            //     CustomText(
+                            //         text: 'Khafif Popcorn',
+                            //         fontWeight: FontWeight.w400,
+                            //         textColor: AppColors.greyTextColor,
+                            //         textType: TextStyleType.BODY),
+                            //     context.screenWidth(40).px,
+                            //     RichText(
+                            //       text: TextSpan(children: [
+                            //         WidgetSpan(
+                            //             child: SvgPicture.asset(
+                            //           color: Get.theme.colorScheme.secondary,
+                            //           AppAssets.icClock,
+                            //         )),
+                            //         TextSpan(
+                            //             text: '  60 min  ',
+                            //             style: Get.theme.textTheme.bodyMedium!
+                            //                 .copyWith(
+                            //                     fontWeight: FontWeight.w600)),
+                            //       ]),
+                            //     ),
+                            //   ],
+                            // ),
                             context.screenWidth(20).ph,
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 CustomText(
                                   text:
-                                      '${productDetailsController.total.value} SAR',
+                                      '${productDetailsController.total.value.toInt()} ${tr('currency_lb')}',
                                   fontWeight: FontWeight.w600,
                                   textType: TextStyleType.HEADER,
                                 ),
@@ -271,7 +271,8 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                                       0,
                                   separatorPadding: 0.px,
                                   listViewHeight: context.screenHeight(18),
-                                  backgroundColor: Colors.white,
+                                  backgroundColor:
+                                      Get.theme.colorScheme.background,
                                   itemBuilder: (context, index) =>
                                       CustomCheckBoxList(
                                         index: index,

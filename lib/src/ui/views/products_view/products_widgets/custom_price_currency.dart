@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/translation/app_translation.dart';
+import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
 
 class CustomPriceCurrency extends StatelessWidget {
@@ -15,13 +16,13 @@ class CustomPriceCurrency extends StatelessWidget {
         CustomText(
           textType: TextStyleType.SMALL,
           text: tr('price_lb'),
-          darkTextColor: AppColors.mainBlackColor,
+          // darkTextColor: AppColors.mainBlackColor,
         ),
         CustomText(
             fontWeight: FontWeight.bold,
             textType: TextStyleType.SMALL,
-            darkTextColor: AppColors.mainBlackColor,
-            text: price),
+            // darkTextColor: AppColors.mainBlackColor,
+            text: '${formatPriceToInt(price)}'),
       ],
     );
   }

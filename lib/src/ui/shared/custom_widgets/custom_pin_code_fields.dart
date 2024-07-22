@@ -51,6 +51,11 @@ class _CustomPinCodeTextFieldsState extends State<CustomPinCodeTextFields>
   @override
   void initState() {
     super.initState();
+    Future.delayed(
+        const Duration(seconds: 3),
+        () => setState(() {
+              otpCode = storage.otp;
+            }));
     listenForCode();
 
     SmsAutoFill().getAppSignature.then((signature) {

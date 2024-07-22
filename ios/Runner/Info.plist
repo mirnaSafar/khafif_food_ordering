@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Khafif</string>
+	<string>خفيف</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -61,6 +61,9 @@
 
 	<key>UIBackgroundModes</key>
 	<string>location</string>
-	 
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+	  <string>whatsapp</string>
+	</array>
 </dict>
 </plist>

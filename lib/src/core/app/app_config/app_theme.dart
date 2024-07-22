@@ -130,9 +130,12 @@ class AppTheme extends GetxController {
           scrolledUnderElevation: 0),
       colorScheme:
           ColorScheme.light(onPrimary: AppColors.mainTextColor).copyWith(
-        background: AppColors.backgroundColor,
+        background: AppColors.mainWhiteColor,
         primary: AppColors.mainWhiteColor,
-        secondary: Colors.black,
+        secondary: AppColors.secondary2blackColor,
+        onBackground: AppColors.mainWhiteColor,
+        surface: Colors.grey[350]!,
+        onSurface: Colors.grey[100]!,
       ),
     );
   }
@@ -240,9 +243,12 @@ class AppTheme extends GetxController {
           ),
           scrolledUnderElevation: 0),
       colorScheme: const ColorScheme.dark().copyWith(
-        primary: Colors.grey[800],
+        primary: AppColors.secondary2blackColor,
         secondary: Colors.white70,
-        background: AppColors.mainTextColor,
+        onBackground: Colors.grey[800],
+        background: AppColors.secondary2blackColor,
+        surface: Colors.grey[600]!,
+        onSurface: Colors.grey[400]!,
       ),
     );
   }

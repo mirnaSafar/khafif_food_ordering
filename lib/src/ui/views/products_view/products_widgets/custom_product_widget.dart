@@ -22,6 +22,7 @@ class CustomProductWidget extends StatelessWidget {
     RxInt selectedIndex = (-1).obs;
 
     return CustomContainer(
+      backgroundColor: Get.theme.colorScheme.primary,
       blurRadius: 4,
       shadowColor: AppColors.shadowColor,
       offset: const Offset(0, 4),

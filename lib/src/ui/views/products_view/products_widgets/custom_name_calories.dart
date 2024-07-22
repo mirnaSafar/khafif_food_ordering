@@ -25,7 +25,7 @@ class CustomNameCalories extends StatelessWidget {
             child: CustomText(
                 textAlign: TextAlign.start,
                 textType: TextStyleType.SMALL,
-                darkTextColor: AppColors.mainBlackColor,
+                // darkTextColor: AppColors.mainBlackColor,
                 fontWeight: FontWeight.bold,
                 text: productname),
           ),
@@ -38,7 +38,7 @@ class CustomNameCalories extends StatelessWidget {
             context.screenWidth(80).px,
             CustomText(
                 textType: TextStyleType.SMALL,
-                darkTextColor: AppColors.mainBlackColor,
+                // darkTextColor: AppColors.mainBlackColor,
                 text: '$calory ${tr('calories_lb')}'),
           ],
         ),

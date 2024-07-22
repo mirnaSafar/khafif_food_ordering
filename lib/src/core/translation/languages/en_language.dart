@@ -26,7 +26,8 @@ class ENLanguage {
         "number_exists_lb": "The Number Already exists please Login instead",
 
         //?---- validation keys
-        'number_must_start_with_5_lb': 'Invalid number, it should start with 5',
+        'number_must_start_with_5_lb':
+            'Invalid number, it should start with 05',
         'invalid_number_lb': 'Invalid number',
         'invalid_email_lb': 'Invalid email',
         'enter_number_lb': 'Enter your number',
@@ -180,6 +181,8 @@ class ENLanguage {
         "close_lb": "close",
         "no_open_branches_error_lb": 'There is no open branches at this time',
         "time_is_invalid": 'Please select valid Time',
+        'opening_time_lb': 'Opening time:',
+
         //?-------tracking order view
 
         "tracking_order_lb": 'Tracking Order',

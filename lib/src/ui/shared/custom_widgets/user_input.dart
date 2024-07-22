@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
@@ -66,7 +67,9 @@ class _UserInputState extends State<UserInput> {
             keyboardType: widget.keyboardType,
             onFieldSubmitted: widget.onSubmitted,
             scrollPadding: EdgeInsets.all(0),
-            style: TextStyle(color: AppColors.mainBlackColor),
+            style: TextStyle(
+              color: Get.theme.colorScheme.secondary,
+            ),
             obscureText: _obscureText,
             textInputAction: TextInputAction.next,
             validator: widget.validator,
@@ -90,9 +93,10 @@ class _UserInputState extends State<UserInput> {
                   : widget.suffixIcon,
               hintText: isFieldEmpty && !_focusNode.hasFocus ? widget.text : '',
               prefixIcon: widget.prefixIcon,
+              prefixIconColor: Get.theme.colorScheme.secondary,
               hintStyle: TextStyle(
                 fontSize: context.screenWidth(33),
-                color: AppColors.mainTextColor,
+                color: Get.theme.colorScheme.secondary,
               ),
               filled: true,
               focusedBorder: OutlineInputBorder(

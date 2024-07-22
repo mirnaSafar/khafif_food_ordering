@@ -49,11 +49,11 @@ class _MyInformationViewState extends State<MyInformationView> {
                         Stack(
                           children: [
                             CircleAvatar(
-                              backgroundColor: AppColors.mainWhiteColor,
+                              backgroundColor: Get.theme.colorScheme.primary,
                               radius: context.screenWidth(6.7),
                               child: CircleAvatar(
                                 radius: context.screenWidth(7),
-                                backgroundColor: AppColors.mainWhiteColor,
+                                backgroundColor: Get.theme.colorScheme.primary,
                                 backgroundImage: infoController
                                         .selectedFile.value.path.isNotEmpty
                                     ? FileImage(
@@ -91,32 +91,40 @@ class _MyInformationViewState extends State<MyInformationView> {
                         UserInput(
                           validator: (value) => nameValidator(value),
                           controller: infoController.userNameController,
+                          fillColor: Get.theme.colorScheme.primary,
                           text: tr('name_field_lb'),
                           prefixIcon: Transform.scale(
                             scale: 0.5,
-                            child: SvgPicture.asset(AppAssets.icUser),
+                            child: SvgPicture.asset(
+                                color: Get.theme.colorScheme.secondary,
+                                AppAssets.icUser),
                           ),
                         ),
                         context.screenWidth(30).ph,
                         UserInput(
                           validator: (value) => emailValidator(value),
                           controller: infoController.userEmailController,
+                          fillColor: Get.theme.colorScheme.primary,
                           text: tr('email_field_lb'),
                           prefixIcon: Transform.scale(
                             scale: 0.5,
-                            child: SvgPicture.asset(AppAssets.icEmail),
+                            child: SvgPicture.asset(
+                                color: Get.theme.colorScheme.secondary,
+                                AppAssets.icEmail),
                           ),
                         ),
                         context.screenWidth(30).ph,
                         UserInput(
                           enabled: false,
-                          fillColor: const Color.fromARGB(255, 224, 224, 224),
+                          fillColor: Get.theme.colorScheme.surface,
                           keyboardType: TextInputType.phone,
                           controller: infoController.userNumberController,
                           text: tr('phone_field_lb'),
                           prefixIcon: Transform.scale(
                             scale: 0.5,
-                            child: SvgPicture.asset(AppAssets.icPhone),
+                            child: SvgPicture.asset(
+                                color: Get.theme.colorScheme.secondary,
+                                AppAssets.icPhone),
                           ),
                         ),
                       ],

@@ -299,16 +299,16 @@ class SharedPreferenceRepository {
     }
   }
 
-  void setOtpTime(String time) {
+  void setOtp(String otp) {
     setPreference(
       dataType: DataType.STRING,
       key: 'otp_info',
-      value: time,
+      value: otp,
       //  jsonEncode(value.toJson()),
     );
   }
 
-  String? getOtpTime() {
+  String? getOtp() {
     if (globalSharedPreference.containsKey('otp_info')) {
       return (getPreference(key: 'otp_info'));
     } else {
@@ -326,7 +326,7 @@ class SharedPreferenceRepository {
   }
 
   // String get sentOtp => getUserInfo() != null ? getUserInfo()!.top! : '';
-  String get otpTime => getOtpTime() != null ? getOtpTime()! : '';
+  String get otp => getOtp() != null ? getOtp()! : '';
 
   void setOtpVerified(bool otpVerified) {
     setPreference(

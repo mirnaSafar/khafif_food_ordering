@@ -114,10 +114,11 @@ class OrdersRepository {
         ShortestPathModel result;
         if (commonResponse.getStatus) {
           result = ShortestPathModel.fromJson(commonResponse.data!);
+          return Right(commonResponse.getStatus);
         } else {
-          Left(commonResponse.message ?? '');
+          return Left(commonResponse.message ?? '');
         }
-        return Right(commonResponse.getStatus);
+        // return Right(commonResponse.getStatus);
       });
     } catch (e) {
       return Left(e.toString());

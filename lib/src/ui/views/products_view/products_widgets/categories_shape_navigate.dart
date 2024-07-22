@@ -38,7 +38,7 @@ class _CategoriesShapeNavigationState extends State<CategoriesShapeNavigation>
               aspectRatio: widget.scrolled ? 9.5 : null,
               scrolled: widget.scrolled,
               onPageChanged: (index, reason) {
-                productsVieewController.produtSelected.value = -1;
+                // productsVieewController.produtSelected.value = -1;
               },
               itemCount: productsVieewController.isCategoriesShimmerLoader.value
                   ? 1
@@ -60,7 +60,7 @@ class _CategoriesShapeNavigationState extends State<CategoriesShapeNavigation>
                     backgroundColor: widget.scrolled &&
                             !productsVieewController
                                 .isCategoriesShimmerLoader.value
-                        ? AppColors.mainWhiteColor
+                        ? Get.theme.colorScheme.primary
                         : Theme.of(context).scaffoldBackgroundColor,
                     itemBuilder: (context, index) {
                       return productsVieewController

@@ -74,16 +74,19 @@ class _AddressesViewState extends State<AddressesView> {
                                               context: context,
                                               content: tr(
                                                   'address_remove_warning_lb'),
-                                              secondBtnText: tr('delete_lb'),
-                                              firstBtnText: tr('cancel_lb'),
-                                              secondBtn: () {
+                                              firstBtnText: tr('delete_lb'),
+                                              secondBtnText: tr('cancel_lb'),
+                                              firstBtnColor:
+                                                  AppColors.mainRedColor,
+                                              secondBtnColor: Colors.green,
+                                              firstBtn: () {
                                                 controller.isDismissed.value =
                                                     isOnline
                                                         ? true
                                                         : showSnackbarText(
                                                             'no internet');
                                               },
-                                              firstBtn: () {
+                                              secondBtn: () {
                                                 controller.isDismissed.value =
                                                     false;
                                               },
@@ -142,7 +145,7 @@ class _AddressesViewState extends State<AddressesView> {
                                       },
                                       child: CustomContainer(
                                         backgroundColor:
-                                            AppColors.mainWhiteColor,
+                                            Get.theme.colorScheme.primary,
                                         containerStyle:
                                             ContainerStyle.BIGSQUARE,
                                         blurRadius: 4,
@@ -164,8 +167,8 @@ class _AddressesViewState extends State<AddressesView> {
                                                     text: address.name ?? '',
                                                     textType:
                                                         TextStyleType.BODY,
-                                                    darkTextColor: AppColors
-                                                        .secondaryblackColor,
+                                                    // darkTextColor: AppColors
+                                                    //     .secondaryblackColor,
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                                   Column(
@@ -189,10 +192,13 @@ class _AddressesViewState extends State<AddressesView> {
                                                                   destination,
                                                             ));
                                                           },
-                                                          child:
-                                                              SvgPicture.asset(
-                                                                  AppAssets
-                                                                      .icEdit)),
+                                                          child: SvgPicture.asset(
+                                                              color: Get
+                                                                  .theme
+                                                                  .colorScheme
+                                                                  .secondary,
+                                                              AppAssets
+                                                                  .icEdit)),
                                                     ],
                                                   )
                                                 ],
@@ -206,8 +212,8 @@ class _AddressesViewState extends State<AddressesView> {
                                                   text: address.street ?? '',
                                                   textType:
                                                       TextStyleType.BODYSMALL,
-                                                  darkTextColor:
-                                                      AppColors.greyColor,
+                                                  // darkTextColor:
+                                                  //     AppColors.greyColor,
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                               ),
@@ -216,8 +222,8 @@ class _AddressesViewState extends State<AddressesView> {
                                                     'IZIP (${address.zip ?? ''})',
                                                 textType:
                                                     TextStyleType.BODYSMALL,
-                                                darkTextColor:
-                                                    AppColors.greyColor,
+                                                // darkTextColor:
+                                                //     AppColors.greyColor,
                                                 fontWeight: FontWeight.w400,
                                               ),
                                               Align(

@@ -78,6 +78,7 @@ class MapPageState extends State<MapPage> {
   Widget build(BuildContext context) {
     return GetBuilder(
       builder: (MapController mapController) => Scaffold(
+        backgroundColor: Get.theme.scaffoldBackgroundColor,
         extendBodyBehindAppBar: true,
         appBar: CustomAppbar(appbarTitle: widget.appBarTitle ?? tr('order_lb')),
         body: CustomSlidingUpPannel(

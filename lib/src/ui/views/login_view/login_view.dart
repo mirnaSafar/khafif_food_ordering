@@ -67,6 +67,7 @@ class _LoginViewState extends State<LoginView> {
                           context.screenWidth(10).ph,
                           UserInput(
                             maxLength: kDebugMode ? null : 9,
+                            fillColor: Get.theme.colorScheme.primary,
                             keyboardType: TextInputType.phone,
                             validator: (number) {
                               return kDebugMode
@@ -75,20 +76,11 @@ class _LoginViewState extends State<LoginView> {
                             },
                             controller: controller.phoneController,
                             text: tr('phone_field_lb'),
-                            prefixIcon: SizedBox(
-                              width: context.screenWidth(4.1),
-                              child: Row(
-                                children: <Widget>[
-                                  context.screenWidth(30).px,
-                                  SvgPicture.asset(AppAssets.icPhone),
-                                  context.screenWidth(30).px,
-                                  CustomText(
-                                    text: '${AppConfig.countryCode} | ',
-                                    textType: TextStyleType.BODYSMALL,
-                                    darkTextColor: AppColors.mainTextColor,
-                                  ),
-                                ],
-                              ),
+                            prefixIcon: Transform.scale(
+                              scale: 0.5,
+                              child: SvgPicture.asset(
+                                  color: Get.theme.colorScheme.secondary,
+                                  AppAssets.icPhone),
                             ),
                           ),
                           context.screenWidth(10).ph,

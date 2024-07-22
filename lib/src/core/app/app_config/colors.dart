@@ -19,6 +19,8 @@ class AppColors {
   static Color priceColor = const Color.fromRGBO(237, 112, 45, 1);
   static Color greyColor = const Color.fromRGBO(117, 124, 134, 1);
   static Color secondaryblackColor = const Color.fromRGBO(50, 51, 53, 1);
+  static Color secondary2blackColor = const Color.fromARGB(255, 83, 83, 83);
+  //  const Color.fromARGB(255, 40, 40, 43);
   static Color shadowColor = const Color.fromRGBO(0, 0, 0, 0.08);
   static Color greyTextColor = const Color.fromRGBO(140, 137, 148, 1);
   static Color btnMinusColor = const Color.fromRGBO(217, 217, 217, 1);

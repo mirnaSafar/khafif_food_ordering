@@ -11,6 +11,7 @@ import 'package:khafif_food_ordering_application/src/core/translation/app_transl
 import 'package:khafif_food_ordering_application/src/core/utility/general_utils.dart';
 import 'package:khafif_food_ordering_application/src/data/models/apis/customer_cart_model.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/custom_widgets/custom_text.dart';
+import 'package:khafif_food_ordering_application/src/ui/shared/dialogs/awosem_dialog.dart';
 import 'package:khafif_food_ordering_application/src/ui/shared/dialogs/browsing_alert_dialog.dart';
 import 'package:khafif_food_ordering_application/src/ui/views/cart_view/confirm_order_controller.dart';
 
@@ -66,7 +67,7 @@ class CartItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
-                  text: ' ${cartModel.priceUnit} ${tr('currency_lb')}',
+                  text: ' ${cartModel.priceUnit?.toInt()} ${tr('currency_lb')}',
                   textType: TextStyleType.BODYSMALL,
                   fontWeight: FontWeight.w600,
                 ),
@@ -86,13 +87,17 @@ class CartItem extends StatelessWidget {
                   onPressed: () {
                     controller.selectedCart.value = cartModel;
 
-                    warninDialog(
-                        content: tr('delete_item_from_cart_lb'),
-                        okBtn: () {
-                          controller.deleteOrder();
-                          // context.pop();
-                        },
-                        context: context);
+                    buildAwsomeDialog(
+                      context: context,
+                      content: tr('delete_item_from_cart_lb'),
+                      firstBtnColor: Colors.red,
+                      secondBtnColor: Colors.green,
+                      firstBtnText: tr('ok_lb'),
+                      secondBtnText: tr('cancel_lb'),
+                      firstBtn: () {
+                        controller.deleteOrder();
+                      },
+                    );
                   },
                   icon: Icon(
                     Icons.delete,

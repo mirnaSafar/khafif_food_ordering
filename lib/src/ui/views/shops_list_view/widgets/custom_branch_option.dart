@@ -38,19 +38,21 @@ class _CustomBranchOptionState extends State<CustomBranchOption> {
             padding: EdgeInsets.symmetric(
                 horizontal: context.screenWidth(30),
                 vertical: context.screenWidth(90)),
+            shadowColor: Get.theme.colorScheme.primary,
             backgroundColor:
                 controller.selectedBranchesDisplayOption.value == widget.index
                     ? AppColors.mainAppColor
-                    : AppColors.mainWhiteColor,
+                    : Get.theme.colorScheme.primary,
             child: CustomText(
-                darkTextColor: controller.selectedBranchesDisplayOption.value ==
-                        widget.index
-                    ? AppColors.mainWhiteColor
-                    : AppColors.mainAppColor,
+                darkTextColor:
+                    // controller.selectedBranchesDisplayOption.value ==
+                    //         widget.index
+                    AppColors.mainWhiteColor,
+                // : AppColors.mainAppColor,
                 textColor: controller.selectedBranchesDisplayOption.value ==
                         widget.index
                     ? AppColors.mainWhiteColor
-                    : AppColors.mainAppColor,
+                    : Get.theme.colorScheme.secondary,
                 text: widget.displayOptionText,
                 textType: TextStyleType.BODY)),
       );

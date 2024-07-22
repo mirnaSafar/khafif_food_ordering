@@ -69,9 +69,13 @@ class DateTimeController extends GetxController {
   }
 
   String parse24TimeToDayPeriod({required String stringDateTime}) {
-    DateTime dateTime = DateFormat("yyyy-MM-dd HH:mm:ss").parse(stringDateTime);
-    String formattedDateTime =
-        DateFormat("yyyy-MM-dd hh:mm a").format(dateTime);
+    DateTime dateTime = DateFormat("yyyy-MM-dd HH:mm").parse(stringDateTime);
+    String formattedDateTime = DateFormat("yyyy-MM-dd h:mm a").format(dateTime);
     return formattedDateTime;
+  }
+
+  String parse24TimeTo12({required String timeIn24}) {
+    DateTime time = DateTime.parse('2000-01-01 $timeIn24:00');
+    return DateFormat('h:mm a').format(time);
   }
 }

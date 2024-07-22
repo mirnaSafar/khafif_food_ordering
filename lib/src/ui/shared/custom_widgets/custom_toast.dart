@@ -126,7 +126,7 @@ class CustomToast extends GetxController with WidgetsBindingObserver {
                     child: Container(
                       width: Get.context!.screenWidth(1.3),
                       decoration: BoxDecoration(
-                          color: AppColors.mainWhiteColor,
+                          color: Get.theme.scaffoldBackgroundColor,
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
@@ -165,8 +165,6 @@ class CustomToast extends GetxController with WidgetsBindingObserver {
                                     textAlign: TextAlign.start,
                                     text: message,
                                     textType: TextStyleType.BODY,
-                                    darkTextColor: AppColors.mainBlackColor,
-                                    textColor: AppColors.mainBlackColor,
                                   ),
                                 ),
                               ],
@@ -249,7 +247,7 @@ class CustomToast extends GetxController with WidgetsBindingObserver {
                 child: Container(
                   width: context.screenWidth(1.3),
                   decoration: BoxDecoration(
-                      color: AppColors.mainWhiteColor,
+                      color: Get.theme.scaffoldBackgroundColor,
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: showMessageWithoutActions
                           ? [
@@ -288,8 +286,8 @@ class CustomToast extends GetxController with WidgetsBindingObserver {
                                 text: message,
                                 fontWeight: FontWeight.w500,
                                 textType: TextStyleType.SUBTITLE,
-                                darkTextColor: AppColors.mainBlackColor,
-                                textColor: AppColors.mainBlackColor,
+                                // darkTextColor: AppColors.mainBlackColor,
+                                // textColor: AppColors.mainBlackColor,
                               ),
                             ),
                           ),

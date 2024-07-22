@@ -112,15 +112,17 @@ class _MyWidgetState extends State<ShopBottomSheet> {
                                           textColor: AppColors.mainTextColor,
                                           textType: TextStyleType.TITLE,
                                         ),
-                                        CustomText(
-                                          darkTextColor:
-                                              AppColors.mainBlackColor,
-                                          text:
-                                              '${widget.shops[index].city} - 2.5 km .15 min walk',
-                                          fontWeight: FontWeight.w400,
-                                          textColor: AppColors.greyTextColor,
-                                          textType: TextStyleType.BODYSMALL,
-                                        ),
+                                        context
+                                            .screenWidth(30)
+                                            .ph, // CustomText(
+                                        //   darkTextColor:
+                                        //       AppColors.mainBlackColor,
+                                        //   text:
+                                        //       '${widget.shops[index].city} - 2.5 km .15 min walk',
+                                        //   fontWeight: FontWeight.w400,
+                                        //   textColor: AppColors.greyTextColor,
+                                        //   textType: TextStyleType.BODYSMALL,
+                                        // ),
                                         Row(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -140,15 +142,19 @@ class _MyWidgetState extends State<ShopBottomSheet> {
                                                 CustomText(
                                                     darkTextColor: AppColors
                                                         .mainBlackColor,
-                                                    text: 'Opening time: ',
+                                                    text:
+                                                        '${tr('opening_time_lb')} ',
                                                     fontWeight: FontWeight.w600,
                                                     textType:
                                                         TextStyleType.BODY),
                                                 CustomText(
                                                     darkTextColor: AppColors
                                                         .mainBlackColor,
-                                                    text:
-                                                        '${widget.shops[index].workTimeFrom}AM - ${widget.shops[index].workTimeTo}PM',
+                                                    text: widget.shops[index]
+                                                                .workTimeTo ==
+                                                            null
+                                                        ? ''
+                                                        : '(${dateTimeController.parse24TimeTo12(timeIn24: widget.shops[index].workTimeFrom!)}) - (${dateTimeController.parse24TimeTo12(timeIn24: widget.shops[index].workTimeTo!)})',
                                                     fontWeight: FontWeight.w600,
                                                     textType:
                                                         TextStyleType.BODY),

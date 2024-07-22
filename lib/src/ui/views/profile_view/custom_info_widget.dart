@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:khafif_food_ordering_application/src/core/app/app_config/colors.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/padding_extension.dart';
 import 'package:khafif_food_ordering_application/src/core/extensions/size_extensions.dart';
@@ -24,7 +25,7 @@ class CustomInfoWidget extends StatelessWidget {
       onTap: onTap,
       child: CustomContainer(
           borderRadius: BorderRadius.circular(8),
-          backgroundColor: AppColors.mainWhiteColor,
+          backgroundColor: Get.theme.colorScheme.primary,
           width: context.screenWidth(5),
           height: context.screenWidth(4.9),
           blurRadius: 4,
@@ -35,13 +36,14 @@ class CustomInfoWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(
+                color: Get.theme.colorScheme.secondary,
                 imagename,
                 width: context.screenWidth(13),
                 height: context.screenWidth(13),
               ),
               context.screenHeight(120).ph,
               CustomText(
-                darkTextColor: AppColors.mainBlackColor,
+                // darkTextColor: AppColors.mainBlackColor,
                 text: text,
                 fontWeight: FontWeight.w600,
                 textType: TextStyleType.BODYSMALL,

@@ -52,7 +52,7 @@ class _SignUpViewState extends State<SignUpView> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      context.screenWidth(4).ph,
+                      context.screenWidth(3).ph,
                       CustomText(
                         text: tr("signup_lb"),
                         textType: TextStyleType.HEADER,
@@ -66,14 +66,18 @@ class _SignUpViewState extends State<SignUpView> {
                       UserInput(
                         controller: controller.nameController,
                         text: tr("name_field_lb"),
+                        fillColor: Get.theme.colorScheme.primary,
                         prefixIcon: Transform.scale(
                             scale: 0.5,
-                            child: SvgPicture.asset(AppAssets.icUser)),
+                            child: SvgPicture.asset(
+                                color: Get.theme.colorScheme.secondary,
+                                AppAssets.icUser)),
                       ),
                       context.screenWidth(20).ph,
                       UserInput(
                         maxLength: 9,
                         // prefixText:,
+                        fillColor: Get.theme.colorScheme.primary,
                         keyboardType: TextInputType.phone,
                         validator: (number) {
                           // return null;
@@ -82,29 +86,23 @@ class _SignUpViewState extends State<SignUpView> {
                         },
                         controller: controller.phoneController,
                         text: tr('phone_field_lb'),
-                        prefixIcon: SizedBox(
-                          width: context.screenWidth(4.1),
-                          child: Row(
-                            children: <Widget>[
-                              context.screenWidth(30).px,
-                              SvgPicture.asset(AppAssets.icPhone),
-                              context.screenWidth(30).px,
-                              CustomText(
-                                text: '${AppConfig.countryCode} | ',
-                                textType: TextStyleType.BODYSMALL,
-                                darkTextColor: AppColors.mainTextColor,
-                              ),
-                            ],
-                          ),
+                        prefixIcon: Transform.scale(
+                          scale: 0.5,
+                          child: SvgPicture.asset(
+                              color: Get.theme.colorScheme.secondary,
+                              AppAssets.icPhone),
                         ),
                       ),
                       context.screenWidth(20).ph,
                       UserInput(
                         controller: controller.emailController,
                         text: tr("email_field_lb"),
+                        fillColor: Get.theme.colorScheme.primary,
                         prefixIcon: Transform.scale(
                           scale: 0.5,
-                          child: SvgPicture.asset(AppAssets.icEmail),
+                          child: SvgPicture.asset(
+                              color: Get.theme.colorScheme.secondary,
+                              AppAssets.icEmail),
                         ),
                         keyboardType: TextInputType.emailAddress,
                         validator: (email) {
@@ -119,23 +117,23 @@ class _SignUpViewState extends State<SignUpView> {
                           controller.signup();
                         }, // color: Theme.of(context).primaryColor,
                       ),
-                      context.screenWidth(8).ph,
-                      Center(
-                        child: CustomText(
-                            customtextStyle:
-                                Theme.of(context).textTheme.bodyLarge!,
-                            text: tr("or_lb"),
-                            fontWeight: FontWeight.bold,
-                            textType: TextStyleType.BODY),
-                      ),
-                      context.screenWidth(60).ph,
-                      CustomButton(
-                        key: const Key('google2'),
-                        onPressed: () => onTapLoginWithGoogle(),
-                        text: tr("google_lb"),
-                        color: Colors.white,
-                        imageName: 'google_ic',
-                      ),
+                      // context.screenWidth(8).ph,
+                      // Center(
+                      //   child: CustomText(
+                      //       customtextStyle:
+                      //           Theme.of(context).textTheme.bodyLarge!,
+                      //       text: tr("or_lb"),
+                      //       fontWeight: FontWeight.bold,
+                      //       textType: TextStyleType.BODY),
+                      // ),
+                      // context.screenWidth(60).ph,
+                      // CustomButton(
+                      //   key: const Key('google2'),
+                      //   onPressed: () => onTapLoginWithGoogle(),
+                      //   text: tr("google_lb"),
+                      //   color: Colors.white,
+                      //   imageName: 'google_ic',
+                      // ),
                       context.screenWidth(8).ph,
                       CustomRowText(
                         key: const Key('sign log in'),

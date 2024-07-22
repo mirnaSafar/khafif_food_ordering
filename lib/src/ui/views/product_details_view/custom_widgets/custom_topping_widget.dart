@@ -61,7 +61,7 @@ class _CustomToppingWidgetState extends State<CustomToppingWidget> {
           Row(
             children: [
               CustomText(
-                text: '+\$ ${widget.price}',
+                text: '+ ${formatPriceToInt(widget.price)}',
                 textType: TextStyleType.BODYSMALL,
                 fontWeight: FontWeight.w600,
               ),
