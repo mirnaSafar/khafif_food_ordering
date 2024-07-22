@@ -109,7 +109,7 @@ class NoSearchResultsWidget extends StatelessWidget {
 
 buildFilterWidget() {
   return CustomContainer(
-    backgroundColor: Get.theme.colorScheme.primary,
+    backgroundColor: Get.theme.colorScheme.onPrimary,
     height: Get.context!.screenHeight(18),
     width: Get.context!.screenHeight(15),
     borderRadius: BorderRadiusDirectional.only(
@@ -118,7 +118,7 @@ buildFilterWidget() {
       Get.context!.screenWidth(28),
     ),
     child: SvgPicture.asset(
-      color: Get.theme.colorScheme.secondary,
+      color: Colors.white,
       AppAssets.icFilter,
       height: Get.context!.screenWidth(80),
       width: Get.context!.screenWidth(80),

@@ -242,7 +242,8 @@ class AppTheme extends GetxController {
             statusBarBrightness: Brightness.light, // For iOS (dark icons)
           ),
           scrolledUnderElevation: 0),
-      colorScheme: const ColorScheme.dark().copyWith(
+      colorScheme:
+          ColorScheme.dark(onPrimary: AppColors.secondary2blackColor).copyWith(
         primary: AppColors.secondary2blackColor,
         secondary: Colors.white70,
         onBackground: Colors.grey[800],
