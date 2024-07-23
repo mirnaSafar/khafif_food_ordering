@@ -23,7 +23,7 @@ String? passValidator(value) {
 
 String? numberValidator(value) {
   if (value!.isNotEmpty) {
-    if (!(value.toString().startsWith('5'))) {
+    if (!(value.toString().startsWith('05'))) {
       return tr('number_must_start_with_5_lb');
     }
     if (!validNumber(value)) {

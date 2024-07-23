@@ -66,7 +66,7 @@ class _LoginViewState extends State<LoginView> {
                           ),
                           context.screenWidth(10).ph,
                           UserInput(
-                            maxLength: kDebugMode ? null : 9,
+                            maxLength: kDebugMode ? null : 10,
                             fillColor: Get.theme.colorScheme.primary,
                             keyboardType: TextInputType.phone,
                             validator: (number) {

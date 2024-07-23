@@ -75,7 +75,7 @@ class _SignUpViewState extends State<SignUpView> {
                       ),
                       context.screenWidth(20).ph,
                       UserInput(
-                        maxLength: 9,
+                        maxLength: 10,
                         // prefixText:,
                         fillColor: Get.theme.colorScheme.primary,
                         keyboardType: TextInputType.phone,
