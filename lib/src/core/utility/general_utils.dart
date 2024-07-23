@@ -169,16 +169,16 @@ setLanguage(String lan) {
 void changeLanguageDialog() {
   // SetteingsController controller = Get.put(SetteingsController());
   Get.defaultDialog(
-      backgroundColor: Get.theme.scaffoldBackgroundColor,
+      backgroundColor: Get.theme.colorScheme.primary,
       title: tr('Languages_lb'),
       titlePadding: EdgeInsets.only(top: Get.context!.screenWidth(20)),
       content: Theme(
         data: Get.theme.copyWith(
           // ignore: deprecated_member_use
           useMaterial3: false,
-          dialogBackgroundColor: Get.theme.scaffoldBackgroundColor,
+          dialogBackgroundColor: Get.theme.colorScheme.primary,
           dialogTheme: DialogTheme(
-            backgroundColor: Get.theme.scaffoldBackgroundColor,
+            backgroundColor: Get.theme.colorScheme.primary,
             surfaceTintColor: Colors.transparent,
           ),
         ),

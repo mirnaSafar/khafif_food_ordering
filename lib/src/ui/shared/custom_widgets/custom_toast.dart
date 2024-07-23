@@ -126,7 +126,7 @@ class CustomToast extends GetxController with WidgetsBindingObserver {
                     child: Container(
                       width: Get.context!.screenWidth(1.3),
                       decoration: BoxDecoration(
-                          color: Get.theme.scaffoldBackgroundColor,
+                          color: Get.theme.colorScheme.primary,
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
@@ -247,7 +247,7 @@ class CustomToast extends GetxController with WidgetsBindingObserver {
                 child: Container(
                   width: context.screenWidth(1.3),
                   decoration: BoxDecoration(
-                      color: Get.theme.scaffoldBackgroundColor,
+                      color: Get.theme.colorScheme.primary,
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: showMessageWithoutActions
                           ? [
