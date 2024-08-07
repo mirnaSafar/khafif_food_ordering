@@ -42,7 +42,7 @@ class AppTheme extends GetxController {
       ),
       dialogBackgroundColor: Get.theme.scaffoldBackgroundColor,
       dialogTheme: DialogTheme(
-        backgroundColor: Get.theme.scaffoldBackgroundColor,
+        backgroundColor: Get.theme.colorScheme.primaryContainer,
         surfaceTintColor: Colors.transparent,
       ),
 
@@ -128,6 +128,11 @@ class AppTheme extends GetxController {
           elevation: 0,
           color: Colors.transparent,
           scrolledUnderElevation: 0),
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: Get.theme.colorScheme.secondary,
+        selectionColor: Get.theme.colorScheme.surface,
+        selectionHandleColor: Get.theme.colorScheme.secondary,
+      ),
       colorScheme:
           ColorScheme.light(onPrimary: AppColors.mainTextColor).copyWith(
         background: AppColors.mainWhiteColor,
@@ -136,6 +141,7 @@ class AppTheme extends GetxController {
         onBackground: AppColors.mainWhiteColor,
         surface: Colors.grey[350]!,
         onSurface: Colors.grey[100]!,
+        primaryContainer: Get.theme.scaffoldBackgroundColor,
       ),
     );
   }
@@ -150,9 +156,9 @@ class AppTheme extends GetxController {
         color: AppColors.mainGreyColor,
       ),
 
-      dialogBackgroundColor: AppColors.secondaryblackColor,
+      dialogBackgroundColor: Get.theme.colorScheme.primary,
       dialogTheme: DialogTheme(
-        backgroundColor: Get.theme.scaffoldBackgroundColor,
+        backgroundColor: Get.theme.colorScheme.primaryContainer,
         surfaceTintColor: Colors.transparent,
       ),
       unselectedWidgetColor:
@@ -242,6 +248,11 @@ class AppTheme extends GetxController {
             statusBarBrightness: Brightness.light, // For iOS (dark icons)
           ),
           scrolledUnderElevation: 0),
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: Get.theme.colorScheme.secondary,
+        selectionColor: Get.theme.colorScheme.secondary,
+        selectionHandleColor: Get.theme.colorScheme.secondary,
+      ),
       colorScheme:
           ColorScheme.dark(onPrimary: AppColors.secondary2blackColor).copyWith(
         primary: AppColors.secondary2blackColor,
@@ -250,6 +261,7 @@ class AppTheme extends GetxController {
         background: AppColors.secondary2blackColor,
         surface: Colors.grey[600]!,
         onSurface: Colors.grey[400]!,
+        primaryContainer: AppColors.secondary2blackColor,
       ),
     );
   }

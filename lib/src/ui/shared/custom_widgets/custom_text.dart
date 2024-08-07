@@ -53,6 +53,8 @@ class _CustomTextState extends State<CustomText> {
       () {
         print(appTheme.isDarkMode.value);
         return Text(widget.text,
+            selectionColor: Get.theme.colorScheme.secondary,
+
             // overflow: TextOverflow.ellipsis,
             textAlign: widget.textAlign ?? TextAlign.center,
             style: widget.customtextStyle ?? textStyle);

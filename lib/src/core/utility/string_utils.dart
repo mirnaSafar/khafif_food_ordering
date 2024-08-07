@@ -30,10 +30,9 @@ bool isMobile(String value) {
   return regExp.hasMatch(value);
 }
 
-//! This to validate syrian number phone And this better than before (isMobile)
 bool validNumber(String value) {
   // RegExp regex = RegExp(r'^(!?(\+|00)?(966)|0)?9\d{8}$');
-  RegExp regex = RegExp(r'^5[0-9]{8}$');
+  RegExp regex = RegExp(r'^05[0-9]{8}$');
 
   return regex.hasMatch(value);
 }

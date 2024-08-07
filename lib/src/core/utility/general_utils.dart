@@ -172,63 +172,52 @@ void changeLanguageDialog() {
       backgroundColor: Get.theme.colorScheme.primary,
       title: tr('Languages_lb'),
       titlePadding: EdgeInsets.only(top: Get.context!.screenWidth(20)),
-      content: Theme(
-        data: Get.theme.copyWith(
-          // ignore: deprecated_member_use
-          useMaterial3: false,
-          dialogBackgroundColor: Get.theme.colorScheme.primary,
-          dialogTheme: DialogTheme(
-            backgroundColor: Get.theme.colorScheme.primary,
-            surfaceTintColor: Colors.transparent,
+      content: Column(
+        children: [
+          const Divider(),
+          TextButton(
+            style: ButtonStyle(
+                backgroundColor:
+                    const MaterialStatePropertyAll(Colors.transparent),
+                fixedSize: MaterialStatePropertyAll(
+                  Size(
+                    Get.context!.screenWidth(1),
+                    Get.context!.screenHeight(14),
+                  ),
+                ),
+                overlayColor:
+                    const MaterialStatePropertyAll(Colors.transparent)),
+            onPressed: () {
+              updateLanguage(langCode: LanguageService.enCode);
+            },
+            child: CustomText(
+              text: 'English',
+              textType: TextStyleType.BODY,
+              // textColor: AppColors.mainAppColor,
+            ),
           ),
-        ),
-        child: Column(
-          children: [
-            const Divider(),
-            TextButton(
-              style: ButtonStyle(
-                  backgroundColor:
-                      const MaterialStatePropertyAll(Colors.transparent),
-                  fixedSize: MaterialStatePropertyAll(
-                    Size(
-                      Get.context!.screenWidth(1),
-                      Get.context!.screenHeight(14),
-                    ),
+          TextButton(
+            style: ButtonStyle(
+                backgroundColor:
+                    const MaterialStatePropertyAll(Colors.transparent),
+                fixedSize: MaterialStatePropertyAll(
+                  Size(
+                    Get.context!.screenWidth(1),
+                    Get.context!.screenHeight(14),
                   ),
-                  overlayColor:
-                      const MaterialStatePropertyAll(Colors.transparent)),
-              onPressed: () {
-                updateLanguage(langCode: LanguageService.enCode);
-              },
-              child: CustomText(
-                text: 'English',
-                textType: TextStyleType.BODY,
-                // textColor: AppColors.mainAppColor,
-              ),
+                ),
+                overlayColor:
+                    const MaterialStatePropertyAll(Colors.transparent)),
+            onPressed: () {
+              updateLanguage(langCode: LanguageService.arCode);
+            },
+            child: CustomText(
+              text: 'العربية',
+              textType: TextStyleType.BODY,
+              // textColor: AppColors.mainAppColor,
             ),
-            TextButton(
-              style: ButtonStyle(
-                  backgroundColor:
-                      const MaterialStatePropertyAll(Colors.transparent),
-                  fixedSize: MaterialStatePropertyAll(
-                    Size(
-                      Get.context!.screenWidth(1),
-                      Get.context!.screenHeight(14),
-                    ),
-                  ),
-                  overlayColor:
-                      const MaterialStatePropertyAll(Colors.transparent)),
-              onPressed: () {
-                updateLanguage(langCode: LanguageService.arCode);
-              },
-              child: CustomText(
-                text: 'العربية',
-                textType: TextStyleType.BODY,
-                // textColor: AppColors.mainAppColor,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ));
 }
 

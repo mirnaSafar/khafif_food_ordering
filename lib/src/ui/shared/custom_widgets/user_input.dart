@@ -74,7 +74,7 @@ class _UserInputState extends State<UserInput> {
             textInputAction: TextInputAction.next,
             validator: widget.validator,
             controller: widget.controller,
-            cursorColor: AppColors.mainBlackColor,
+            cursorColor: Get.theme.colorScheme.secondary,
             decoration: InputDecoration(
               suffixIcon: widget.obscureText!
                   ? IconButton(
