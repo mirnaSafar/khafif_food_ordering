@@ -10,10 +10,9 @@ import 'package:khafif_food_ordering_application/src/core/utility/general_utils.
 import 'package:path/path.dart' as path;
 
 class NetworkUtil {
-  static String baseUrl =
-      'erp.khafif.com.sa';
-      // '147.182.194.53:8069';
-      // '192.168.1.199:8069';
+  static String baseUrl = 'erp.khafif.com.sa';
+  // '147.182.194.53:8069';
+  // '192.168.1.199:8069';
   static var client = http.Client();
   static RxBool online = isOnline.obs;
 
@@ -36,7 +35,7 @@ class NetworkUtil {
       //!--- Required for request ----
       //*--- Make full api url ------
 
-      var uri = Uri.http(baseUrl, url, params);
+      var uri = Uri.https(baseUrl, url, params);
 
       //To save api response
       late http.Response response;
