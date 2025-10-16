@@ -3,5 +3,5 @@ class AppConfig {
   static String defaultLanguage = 'ar';
   static String countryCode = "+966";
   static bool subscriptionStatus = true;
-  static String google_api_key = "AIzaSyCq7hlabnqxQyrP2xPUlRMycNZR1eWQZmc";
+  static String google_api_key = "*****yCq7hlabnqxQyrP2xPUlRMycNZR1e****";
 }
